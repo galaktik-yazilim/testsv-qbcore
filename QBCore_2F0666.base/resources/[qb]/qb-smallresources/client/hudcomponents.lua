@@ -34,7 +34,10 @@ CreateThread(function()
         SetVehicleDensityMultiplierThisFrame(Config.Density.vehicle)
         SetRandomVehicleDensityMultiplierThisFrame(Config.Density.multiplier)
         SetPedDensityMultiplierThisFrame(Config.Density.peds)
-        SetScenarioPedDensityMultiplierThisFrame(Config.Density.scenario, Config.Density.scenario) -- Walking NPC Density
+        SetScenarioPedDensityMultiplierThisFrame(Config.Density.scenario, Config.Density.scenario)
+        SetAmbientPedRangeMultiplierThisFrame(0.0)
+        SetAmbientVehicleRangeMultiplierThisFrame(0.0)
+        SetNumberOfParkedVehicles(0)
         Wait(0)
     end
 end)

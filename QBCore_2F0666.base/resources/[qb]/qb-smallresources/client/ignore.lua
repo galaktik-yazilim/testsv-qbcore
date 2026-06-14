@@ -11,9 +11,64 @@ CreateThread(function()
 end)
 
 AddEventHandler('populationPedCreating', function(x, y, z)
-    Wait(500)                                     -- Give the entity some time to be created
-    local _, handle = GetClosestPed(x, y, z, 1.0) -- Get the entity handle
-    SetPedDropsWeaponsWhenDead(handle, false)
+    CancelEvent()
+end)
+
+CreateThread(function()
+    SetPedPopulationBudget(0)
+    SetVehiclePopulationBudget(0)
+end)
+
+CreateThread(function()
+    while true do
+        RemoveVehiclesFromGeneratorsInArea(-5000.0, -5000.0, -500.0, 5000.0, 5000.0, 500.0)
+        Wait(1000)
+    end
+end)
+
+CreateThread(function()
+    local ambientPedTypes = {
+        [1] = true,
+        [2] = true,
+        [3] = true,
+        [4] = true,
+        [5] = true,
+    }
+    local ambientVehTypes = {
+        [1] = true,
+        [2] = true,
+        [3] = true,
+        [4] = true,
+        [5] = true,
+    }
+
+    while true do
+        Wait(2000)
+
+        if Config.Density.peds == 0 then
+            local playerPed = PlayerPedId()
+            for _, ped in ipairs(GetGamePool('CPed')) do
+                if ped ~= playerPed and not IsPedAPlayer(ped) and not IsEntityPositionFrozen(ped) then
+                    if ambientPedTypes[GetEntityPopulationType(ped)] then
+                        DeleteEntity(ped)
+                    end
+                end
+            end
+        end
+
+        if Config.Density.vehicle == 0 or Config.Density.parked == 0 then
+            for _, veh in ipairs(GetGamePool('CVehicle')) do
+                local driver = GetPedInVehicleSeat(veh, -1)
+                if driver ~= 0 and not IsPedAPlayer(driver) then
+                    DeleteEntity(veh)
+                elseif driver == 0 and not NetworkGetEntityIsNetworked(veh) then
+                    if ambientVehTypes[GetEntityPopulationType(veh)] then
+                        DeleteEntity(veh)
+                    end
+                end
+            end
+        end
+    end
 end)
 
 CreateThread(function()
