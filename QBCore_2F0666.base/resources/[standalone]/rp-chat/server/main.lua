@@ -97,7 +97,16 @@ RegisterNetEvent('rp-chat:server:vehicleLock', function(locked)
     local src = source
     local charName = GetCharName(src)
     local msg = locked
-        and (charName .. ' isimli kişi aracı kilitledi')
-        or (charName .. ' isimli kişi aracın kilidini açtı')
+        and ('* ' .. charName .. ' aracı kilitler')
+        or ('* ' .. charName .. ' aracın kilidini açar')
+    BroadcastProximity(src, Config.Colors.me, msg, '')
+end)
+
+RegisterNetEvent('rp-chat:server:vehicleSeatbelt', function(buckled)
+    local src = source
+    local charName = GetCharName(src)
+    local msg = buckled
+        and ('* ' .. charName .. ' emniyet kemerini takar')
+        or ('* ' .. charName .. ' emniyet kemerini çıkartır')
     BroadcastProximity(src, Config.Colors.me, msg, '')
 end)

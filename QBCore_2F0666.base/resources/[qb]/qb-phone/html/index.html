@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.2.9/purify.min.js" integrity="sha512-VOTFfd4vxPpuE98m9UQTN7j2N2/Blw44lZMhRTnZQqA2gOHq7Yvn5bdIDjjAZuFqqkDtppcjMW+dN3GYbhM94g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
-    <title>QBCore Phone</title>
+    <title>QBCore Telefon</title>
 
     <!-- CSS File's -->
     <link rel="stylesheet" href="./css/main.css">
@@ -110,13 +110,13 @@
                             <!-- <div class="settings-app-tab-header"><p>Appearance</p></div> -->
                             <div class="settings-app-tab" data-settingstab="background">
                                 <div class="settings-tab-icon"><i class="fas fa-palette" style="color: #9b59b6;"></i></div>
-                                <div class="settings-tab-title"><p>Background</p></div>
-                                <div class="settings-tab-description"><p>Default</p></div>
+                                <div class="settings-tab-title"><p>Arka Plan</p></div>
+                                <div class="settings-tab-description"><p>Varsayılan</p></div>
                             </div>
                             <div class="settings-app-tab" data-settingstab="profilepicture">
                                 <div class="settings-tab-icon"></div>
                                 <div class="settings-tab-title"><p>Avatar</p></div>
-                                <div class="settings-tab-description"><p>Default</p></div>
+                                <div class="settings-tab-description"><p>Varsayılan</p></div>
                             </div>
                         </div>
 
@@ -125,12 +125,12 @@
                             <!-- <div class="settings-app-tab-header"><p>Infomation</p></div> -->
                             <div class="settings-app-tab secondTab" data-settingstab="myPhone" id="phoneNumberSelect">
                                 <div class="settings-tab-icon"><i class="fas fa-phone-alt" style="color: #e67e22;"></i></div>
-                                <div class="settings-tab-title"><p>My phone number</p></div>
+                                <div class="settings-tab-title"><p>Telefon Numaram</p></div>
                                 <div class="settings-tab-description" id="myPhoneNumber"><p>0612345678</p></div>
                             </div>
                             <div class="settings-app-tab secondTab" data-settingstab="serialNumber" id="serialNumberSelect">
                                 <div class="settings-tab-icon"><i class="fas fa-phone-alt" style="color: #e67e22;"></i></div>
-                                <div class="settings-tab-title"><p>Serial Number</p></div>
+                                <div class="settings-tab-title"><p>Seri Numarası</p></div>
                                 <div class="settings-tab-description" id="mySerialNumber"><p>0612345678</p></div>
                             </div>
                             <div class="settings-app-tab secondTab" data-settingstab="numberrecognition">
@@ -141,44 +141,44 @@
                                 </label>
 
                                 <div class="settings-tab-icon"><i class="fas fa-user-slash" style="color: #e67e22;"></i></div>
-                                <div class="settings-tab-title"><p>Call Anonymously</p></div>
-                                <div class="settings-tab-description" id="numberrecognition"><p>Off</p></div>
+                                <div class="settings-tab-title"><p>Gizli Ara</p></div>
+                                <div class="settings-tab-description" id="numberrecognition"><p>Kapalı</p></div>
                             </div>
                         </div>
 
                         <div class="settings-background-tab">
-                            <div class="settings-app-header"><p>Background</p></div>
+                            <div class="settings-app-header"><p>Arka Plan</p></div>
 
                             <div class="background-options">
                                 <div class="background-option" data-background="default-qbcore">
                                     <div class="background-option-icon"> <i class="fas fa-paint-brush"></i> </div>
-                                    <div class="background-option-title"> Default </div>
-                                    <div class="background-option-description">Default background</div>
+                                    <div class="background-option-title"> Varsayılan </div>
+                                    <div class="background-option-description">Varsayılan arka plan</div>
                                     <div class="background-option-current"><i class="fas fa-check-circle"></i></div>
                                 </div>
                                 <div class="background-option" data-background="custom-background">
                                     <div class="background-option-icon"><i class="fas fa-paint-brush"></i></div>
-                                    <div class="background-option-title">Custom</div>
-                                    <div class="background-option-description">Personalize your background</div>
+                                    <div class="background-option-title">Özel</div>
+                                    <div class="background-option-description">Arka planınızı özelleştirin</div>
                                 </div>
                             </div>
 
                             <div class="background-buttons">
                                 <div class="background-button" id="accept-background">
-                                    <p>Confirm</p>
+                                    <p>Onayla</p>
                                 </div>
                                 <div class="background-button" id="cancel-background">
-                                    <p>Cancel</p>
+                                    <p>İptal</p>
                                 </div>
                             </div>
 
                             <div class="background-custom">
-                                <div class="background-custom-title">Personalized Background</div>
+                                <div class="background-custom-title">Özel Arka Plan</div>
                                 <input type="text" class="custom-background-input" placeholder="URL (.jpg/.png)" spellcheck="false">
 
                                 <div class="background-custom-buttons">
-                                    <div class="custom-background-button" id="accept-custom-background"><p>Confirm</p></div>
-                                    <div class="custom-background-button" id="cancel-custom-background"><p>Cancel</p></div>
+                                    <div class="custom-background-button" id="accept-custom-background"><p>Onayla</p></div>
+                                    <div class="custom-background-button" id="cancel-custom-background"><p>İptal</p></div>
                                 </div>
                             </div>
                         </div>
@@ -189,38 +189,38 @@
                             <div class="profilepicture-options">
                                 <div class="profilepicture-option" data-profilepicture="default">
                                     <div class="profilepicture-option-icon"> <i class="fas fa-paint-brush"></i> </div>
-                                    <div class="profilepicture-option-title"> Default </div>
-                                    <div class="profilepicture-option-description">Default avatar</div>
+                                    <div class="profilepicture-option-title"> Varsayılan </div>
+                                    <div class="profilepicture-option-description">Varsayılan avatar</div>
                                     <div class="profilepicture-option-current"><i class="fas fa-check-circle"></i></div>
                                 </div>
                                 <div class="profilepicture-option" data-profilepicture="custom-profilepicture">
                                     <div class="profilepicture-option-icon"><i class="fas fa-paint-brush"></i></div>
-                                    <div class="profilepicture-option-title">Custom</div>
-                                    <div class="profilepicture-option-description">Personalize your avatar</div>
+                                    <div class="profilepicture-option-title">Özel</div>
+                                    <div class="profilepicture-option-description">Avatarınızı özelleştirin</div>
                                 </div>
                                 <div class="profilepicture-option" data-profilepicture="camera-profilepicture">
                                     <div class="profilepicture-option-icon"><i class="fas fa fa-camera"></i></div>
-                                    <div class="profilepicture-option-title">Photo - Coming Soon</div>
-                                    <div class="profilepicture-option-description">Set your profile picture with a photo</div>
+                                    <div class="profilepicture-option-title">Fotoğraf - Yakında</div>
+                                    <div class="profilepicture-option-description">Fotoğraf ile profil resmi ayarlayın</div>
                                 </div>
                             </div>
 
                             <div class="profilepicture-buttons">
                                 <div class="profilepicture-button" id="accept-profilepicture">
-                                    <p>Confirm</p>
+                                    <p>Onayla</p>
                                 </div>
                                 <div class="profilepicture-button" id="cancel-profilepicture">
-                                    <p>Cancel</p>
+                                    <p>İptal</p>
                                 </div>
                             </div>
 
                             <div class="profilepicture-custom">
-                                <div class="profilepicture-custom-title">Personalized Avatar</div>
+                                <div class="profilepicture-custom-title">Özel Avatar</div>
                                 <input type="text" class="custom-profilepicture-input" placeholder="URL (.jpg/.png)" spellcheck="false">
 
                                 <div class="profilepicture-custom-buttons">
-                                    <div class="custom-profilepicture-button" id="accept-custom-profilepicture"><p>Confirm</p></div>
-                                    <div class="custom-profilepicture-button" id="cancel-custom-profilepicture"><p>Cancel</p></div>
+                                    <div class="custom-profilepicture-button" id="accept-custom-profilepicture"><p>Onayla</p></div>
+                                    <div class="custom-profilepicture-button" id="cancel-custom-profilepicture"><p>İptal</p></div>
                                 </div>
                             </div>
                         </div>
@@ -228,8 +228,8 @@
 
                     <div class="phone-call-app">
                         <div class="phone-call-incoming">
-                            <div class="phone-call-incoming-title">Incoming Call</div>
-                            <div class="phone-call-incoming-caller">Unknown Number</div>
+                            <div class="phone-call-incoming-title">Gelen Arama</div>
+                            <div class="phone-call-incoming-caller">Bilinmeyen Numara</div>
                             <div class="phone-call-incoming-picture"></div>
 
                             <i class="fas fa-phone" id="incoming-answer"></i>
@@ -237,16 +237,16 @@
                         </div>
 
                         <div class="phone-call-outgoing">
-                            <div class="phone-call-outgoing-title">Calling...</div>
-                            <div class="phone-call-outgoing-caller">Unknown Number</div>
+                            <div class="phone-call-outgoing-title">Aranıyor...</div>
+                            <div class="phone-call-outgoing-caller">Bilinmeyen Numara</div>
                             <div class="phone-call-outgoing-picture"></div>
 
                             <i class="fas fa-phone" id="outgoing-cancel"></i>
                         </div>
 
                         <div class="phone-call-ongoing">
-                            <div class="phone-call-ongoing-title">Ongoing</div>
-                            <div class="phone-call-ongoing-caller">Unknown Number</div>
+                            <div class="phone-call-ongoing-title">Devam Ediyor</div>
+                            <div class="phone-call-ongoing-caller">Bilinmeyen Numara</div>
                             <div class="phone-call-ongoing-picture"></div>
                             <div class="phone-call-ongoing-time">05:05</div>
 
@@ -256,13 +256,13 @@
 
                     <div class="phone-app">
                         <div class="phone-app-header">
-                            <p>Contacts</p>
-                            <span id="total-contacts">0 contacts</span>
+                            <p>Rehber</p>
+                            <span id="total-contacts">0 kişi</span>
                         </div>
 
                         <div class="phone-contacts">
                             <div class="phone-contacts-header">
-                                <input type="text" id="contact-search" placeholder="Contact name" spellcheck="false">
+                                <input type="text" id="contact-search" placeholder="Kişi adı" spellcheck="false">
                                 <i id="phone-search-icon" class="fas fa-search"></i>
                                 <i id="phone-plus-icon" class="fas fa-plus"></i>
                             </div>
@@ -272,7 +272,7 @@
                         </div>
 
                         <div class="phone-recent">
-                            <div class="phone-recent-header"><p>Recent Call History</p></div>
+                            <div class="phone-recent-header"><p>Son Aramalar</p></div>
 
                             <div class="phone-recent-calls">
                                 <!-- <div class="phone-recent-call"> <div class="phone-recent-call-image">P</div> <div class="phone-recent-call-name">Pieter Post</div> <div class="phone-recent-call-type"><i class="fas fa-phone-slash"></i></div> <div class="phone-recent-call-time">12:05</div> </div> -->
@@ -281,8 +281,8 @@
 
                         <div class="phone-suggestedcontacts">
                             <div class="phone-suggestedcontacts-header">
-                                Suggested Contacts
-                                <p class="amount-of-suggested-contacts">0 contacts</p>
+                                Önerilen Kişiler
+                                <p class="amount-of-suggested-contacts">0 kişi</p>
                             </div>
 
                             <div class="suggested-contacts">
@@ -310,39 +310,39 @@
                         </div>
 
                         <div class="phone-add-contact">
-                            <div class="phone-add-contact-header"><p>Add Contact</p></div>
+                            <div class="phone-add-contact-header"><p>Kişi Ekle</p></div>
 
                             <i id="phone-add-contact-name-icon" class="fas fa-user"></i>
-                            <input type="text" class="phone-add-contact-name" placeholder="Contact Name" required spellcheck="false">
+                            <input type="text" class="phone-add-contact-name" placeholder="Kişi Adı" required spellcheck="false">
 
                             <i id="phone-add-contact-number-icon" class="fas fa-phone-alt"></i>
-                            <input type="number" class="phone-add-contact-number" placeholder="Phone number" required spellcheck="false">
+                            <input type="number" class="phone-add-contact-number" placeholder="Telefon numarası" required spellcheck="false">
 
                             <i id="phone-add-contact-iban-icon" class="fas fa-money-check"></i>
-                            <input type="text" class="phone-add-contact-iban" placeholder="Bank nr. (Not required)" required spellcheck="false">
+                            <input type="text" class="phone-add-contact-iban" placeholder="Banka no. (Zorunlu değil)" required spellcheck="false">
 
                             <div class="phone-add-contact-buttons">
-                                <div class="phone-add-contact-button" id="add-contact-save"><p>Save</p></div>
-                                <div class="phone-add-contact-button" id="add-contact-cancel"><p>Cancel</p></div>
+                                <div class="phone-add-contact-button" id="add-contact-save"><p>Kaydet</p></div>
+                                <div class="phone-add-contact-button" id="add-contact-cancel"><p>İptal</p></div>
                             </div>
                         </div>
 
                         <div class="phone-edit-contact">
-                            <div class="phone-edit-contact-header"><p>Add Contact</p></div>
+                            <div class="phone-edit-contact-header"><p>Kişi Düzenle</p></div>
 
                             <i id="phone-edit-contact-name-icon" class="fas fa-user"></i>
-                            <input type="text" class="phone-edit-contact-name" placeholder="Contact Name" required spellcheck="false">
+                            <input type="text" class="phone-edit-contact-name" placeholder="Kişi Adı" required spellcheck="false">
 
                             <i id="phone-edit-contact-number-icon" class="fas fa-phone-alt"></i>
-                            <input type="number" class="phone-edit-contact-number" placeholder="Phone number" required spellcheck="false">
+                            <input type="number" class="phone-edit-contact-number" placeholder="Telefon numarası" required spellcheck="false">
 
                             <i id="phone-edit-contact-iban-icon" class="fas fa-money-check"></i>
-                            <input type="text" class="phone-edit-contact-iban" placeholder="Bank nr. (Not required)" required spellcheck="false">
+                            <input type="text" class="phone-edit-contact-iban" placeholder="Banka no. (Zorunlu değil)" required spellcheck="false">
 
                             <div class="phone-edit-contact-buttons">
-                                <div class="phone-edit-contact-button" id="edit-contact-save"><p>Save</p></div>
-                                <div class="phone-edit-contact-button" id="edit-contact-delete"><p>Delete</p></div>
-                                <div class="phone-edit-contact-button" id="edit-contact-cancel"><p>Cancel</p></div>
+                                <div class="phone-edit-contact-button" id="edit-contact-save"><p>Kaydet</p></div>
+                                <div class="phone-edit-contact-button" id="edit-contact-delete"><p>Sil</p></div>
+                                <div class="phone-edit-contact-button" id="edit-contact-cancel"><p>İptal</p></div>
                             </div>
                         </div>
 
@@ -364,14 +364,14 @@
 
                     <div class="houses-app">
                         <div class="houses-app-header">
-                            <div class="houses-app-header-tab houses-app-header-tab-selected" data-housetab="myhouses"><p>My Houses</p></div>
-                            <div class="houses-app-header-tab" data-housetab="mykeys"><p>My Keys</p></div>
+                            <div class="houses-app-header-tab houses-app-header-tab-selected" data-housetab="myhouses"><p>Evlerim</p></div>
+                            <div class="houses-app-header-tab" data-housetab="mykeys"><p>Anahtarlarım</p></div>
                         </div>
 
                         <div class="house-app-myhouses-container">
                             <div class="myhouses-house">
                                 <div class="myhouse-house-icon"><i class="fas fa-home"></i></div>
-                                <div class="myhouse-house-titel">Grove St. 1 | Tier 1</div>
+                                <div class="myhouse-house-titel">Grove St. 1 | Seviye 1</div>
                                 <div class="myhouse-house-details"><i class="fas fa-key"></i>&nbsp;&nbsp;5</div>
                             </div>
                         </div>
@@ -382,36 +382,36 @@
                         <div class="myhouses-options-container">
                             <div class="myhouses-options">
                                 <div class="myhouses-options-header">Grove St. 1</div>
-                                <div class="myhouses-option" id="myhouse-option-transfer">TRANSFER</div>
-                                <div class="myhouses-option" id="myhouse-option-keys">KEYS</div>
+                                <div class="myhouses-option" id="myhouse-option-transfer">DEVRET</div>
+                                <div class="myhouses-option" id="myhouse-option-keys">ANAHTARLAR</div>
                                 <br>
                                 <br>
-                                <div class="myhouses-option" id="myhouse-option-close">CLOSE</div>
+                                <div class="myhouses-option" id="myhouse-option-close">KAPAT</div>
                             </div>
 
                             <div class="myhouse-option-transfer-container">
-                                <div class="myhouse-option-transfer-container-header">Transfer House</div>
+                                <div class="myhouse-option-transfer-container-header">Ev Devri</div>
                                 <input class="myhouse-option-transfer-container-citizenid" type="text" spellcheck="false" placeholder="CSN" required>
                                 <br>
                                 <br>
                                 <br>
                                 <br>
                                 <br>
-                                <div class="myhouses-option" id="myhouse-option-transfer-confirm">CONFIRM</div>
-                                <div class="myhouses-option" id="myhouse-option-transfer-back">RETURN</div>
+                                <div class="myhouses-option" id="myhouse-option-transfer-confirm">ONAYLA</div>
+                                <div class="myhouses-option" id="myhouse-option-transfer-back">GERİ</div>
                             </div>
 
                             <div class="myhouse-option-keys-container">
                                 <div class="keys-container">
                                 </div>
-                                <div class="myhouses-option" id="myhouse-option-keys-back">RETURN</div>
+                                <div class="myhouses-option" id="myhouse-option-keys-back">GERİ</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="garage-app">
                         <div class="garage-app-header">
-                            My Garage
+                            Garajım
                         </div>
                         <div class="garage-homescreen">
                             <div class="garage-vehicles">
@@ -420,22 +420,22 @@
 
                          <div class="garage-detailscreen">
                             <div class="garage-cardetails">
-                                <div class="vehicle-brand"><span class="vehicle-detail">Brand</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-brand"><span class="vehicle-detail">Marka</span><span class="vehicle-answer">BMW M5</span></div>
                                 <div class="vehicle-model"><span class="vehicle-detail">Model</span><span class="vehicle-answer">BMW M5</span></div>
-                                <div class="vehicle-plate"><span class="vehicle-detail">License Plate</span><span class="vehicle-answer">BMW M5</span></div>
-                                <div class="vehicle-garage"><span class="vehicle-detail">Garage</span><span class="vehicle-answer">BMW M5</span></div>
-                                <div class="vehicle-status"><span class="vehicle-detail">Status</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-plate"><span class="vehicle-detail">Plaka</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-garage"><span class="vehicle-detail">Garaj</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-status"><span class="vehicle-detail">Durum</span><span class="vehicle-answer">BMW M5</span></div>
                                 &nbsp;
-                                <div class="vehicle-fuel"><span class="vehicle-detail">Fuel</span><span class="vehicle-answer">BMW M5</span></div>
-                                <div class="vehicle-engine"><span class="vehicle-detail">Engine</span><span class="vehicle-answer">BMW M5</span></div>
-                                <div class="vehicle-body"><span class="vehicle-detail">Bodywork</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-fuel"><span class="vehicle-detail">Yakıt</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-engine"><span class="vehicle-detail">Motor</span><span class="vehicle-answer">BMW M5</span></div>
+                                <div class="vehicle-body"><span class="vehicle-detail">Kaporta</span><span class="vehicle-answer">BMW M5</span></div>
 
                                 <div class="return-track">
                                     <div id="return-button">
-                                        RETURN
+                                        GERİ
                                     </div>
                                     <div id="track-vehicle">
-                                        TRACK
+                                        TAKİP ET
                                     </div>
                                 </div>
                             </div>
@@ -444,7 +444,7 @@
 
                     <div class="gallery-app">
                         <div class="gallery-app-header">
-                            My Gallery
+                            Galerim
                         </div>
                         <div class="gallery-homescreen">
                             <div class="gallery-images">
@@ -456,7 +456,7 @@
                                 <div class="imagedata"><img class="image" id="imagedata" style="width: 100%;" src="" alt=""></div>
                                 <div class="make-post-button">
                                     <div id="make-post-button">
-                                        POST
+                                        PAYLAŞ
                                     </div>
                                     <div id="delete-button">
                                         <i class="fas fa-trash-alt"></i>
@@ -464,7 +464,7 @@
                                 </div>
                                 <div class="return-button">
                                     <div id="return-button">
-                                        RETURN
+                                        GERİ
                                     </div>
                                 </div>
                             </div>
@@ -482,7 +482,7 @@
                                 </div>
                                 <div class="return-button">
                                     <div id="returndetail-button">
-                                        RETURN
+                                        GERİ
                                     </div>
                                 </div>
                             </div>
@@ -499,28 +499,28 @@
 
                     <div class="trucker-app">
                         <div class="trucker-header">
-                            <span class="trucker-header-name"><span style="font-size: 1vh; color: rgba(255, 255, 255, 0.6);">Welcome</span><br><span id="trucker-name">Jay Yay</span></span>
+                            <span class="trucker-header-name"><span style="font-size: 1vh; color: rgba(255, 255, 255, 0.6);">Hoş Geldiniz</span><br><span id="trucker-name">Jay Yay</span></span>
                             <div class="trucker-header-progress">
                                 <div class="trucker-header-progress-fill"></div>
-                                <span class="trucker-header-progress-text" id="trucker-header-progress-current" style="float: left;">Current: 100 REP</span>
-                                <span class="trucker-header-progress-text" id="trucker-header-progress-next" style="float: right;">Next: 200 REP</span>
+                                <span class="trucker-header-progress-text" id="trucker-header-progress-current" style="float: left;">Mevcut: 100 REP</span>
+                                <span class="trucker-header-progress-text" id="trucker-header-progress-next" style="float: right;">Sonraki: 200 REP</span>
                             </div>
                             <!-- <div class="trucker-header-currentlevel">1</div> -->
-                            <span class="trucker-header-description">Your current progression<br><span id="trucker-header-tier">Tier 1</span></span>
+                            <span class="trucker-header-description">Mevcut ilerlemeniz<br><span id="trucker-header-tier">Seviye 1</span></span>
                         </div>
 
                         <div class="trucker-jobinfo">
                             <div class="trucker-jobinfo-nojob">
                                 <i class="fas fa-ban"></i>
-                                <span id="trucker-jobinfo-nojob-text">You are currently not working</span>
+                                <span id="trucker-jobinfo-nojob-text">Şu anda çalışmıyorsunuz</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="lawyers-app">
                         <div class="lawyers-header">
-                            <p>Services</p>
-                            <span>Available services</span>
+                            <p>Hizmetler</p>
+                            <span>Mevcut hizmetler</span>
                         </div>
 
                         <div class="lawyers-list">
@@ -534,28 +534,28 @@
 
                             <div class="crypto-header-values">
                                 <div class="crypto-header-value crypto-portofolio">
-                                    <span>Wallet</span>
+                                    <span>Cüzdan</span>
                                     <p>0.2555</p>
                                 </div>
                                 <div class="crypto-header-value crypto-course">
-                                    <span>Value</span>
+                                    <span>Değer</span>
                                     <p>$9000</p>
                                 </div>
                                 <div class="crypto-header-value crypto-volume">
-                                    <span>Volume</span>
+                                    <span>Hacim</span>
                                     <p>$2299.5‬</p>
                                 </div>
                             </div>
 
                             <div class="crypto-header-footer">
                                 <div class="crypto-header-footer-item" data-cryptotab="general">
-                                    General
+                                    Genel
                                 </div>
                                 <div class="crypto-header-footer-item" data-cryptotab="transactions">
-                                    Transactions
+                                    İşlemler
                                 </div>
                                 <div class="crypto-header-footer-item" data-cryptotab="course">
-                                    Value
+                                    Değer
                                 </div>
                             </div>
                         </div>
@@ -563,16 +563,16 @@
                         <div class="crypto-action-page">
                             <div class="crypto-action-page-buy-crypto">
 
-                                <div class="crypto-action-page-header">Buy Qbit</div>
+                                <div class="crypto-action-page-header">Qbit Al</div>
 
-                                <div class="crypto-action-page-wallet">Wallet: 1.000500 Qbit('s)</div>
+                                <div class="crypto-action-page-wallet">Cüzdan: 1.000500 Qbit</div>
 
                                 <i class="crypto-action-page-buy-crypto-input-coins-icon fas fa-coins"></i>
                                 <input type="number" oninput="this.value = Math.abs(this.value)" class="crypto-action-page-buy-crypto-input-coins" required spellcheck="false" placeholder="1.000000" step="0.000001" min="0">
 
                                 <i class="crypto-action-page-buy-crypto-input-money-icon fas fa-dollar-sign"></i>
                                 <!-- <input type="number" oninput="this.value = Math.abs(this.value)" class="crypto-action-page-buy-crypto-input-money" required spellcheck="false" placeholder="1000" step="1.0" min="0"> -->
-                                <div class="crypto-action-page-buy-crypto-input-money">0 Dollars</div>
+                                <div class="crypto-action-page-buy-crypto-input-money">0 Dolar</div>
 
                                 <div class="crypto-action-page-buy-crypto-footer">
                                     <div class="crypto-action-page-buy-crypto-footer-button" id="buy-crypto">
@@ -585,16 +585,16 @@
                             </div>
                             <div class="crypto-action-page-sell-crypto">
 
-                                <div class="crypto-action-page-header">Sell Qbit</div>
+                                <div class="crypto-action-page-header">Qbit Sat</div>
 
-                                <div class="crypto-action-page-wallet">Wallet: 1.000500 Qbit('s)</div>
+                                <div class="crypto-action-page-wallet">Cüzdan: 1.000500 Qbit</div>
 
                                 <i class="crypto-action-page-sell-crypto-input-coins-icon fas fa-coins"></i>
                                 <input type="number" oninput="this.value = Math.abs(this.value)" class="crypto-action-page-sell-crypto-input-coins" required spellcheck="false" placeholder="1.000000" step="0.000001" min="0">
 
                                 <i class="crypto-action-page-sell-crypto-input-money-icon fas fa-dollar-sign"></i>
                                 <!-- <input type="number" onchange="this.value = Math.abs(this.value)" class="crypto-action-page-sell-crypto-input-money" required spellcheck="false" placeholder="1000" step="1.0" min="0"> -->
-                                <div class="crypto-action-page-sell-crypto-input-money">0 Dollars</div>
+                                <div class="crypto-action-page-sell-crypto-input-money">0 Dolar</div>
 
                                 <div class="crypto-action-page-buy-crypto-footer">
                                     <div class="crypto-action-page-buy-crypto-footer-button" id="sell-crypto">
@@ -607,9 +607,9 @@
                             </div>
                             <div class="crypto-action-page-transfer-crypto">
 
-                                <div class="crypto-action-page-header">Transfer Qbit</div>
+                                <div class="crypto-action-page-header">Qbit Transfer</div>
 
-                                <div class="crypto-action-page-wallet">Wallet: 0 Qbit('s)</div>
+                                <div class="crypto-action-page-wallet">Cüzdan: 0 Qbit</div>
 
                                 <i class="crypto-action-page-transfer-crypto-input-coins-icon fas fa-coins"></i>
                                 <input type="number" onchange="this.value = Math.abs(this.value)" class="crypto-action-page-transfer-crypto-input-coins" required spellcheck="false" placeholder="1.000000" step="0.000001" min="0">
@@ -633,21 +633,21 @@
                                 <div class="cryptotab-general-actions">
                                     <div class="cryptotab-general-action" data-action="buy-crypto">
                                         <i class="fas fa-shopping-basket" style="color:green"></i>
-                                        <span class="cryptotab-general-action-title">BUY</span>
-                                        <span class="cryptotab-general-action-description">You can buy crypto here.</span>
+                                        <span class="cryptotab-general-action-title">AL</span>
+                                        <span class="cryptotab-general-action-description">Buradan kripto satın alabilirsiniz.</span>
                                     </div>
                                     <div class="cryptotab-general-action" data-action="sell-crypto">
                                         <i class="fas fa-hand-holding-usd" style="color:red"></i>
-                                        <span class="cryptotab-general-action-title">SELL</span>
-                                        <span class="cryptotab-general-action-description">You can sell crypto here.</span>
+                                        <span class="cryptotab-general-action-title">SAT</span>
+                                        <span class="cryptotab-general-action-description">Buradan kripto satabilirsiniz.</span>
                                     </div>
                                     <div class="cryptotab-general-action" data-action="transfer-crypto">
                                         <i class="fas fa-share" style="color:orange"></i>
                                         <span class="cryptotab-general-action-title">TRANSFER</span>
-                                        <span class="cryptotab-general-action-description">You can transfer crypto here.</span>
+                                        <span class="cryptotab-general-action-description">Buradan kripto transfer edebilirsiniz.</span>
                                     </div>
                                 </div>
-                                <span class="crypto-walletid">Wallet ID: QB-12345678</span>
+                                <span class="crypto-walletid">Cüzdan ID: QB-12345678</span>
                             </div>
 
                             <div class="cryptotab-transactions">
@@ -666,32 +666,32 @@
                         <input type="text" id="testerino">
                         <div class="meos-app-header">
                             <span id="meos-app-title">MDT</span>
-                            <span id="meos-app-name">Welcome Jay Nandes</span>
+                            <span id="meos-app-name">Hoş geldin Jay Nandes</span>
                         </div>
 
                         <div class="meos-homescreen">
                             <div class="meos-blocks">
                                 <div class="meos-block" data-meosblock="person">
                                     <i class="fas fa-user"></i>
-                                    <p>Person</p>
+                                    <p>Kişi</p>
                                 </div>
                                 <div class="meos-block" data-meosblock="vehicle">
                                     <i class="fas fa-car"></i>
-                                    <p>Vehicle</p>
+                                    <p>Araç</p>
                                 </div>
                                 <div class="meos-block" data-meosblock="houses">
                                     <i class="fas fa-house-user"></i>
-                                    <p>House</p>
+                                    <p>Ev</p>
                                 </div>
                                 <div class="meos-block" data-meosblock="alerts">
                                     <i class="fas fa-bell"></i>
-                                    <p>Alerts</p>
+                                    <p>Uyarılar</p>
                                 </div>
                             </div>
 
-                            <span class="meos-recent-header">Most recent alert</span>
+                            <span class="meos-recent-header">Son uyarı</span>
                             <div class="meos-recent-alerts">
-                                <div class="meos-recent-alert"> <span class="meos-recent-alert-title">You don't have any alerts!</span></div>
+                                <div class="meos-recent-alert"> <span class="meos-recent-alert-title">Hiç uyarınız yok!</span></div>
                             </div>
                         </div>
 
@@ -732,7 +732,7 @@
                             </div>
 
                             <div class="meos-alerts-page">
-                                <div class="meos-clear-alerts">CLEAR</div>
+                                <div class="meos-clear-alerts">TEMİZLE</div>
                                 <div class="meos-alerts">
                                 </div>
                             </div>
@@ -746,7 +746,7 @@
                     <div class="advert-app">
                         <div class="advert-home">
                             <div class="advert-header">
-                                <span id="advert-header-text">Advertisements</span>
+                                <span id="advert-header-text">İlanlar</span>
                                 <span id="advert-header-name"></span>
                             </div>
                             <div class="advert-list">
@@ -759,11 +759,11 @@
 
                         <div class="new-advert">
                             <div class="new-advert-header">
-                                <span id="new-advert-header-text">New advertisement</span>
+                                <span id="new-advert-header-text">Yeni ilan</span>
                             </div>
 
                             <textarea class="new-advert-textarea" spellcheck="false" required></textarea>
-                            <span><textarea id="advert-new-url" style="text-align:left; padding-left:15px;" placeholder="Picture URL" cols="30" rows="10" spellcheck="false"></textarea></span>
+                            <span><textarea id="advert-new-url" style="text-align:left; padding-left:15px;" placeholder="Resim URL'si" cols="30" rows="10" spellcheck="false"></textarea></span>
 
                             <div class="new-advert-footer">
                                 <div class="new-advert-footer-item" id="new-advert-submit">
@@ -782,9 +782,9 @@
                     <div class="mail-app">
                         <div class="mail-home">
                             <div class="mail-header">
-                                <span id="mail-header-text">Inbox</span>
+                                <span id="mail-header-text">Gelen Kutusu</span>
                                 <span id="mail-header-mail">jay.nandes@qbcore.com</span>
-                                <span id="mail-header-lastsync">Last synchronization 18:31</span>
+                                <span id="mail-header-lastsync">Son senkronizasyon 18:31</span>
                             </div>
 
                             <div class="mail-list">
@@ -794,11 +794,11 @@
                         <div class="opened-mail">
                             <div class="opened-mail-header">
                                 <div class="mail-back"><i class="fas fa-chevron-left" id="mail-back"></i></div>
-                                <div class="mail-subject"><p>Subject</p></div>
-                                <div class="mail-date"><p>19 February 2019 &nbsp; 08:19</p></div>
+                                <div class="mail-subject"><p>Konu</p></div>
+                                <div class="mail-date"><p>19 Şubat 2019 &nbsp; 08:19</p></div>
                                 <div class="mail-spacing"></div>
                                 <div class="mail-content"><p>
-                                    This is a test mail and will not be fully shown because thats what I'm testing.
+                                    Bu bir test e-postasıdır ve tam olarak gösterilmeyecektir.
                                 </p></div>
                             </div>
                             <div class="opened-mail-footer">
@@ -814,7 +814,7 @@
 
                     <div class="store-app">
                         <div class="store-header">
-                            <p>App Store</p>
+                            <p>Uygulama Mağazası</p>
                         </div>
                         <div class="store-apps">
                             <div class="storeapp" data-app="territory">
@@ -822,7 +822,7 @@
                                     <i class="fas fa-globe-europe"></i>
                                 </div>
                                 <div class="storeapp-title">
-                                    Territory
+                                    Bölge
                                 </div>
                                 <div class="storeapp-creator">
                                     Qbus
@@ -834,8 +834,8 @@
                         </div>
                         <div class="download-password-container">
                             <div class="download-password">
-                                <span id="download-password-title">Security</span>
-                                <span id="download-password-disclaimer">To download this application you must enter a password.</span>
+                                <span id="download-password-title">Güvenlik</span>
+                                <span id="download-password-disclaimer">Bu uygulamayı indirmek için bir şifre girmelisiniz.</span>
                                 <input type="text" class="download-password-input" spellcheck="false" required>
 
                                 <div class="download-password-buttons">
@@ -853,7 +853,7 @@
                     <div class="racing-app">
                         <div class="racing-overview">
                             <div class="racing-app-header">
-                                Racing - Overview
+                                Yarış - Genel Bakış
                             </div>
 
                             <div class="racing-races">
@@ -861,13 +861,13 @@
 
                             <div class="racing-buttons">
                                 <div class="racing-button" id="setup-race">
-                                    <i class="fas fa-flag-checkered"></i> Setup
+                                    <i class="fas fa-flag-checkered"></i> Kurulum
                                 </div>
                                 <div class="racing-button" id="leaderboards-race">
                                     <i class="fas fa-trophy"></i>
                                 </div>
                                 <div class="racing-button" id="create-race">
-                                    <i class="fas fa-plus"></i> Create
+                                    <i class="fas fa-plus"></i> Oluştur
                                 </div>
                             </div>
 
@@ -875,32 +875,32 @@
 
                         <div class="racing-setup">
                             <div class="racing-app-header">
-                                Racing - Setup
+                                Yarış - Kurulum
                             </div>
 
-                            <span id="racing-setup-trackheader">Race Track</span>
+                            <span id="racing-setup-trackheader">Yarış Pisti</span>
                             <div class="dropdown">
                                 <div class="select">
-                                  <span>Select a Track</span>
+                                  <span>Pist Seçin</span>
                                   <i class="fa fa-chevron-left"></i>
                                 </div>
                                 <input type="hidden" name="gender">
                                 <ul class="dropdown-menu"></ul>
                             </div>
 
-                            <span id="racing-setup-lapsheader">Laps</span>
-                            <input type="number" min="0" oninput="this.value = Math.abs(this.value)" class="racing-setup-laps" required spellcheck="false" placeholder="Number of laps (0 is Sprint)">
+                            <span id="racing-setup-lapsheader">Tur</span>
+                            <input type="number" min="0" oninput="this.value = Math.abs(this.value)" class="racing-setup-laps" required spellcheck="false" placeholder="Tur sayısı (0 = Sprint)">
 
-                            <span id="racing-setup-informationheader">Race Information</span>
-                            <div class="racing-setup-information-distance">Select a Track</div>
-                            <div class="racing-setup-information-creator">Select a Track</div>
-                            <div class="racing-setup-information-wr">Select a Track</div>
+                            <span id="racing-setup-informationheader">Yarış Bilgisi</span>
+                            <div class="racing-setup-information-distance">Pist Seçin</div>
+                            <div class="racing-setup-information-creator">Pist Seçin</div>
+                            <div class="racing-setup-information-wr">Pist Seçin</div>
 
                             <div class="racing-setup-buttons">
-                                <div class="racing-setup-button" id="setup-race-accept" data-toggle="race-setup" data-placement="bottom" title="Accept">
+                                <div class="racing-setup-button" id="setup-race-accept" data-toggle="race-setup" data-placement="bottom" title="Onayla">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="racing-setup-button" id="setup-race-cancel" data-toggle="race-setup" data-placement="bottom" title="Cancel">
+                                <div class="racing-setup-button" id="setup-race-cancel" data-toggle="race-setup" data-placement="bottom" title="İptal">
                                     <i class="fas fa-times-circle"></i>
                                 </div>
                             </div>
@@ -908,8 +908,8 @@
 
                         <div class="racing-create">
                             <div class="racing-create-block">
-                                <span id="racing-create-tracknameheader">Track Name</span>
-                                <input type="text" class="racing-create-trackname" required spellcheck="false" placeholder="Name of your track">
+                                <span id="racing-create-tracknameheader">Pist Adı</span>
+                                <input type="text" class="racing-create-trackname" required spellcheck="false" placeholder="Pistinizin adı">
 
                                 <div class="racing-create-buttons">
                                     <div class="racing-create-button" id="racing-create-accept">
@@ -924,10 +924,10 @@
 
                         <div class="racing-leaderboard">
                             <div class="racing-app-header">
-                                Racing - Leaderboards
+                                Yarış - Sıralama
                             </div>
 
-                            <span id="racing-leaderboards-header">Last Tracks</span>
+                            <span id="racing-leaderboards-header">Son Pistler</span>
                             <div class="racing-leaderboards">
                             </div>
 
@@ -935,7 +935,7 @@
                                 <div class="racing-leaderboard-details-block">
                                     <div class="racing-leaderboard-details-back"><i class="fas fa-times-circle"></i></div>
                                     <div class="racing-leaderboard-details-block-trackname"><i class="fas fa-flag-checkered"></i> Prison</div>
-                                    <span id="leaderboard-list-header"><span style="float: left;">Racer</span><span style="margin-left: 5.55vh;"><i class="fas fa-stopwatch"></i></span><span style="float: right; margin-right: 2vh;">#</span></span>
+                                    <span id="leaderboard-list-header"><span style="float: left;">Yarışçı</span><span style="margin-left: 5.55vh;"><i class="fas fa-stopwatch"></i></span><span style="float: right; margin-right: 2vh;">#</span></span>
                                     <div class="racing-leaderboard-details-block-list">
                                         <!-- <div class="row"> <div class="name">Jay Nandes</div><div class="time">00:04:55</div><div class="score">1</div> </div> -->
                                     </div>
@@ -951,11 +951,11 @@
                     <div class="twitter-app">
 
                         <div class="twitter-home-tab">
-                             <div class="twitter-no-tweets"><p>No tweets</p></div>
+                             <div class="twitter-no-tweets"><p>Tweet yok</p></div>
                         </div>
 
                         <div class="twitter-mentions-tab">
-                            <div class="twitter-no-tweets"><p>No mentions</p></div>
+                            <div class="twitter-no-tweets"><p>Bahsetme yok</p></div>
                         </div>
 
                         <div class="twitter-hashtags-tab">
@@ -964,7 +964,7 @@
                                 </div>
                             </div>
                             <div class="twitter-hashtags">
-                                <div class="twitter-no-tweets"><p>No hashtags</p></div>
+                                <div class="twitter-no-tweets"><p>Etiket yok</p></div>
                             </div>
                         </div>
 
@@ -973,14 +973,14 @@
                         </div>
 
                         <div class="twitter-new-tweet-tab">
-                            <div class="twitter-new-tweet-header"><p>New Tweet</p></div>
+                            <div class="twitter-new-tweet-header"><p>Yeni Tweet</p></div>
 
-                            <textarea id="tweet-new-message" placeholder="Twitter message" cols="30" rows="10" spellcheck="false" required></textarea>
-                            <span><textarea id="tweet-new-url" style="text-align:left; padding-left:15px;" placeholder="Picture URL" cols="30" rows="10" spellcheck="false"></textarea></span>
+                            <textarea id="tweet-new-message" placeholder="Twitter mesajı" cols="30" rows="10" spellcheck="false" required></textarea>
+                            <span><textarea id="tweet-new-url" style="text-align:left; padding-left:15px;" placeholder="Resim URL'si" cols="30" rows="10" spellcheck="false"></textarea></span>
                             <div class="twitter-new-tweet-buttons">
-                                <div class="twitter-new-tweet-button" id="send-tweet"><p>Send</p></div>
-                                <div class="twitter-new-tweet-button" id="take-pic"><p>Take Pic</p></div>
-                                <div class="twitter-new-tweet-button" id="cancel-tweet"><p>Cancel</p></div>
+                                <div class="twitter-new-tweet-button" id="send-tweet"><p>Gönder</p></div>
+                                <div class="twitter-new-tweet-button" id="take-pic"><p>Fotoğraf Çek</p></div>
+                                <div class="twitter-new-tweet-button" id="cancel-tweet"><p>İptal</p></div>
                             </div>
                         </div>
 
@@ -994,17 +994,17 @@
                     <div class="bank-app">
                         <div class="bank-app-loading">
                             <img src="../html/img/apps/bank-logo.png" class="qbank-logo">
-                            <span id="qbank-text">Bank</span>
+                            <span id="qbank-text">Banka</span>
                         </div>
                         <div class="bank-app-loaded">
                             <div class="bank-app-header">
-                                <div data-headertype="accounts" class="bank-app-header-button bank-app-header-button-selected"> <i class="fas fa-align-left"></i> <p>Accounts</p> </div>
-                                <div data-headertype="invoices" class="bank-app-header-button"> <i class="fas fa-file-invoice"></i> <p>Invoices</p> </div>
+                                <div data-headertype="accounts" class="bank-app-header-button bank-app-header-button-selected"> <i class="fas fa-align-left"></i> <p>Hesaplar</p> </div>
+                                <div data-headertype="invoices" class="bank-app-header-button"> <i class="fas fa-file-invoice"></i> <p>Faturalar</p> </div>
                             </div>
 
                             <div class="bank-app-accounts">
                                 <div class="bank-app-account">
-                                    <div class="bank-app-account-title">Account</div>
+                                    <div class="bank-app-account-title">Hesap</div>
                                     <!-- <div class="bank-app-account-number" id="iban-account">NL01QBBA012341234123</div> -->
                                     <input type="text" class="bank-app-account-number" id="iban-account" readonly spellcheck="false">
                                     <div class="bank-app-account-balance">&#36; 5000,00</div>
@@ -1016,7 +1016,7 @@
                             </div>
 
                             <div class="bank-app-transfer">
-                                <div class="bank-app-transfer-header">Transfer Money</div>
+                                <div class="bank-app-transfer-header">Para Transferi</div>
 
                                 <i class="bank-transfer-iban-icon fas fa-credit-card"></i>
                                 <input type="text" id="bank-transfer-iban" class="bank-transfer-input" required spellcheck="false">
@@ -1026,8 +1026,8 @@
                                 <input type="number" min="0" oninput="this.value = Math.abs(this.value)" id="bank-transfer-amount" class="bank-transfer-input" required spellcheck="false">
 
                                 <div class="bank-app-transfer-buttons">
-                                    <div class="bank-app-transfer-button" id="accept-transfer">Transfer</div>
-                                    <div class="bank-app-transfer-button" id="cancel-transfer">Cancel</div>
+                                    <div class="bank-app-transfer-button" id="accept-transfer">Transfer Et</div>
+                                    <div class="bank-app-transfer-button" id="cancel-transfer">İptal</div>
                                 </div>
                             </div>
 
@@ -1039,14 +1039,14 @@
                         </div>
 
                         <div class="bank-app-my-contacts">
-                            <div class="bank-app-my-contacts-header">My Contacts</div>
+                            <div class="bank-app-my-contacts-header">Rehberim</div>
                             <div class="bank-app-my-contacts-list-header">
-                                <input type="text" id="bank-app-my-contact-search" placeholder="Contact name" spellcheck="false">
+                                <input type="text" id="bank-app-my-contact-search" placeholder="Kişi adı" spellcheck="false">
                             </div>
                             <div class="bank-app-my-contacts-list">
                                 <!-- <div class="bank-app-my-contact"> <div class="bank-app-my-contact-firstletter">P</div> <div class="bank-app-my-contact-name">Pieter Post</div> </div> -->
                             </div>
-                            <div class="bank-app-my-contacts-list-back">Return</div>
+                            <div class="bank-app-my-contacts-list-back">Geri</div>
                         </div>
                     </div>
 
@@ -1054,9 +1054,9 @@
                         <div class="whatsapp-header">
                             <div class="whatsapp-header-top"></div>
                             <div class="whatsapp-header-footer">
-                                <p>Whatsapp</p>
+                                <p>WhatsApp</p>
                                 <i id="whatsapp-search-chats" class="fas fa-search"></i>
-                                <input type="text" id="whatsapp-search-input" placeholder="Contactname" spellcheck="false">
+                                <input type="text" id="whatsapp-search-input" placeholder="Kişi adı" spellcheck="false">
                             </div>
                         </div>
                         <div class="whatsapp-chats">
@@ -1078,7 +1078,7 @@
                                     <div class="whatsapp-extra-button" id="send-image"><i class="fas fa-camera"></i></div>
                                     <!-- <div class="whatsapp-extra-button" id="send-money"><i class="fas fa-money-bill"></i></div> -->
                                 </div>
-                                <input type="text" id="whatsapp-openedchat-message" placeholder="Message" spellcheck="false">
+                                <input type="text" id="whatsapp-openedchat-message" placeholder="Mesaj" spellcheck="false">
                                 <i class="fas fa-paper-plane" id="whatsapp-openedchat-send"></i>
                                 <i class="fas fa-ellipsis-v" id="whatsapp-openedchat-message-extras"></i>
                             </div>
@@ -1088,8 +1088,8 @@
 
                 <div class="phone-currentcall-container">
                     <div class="phone-currentcall-icon"><i class="fas fa-phone"></i></div>
-                    <div class="phone-currentcall-title">Outgoing call</div>
-                    <div class="phone-currentcall-contact">with 0612345678</div>
+                    <div class="phone-currentcall-title">Giden arama</div>
+                    <div class="phone-currentcall-contact">ile 0612345678</div>
                 </div>
 
                 <!-- Phone Home Button -->
@@ -1103,14 +1103,14 @@
 
         <div class="screen-notifications-container">
             <div class="screen-notification-icon"><i class="fab fa-twitter"></i></div>
-            <div class="screen-notification-title"><p>New Tweet!</p></div>
-            <div class="screen-notification-content"><p>This is a test notification </p></div>
+            <div class="screen-notification-title"><p>Yeni Tweet!</p></div>
+            <div class="screen-notification-content"><p>Bu bir test bildirimidir </p></div>
         </div>
 
         <div class="call-notifications">
             <div class="call-notifications-icon"><i class="fas fa-phone"></i></div>
-            <div class="call-notifications-title"><p>Incoming Call</p></div>
-            <div class="call-notifications-content"><p>You have an incoming call from Test</p></div>
+            <div class="call-notifications-title"><p>Gelen Arama</p></div>
+            <div class="call-notifications-content"><p>Test'ten gelen aramanız var</p></div>
         </div>
 
         <!-- JavaScript File's -->

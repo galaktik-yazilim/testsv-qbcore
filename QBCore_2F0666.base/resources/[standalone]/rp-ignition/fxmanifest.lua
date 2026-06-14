@@ -3,14 +3,15 @@ game 'gta5'
 lua54 'yes'
 
 name 'rp-ignition'
-description 'Manuel kontak — M ile çalıştır/durdur, yakınlık chat log'
+description 'Manuel kontak, sunucu tuşları (F2/M/K/L) ve yakınlık chat log'
 version '1.0.0'
 
 client_scripts {
-    'client/keybinds.lua',
     'client/main.lua',
+    'client/keybinds.lua',
 }
 
 dependency 'qb-core'
 dependency 'qb-vehiclekeys'
+dependency 'qb-phone'
 dependency 'rp-chat'

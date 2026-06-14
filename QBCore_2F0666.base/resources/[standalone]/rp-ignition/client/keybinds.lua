@@ -1,44 +1,76 @@
--- Sunucu tuşları: her girişte oyuncunun kayıtlı bind'lerini günceller.
--- K = kilit, L = emniyet kemeri, M = kontak, F2 = telefon
+-- Sunucu tuşları — fivem.cfg'den bağımsız, her oyuncuda aynı.
+-- F2 telefon | M kontak | K kilit | L kemer
+-- Eski bind'ler (M→phone, L→togglelocks) boş komutlara gider; asıl iş burada.
 
-local UNBINDS = {
-    { key = 'm', command = 'phone' },
-    { key = 'b', command = 'toggleseatbelt' },
-    { key = 'l', command = 'togglelocks' },
-    { key = 'g', command = 'toggleengine' },
+local KEYS = {
+    { control = 289, command = 'openphone',       cooldown = 400, inVehicle = false }, -- F2
+    { control = 244, command = 'toggleignition',    cooldown = 500, inVehicle = true  }, -- M
+    { control = 311, command = 'rp_vehiclelock',  cooldown = 450, inVehicle = false }, -- K
+    { control = 182, command = 'rp_seatbelt',     cooldown = 450, inVehicle = true  }, -- L
 }
 
-local BINDS = {
-    { key = 'f2', command = 'phone' },
-    { key = 'm',  command = 'toggleignition' },
-    { key = 'k',  command = 'togglelocks' },
-    { key = 'l',  command = 'toggleseatbelt' },
+local KEYS_TO_CLEAR = { 'k', 'l', 'm', 'b', 'g', 'f2', 'F2' }
+local COMMANDS_TO_CLEAR = {
+    'phone', 'openphone',
+    'togglelocks', 'rp_vehiclelock',
+    'toggleseatbelt', 'rp_seatbelt',
+    'toggleignition', 'toggleengine',
 }
 
-local function applyKeybindOverrides()
-    for i = 1, #UNBINDS do
-        local entry = UNBINDS[i]
-        ExecuteCommand(('unbind keyboard %s %s'):format(entry.key, entry.command))
-    end
+local lastUsed = {}
 
-    for i = 1, #BINDS do
-        local entry = BINDS[i]
-        ExecuteCommand(('bind keyboard %s %s'):format(entry.key, entry.command))
+local function stripLegacyBinds()
+    for i = 1, #KEYS_TO_CLEAR do
+        local key = KEYS_TO_CLEAR[i]
+        ExecuteCommand(('unbind keyboard %s'):format(key))
+        for j = 1, #COMMANDS_TO_CLEAR do
+            ExecuteCommand(('unbind keyboard %s %s'):format(key, COMMANDS_TO_CLEAR[j]))
+        end
     end
 end
 
-local function scheduleKeybindOverrides()
-    SetTimeout(2500, applyKeybindOverrides)
-    SetTimeout(6000, applyKeybindOverrides)
+local function scheduleStripLegacyBinds()
+    stripLegacyBinds()
+    SetTimeout(500, stripLegacyBinds)
+    SetTimeout(2000, stripLegacyBinds)
+    SetTimeout(5000, stripLegacyBinds)
 end
 
-AddEventHandler('onResourceStart', function(resource)
-    if resource ~= GetCurrentResourceName() then return end
-    if LocalPlayer.state.isLoggedIn then
-        scheduleKeybindOverrides()
+local function handleKeyPress(entry)
+    if entry.inVehicle and not IsPedInAnyVehicle(PlayerPedId(), false) then
+        return
+    end
+    ExecuteCommand(entry.command)
+end
+
+CreateThread(function()
+    while true do
+        if LocalPlayer.state.isLoggedIn and not IsPauseMenuActive() then
+            local now = GetGameTimer()
+
+            for i = 1, #KEYS do
+                local entry = KEYS[i]
+                if IsControlJustPressed(0, entry.control) then
+                    if not lastUsed[i] or now - lastUsed[i] > entry.cooldown then
+                        lastUsed[i] = now
+                        handleKeyPress(entry)
+                    end
+                end
+            end
+
+            Wait(0)
+        else
+            Wait(500)
+        end
     end
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    scheduleKeybindOverrides()
+    scheduleStripLegacyBinds()
+end)
+
+AddEventHandler('onResourceStart', function(resource)
+    if resource == GetCurrentResourceName() and LocalPlayer.state.isLoggedIn then
+        scheduleStripLegacyBinds()
+    end
 end)

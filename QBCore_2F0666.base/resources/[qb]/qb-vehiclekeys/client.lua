@@ -163,8 +163,7 @@ exports('removeNoLockVehicles', removeNoLockVehicles)
 -----------------------
 ---- Client Events ----
 -----------------------
-RegisterKeyMapping('togglelocks', Lang:t('info.tlock'), 'keyboard', 'K')
-RegisterCommand('togglelocks', function()
+local function toggleLocksCommand()
     local ped = PlayerPedId()
     if IsPedInAnyVehicle(ped, false) then
         ToggleVehicleLocksWithoutNui(GetVehicle())
@@ -173,7 +172,11 @@ RegisterCommand('togglelocks', function()
     else
         ToggleVehicleLocksWithoutNui(GetVehicle())
     end
-end)
+end
+
+-- Eski fivem.cfg bind'leri (ör. L → togglelocks) etkisiz kalsın
+RegisterCommand('togglelocks', function() end, false)
+RegisterCommand('rp_vehiclelock', toggleLocksCommand, false)
 
 AddEventHandler('onResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() and QBCore.Functions.GetPlayerData() ~= {} then

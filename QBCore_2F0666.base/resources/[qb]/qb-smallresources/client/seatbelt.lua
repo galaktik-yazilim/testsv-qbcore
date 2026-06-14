@@ -15,6 +15,7 @@ local damageDone = false
 local modifierDensity = true
 local lastVeh = nil
 local veloc
+local lastExitWarn = 0
 
 -- Functions
 
@@ -39,6 +40,7 @@ local function toggleSeatbelt()
     SeatBeltLoop()
     TriggerEvent('seatbelt:client:ToggleSeatbelt', seatbeltOn)
     TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 5.0, seatbeltOn and 'carbuckle' or 'carunbuckle', 0.25)
+    TriggerServerEvent('rp-chat:server:vehicleSeatbelt', seatbeltOn)
 end
 
 local function toggleHarness()
@@ -59,6 +61,14 @@ function SeatBeltLoop()
             if seatbeltOn or harnessOn then
                 DisableControlAction(0, 75, true)
                 DisableControlAction(27, 75, true)
+
+                if IsDisabledControlJustPressed(0, 75) or IsDisabledControlJustPressed(27, 75) then
+                    local now = GetGameTimer()
+                    if now - lastExitWarn > 2500 then
+                        lastExitWarn = now
+                        QBCore.Functions.Notify(Lang:t('seatbelt.cannot_exit'), 'warning', 3500)
+                    end
+                end
             end
             if not IsPedInAnyVehicle(PlayerPedId(), false) then
                 seatbeltOn = false
@@ -230,11 +240,13 @@ end)
 
 -- Register Key
 
-RegisterCommand('toggleseatbelt', function()
+local function toggleSeatbeltCommand()
     if not IsPedInAnyVehicle(PlayerPedId(), false) or IsPauseMenuActive() then return end
     local class = GetVehicleClass(GetVehiclePedIsUsing(PlayerPedId()))
     if class == 8 or class == 13 or class == 14 then return end
     toggleSeatbelt()
-end, false)
+end
 
-RegisterKeyMapping('toggleseatbelt', 'Toggle Seatbelt', 'keyboard', 'L')
+-- Eski fivem.cfg bind'leri (ör. B/L → toggleseatbelt) etkisiz kalsın
+RegisterCommand('toggleseatbelt', function() end, false)
+RegisterCommand('rp_seatbelt', toggleSeatbeltCommand, false)

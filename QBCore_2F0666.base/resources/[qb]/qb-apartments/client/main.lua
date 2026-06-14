@@ -19,10 +19,26 @@ local IsInsideExitZone = false
 local IsInsideStashZone = false
 local IsInsideOutfitsZone = false
 local IsInsideLogoutZone = false
+local EntranceApartmentId = nil
+
+local function getEntranceApartment(apartmentType)
+    apartmentType = apartmentType or EntranceApartmentId or ClosestHouse
+    if not apartmentType or not Apartments.Locations[apartmentType] then
+        return nil
+    end
+    return apartmentType
+end
 
 -- polyzone integration
 
 local function OpenEntranceMenu()
+    local apartmentType = getEntranceApartment()
+    if not apartmentType then
+        QBCore.Functions.Notify(Lang:t('error.to_far_from_door'), 'error')
+        return
+    end
+
+    ClosestHouse = apartmentType
     local headerMenu = {}
 
     if IsOwned then
@@ -30,7 +46,7 @@ local function OpenEntranceMenu()
             header = Lang:t('text.enter'),
             params = {
                 event = 'apartments:client:EnterApartment',
-                args = {}
+                args = { apartmentType = apartmentType }
             }
         }
     elseif not IsOwned then
@@ -38,7 +54,7 @@ local function OpenEntranceMenu()
             header = Lang:t('text.move_here'),
             params = {
                 event = 'apartments:client:UpdateApartment',
-                args = {}
+                args = { apartmentType = apartmentType }
             }
         }
     end
@@ -47,7 +63,7 @@ local function OpenEntranceMenu()
         header = Lang:t('text.ring_doorbell'),
         params = {
             event = 'apartments:client:DoorbellMenu',
-            args = {}
+            args = { apartmentType = apartmentType }
         }
     }
 
@@ -113,8 +129,16 @@ local function RegisterApartmentEntranceZone(apartmentID, apartmentData)
 
     zone:onPlayerInOut(function(isPointInside)
         if isPointInside and not InApartment then
+            EntranceApartmentId = apartmentID
+            ClosestHouse = apartmentID
+            QBCore.Functions.TriggerCallback('apartments:IsOwner', function(result)
+                IsOwned = result
+            end, apartmentID)
             exports['qb-core']:DrawText(Lang:t('text.options'), 'left')
         else
+            if EntranceApartmentId == apartmentID then
+                EntranceApartmentId = nil
+            end
             exports['qb-core']:HideText()
         end
         IsInsideEntranceZone = isPointInside
@@ -472,14 +496,15 @@ end
 local function SetClosestApartment()
     local pos = GetEntityCoords(PlayerPedId())
     local current = nil
-    local dist = 100
+    local dist = math.huge
     for id, _ in pairs(Apartments.Locations) do
         local distcheck = #(pos - vector3(Apartments.Locations[id].coords.enter.x, Apartments.Locations[id].coords.enter.y, Apartments.Locations[id].coords.enter.z))
         if distcheck < dist then
+            dist = distcheck
             current = id
         end
     end
-    if current ~= ClosestHouse and LocalPlayer.state.isLoggedIn and not InApartment then
+    if current and current ~= ClosestHouse and LocalPlayer.state.isLoggedIn and not InApartment and not IsInsideEntranceZone then
         ClosestHouse = current
         QBCore.Functions.TriggerCallback('apartments:IsOwner', function(result)
             IsOwned = result
@@ -565,6 +590,9 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     CurrentApartment = nil
     InApartment = false
     CurrentOffset = 0
+    EntranceApartmentId = nil
+    ClosestHouse = nil
+    IsOwned = false
 
     DeleteApartmentsEntranceTargets()
     DeleteInApartmentTargets()
@@ -649,17 +677,30 @@ RegisterNetEvent('apartments:client:DoorbellMenu', function()
     MenuOwners()
 end)
 
-RegisterNetEvent('apartments:client:EnterApartment', function()
+RegisterNetEvent('apartments:client:EnterApartment', function(data)
+    local apartmentType = getEntranceApartment(data and data.apartmentType)
+    if not apartmentType then
+        QBCore.Functions.Notify(Lang:t('error.to_far_from_door'), 'error')
+        return
+    end
+
+    ClosestHouse = apartmentType
     QBCore.Functions.TriggerCallback('apartments:GetOwnedApartment', function(result)
         if result ~= nil then
-            EnterApartment(ClosestHouse, result.name)
+            EnterApartment(apartmentType, result.name)
         end
     end)
 end)
 
-RegisterNetEvent('apartments:client:UpdateApartment', function()
-    local apartmentType = ClosestHouse
-    local apartmentLabel = Apartments.Locations[ClosestHouse].label
+RegisterNetEvent('apartments:client:UpdateApartment', function(data)
+    local apartmentType = getEntranceApartment(data and data.apartmentType)
+    if not apartmentType then
+        QBCore.Functions.Notify(Lang:t('error.to_far_from_door'), 'error')
+        return
+    end
+
+    local apartmentLabel = Apartments.Locations[apartmentType].label
+    ClosestHouse = apartmentType
     QBCore.Functions.TriggerCallback('apartments:GetOwnedApartment', function(result)
         if result == nil then
             TriggerServerEvent('apartments:server:CreateApartment', apartmentType, apartmentLabel, false)

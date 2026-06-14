@@ -1,0 +1,86 @@
+local Translations = {
+    headers = {
+        ['bsm'] = 'Patron Menüsü - ',
+    },
+    body = {
+        ['manage'] = 'Çalışanları Yönet',
+        ['managed'] = 'Çalışan listenizi görüntüleyin',
+        ['hire'] = 'Çalışan İşe Al',
+        ['hired'] = 'Yakındaki sivilleri işe al',
+        ['storage'] = 'Depo Erişimi',
+        ['storaged'] = 'Depoyu Aç',
+        ['outfits'] = 'Kıyafetler',
+        ['outfitsd'] = 'Kayıtlı kıyafetleri gör',
+        ['money'] = 'Para Yönetimi',
+        ['moneyd'] = 'Şirket bakiyenizi kontrol edin',
+        ['mempl'] = 'Çalışanları Yönet - ',
+        ['mngpl'] = 'Yönet: ',
+        ['grade'] = 'Rütbe: ',
+        ['fireemp'] = 'Çalışanı Kov',
+        ['hireemp'] = 'Çalışan İşe Al - ',
+        ['cid'] = 'Vatandaş ID: ',
+        ['balance'] = 'Bakiye: $',
+        ['deposit'] = 'Yatır',
+        ['depositd'] = 'Hesaba para yatır',
+        ['withdraw'] = 'Çek',
+        ['withdrawd'] = 'Hesaptan para çek',
+        ['depositm'] = 'Para Yatır <br> Mevcut Bakiye: $',
+        ['withdrawm'] = 'Para Çek <br> Mevcut Bakiye: $',
+        ['submit'] = 'Onayla',
+        ['amount'] = 'Tutar',
+        ['return'] = 'Geri Dön',
+        ['exit'] = 'Geri Dön',
+    },
+    drawtext = {
+        ['label'] = '[E] İş Yönetimini Aç',
+    },
+    target = {
+        ['label'] = 'Patron Menüsü',
+    },
+    headersgang = {
+        ['bsm'] = 'Çete Yönetimi - ',
+    },
+    bodygang = {
+        ['manage'] = 'Çete Üyelerini Yönet',
+        ['managed'] = 'Çete üyelerini al veya kov',
+        ['hire'] = 'Üye Al',
+        ['hired'] = 'Çete üyesi işe al',
+        ['storage'] = 'Depo Erişimi',
+        ['storaged'] = 'Çete deposunu aç',
+        ['outfits'] = 'Kıyafetler',
+        ['outfitsd'] = 'Kıyafet değiştir',
+        ['money'] = 'Para Yönetimi',
+        ['moneyd'] = 'Çete bakiyenizi kontrol edin',
+        ['mempl'] = 'Çete Üyelerini Yönet - ',
+        ['mngpl'] = 'Yönet: ',
+        ['grade'] = 'Rütbe: ',
+        ['fireemp'] = 'Kov',
+        ['hireemp'] = 'Çete Üyesi Al - ',
+        ['cid'] = 'Vatandaş ID: ',
+        ['balance'] = 'Bakiye: $',
+        ['deposit'] = 'Yatır',
+        ['depositd'] = 'Hesaba para yatır',
+        ['withdraw'] = 'Çek',
+        ['withdrawd'] = 'Hesaptan para çek',
+        ['depositm'] = 'Para Yatır <br> Mevcut Bakiye: $',
+        ['withdrawm'] = 'Para Çek <br> Mevcut Bakiye: $',
+        ['submit'] = 'Onayla',
+        ['amount'] = 'Tutar',
+        ['return'] = 'Geri Dön',
+        ['exit'] = 'Çık',
+    },
+    drawtextgang = {
+        ['label'] = '[E] Çete Yönetimini Aç',
+    },
+    targetgang = {
+        ['label'] = 'Çete Menüsü',
+    }
+}
+
+if GetConvar('qb_locale', 'en') == 'tr' then
+    Lang = Locale:new({
+        phrases = Translations,
+        warnOnMissing = true,
+        fallbackLang = Lang,
+    })
+end

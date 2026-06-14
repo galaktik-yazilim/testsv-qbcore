@@ -15,6 +15,24 @@ local rotateActive = false
 local peanut = false
 local previewObj = nil
 
+local function ensureObjectList()
+	if type(ObjectList) ~= 'table' then
+		ObjectList = {}
+	end
+end
+
+local function getNextObjectId()
+	ensureObjectList()
+	local nextId = 0
+	for id in pairs(ObjectList) do
+		local numId = tonumber(id) or 0
+		if numId > nextId then
+			nextId = numId
+		end
+	end
+	return nextId + 1
+end
+
 local function openDecorateUI()
 	SetNuiFocus(true, true)
 	cursorEnabled = true
@@ -36,6 +54,7 @@ end
 local function EnableEditMode()
 	local pos = GetEntityCoords(PlayerPedId(), true)
 	curPos = { x = pos.x, y = pos.y, z = pos.z }
+	ensureObjectList()
 	DecoMode = true
 	exports['qb-target']:AllowTargeting(false)
 	LocalPlayer.state:set('inv_busy', true, true)
@@ -43,30 +62,39 @@ local function EnableEditMode()
 end
 
 local function SaveDecorations()
-	if ClosestHouse then
-		if SelectedObj then
-			if SelObjId ~= 0 then
-				ObjectList[SelObjId] = { hashname = SelObjHash, x = SelObjPos.x, y = SelObjPos.y, z = SelObjPos.z, rotx = SelObjRot.x, roty = SelObjRot.y, rotz = SelObjRot.z, object = SelectedObj, objectId = SelObjId }
-			else
-				if ObjectList then
-					ObjectList[#ObjectList + 1] = { hashname = SelObjHash, x = SelObjPos.x, y = SelObjPos.y, z = SelObjPos.z, rotx = SelObjRot.x, roty = SelObjRot.y, rotz = SelObjRot.z, object = SelectedObj, objectId = #ObjectList + 1 }
-				else
-					ObjectList[1] = { hashname = SelObjHash, x = SelObjPos.x, y = SelObjPos.y, z = SelObjPos.z, rotx = SelObjRot.x, roty = SelObjRot.y, rotz = SelObjRot.z, object = SelectedObj, objectId = 1 }
-				end
-			end
+	if not ClosestHouse then return end
 
-			for _, v in pairs(ObjectList) do
+	ensureObjectList()
+
+	if SelectedObj then
+		local objectData = {
+			hashname = SelObjHash,
+			x = SelObjPos.x,
+			y = SelObjPos.y,
+			z = SelObjPos.z,
+			rotx = SelObjRot.x,
+			roty = SelObjRot.y,
+			rotz = SelObjRot.z,
+			object = SelectedObj,
+			objectId = SelObjId ~= 0 and SelObjId or getNextObjectId(),
+		}
+
+		ObjectList[objectData.objectId] = objectData
+
+		for _, v in pairs(ObjectList) do
+			if v.object and DoesEntityExist(v.object) then
 				DeleteObject(v.object)
 			end
+			v.object = nil
 		end
-		TriggerServerEvent('qb-houses:server:savedecorations', ClosestHouse, ObjectList)
 	end
+
+	TriggerServerEvent('qb-houses:server:savedecorations', ClosestHouse, ObjectList)
 end
 
 local function DisableEditMode()
 	SaveDecorations()
 	EnableAllControlActions(0)
-	ObjectList = nil
 	SelectedObj = nil
 	peanut = false
 	DecoMode = false
@@ -242,9 +270,14 @@ RegisterNUICallback('closedecorations', function(_, cb)
 end)
 
 RegisterNUICallback('deleteSelectedObject', function(_, cb)
-	DeleteObject(SelectedObj)
+	if SelectedObj and DoesEntityExist(SelectedObj) then
+		DeleteObject(SelectedObj)
+	end
 	SelectedObj = nil
-	table.remove(ObjectList, SelObjId)
+	ensureObjectList()
+	if SelObjId ~= 0 then
+		ObjectList[SelObjId] = nil
+	end
 	Wait(100)
 	SaveDecorations()
 	SelObjId = 0
@@ -280,6 +313,7 @@ RegisterNUICallback('buySelectedObject', function(data, cb)
 end)
 
 RegisterNUICallback('setupMyObjects', function(_, cb)
+	ensureObjectList()
 	local Objects = {}
 	for k, v in pairs(ObjectList) do
 		if ObjectList[k] then

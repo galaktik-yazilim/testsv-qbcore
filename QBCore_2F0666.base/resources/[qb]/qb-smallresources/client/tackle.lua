@@ -17,9 +17,12 @@ local function tackleAnim()
 end
 
 RegisterCommand('tackle', function()
+    local playerData = QBCore.Functions.GetPlayerData()
+    if not playerData or not playerData.metadata then return end
+
     local closestPlayer, distance = QBCore.Functions.GetClosestPlayer()
     local ped = PlayerPedId()
-    if distance ~= -1 and distance < 2 and GetEntitySpeed(ped) > 2.5 and not IsPedInAnyVehicle(ped, false) and not QBCore.Functions.GetPlayerData().metadata.ishandcuffed and not IsPedRagdoll(ped) then
+    if distance ~= -1 and distance < 2 and GetEntitySpeed(ped) > 2.5 and not IsPedInAnyVehicle(ped, false) and not playerData.metadata.ishandcuffed and not IsPedRagdoll(ped) then
         TriggerServerEvent('tackle:server:TacklePlayer', GetPlayerServerId(closestPlayer))
         tackleAnim()
     end

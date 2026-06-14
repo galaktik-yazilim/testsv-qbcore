@@ -510,12 +510,7 @@ end
 
 -- Command
 
-RegisterCommand('phone', function()
-    local ped = PlayerPedId()
-    if IsPedInAnyVehicle(ped, false) and GetPedInVehicleSeat(GetVehiclePedIsIn(ped, false), -1) == ped then
-        return
-    end
-
+local function openPhoneCommand()
     local PlayerData = QBCore.Functions.GetPlayerData()
     if not PhoneData.isOpen and LocalPlayer.state.isLoggedIn then
         if not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() then
@@ -524,11 +519,13 @@ RegisterCommand('phone', function()
             QBCore.Functions.Notify('Action not available at the moment..', 'error')
         end
     end
-end)
+end
 
-RegisterKeyMapping('phone', 'Open Phone', 'keyboard', Config.OpenPhone)
+-- Eski fivem.cfg bind'leri (ör. M → phone) etkisiz kalsın
+RegisterCommand('phone', function() end, false)
+RegisterCommand('openphone', openPhoneCommand, false)
 
--- NUI Callbacks
+-- Command
 
 RegisterNUICallback('CancelOutgoingCall', function(_, cb)
     CancelCall()

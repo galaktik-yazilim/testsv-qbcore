@@ -53,8 +53,6 @@ RegisterCommand('toggleignition', function()
     toggleIgnition()
 end, false)
 
-RegisterKeyMapping('toggleignition', 'Kontak Aç/Kapa', 'keyboard', 'M')
-
 CreateThread(function()
     while true do
         local sleep = 500

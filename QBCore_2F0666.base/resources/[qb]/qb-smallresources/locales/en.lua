@@ -52,7 +52,8 @@ local Translations = {
     seatbelt = {
         use_harness_progress = "Attaching Race Harness",
         remove_harness_progress = "Removing Race Harness",
-        no_car = "You're not in a car."
+        no_car = "You're not in a car.",
+        cannot_exit = "Emniyet kemeriniz takılıyken araçtan inemezsiniz",
     },
     teleport = {
         teleport_default = 'Use Elevator'

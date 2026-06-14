@@ -96,7 +96,7 @@ QB.Phone.Functions.GetLastMessage = function(messages) {
             ALLOWED_TAGS: [],
             ALLOWED_ATTR: []
         });
-        if(LastMessageData.message == '') 'Hmm, I shouldn\'t be able to do this...'
+        if(LastMessageData.message == '') 'Hmm, bunu yapmam gerekmezdi...'
     });
 
     return LastMessageData
@@ -145,7 +145,7 @@ QB.Phone.Functions.ReloadWhatsappAlerts = function(chats) {
     });
 }
 
-const monthNames = ["January", "February", "March", "April", "May", "June", "JulY", "August", "September", "October", "November", "December"];
+const monthNames = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
 FormatChatDate = function(date) {
     var TestDate = date.split("-");
@@ -160,7 +160,7 @@ FormatChatDate = function(date) {
 
     var ReturnedValue = ChatDate;
     if (CurrentDate == CurDateee) {
-        ReturnedValue = "Today";
+        ReturnedValue = "Bugün";
     }
 
     return ReturnedValue;
@@ -198,7 +198,7 @@ $(document).on('click', '#whatsapp-openedchat-send', function(e){
         $("#whatsapp-openedchat-message").val("");
         $("div.emojionearea-editor").data("emojioneArea").setText('');
     } else {
-        QB.Phone.Notifications.Add("fab fa-whatsapp", "Whatsapp", "You can't send a empty message!", "#25D366", 1750);
+        QB.Phone.Notifications.Add("fab fa-whatsapp", "WhatsApp", "Boş mesaj gönderemezsiniz!", "#25D366", 1750);
     }
 });
 
@@ -212,7 +212,7 @@ $(document).on('keypress', function (e) {
                     ALLOWED_TAGS: [],
                     ALLOWED_ATTR: []
                 });
-                if (clean == '') clean = 'Hmm, I shouldn\'t be able to do this...'
+                if (clean == '') clean = 'Hmm, bunu yapmam gerekmezdi...'
                 $.post('https://qb-phone/SendMessage', JSON.stringify({
                     ChatNumber: OpenedChatData.number,
                     ChatDate: GetCurrentDateKey(),
@@ -222,7 +222,7 @@ $(document).on('keypress', function (e) {
                 }));
                 $("#whatsapp-openedchat-message").val("");
             } else {
-                QB.Phone.Notifications.Add("fab fa-whatsapp", "Whatsapp", "You can't send a empty message!", "#25D366", 1750);
+                QB.Phone.Notifications.Add("fab fa-whatsapp", "WhatsApp", "Boş mesaj gönderemezsiniz!", "#25D366", 1750);
             }
         }
     }
@@ -234,7 +234,7 @@ $(document).on('click', '#send-location', function(e){
     $.post('https://qb-phone/SendMessage', JSON.stringify({
         ChatNumber: OpenedChatData.number,
         ChatDate: GetCurrentDateKey(),
-        ChatMessage: "Shared location",
+        ChatMessage: "Konum paylaşıldı",
         ChatTime: FormatMessageTime(),
         ChatType: "location",
     }));
@@ -248,7 +248,7 @@ $(document).on('click', '#send-image', function(e){
         $.post('https://qb-phone/SendMessage', JSON.stringify({
         ChatNumber: ChatNumber2,
         ChatDate: GetCurrentDateKey(),
-        ChatMessage: "Photo",
+        ChatMessage: "Fotoğraf",
         ChatTime: FormatMessageTime(),
         ChatType: "picture",
         url : url
@@ -289,14 +289,14 @@ QB.Phone.Functions.SetupChatMessages = function(cData, NewChatData) {
                     ALLOWED_TAGS: [],
                     ALLOWED_ATTR: []
                 });
-                if (message.message == '') message.message = 'Hmm, I shouldn\'t be able to do this...'
+                if (message.message == '') message.message = 'Hmm, bunu yapmam gerekmezdi...'
                 var Sender = "me";
                 if (message.sender !== QB.Phone.Data.PlayerData.citizenid) { Sender = "other"; }
                 var MessageElement
                 if (message.type == "message") {
                     MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+'">'+message.message+'<div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
                 } else if (message.type == "location") {
-                    MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+' whatsapp-shared-location" data-x="'+message.data.x+'" data-y="'+message.data.y+'"><span style="font-size: 1.2vh;"><i class="fas fa-map-marker-alt" style="font-size: 1vh;"></i> Location</span><div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
+                    MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+' whatsapp-shared-location" data-x="'+message.data.x+'" data-y="'+message.data.y+'"><span style="font-size: 1.2vh;"><i class="fas fa-map-marker-alt" style="font-size: 1vh;"></i> Konum</span><div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
                 } else if (message.type == "picture") {
                     MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+'" data-id='+OpenedChatData.number+'><img class="wppimage" src='+message.data.url +'  style=" border-radius:4px; width: 100%; position:relative; z-index: 1; right:1px;height: auto;"></div><div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
                 }
@@ -325,7 +325,7 @@ QB.Phone.Functions.SetupChatMessages = function(cData, NewChatData) {
         var NewDateDOM = NewDate.getDate();
         var NewDateYear = NewDate.getFullYear();
         var DateString = ""+NewDateDOM+"-"+(NewDateMonth+1)+"-"+NewDateYear;
-        var ChatDiv = '<div class="whatsapp-openedchat-messages-'+DateString+' unique-chat"><div class="whatsapp-openedchat-date">TODAY</div></div>';
+        var ChatDiv = '<div class="whatsapp-openedchat-messages-'+DateString+' unique-chat"><div class="whatsapp-openedchat-date">BUGÜN</div></div>';
 
         $(".whatsapp-openedchat-messages").append(ChatDiv);
     }

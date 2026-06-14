@@ -11,9 +11,6 @@
         <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.umd.prod.js" defer></script>
         <script src="app.js" defer></script>
     </head>
-    <!-- This is where you want to replace with your audio -->
-
-    <audio autoplay loop id="audio" src="/assets/audio/noncopyright.mp3"></audio>
 
     <body>
         <div id="loading-main" style="min-height: auto;">
@@ -220,10 +217,6 @@
                     </q-card-section>
 
                     <q-card-section style="padding-top: 0px;">
-                        <q-toggle v-model="audioplay" size="lg" checked-icon="headset" keep-color color="togglecolor" label="Audio-track Enabled" unchecked-icon="headset_off" onclick="audiotoggle()"></q-toggle>
-                        <div style="white-space: pre-wrap;" class="text-h7 text-weight-medium q-mb-md-d">
-                            {{ AudioTrackDesc1 }}
-                        </div>
                         <q-toggle v-model="secondap" size="lg" checked-icon="view_carousel" keep-color color="togglecolor" label="Auto-play Enabled" unchecked-icon="image"></q-toggle>
                         <div style="white-space: pre-wrap;" class="text-h7 text-weight-medium q-mb-md-d">
                             {{ AutoPlayDesc2 }}

@@ -5,40 +5,39 @@ const { ref } = Vue
 const load = Vue.createApp({
   setup () {
     return {
-      CarouselText1: 'You can add/remove items, vehicles, jobs & gangs through the shared folder.',
-      CarouselSubText1: 'Photo captured by: Markyoo#8068',
-      CarouselText2: 'Adding additional player data can be achieved by modifying the qb-core player.lua file.',
-      CarouselSubText2: 'Photo captured by: ihyajb#9723',
-      CarouselText3: 'All server-specific adjustments can be made in the config.lua files throughout the build.',
-      CarouselSubText3: 'Photo captured by: FLAPZ[INACTIV]#9925',
-      CarouselText4: 'For additional support please join our community at discord.gg/qbcore',
-      CarouselSubText4: 'Photo captured by: Robinerino#1312',
+      CarouselText1: 'Türk RP sunucusuna hoş geldiniz.',
+      CarouselSubText1: 'Gerçekçi roleplay deneyimi için kurallara uyun.',
+      CarouselText2: 'Envanter, telefon ve araç kontrolleri için tuş atamalarını aşağıdan inceleyebilirsiniz.',
+      CarouselSubText2: 'Yardım için Discord sunucumuza katılın.',
+      CarouselText3: 'Ambient NPC\'ler kapalıdır; dünya daha sakin ve RP odaklıdır.',
+      CarouselSubText3: 'Motor, kilit ve emniyet kemeri manuel çalışır.',
+      CarouselText4: 'İyi roller dileriz — eğlenin ve saygılı olun.',
+      CarouselSubText4: 'Yerel geliştirme sunucusu',
 
-      DownloadTitle: 'Downloading QBCore Server',
-      DownloadDesc: "Hold tight while we begin downloading all the resources/assets required to play on QBCore Server. \n\nAfter download has been finished successfully, you'll be placed into the server and this screen will disappear. Please don't leave or turn off your PC. ",
+      DownloadTitle: 'Sunucu Yükleniyor',
+      DownloadDesc: "Oyun için gerekli tüm kaynaklar indiriliyor, lütfen bekleyin.\n\nİndirme tamamlandığında sunucuya bağlanacaksınız ve bu ekran kapanacak. Lütfen oyundan çıkmayın veya bilgisayarı kapatmayın.",
 
-      SettingsTitle: 'Settings',
-      AudioTrackDesc1: 'When disabled the current audio-track playing will be stopped.',
-      AutoPlayDesc2: 'When disabled carousel images will stop cycling and remain on the last shown.',
-      PlayVideoDesc3: 'When disabled video will stop playing and remain paused.',
+      SettingsTitle: 'Ayarlar',
+      AutoPlayDesc2: 'Kapalıyken slayt görselleri dönmeyi durdurur ve son görselde kalır.',
+      PlayVideoDesc3: 'Kapalıyken video duraklatılır.',
 
-      KeybindTitle: 'Default Keybinds',
-      Keybind1: 'Open Inventory',
-      Keybind2: 'Cycle Proximity',
-      Keybind3: 'Open Phone',
-      Keybind4: 'Toggle Seat Belt',
-      Keybind5: 'Open Target Menu',
-      Keybind6: 'Radial Menu',
-      Keybind7: 'Open Hud Menu',
-      Keybind8: 'Talk Over Radio',
-      Keybind9: 'Open Scoreboard',
-      Keybind10: 'Vehicle Locks',
-      Keybind11: 'Toggle Engine',
-      Keybind12: 'Pointer Emote',
-      Keybind13: 'Keybind Slots',
-      Keybind14: 'Hands Up Emote',
-      Keybind15: 'Use Item Slots',
-      Keybind16: 'Cruise Control',
+      KeybindTitle: 'Tuş Atamaları',
+      Keybind1: 'Envanter',
+      Keybind2: 'Yakınlık Sohbeti',
+      Keybind3: 'Telefon (F2)',
+      Keybind4: 'Emniyet Kemeri (L)',
+      Keybind5: 'Hedef Menüsü',
+      Keybind6: 'Radyal Menü',
+      Keybind7: 'HUD Menüsü',
+      Keybind8: 'Telsiz Konuşma',
+      Keybind9: 'Oyuncu Listesi',
+      Keybind10: 'Araç Kilidi (K)',
+      Keybind11: 'Motor (M)',
+      Keybind12: 'İşaret Emote',
+      Keybind13: 'Hızlı Slot',
+      Keybind14: 'Eller Yukarı',
+      Keybind15: 'Eşya Slotları',
+      Keybind16: 'Hız Sabitleyici',
 
       firstap: ref(true),
       secondap: ref(true),
@@ -46,7 +45,6 @@ const load = Vue.createApp({
       firstslide: ref(1),
       secondslide: ref('1'),
       thirdslide: ref('5'),
-      audioplay: ref(true),
       playvideo: ref(true),
       download: ref(true),
       settings: ref(false),
@@ -56,18 +54,6 @@ const load = Vue.createApp({
 
 load.use(Quasar, { config: {} })
 load.mount('#loading-main')
-
-var audio = document.getElementById("audio");
-audio.volume = 0.05;
-
-function audiotoggle() {
-    var audio = document.getElementById("audio");
-    if (audio.paused) {
-        audio.play();
-    } else {
-        audio.pause();
-    }
-}
 
 function videotoggle() {
     var video = document.getElementById("video");

@@ -22,7 +22,7 @@ CreateThread(function()
                 price = v.price,
                 locked = true,
                 adress = v.label,
-                tier = v.tier,
+                tier = tonumber(v.tier) or 1,
                 garage = garage,
                 decorations = {}
             }
