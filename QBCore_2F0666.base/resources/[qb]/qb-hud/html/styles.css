@@ -178,17 +178,273 @@ div#q-loading-bar {
     text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7), 1px -1px 0 rgba(0, 0, 0, 0.7), -1px 1px 0 rgba(0, 0, 0, 0.7), 1px 1px 0 rgba(0, 0, 0, 0.7);
 }
 
-/* Player HUD */
+/* Player HUD — minimap sağında (RAGE MP) */
+
+:root {
+    --map-left: 2.5vh;
+    --map-width: 29vh;
+    --map-height: 18.5vh;
+    --map-bottom: 6.3%;
+    --stat-size: 2.15rem;
+    --stat-gap: 1.2vh;
+}
+
+#ui-container {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+}
 
 #playerhud {
     position: absolute;
+    left: calc(var(--map-left) + var(--map-width) + var(--stat-gap));
+    bottom: calc(var(--map-bottom) + (var(--map-height) - var(--stat-size)) / 2);
     display: flex;
-    left: 3vh;
-    bottom: 0.2vw;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+/* Kare stat ikonları (RAGE MP) */
+.stat-box {
+    position: relative;
+    width: 2.15rem;
+    height: 2.15rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.stat-box-track {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 0;
+}
+
+.stat-box-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--stat-pct, 100%);
+    background: var(--stat-color, #ffffff);
+    opacity: 0.92;
+    border-radius: 0;
+    transition: height 0.25s ease;
+}
+
+.stat-box-icon {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    font-size: 0.82rem !important;
+    z-index: 2;
+    margin: 0 !important;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+#playerhud .q-ml-xl {
+    margin-left: 0 !important;
+}
+
+#veh-container {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    pointer-events: none;
+}
+
+#veh-container > .border {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.veh-icons-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.veh-icon {
+    position: relative !important;
+    margin-left: -18px !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+.veh-icons-row .veh-icon:first-child {
+    margin-left: 0.35rem !important;
+}
+
+#veh-container #Speedo,
+#veh-container #FuelGaugeBackground,
+#veh-container #FuelGaugeValue {
+    font-size: 50px !important;
+}
+
+#veh-container #FuelGaugeIcon {
+    font-size: 16px !important;
+}
+
+#veh-container speed {
+    font-size: 1.35vh !important;
+    position: absolute;
+}
+
+#veh-container speed:after {
+    font-size: 0.62vh !important;
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+
+#veh-container altitude {
+    font-size: 1.2vh !important;
+    position: absolute;
+}
+
+/* responsive.css eski araç konumlarını iptal et */
+#speedometer,
+#fuelgauge,
+#seatbelt,
+#altitudegauge {
+    left: auto !important;
+    bottom: auto !important;
+    margin-left: 0 !important;
+}
+
+.responsive#speedometer,
+.responsive#fuelgauge {
+    margin-left: 0 !important;
+    bottom: auto !important;
 }
 
 .q-ml-xl {
-    margin-left: -22px !important; /* Change this to space radials */
+    margin-left: -18px !important;
+}
+
+/* RAGE MP alt bilgi çubuğu */
+#ragemp-info {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+    user-select: none;
+}
+
+.info-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.38rem 0.75rem;
+    margin-bottom: 0.35rem;
+    background: rgba(0, 0, 0, 0.72);
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-size: 0.78rem;
+    color: #ffffff;
+    white-space: nowrap;
+    width: fit-content;
+    max-width: 96vw;
+}
+
+.info-vehicle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.info-speed {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    min-width: 4.2rem;
+    letter-spacing: 0.02em;
+}
+
+.fuel-bar {
+    width: 2.6rem;
+    height: 0.5rem;
+    background: rgba(255, 255, 255, 0.22);
+    overflow: hidden;
+}
+
+.fuel-fill {
+    height: 100%;
+    background: #ffffff;
+    min-width: 0;
+    transition: width 0.15s linear;
+}
+
+.info-mileage {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    min-width: 3.2rem;
+}
+
+.veh-icons-row {
+    display: none !important;
+}
+
+.info-id {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    padding: 0 0.2rem;
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: 0;
+}
+
+.info-name {
+    font-weight: 500;
+}
+
+.info-datetime,
+.info-zone {
+    font-weight: 400;
+    opacity: 0.95;
+}
+
+.info-icon {
+    font-size: 0.72rem;
+    opacity: 0.85;
+}
+
+.info-sep {
+    opacity: 0.35;
+    font-weight: 300;
+}
+
+/* Nakit — stat ikonlarının sağında yeşil kutu */
+#money-cash-ragemp {
+    display: flex;
+    align-items: center;
+    margin-left: 0.15rem;
+    padding: 0.25rem 0.55rem;
+    min-height: 2.15rem;
+    background: rgba(0, 120, 40, 0.85);
+    border-radius: 0;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+#money-cash-ragemp .cash-sign {
+    margin-right: 0.15rem;
+    opacity: 0.9;
 }
 
 /* Vehicle HUD */
@@ -240,9 +496,10 @@ altitude {
 }
 
 .square {
-    bottom: 6.3%;
-    width: 29vh;
-    height: 18.5vh;
+    left: var(--map-left, 2.5vh);
+    bottom: var(--map-bottom, 6.3%);
+    width: var(--map-width, 29vh);
+    height: var(--map-height, 18.5vh);
     border: 4px solid #bababa;
     position: absolute;
     display: inline-block;

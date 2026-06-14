@@ -751,7 +751,7 @@ const playerHud = {
             dev: 0,
             show: false,
             talking: false,
-            showVoice: true,
+            showVoice: false,
             showHealth: false,
             showArmor: true,
             showHunger: true,
@@ -774,7 +774,30 @@ const playerHud = {
             healthColor: "",
             thirstColor: "",
             radioActive: false,
+            cashAmount: 0,
+            bankAmount: 0,
+            showInfo: false,
+            charName: "",
+            serverId: 0,
+            dateTime: "",
+            zone: "",
+            inVehicle: false,
+            vehicleSpeed: 0,
+            vehicleFuel: 0,
+            vehicleMileage: 0,
+            speedUnit: "mph",
+            mileageUnit: "mi",
         };
+    },
+
+    computed: {
+        speedText() {
+            const padded = String(this.vehicleSpeed).padStart(3, "0");
+            return padded + this.speedUnit;
+        },
+        mileageText() {
+            return Number(this.vehicleMileage).toFixed(1) + this.mileageUnit;
+        },
     },
 
     destroyed() {
@@ -784,10 +807,19 @@ const playerHud = {
         this.listener = window.addEventListener("message", (event) => {
             if (event.data.action === "hudtick") {
                 this.hudTick(event.data);
+            } else if (event.data.action === "infobar") {
+                this.showInfo = event.data.show;
+                this.charName = event.data.charName || "";
+                this.serverId = event.data.serverId || 0;
+                this.dateTime = event.data.dateTime || "";
+                this.zone = event.data.zone || "";
+                this.inVehicle = !!event.data.inVehicle;
+                this.vehicleSpeed = event.data.speed || 0;
+                this.vehicleFuel = event.data.fuel || 0;
+                this.vehicleMileage = event.data.mileage || 0;
+                this.speedUnit = event.data.speedUnit || "mph";
+                this.mileageUnit = event.data.mileageUnit || "mi";
             }
-            // else if(event.data.update) {
-            //   eval(event.data.action + "(" + event.data.show + ')')
-            // }
         });
         Config = {};
     },
@@ -824,6 +856,12 @@ const playerHud = {
             this.dynamicOxygen = data.dynamicOxygen;
             this.dynamicEngine = data.dynamicEngine;
             this.dynamicNitro = data.dynamicNitro;
+            if (data.cash !== undefined) {
+                this.cashAmount = data.cash;
+            }
+            if (data.bank !== undefined) {
+                this.bankAmount = data.bank;
+            }
 
             if (data.dynamicHealth == true) {
                 if (data.health >= 100) {
@@ -1026,6 +1064,7 @@ const vehHud = {
             showSquare: false,
             showCircle: false,
             seatbeltColor: "",
+            fuelColor: "#FFFFFF",
         };
     },
 

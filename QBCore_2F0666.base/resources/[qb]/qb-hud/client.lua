@@ -95,6 +95,14 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     local hudSettings = GetResourceKvpString('hudSettings')
     if hudSettings then loadSettings(json.decode(hudSettings)) end
     PlayerData = QBCore.Functions.GetPlayerData()
+    if PlayerData.money then
+        cashAmount = PlayerData.money['cash'] or 0
+        bankAmount = PlayerData.money['bank'] or 0
+    end
+    Wait(500)
+    sendInfoBar()
+    TriggerEvent('hud:client:LoadMap')
+    DisplayRadar(Menu.isOutMapChecked)
     Wait(3000)
     SetEntityHealth(PlayerPedId(), 200)
 end)
@@ -106,13 +114,40 @@ end)
 RegisterNetEvent('QBCore:Client:OnPlayerUpdated', function(key, val)
     if key ~= 'all' then return end
     PlayerData = val
+    if PlayerData.money then
+        cashAmount = PlayerData.money['cash'] or 0
+        bankAmount = PlayerData.money['bank'] or 0
+    end
+    sendInfoBar()
+end)
+
+AddEventHandler('QBCore:Player:SetPlayerData', function(val)
+    PlayerData = val
+    if PlayerData.money then
+        cashAmount = PlayerData.money['cash'] or 0
+        bankAmount = PlayerData.money['bank'] or 0
+    end
+    sendInfoBar()
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
     Wait(2000)
+    if LocalPlayer.state.isLoggedIn then
+        PlayerData = QBCore.Functions.GetPlayerData()
+        if PlayerData.money then
+            cashAmount = PlayerData.money['cash'] or 0
+            bankAmount = PlayerData.money['bank'] or 0
+        end
+        sendInfoBar()
+    end
     local hudSettings = GetResourceKvpString('hudSettings')
-    if hudSettings then loadSettings(json.decode(hudSettings)) end
+    if hudSettings then
+        loadSettings(json.decode(hudSettings))
+    else
+        TriggerEvent('hud:client:LoadMap')
+        DisplayRadar(Menu.isOutMapChecked)
+    end
 end)
 
 AddEventHandler('pma-voice:radioActive', function(data)
@@ -599,8 +634,14 @@ local function updatePlayerHud(data)
             break
         end
     end
+    local prevCash = prevPlayerStats.cash
+    local prevBank = prevPlayerStats.bank
     prevPlayerStats = data
-    if shouldUpdate then
+    local cash = Round(cashAmount)
+    local bank = Round(bankAmount)
+    if shouldUpdate or prevCash ~= cash or prevBank ~= bank then
+        prevPlayerStats.cash = cash
+        prevPlayerStats.bank = bank
         SendNUIMessage({
             action = 'hudtick',
             show = data[1],
@@ -634,6 +675,8 @@ local function updatePlayerHud(data)
             cinematic = data[29],
             dev = data[30],
             radioActive = data[31],
+            cash = cash,
+            bank = Round(bankAmount),
         })
     end
 end
@@ -667,7 +710,7 @@ local function updateVehicleHud(data)
 end
 
 local lastFuelUpdate = 0
-local lastFuelCheck = {}
+local lastFuelCheck = 0
 
 local function getFuelLevel(vehicle)
     local updateTick = GetGameTimer()
@@ -677,6 +720,129 @@ local function getFuelLevel(vehicle)
     end
     return lastFuelCheck
 end
+
+local function getCharName()
+    local data = QBCore.Functions.GetPlayerData()
+    if data and data.charinfo and data.charinfo.firstname then
+        local c = data.charinfo
+        return c.firstname .. ' ' .. c.lastname
+    end
+    return ''
+end
+
+local function getZoneLabel()
+    local coords = GetEntityCoords(PlayerPedId())
+    return GetLabelText(GetNameOfZone(coords.x, coords.y, coords.z))
+end
+
+local function getDateTimeString()
+    local year, month, day, hour, minute = GetLocalTime()
+    return string.format('%02d/%02d/%04d %02d:%02d', day, month, year, hour, minute)
+end
+
+local function syncMoney()
+    local data = QBCore.Functions.GetPlayerData()
+    if data and data.money then
+        cashAmount = data.money['cash'] or 0
+        bankAmount = data.money['bank'] or 0
+        PlayerData = data
+    end
+end
+
+local function getLocationLabel()
+    local zone = getZoneLabel()
+    local pos = GetEntityCoords(PlayerPedId())
+    local street1, street2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z)
+    local street = GetStreetNameFromHashKey(street1)
+    if street == '' or street == 'NULL' then
+        street = GetStreetNameFromHashKey(street2)
+    end
+    if street ~= '' and street ~= 'NULL' and zone ~= '' then
+        return zone .. ', ' .. street
+    end
+    return zone ~= '' and zone or street
+end
+
+local vehicleMileage = {}
+local lastMileagePos = nil
+local lastMileageVeh = nil
+
+local function updateMileage(vehicle)
+    local plate = QBCore.Functions.GetPlate(vehicle)
+    if not plate or plate == '' then return 0.0 end
+
+    local coords = GetEntityCoords(vehicle)
+    if lastMileageVeh == vehicle and lastMileagePos then
+        local dist = #(coords - lastMileagePos)
+        local delta = config.UseMPH and (dist * 0.000621371) or (dist / 1000.0)
+        vehicleMileage[plate] = (vehicleMileage[plate] or 0.0) + delta
+    end
+
+    lastMileagePos = coords
+    lastMileageVeh = vehicle
+    return vehicleMileage[plate] or 0.0
+end
+
+local function getVehicleHudData()
+    local ped = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(ped, false)
+    if vehicle == 0 or IsThisModelABicycle(vehicle) then
+        lastMileagePos = nil
+        lastMileageVeh = nil
+        return false, 0, 0, 0.0
+    end
+
+    local speed = math.ceil(GetEntitySpeed(vehicle) * speedMultiplier)
+    local fuel = getFuelLevel(vehicle)
+    local mileage = updateMileage(vehicle)
+    return true, speed, fuel, mileage
+end
+
+function sendInfoBar()
+    if not LocalPlayer.state.isLoggedIn then
+        SendNUIMessage({ action = 'infobar', show = false })
+        return
+    end
+
+    local inVehicle, speed, fuel, mileage = getVehicleHudData()
+    local speedUnit = config.UseMPH and 'mph' or 'kph'
+    local mileageUnit = config.UseMPH and 'mi' or 'km'
+
+    SendNUIMessage({
+        action = 'infobar',
+        show = not IsPauseMenuActive(),
+        charName = getCharName(),
+        serverId = GetPlayerServerId(PlayerId()),
+        dateTime = getDateTimeString(),
+        zone = getLocationLabel(),
+        inVehicle = inVehicle,
+        speed = speed,
+        fuel = fuel,
+        mileage = mileage,
+        speedUnit = speedUnit,
+        mileageUnit = mileageUnit,
+    })
+end
+
+-- RAGE MP alt bilgi çubuğu: isim, tarih, konum + araç bilgisi
+CreateThread(function()
+    while true do
+        local wait = 1000
+        if LocalPlayer.state.isLoggedIn then
+            local ped = PlayerPedId()
+            local veh = GetVehiclePedIsIn(ped, false)
+            if veh ~= 0 and not IsThisModelABicycle(veh) then
+                wait = 100
+            end
+        end
+        Wait(wait)
+        if LocalPlayer.state.isLoggedIn then
+            sendInfoBar()
+        else
+            SendNUIMessage({ action = 'infobar', show = false })
+        end
+    end
+end)
 
 -- HUD Update loop
 
@@ -689,6 +855,7 @@ CreateThread(function()
             Wait(50)
         end
         if LocalPlayer.state.isLoggedIn then
+            syncMoney()
             local show = true
             local player = PlayerPedId()
             local playerId = PlayerId()
@@ -882,15 +1049,15 @@ RegisterNetEvent('hud:client:ShowAccounts', function(type, amount)
 end)
 
 RegisterNetEvent('hud:client:OnMoneyChange', function(type, amount, isMinus)
-    cashAmount = PlayerData.money['cash']
-    bankAmount = PlayerData.money['bank']
+    syncMoney()
     SendNUIMessage({
         action = 'updatemoney',
         cash = Round(cashAmount),
         bank = Round(bankAmount),
         amount = Round(amount),
         minus = isMinus,
-        type = type
+        type = type,
+        plus = not isMinus,
     })
 end)
 

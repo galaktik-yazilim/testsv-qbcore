@@ -39,6 +39,7 @@ setr voice_defaultVolume 0.3
 setr voice_enableRadioAnim 1
 setr voice_syncData 1
 setr voice_useSendingRangeOnly false
+setr voice_enableUi 0
 
 # QBCore locale config
 setr qb_locale "en"

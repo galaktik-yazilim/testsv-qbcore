@@ -210,135 +210,137 @@
             <div id="ui-container">
                 <div id="playerHud" v-show="show">
                     <transition name="fade">
-                    <div v-if="showVoice">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" :style="{color: talkingColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="voice" :thickness="0.24" :style="{color: talkingColor}" :min="0" :max="5" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -0.5px; left: 0px;" :name="voiceIcon" color="white"/>
+                    <div class="stat-box" v-if="showVoice" :style="{ '--stat-pct': (voice / 5 * 100) + '%', '--stat-color': talkingColor }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" :name="voiceIcon" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showHealth">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" :style="{color: healthColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="health" :thickness="0.24" :style="{color: healthColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -0.5px; left: -0.4px;" name="fas fa-heart" color="white"/>
+                    <div class="stat-box" v-if="showHealth" :style="{ '--stat-pct': health + '%', '--stat-color': healthColor }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-heart" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showArmor">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" :style="{color: armorColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="armor" :thickness="0.24" :style="{color: armorColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" name="fas fa-shield-alt" color="white"/>
+                    <div class="stat-box" v-if="showArmor" :style="{ '--stat-pct': armor + '%', '--stat-color': armorColor }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-shield-alt" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showHunger">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" :style="{color: hungerColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="hunger" :thickness="0.24" :style="{color: hungerColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -1px; left: -0.5px;" name="fas fa-hamburger" color="white"/>
+                    <div class="stat-box" v-if="showHunger" :style="{ '--stat-pct': hunger + '%', '--stat-color': hungerColor }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-hamburger" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showThirst">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" :style="{color: thirstColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="thirst" :thickness="0.24" :style="{color: thirstColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -0.5px; left: -0.5px;" name="fas fa-tint" color="white"/>
+                    <div class="stat-box" v-if="showThirst" :style="{ '--stat-pct': thirst + '%', '--stat-color': thirstColor }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-tint" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showStress">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="stress" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="stress" :thickness="0.24" color="stress" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -0.5px; left: -0.5px;" name="fas fa-brain" color="white"/>
+                    <div class="stat-box" v-if="showStress" :style="{ '--stat-pct': stress + '%', '--stat-color': '#e53935' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-brain" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showOxygen">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="oxygen" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="oxygen" :thickness="0.24" color="oxygen" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -2px; left: -0.1px;" name="fas fa-lungs" color="white"/>
+                    <div class="stat-box" v-if="showOxygen" :style="{ '--stat-pct': oxygen + '%', '--stat-color': '#8aa8bd' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-lungs" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showArmed">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="armed" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="static" :thickness="0.24" color="armed" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" name="fas fa-stream" color="white"/>
+                    <div class="stat-box" v-if="showArmed" :style="{ '--stat-pct': '100%', '--stat-color': '#ff4885' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-stream" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showParachute">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="parachute" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="parachute" :thickness="0.24" color="parachute" :min="0" :max="2" center-color="grey-10">
-                        <q-icon id="Icons" name="fas fa-parachute-box" size="23px" color="white"/>
+                    <div class="stat-box" v-if="showParachute" :style="{ '--stat-pct': (parachute / 2 * 100) + '%', '--stat-color': '#9e9e9e' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-parachute-box" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showEngine">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" :style="{color: engineColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="engine" :thickness="0.24" :style="{color: engineColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -1px;" name="fas fa-oil-can" size="19.5px":style="{color: engineColor}"/>
+                    <div class="stat-box" v-if="showEngine" :style="{ '--stat-pct': engine + '%', '--stat-color': engineColor }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-oil-can" :style="{ color: '#ffffff' }"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showHarness">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="harness" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="hp" :thickness="0.24" color="harness" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" name="fas fa-user-slash" color="white"/>
+                    <div class="stat-box" v-if="showHarness" :style="{ '--stat-pct': (hp > 100 ? 100 : hp) + '%', '--stat-color': '#b648ff' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-user-slash" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showCruise">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="cruise" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="speed" :thickness="0.24" color="cruise" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" style="top: -1.5px;" name="fas fa-tachometer-alt-fast" color="white"/>
+                    <div class="stat-box" v-if="showCruise" :style="{ '--stat-pct': speed + '%', '--stat-color': '#ff4885' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-tachometer-alt-fast" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showNos">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="nos" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="nos" :thickness="0.24" color="nos" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" name="fas fa-meteor" :style="{color: nosColor}"/>
+                    <div class="stat-box" v-if="showNos" :style="{ '--stat-pct': nos + '%', '--stat-color': nosColor || '#ff4885' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-meteor" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">
-                    <div v-if="showDev">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" :thickness="0.24" color="dev" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="static" :thickness="0.24" color="dev" :min="0" :max="100" center-color="grey-10">
-                        <q-icon id="Icons" name="fas fa-terminal" color="white"/>
+                    <div class="stat-box" v-if="showDev" :style="{ '--stat-pct': '100%', '--stat-color': '#616161' }">
+                        <div class="stat-box-track"></div>
+                        <div class="stat-box-fill"></div>
+                        <q-icon class="stat-box-icon" name="fas fa-terminal" color="white"/>
                     </div>
                     </transition>
+                    <div id="money-cash-ragemp" v-if="show">
+                        <span class="cash-sign">$</span>{{ cashAmount.toLocaleString('en-US') }}
+                    </div>
+                </div>
+                <div id="ragemp-info" v-show="showInfo">
+                    <div class="info-bar">
+                        <template v-if="inVehicle">
+                            <div class="info-vehicle">
+                                <i class="fas fa-tachometer-alt info-icon"></i>
+                                <span class="info-speed">{{ speedText }}</span>
+                                <i class="fas fa-gas-pump info-icon"></i>
+                                <div class="fuel-bar"><div class="fuel-fill" :style="{ width: vehicleFuel + '%' }"></div></div>
+                                <i class="fas fa-road info-icon"></i>
+                                <span class="info-mileage">{{ mileageText }}</span>
+                            </div>
+                            <span class="info-sep">|</span>
+                        </template>
+                        <span class="info-id">ID</span>
+                        <span class="info-name">{{ charName }} ({{ serverId }})</span>
+                        <span class="info-sep">|</span>
+                        <i class="fas fa-calendar-alt info-icon"></i>
+                        <span class="info-datetime">{{ dateTime }}</span>
+                        <span class="info-sep">|</span>
+                        <i class="fas fa-map-marker-alt info-icon"></i>
+                        <span class="info-zone">{{ zone }}</span>
+                    </div>
                 </div>
             </div>
             <div id="veh-container">
-                <div v-show="show">
-                    <div class="responsive" id="speedometer">
-                        <q-circular-progress id="Speedo" class="q-ml-xl" style="transform: rotate(-150deg); opacity: 60%;" :value="speedometer" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress id="Speedo" class="q-ml-xl" style="transform: rotate(-150deg); left: -50%;" show-value :value="speed" :thickness="0.21" color="gauge" :min="0" :max="600">
-                        <speed id="Speed">{{(speed)}}</speed>
-                    </div>
-                    <div class="responsive" id="fuelgauge">
-                        <q-circular-progress id="FuelGaugeBackground" class="q-ml-xl" style="transform: rotate(-125deg); opacity: 60%;" :value="fuelgauge" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress id="FuelGaugeValue" class="q-ml-xl" style="transform: rotate(-125deg); left: -50%;" show-value :value="fuel" :thickness="0.21" :style="{color: fuelColor}">
-                        <q-icon id="FuelGaugeIcon" name="fas fa-gas-pump" style="transform: rotate(125deg);" color="white"/>
-                    </div>
-                    <div class="responsive" id="altitudegauge" v-if="showAltitude">
-                        <q-circular-progress id="Altimeter" class="q-ml-xl" style="transform: rotate(-135deg); opacity: 60%;" :value="altitudegauge" size="70px" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress id="AltimeterValue" class="q-ml-xl" style="transform: rotate(-135deg); left: -50%;" show-value :value="altitude" size="70px" :thickness="0.21" color="gauge" :min="0" :max="750">
-                        <altitude id="Alt">{{(altitude)}}</altitude>
-                    </div>
-                    <transition name="fade">
-                    <div class="responsive" id="seatbelt" v-if="showSeatbelt">
-                        <q-circular-progress id="SeatbeltLocation" class="q-ml-xl" style="transform: rotate(-125deg); opacity: 60%;" size="70px" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress id="SeatbeltLocation" class="q-ml-xl" style="transform: rotate(-125deg); left: -40%;" show-value size="70px" :thickness="0.21" color="gauge" :min="0" :max="750">
-                        <q-icon id="SeatbeltIcon" name="fas fa-user-slash" style="transform: rotate(125deg);" :value="seatbelt" size="21px" :style="{color: seatbeltColor}"/>
-                    </div>
-                    </transition>
-                    <div class="border">
-                        <div class="square" v-if="showSquare"></div>
-                    </div>
-                    <div class="border">
-                        <div class="circle" v-if="showCircle"></div>
-                    </div>
+                <div class="border">
+                    <div class="square" v-if="showSquare"></div>
+                </div>
+                <div class="border">
+                    <div class="circle" v-if="showCircle"></div>
                 </div>
             </div>
         </div>
