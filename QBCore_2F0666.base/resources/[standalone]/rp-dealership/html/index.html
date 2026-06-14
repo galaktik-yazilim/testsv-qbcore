@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div id="app" class="hidden">
+        <div class="panel">
+            <header class="panel-header">
+                <div>
+                    <h1 id="shop-title">Galeri</h1>
+                    <p class="subtitle">Araç seç, filtrele ve satın al</p>
+                </div>
+                <button id="btn-close" class="icon-btn" title="Kapat"><i class="fas fa-times"></i></button>
+            </header>
+
+            <div class="money-bar">
+                <span><i class="fas fa-wallet"></i> Nakit: <strong id="cash-amount">$0</strong></span>
+                <span><i class="fas fa-university"></i> Banka: <strong id="bank-amount">$0</strong></span>
+            </div>
+
+            <div class="filters">
+                <div class="search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input id="search" type="text" placeholder="Araç veya marka ara..." autocomplete="off" />
+                </div>
+                <div class="filter-dropdown" data-filter="category">
+                    <button type="button" class="filter-trigger" id="filter-category-trigger">
+                        <span>Tüm kategoriler</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="filter-menu hidden" id="filter-category-menu"></div>
+                </div>
+                <div class="filter-dropdown" data-filter="brand">
+                    <button type="button" class="filter-trigger" id="filter-brand-trigger">
+                        <span>Tüm markalar</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="filter-menu hidden" id="filter-brand-menu"></div>
+                </div>
+                <div class="filter-dropdown" data-filter="sort">
+                    <button type="button" class="filter-trigger" id="filter-sort-trigger">
+                        <span>İsme göre</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="filter-menu hidden" id="filter-sort-menu"></div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div id="vehicle-list" class="vehicle-list"></div>
+                <aside class="detail">
+                    <div id="detail-empty" class="detail-empty">
+                        <i class="fas fa-car-side"></i>
+                        <p>Listeden bir araç seçin</p>
+                    </div>
+                    <div id="detail-card" class="detail-card hidden">
+                        <p class="detail-brand" id="detail-brand"></p>
+                        <h2 id="detail-name"></h2>
+                        <p class="detail-category" id="detail-category"></p>
+                        <p class="detail-price" id="detail-price"></p>
+                        <div class="buy-actions">
+                            <button id="btn-buy-cash" class="btn btn-cash"><i class="fas fa-money-bill-wave"></i> Nakit</button>
+                            <button id="btn-buy-bank" class="btn btn-bank"><i class="fas fa-credit-card"></i> Banka</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <footer class="panel-footer">
+                <span id="result-count">0 araç</span>
+                <span>ESC ile kapat</span>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
