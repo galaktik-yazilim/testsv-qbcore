@@ -83,3 +83,21 @@ end, 'user')
 
 exports('BroadcastProximity', BroadcastProximity)
 exports('GetCharName', GetCharName)
+
+RegisterNetEvent('rp-chat:server:vehicleIgnition', function(engineOn)
+    local src = source
+    local charName = GetCharName(src)
+    local msg = engineOn
+        and (charName .. ' isimli kişi aracı çalıştırdı')
+        or (charName .. ' isimli kişi aracı durdurdu')
+    BroadcastProximity(src, Config.Colors.me, msg, '')
+end)
+
+RegisterNetEvent('rp-chat:server:vehicleLock', function(locked)
+    local src = source
+    local charName = GetCharName(src)
+    local msg = locked
+        and (charName .. ' isimli kişi aracı kilitledi')
+        or (charName .. ' isimli kişi aracın kilidini açtı')
+    BroadcastProximity(src, Config.Colors.me, msg, '')
+end)

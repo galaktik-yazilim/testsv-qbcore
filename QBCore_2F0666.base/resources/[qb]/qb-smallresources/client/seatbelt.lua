@@ -119,49 +119,10 @@ RegisterNetEvent('QBCore:Client:EnteredVehicle', function()
             end
             if frameBodyChange ~= 0 then
                 if lastFrameVehSpeed > 110 and thisFrameVehSpeed < (lastFrameVehSpeed * 0.75) and not damageDone then
-                    if frameBodyChange > 18.0 then
-                        if not seatbeltOn and not IsThisModelABike(currVehicle) then
-                            if math.random(math.ceil(lastFrameVehSpeed)) > 60 then
-                                if not harnessOn then
-                                    ejectFromVehicle()
-                                else
-                                    harnessHp -= 1
-                                    TriggerServerEvent('seatbelt:DoHarnessDamage', harnessHp, harnessData)
-                                end
-                            end
-                        elseif (seatbeltOn or harnessOn) and not IsThisModelABike(currVehicle) then
-                            if lastFrameVehSpeed > 150 then
-                                if math.random(math.ceil(lastFrameVehSpeed)) > 150 then
-                                    if not harnessOn then
-                                        ejectFromVehicle()
-                                    else
-                                        harnessHp -= 1
-                                        TriggerServerEvent('seatbelt:DoHarnessDamage', harnessHp, harnessData)
-                                    end
-                                end
-                            end
-                        end
-                    else
-                        if not seatbeltOn and not IsThisModelABike(currVehicle) then
-                            if math.random(math.ceil(lastFrameVehSpeed)) > 60 then
-                                if not harnessOn then
-                                    ejectFromVehicle()
-                                else
-                                    harnessHp -= 1
-                                    TriggerServerEvent('seatbelt:DoHarnessDamage', harnessHp, harnessData)
-                                end
-                            end
-                        elseif (seatbeltOn or harnessOn) and not IsThisModelABike(currVehicle) then
-                            if lastFrameVehSpeed > 120 then
-                                if math.random(math.ceil(lastFrameVehSpeed)) > 200 then
-                                    if not harnessOn then
-                                        ejectFromVehicle()
-                                    else
-                                        harnessHp -= 1
-                                        TriggerServerEvent('seatbelt:DoHarnessDamage', harnessHp, harnessData)
-                                    end
-                                end
-                            end
+                    if not seatbeltOn and not harnessOn and not IsThisModelABike(currVehicle) then
+                        local ejectChance = frameBodyChange > 18.0 and 60 or 60
+                        if math.random(math.ceil(lastFrameVehSpeed)) > ejectChance then
+                            ejectFromVehicle()
                         end
                     end
                     damageDone = true
@@ -276,4 +237,4 @@ RegisterCommand('toggleseatbelt', function()
     toggleSeatbelt()
 end, false)
 
-RegisterKeyMapping('toggleseatbelt', 'Toggle Seatbelt', 'keyboard', 'B')
+RegisterKeyMapping('toggleseatbelt', 'Toggle Seatbelt', 'keyboard', 'L')

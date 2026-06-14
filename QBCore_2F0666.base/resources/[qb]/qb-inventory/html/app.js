@@ -42,7 +42,7 @@ const InventoryContainer = Vue.createApp({
             }
         },
         shouldCenterInventory() {
-            return this.isOtherInventoryEmpty;
+            return false;
         },
     },
     watch: {
@@ -64,7 +64,7 @@ const InventoryContainer = Vue.createApp({
                 errorSlot: null,
                 // Player Inventory
                 playerInventory: {},
-                inventoryLabel: "Inventory",
+                inventoryLabel: "Envanter",
                 totalWeight: 0,
                 // Other inventory
                 otherInventory: {},
@@ -104,7 +104,44 @@ const InventoryContainer = Vue.createApp({
                 ghostElement: null,
                 dragStartInventoryType: "player",
                 transferAmount: null,
+                playerSearchQuery: "",
+                otherSearchQuery: "",
             };
+        },
+        getItemImage(item) {
+            if (!item || !item.image) return "images/phone.png";
+            return "images/" + item.image;
+        },
+        onImageError(event) {
+            if (!event || !event.target) return;
+            if (event.target.dataset.fallbackApplied) return;
+            event.target.dataset.fallbackApplied = "1";
+            const src = event.target.src || "";
+            const file = src.split("/").pop() || "";
+            if (file.toLowerCase() !== file) {
+                event.target.src = "images/" + file.toLowerCase();
+                return;
+            }
+            event.target.src = "images/phone.png";
+        },
+        formatWeight(value) {
+            const weight = Number(value) || 0;
+            return Math.round(weight).toString();
+        },
+        matchesSearch(item, query) {
+            if (!query) return true;
+            if (!item) return false;
+            const needle = query.toLowerCase().trim();
+            const label = (item.label || "").toLowerCase();
+            const name = (item.name || "").toLowerCase();
+            const plate = item.info && item.info.plate ? String(item.info.plate).toLowerCase() : "";
+            return label.includes(needle) || name.includes(needle) || plate.includes(needle);
+        },
+        isSlotVisible(slot, inventoryType) {
+            const item = this.getItemInSlot(slot, inventoryType);
+            if (!item) return true;
+            if (inventoryType === "player") return this.matchesSearch(item, this.playerSearchQuery);
+            return this.matchesSearch(item, this.otherSearchQuery);
         },
         openInventory(data) {
             if (this.showHotbar) {
@@ -112,6 +149,8 @@ const InventoryContainer = Vue.createApp({
             }
 
             this.isInventoryOpen = true;
+            this.playerSearchQuery = "";
+            this.otherSearchQuery = "";
             this.maxWeight = data.maxweight;
             this.totalSlots = data.slots;
             this.playerInventory = {};
@@ -221,7 +260,11 @@ const InventoryContainer = Vue.createApp({
             const itemInSlot = this.getItemInSlot(slot, inventory);
             if (event.button === 0) {
                 if (event.shiftKey && itemInSlot) {
-                    this.splitAndPlaceItem(itemInSlot, inventory);
+                    if (!this.isOtherInventoryEmpty) {
+                        this.moveItemBetweenInventories(itemInSlot, inventory);
+                    } else {
+                        this.splitAndPlaceItem(itemInSlot, inventory);
+                    }
                 } else {
                     this.startDrag(event, slot, inventory);
                 }
@@ -766,7 +809,7 @@ const InventoryContainer = Vue.createApp({
         showItemNotification(itemData) {
             this.notificationText = itemData.item.label;
             this.notificationImage = "images/" + itemData.item.image;
-            this.notificationType = itemData.type === "add" ? "Received" : itemData.type === "use" ? "Used" : "Removed";
+            this.notificationType = itemData.type === "add" ? "Alındı" : itemData.type === "use" ? "Kullanıldı" : "Çıkarıldı";
             this.notificationAmount = itemData.amount || 1;
             this.showNotification = true;
             setTimeout(() => {

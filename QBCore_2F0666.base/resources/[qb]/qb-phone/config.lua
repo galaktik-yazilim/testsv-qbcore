@@ -5,7 +5,7 @@ Config.BillingCommissions = { -- This is a percentage (0.10) == 10%
 Config.TweetDuration = 12 -- How many hours to load tweets (12 will load the past 12 hours of tweets)
 Config.RepeatTimeout = 2000
 Config.CallRepeats = 10
-Config.OpenPhone = 'M'
+Config.OpenPhone = 'F2'
 
 -- Set this to true if you wish to use Fivemerr (https://fivemerr.com/) for media uploads.
 -- Ensure to add your API key to server/main.lua

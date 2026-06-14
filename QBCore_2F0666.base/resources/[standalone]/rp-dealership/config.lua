@@ -3,10 +3,7 @@ Config = {}
 -- Her zaman yeşil marker göster (giriş noktasında)
 Config.ShowMarker = true
 
--- NPC de spawn olsun (marker'ın yanında)
-Config.SpawnNpc = true
-
--- qb-target bölgesi (NPC olmasa bile çalışır)
+-- qb-target bölgesi
 Config.UseTarget = true
 
 Config.CategoryLabels = {
@@ -43,10 +40,6 @@ Config.Dealerships = {
         garage = 'pillboxgarage',
         spawn = vector4(-56.79, -1109.85, 26.43, 71.5),
         interact = vector4(-45.67, -1098.34, 26.42, 70.0),
-        npc = {
-            model = 'cs_siemonyetarian',
-            scenario = 'WORLD_HUMAN_CLIPBOARD',
-        },
         marker = {
             type = 1,
             scale = vector3(1.0, 1.0, 0.9),

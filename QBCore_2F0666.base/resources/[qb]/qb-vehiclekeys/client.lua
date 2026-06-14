@@ -163,7 +163,7 @@ exports('removeNoLockVehicles', removeNoLockVehicles)
 -----------------------
 ---- Client Events ----
 -----------------------
-RegisterKeyMapping('togglelocks', Lang:t('info.tlock'), 'keyboard', 'L')
+RegisterKeyMapping('togglelocks', Lang:t('info.tlock'), 'keyboard', 'K')
 RegisterCommand('togglelocks', function()
     local ped = PlayerPedId()
     if IsPedInAnyVehicle(ped, false) then
@@ -173,15 +173,6 @@ RegisterCommand('togglelocks', function()
     else
         ToggleVehicleLocksWithoutNui(GetVehicle())
     end
-end)
-
-RegisterKeyMapping('engine', Lang:t('info.engine'), 'keyboard', 'G')
-RegisterCommand('engine', function()
-    local vehicle = GetVehicle()
-    if not vehicle then return end
-    if not IsPedInVehicle(PlayerPedId(), vehicle) then return end
-
-    ToggleEngine(vehicle)
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)
@@ -322,6 +313,14 @@ function ToggleEngine(veh)
     end
 end
 
+function CanControlEngine(veh)
+    if not veh or veh == 0 then return false end
+    if isBlacklistedVehicle(veh) then return false end
+    return HasKeys(QBCore.Functions.GetPlate(veh)) or AreKeysJobShared(veh)
+end
+
+exports('CanControlEngine', CanControlEngine)
+
 function ToggleVehicleLocksWithoutNui(veh)
     if not veh then return end
 
@@ -368,10 +367,10 @@ function ToggleVehicleLocksWithoutNui(veh)
     NetworkRequestControlOfEntity(veh)
     if vehLockStatus == 1 then
         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(veh), 2)
-        QBCore.Functions.Notify(Lang:t('notify.vlock'), 'primary')
+        TriggerServerEvent('rp-chat:server:vehicleLock', true)
     else
         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(veh), 1)
-        QBCore.Functions.Notify(Lang:t('notify.vunlock'), 'success')
+        TriggerServerEvent('rp-chat:server:vehicleLock', false)
     end
 
     SetVehicleLights(veh, 2)
@@ -476,7 +475,7 @@ function ToggleVehicleLocks(veh)
     end
     if vehLockStatus == 1 then
         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(veh), 2)
-        QBCore.Functions.Notify(Lang:t('notify.vlock'), 'primary')
+        TriggerServerEvent('rp-chat:server:vehicleLock', true)
     end
     SetVehicleLights(veh, 2)
     Wait(250)
@@ -508,7 +507,7 @@ function ToggleVehicleunLocks(veh)
     NetworkRequestControlOfEntity(veh)
     if vehLockStatus == 2 then
         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(veh), 1)
-        QBCore.Functions.Notify(Lang:t('notify.vunlock'), 'success')
+        TriggerServerEvent('rp-chat:server:vehicleLock', false)
     end
     SetVehicleLights(veh, 2)
     Wait(250)

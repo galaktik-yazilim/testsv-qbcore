@@ -1,5 +1,4 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local dealershipPeds = {}
 local targetZones = {}
 local currentDealership = nil
 local nuiOpen = false
@@ -11,26 +10,10 @@ local function getInteractCoords(data)
     if c then
         return vector3(c.x, c.y, c.z), c.w or 0.0
     end
-    if data.npc and data.npc.coords then
-        return vector3(data.npc.coords.x, data.npc.coords.y, data.npc.coords.z), data.npc.coords.w or 0.0
-    end
     if data.marker and data.marker.coords then
         return data.marker.coords, 0.0
     end
     return nil, 0.0
-end
-
-local function loadModel(model)
-    local hash = type(model) == 'number' and model or joaat(model)
-    if not IsModelInCdimage(hash) then return false end
-    RequestModel(hash)
-    local timeout = 0
-    while not HasModelLoaded(hash) do
-        Wait(10)
-        timeout = timeout + 10
-        if timeout > 10000 then return false end
-    end
-    return hash
 end
 
 local function setFuel(vehicle, amount)
@@ -106,42 +89,16 @@ local function addTargetZone(dealershipId, data, coords)
     targetZones[zoneName] = true
 end
 
-local function spawnNpc(dealershipId, data, coords, heading)
-    if not Config.SpawnNpc or not data.npc then return end
-    if dealershipPeds[dealershipId] and DoesEntityExist(dealershipPeds[dealershipId]) then return end
-
-    local hash = loadModel(data.npc.model)
-    if not hash then
-        print(('[rp-dealership] NPC model yüklenemedi: %s'):format(data.npc.model))
-        return
-    end
-
-    local ped = CreatePed(0, hash, coords.x, coords.y, coords.z - 1.0, heading, false, false)
-    SetEntityHeading(ped, heading)
-    PlaceEntityOnGroundProperly(ped)
-    FreezeEntityPosition(ped, true)
-    SetEntityInvincible(ped, true)
-    SetBlockingOfNonTemporaryEvents(ped, true)
-    if data.npc.scenario then
-        TaskStartScenarioInPlace(ped, data.npc.scenario, 0, true)
-    end
-    SetModelAsNoLongerNeeded(hash)
-
-    dealershipPeds[dealershipId] = ped
-
-    if Config.UseTarget and hasTarget then
-        exports['qb-target']:AddTargetEntity(ped, {
-            options = {
-                {
-                    icon = 'fas fa-car',
-                    label = 'Galeriyi Aç',
-                    action = function()
-                        openDealership(dealershipId)
-                    end,
-                },
-            },
-            distance = data.interactDistance or 2.5,
-        })
+local function cleanupPdmShowroomVehicles()
+    local center = vector3(-45.67, -1098.34, 26.42)
+    for _, veh in ipairs(GetGamePool('CVehicle')) do
+        if DoesEntityExist(veh) and #(GetEntityCoords(veh) - center) < 80.0 then
+            local plate = (GetVehicleNumberPlateText(veh) or ''):gsub('%s+', '')
+            if plate == 'BUYME' or plate:find('BUY') then
+                SetEntityAsMissionEntity(veh, true, true)
+                DeleteVehicle(veh)
+            end
+        end
     end
 end
 
@@ -150,12 +107,13 @@ local function initDealerships()
     initialized = true
     hasTarget = GetResourceState('qb-target') == 'started'
 
+    cleanupPdmShowroomVehicles()
+
     for dealershipId, data in pairs(Config.Dealerships) do
-        local coords, heading = getInteractCoords(data)
+        local coords = getInteractCoords(data)
         if not coords then goto continue end
 
         addTargetZone(dealershipId, data, coords)
-        spawnNpc(dealershipId, data, coords, heading)
 
         ::continue::
     end
@@ -231,7 +189,7 @@ RegisterNetEvent('rp-dealership:client:spawnPurchased', function(dealershipId, m
         setFuel(veh, 100.0)
         TriggerEvent('vehiclekeys:client:SetOwner', vehPlate)
         TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
-        SetVehicleEngineOn(veh, true, true, false)
+        SetVehicleEngineOn(veh, false, true, true)
     end, plate, model, dealership.spawn, true)
 end)
 
@@ -260,9 +218,6 @@ end)
 AddEventHandler('onResourceStop', function(resource)
     if resource ~= GetCurrentResourceName() then return end
     closeDealership()
-    for _, ped in pairs(dealershipPeds) do
-        if DoesEntityExist(ped) then DeleteEntity(ped) end
-    end
     if hasTarget then
         for zoneName in pairs(targetZones) do
             exports['qb-target']:RemoveZone(zoneName)
@@ -273,7 +228,6 @@ end)
 AddEventHandler('onResourceStart', function(resource)
     if resource ~= GetCurrentResourceName() then return end
     initialized = false
-    dealershipPeds = {}
     targetZones = {}
     Wait(2000)
     initDealerships()

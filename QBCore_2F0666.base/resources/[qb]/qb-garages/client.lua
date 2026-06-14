@@ -304,7 +304,7 @@ RegisterNetEvent('qb-garages:client:takeOutGarage', function(data)
                 TriggerEvent('vehiclekeys:client:SetOwner', vehPlate)
                 if Config.Warp then TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1) end
                 if Config.VisuallyDamageCars then doCarDamage(veh, data.stats, properties) end
-                SetVehicleEngineOn(veh, true, true, false)
+                SetVehicleEngineOn(veh, false, true, true)
             end, data.plate, data.vehicle, location, true)
         else
             QBCore.Functions.Notify(Lang:t('error.not_depot'), 'error', 5000)
