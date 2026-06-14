@@ -1,0 +1,16 @@
+[
+  {
+    "$schema": 1,
+    "name": "admin",
+    "master": true,
+    "password_hash": "BURAYA_TXADMIN_SIFRE_HASH",
+    "providers": {
+      "citizenfx": {
+        "id": "admin",
+        "identifier": "fivem:YOUR_FIVEM_ID",
+        "data": {}
+      }
+    },
+    "permissions": []
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "general": {
+    "serverName": "testsv"
+  },
+  "server": {
+    "dataPath": "C:/txData/QBCore_2F0666.base/"
+  }
+}
