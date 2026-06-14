@@ -17,6 +17,10 @@
     background: transparent !important;
     text-align: left;
     user-select: none;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
 }
 
 .chat-messages {
