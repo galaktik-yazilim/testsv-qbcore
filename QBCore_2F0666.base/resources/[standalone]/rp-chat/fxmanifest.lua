@@ -1,9 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-name 'testsv-chat'
+name 'rp-chat'
 description 'RAGE MP tarzı şeffaf chat log — yakınlık, /me /b /do'
-author 'testsv'
 version '1.0.0'
 
 shared_script 'config.lua'
@@ -22,7 +21,7 @@ dependency 'qb-core'
 file 'style.css'
 file 'theme.js'
 
-chat_theme 'testsv_rp' {
+chat_theme 'rp' {
     styleSheet = 'style.css',
     script = 'theme.js',
     msgTemplates = {

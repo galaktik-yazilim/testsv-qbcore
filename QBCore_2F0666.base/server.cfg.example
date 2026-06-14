@@ -57,7 +57,7 @@ ensure baseevents
 
 # QBCore & Extra stuff
 ensure qb-core
-ensure testsv-chat
+ensure rp-chat
 ensure [qb]
 ensure [standalone]
 ensure [voice]

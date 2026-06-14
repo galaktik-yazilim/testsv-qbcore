@@ -2,16 +2,21 @@
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
 }
 
-/* ── Mesaj penceresi: sol üst, şeffaf (RAGE MP tarzı) ── */
-.chat-window {
+:root {
+    --chat-left: 1.2rem;
+    --chat-top: 1.2rem;
     --line-h: 1.35rem;
     --visible-lines: 12;
+    --chat-width: min(30vw, 460px);
+}
 
+/* ── Mesaj penceresi: sol üst, şeffaf (RAGE MP tarzı) ── */
+.chat-window {
     position: absolute;
-    left: 1.2rem;
-    top: 1.2rem;
+    left: var(--chat-left);
+    top: var(--chat-top);
     right: auto;
-    width: min(38vw, 520px);
+    width: var(--chat-width);
     height: calc(var(--line-h) * var(--visible-lines)) !important;
 
     background: transparent !important;
@@ -67,45 +72,44 @@
     color: #b8b8b8;
 }
 
-/* ── Yazı kutusu: sol alt ── */
+/* ── Yazı kutusu: sol üst, logun hemen altı (RAGE MP T tuşu) ── */
 .chat-input {
     position: absolute;
-    left: 1.2rem;
-    bottom: 18vh;
+    left: var(--chat-left);
+    top: calc(var(--chat-top) + var(--line-h) * var(--visible-lines) + 2px);
+    bottom: auto;
     right: auto;
-    top: auto;
     height: auto;
-    width: min(38vw, 520px);
+    width: var(--chat-width);
     text-align: left;
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
 }
 
 .chat-input > div {
-    background-color: rgba(0, 0, 0, 0.35) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.72) !important;
+    border: none !important;
     outline: none !important;
-    padding: 2px 4px;
-    border-radius: 2px;
+    padding: 3px 5px;
+    border-radius: 0 !important;
+    box-shadow: none !important;
 }
 
 .chat-input .prefix {
-    margin: 0;
-    margin-left: 0.5%;
-    line-height: 1.6rem;
-    opacity: 0.75;
+    display: none;
 }
 
 .chat-input > div + div {
     position: absolute;
-    bottom: calc(100% + 4px);
+    top: calc(100% + 4px);
+    bottom: auto;
     width: 100%;
     text-align: left;
 }
 
 .suggestions {
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(0, 0, 0, 0.55);
-    border-radius: 2px;
+    border: none;
+    background: rgba(0, 0, 0, 0.72);
+    border-radius: 0;
 }
 
 .suggestions .suggestion {
@@ -114,15 +118,23 @@
 
 textarea {
     background: transparent;
-    color: #fff;
-    padding: 0.35rem 0.5rem;
+    color: #ffffff;
+    padding: 2px 4px;
+    margin: 0;
     font-size: 0.82rem;
+    line-height: var(--line-h);
+    min-height: var(--line-h);
+    resize: none;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    caret-color: #ffffff;
+    box-shadow: none;
 }
 
 /* Ultra-wide düzeltme */
 @media screen and (min-aspect-ratio: 21/9) {
-    .chat-window,
-    .chat-input {
-        left: 2rem;
+    :root {
+        --chat-left: 2rem;
     }
 }
