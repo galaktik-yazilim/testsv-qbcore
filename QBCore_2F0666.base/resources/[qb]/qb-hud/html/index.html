@@ -121,7 +121,6 @@
                                     <q-checkbox v-on:click="dynamicArmor($event)" label='Show Armor always' v-model="isDynamicArmorChecked" color="checkbox" val="11" style="display: flex;"></q-checkbox>
                                     <q-checkbox v-on:click="dynamicHunger($event)" label='Show Hunger always' v-model="isDynamicHungerChecked" color="checkbox" val="12" style="display: flex;"></q-checkbox>
                                     <q-checkbox v-on:click="dynamicThirst($event)" label='Show Thirst always' v-model="isDynamicThirstChecked" color="checkbox" val="13" style="display: flex;"></q-checkbox>
-                                    <q-checkbox v-on:click="dynamicStress($event)" label='Show Stress always' v-model="isDynamicStressChecked" color="checkbox" val="14" style="display: flex;"></q-checkbox>
                                 </div>
                                 <hr>
                                 <div class="text-h6 q-mb-md">Vehicle</div>
@@ -241,13 +240,6 @@
                         <div class="stat-box-track"></div>
                         <div class="stat-box-fill"></div>
                         <q-icon class="stat-box-icon" name="fas fa-tint" color="white"/>
-                    </div>
-                    </transition>
-                    <transition name="fade">
-                    <div class="stat-box" v-if="showStress" :style="{ '--stat-pct': stress + '%', '--stat-color': '#e53935' }">
-                        <div class="stat-box-track"></div>
-                        <div class="stat-box-fill"></div>
-                        <q-icon class="stat-box-icon" name="fas fa-brain" color="white"/>
                     </div>
                     </transition>
                     <transition name="fade">

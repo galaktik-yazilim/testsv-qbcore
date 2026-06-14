@@ -757,7 +757,7 @@ const playerHud = {
             showHunger: true,
             showThirst: true,
             showNos: true,
-            showStress: true,
+            showStress: false,
             showOxygen: false,
             showArmed: true,
             showEngine: false,
@@ -807,6 +807,13 @@ const playerHud = {
         this.listener = window.addEventListener("message", (event) => {
             if (event.data.action === "hudtick") {
                 this.hudTick(event.data);
+            } else if (event.data.action === "updatemoney") {
+                if (event.data.cash !== undefined) {
+                    this.cashAmount = Number(event.data.cash) || 0;
+                }
+                if (event.data.bank !== undefined) {
+                    this.bankAmount = Number(event.data.bank) || 0;
+                }
             } else if (event.data.action === "infobar") {
                 this.showInfo = event.data.show;
                 this.charName = event.data.charName || "";
@@ -819,6 +826,12 @@ const playerHud = {
                 this.vehicleMileage = event.data.mileage || 0;
                 this.speedUnit = event.data.speedUnit || "mph";
                 this.mileageUnit = event.data.mileageUnit || "mi";
+                if (event.data.cash !== undefined) {
+                    this.cashAmount = Number(event.data.cash) || 0;
+                }
+                if (event.data.bank !== undefined) {
+                    this.bankAmount = Number(event.data.bank) || 0;
+                }
             }
         });
         Config = {};
@@ -857,10 +870,10 @@ const playerHud = {
             this.dynamicEngine = data.dynamicEngine;
             this.dynamicNitro = data.dynamicNitro;
             if (data.cash !== undefined) {
-                this.cashAmount = data.cash;
+                this.cashAmount = Number(data.cash) || 0;
             }
             if (data.bank !== undefined) {
-                this.bankAmount = data.bank;
+                this.bankAmount = Number(data.bank) || 0;
             }
 
             if (data.dynamicHealth == true) {
@@ -929,15 +942,7 @@ const playerHud = {
                 this.thirstColor = "#1a7cad";
             }
 
-            if (data.dynamicStress == true) {
-                if (data.stress == 0) {
-                    this.showStress = false;
-                } else {
-                    this.showStress = true;
-                }
-            } else if (data.dynamicStress == false) {
-                this.showStress = true;
-            }
+            this.showStress = false;
 
             this.showOxygen = false;
 

@@ -28,6 +28,26 @@ local CinematicHeight = 0.2
 local w = 0
 local radioActive = false
 
+local function syncMoney()
+    local data = QBCore.Functions.GetPlayerData()
+    if not data then return end
+
+    if data.money then
+        cashAmount = tonumber(data.money.cash) or tonumber(data.money['cash']) or 0
+        bankAmount = tonumber(data.money.bank) or tonumber(data.money['bank']) or 0
+        PlayerData = data
+    end
+end
+
+local function pushMoneyHud()
+    syncMoney()
+    SendNUIMessage({
+        action = 'updatemoney',
+        cash = math.floor(cashAmount),
+        bank = math.floor(bankAmount),
+    })
+end
+
 DisplayRadar(false)
 
 local function CinematicShow(bool)
@@ -95,10 +115,8 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     local hudSettings = GetResourceKvpString('hudSettings')
     if hudSettings then loadSettings(json.decode(hudSettings)) end
     PlayerData = QBCore.Functions.GetPlayerData()
-    if PlayerData.money then
-        cashAmount = PlayerData.money['cash'] or 0
-        bankAmount = PlayerData.money['bank'] or 0
-    end
+    syncMoney()
+    pushMoneyHud()
     Wait(500)
     sendInfoBar()
     TriggerEvent('hud:client:LoadMap')
@@ -112,21 +130,31 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUpdated', function(key, val)
+    if key == 'money' then
+        if val then
+            cashAmount = tonumber(val.cash) or tonumber(val['cash']) or 0
+            bankAmount = tonumber(val.bank) or tonumber(val['bank']) or 0
+        end
+        pushMoneyHud()
+        return
+    end
     if key ~= 'all' then return end
     PlayerData = val
     if PlayerData.money then
-        cashAmount = PlayerData.money['cash'] or 0
-        bankAmount = PlayerData.money['bank'] or 0
+        cashAmount = tonumber(PlayerData.money.cash) or tonumber(PlayerData.money['cash']) or 0
+        bankAmount = tonumber(PlayerData.money.bank) or tonumber(PlayerData.money['bank']) or 0
     end
+    pushMoneyHud()
     sendInfoBar()
 end)
 
 AddEventHandler('QBCore:Player:SetPlayerData', function(val)
     PlayerData = val
     if PlayerData.money then
-        cashAmount = PlayerData.money['cash'] or 0
-        bankAmount = PlayerData.money['bank'] or 0
+        cashAmount = tonumber(PlayerData.money.cash) or tonumber(PlayerData.money['cash']) or 0
+        bankAmount = tonumber(PlayerData.money.bank) or tonumber(PlayerData.money['bank']) or 0
     end
+    pushMoneyHud()
     sendInfoBar()
 end)
 
@@ -135,10 +163,8 @@ AddEventHandler('onResourceStart', function(resourceName)
     Wait(2000)
     if LocalPlayer.state.isLoggedIn then
         PlayerData = QBCore.Functions.GetPlayerData()
-        if PlayerData.money then
-            cashAmount = PlayerData.money['cash'] or 0
-            bankAmount = PlayerData.money['bank'] or 0
-        end
+        syncMoney()
+        pushMoneyHud()
         sendInfoBar()
     end
     local hudSettings = GetResourceKvpString('hudSettings')
@@ -595,7 +621,11 @@ RegisterNetEvent('hud:client:UpdateNeeds', function(newHunger, newThirst) -- Tri
     thirst = newThirst
 end)
 
-RegisterNetEvent('hud:client:UpdateStress', function(newStress) -- Add this event with adding stress elsewhere
+RegisterNetEvent('hud:client:UpdateStress', function(newStress)
+    if config.DisableStress then
+        stress = 0
+        return
+    end
     stress = newStress
 end)
 
@@ -637,8 +667,8 @@ local function updatePlayerHud(data)
     local prevCash = prevPlayerStats.cash
     local prevBank = prevPlayerStats.bank
     prevPlayerStats = data
-    local cash = Round(cashAmount)
-    local bank = Round(bankAmount)
+    local cash = math.floor(tonumber(cashAmount) or 0)
+    local bank = math.floor(tonumber(bankAmount) or 0)
     if shouldUpdate or prevCash ~= cash or prevBank ~= bank then
         prevPlayerStats.cash = cash
         prevPlayerStats.bank = bank
@@ -740,15 +770,6 @@ local function getDateTimeString()
     return string.format('%02d/%02d/%04d %02d:%02d', day, month, year, hour, minute)
 end
 
-local function syncMoney()
-    local data = QBCore.Functions.GetPlayerData()
-    if data and data.money then
-        cashAmount = data.money['cash'] or 0
-        bankAmount = data.money['bank'] or 0
-        PlayerData = data
-    end
-end
-
 local function getLocationLabel()
     local zone = getZoneLabel()
     local pos = GetEntityCoords(PlayerPedId())
@@ -804,6 +825,8 @@ function sendInfoBar()
         return
     end
 
+    syncMoney()
+
     local inVehicle, speed, fuel, mileage = getVehicleHudData()
     local speedUnit = config.UseMPH and 'mph' or 'kph'
     local mileageUnit = config.UseMPH and 'mi' or 'km'
@@ -821,6 +844,8 @@ function sendInfoBar()
         mileage = mileage,
         speedUnit = speedUnit,
         mileageUnit = mileageUnit,
+        cash = math.floor(cashAmount),
+        bank = math.floor(bankAmount),
     })
 end
 
@@ -856,6 +881,7 @@ CreateThread(function()
         end
         if LocalPlayer.state.isLoggedIn then
             syncMoney()
+            if config.DisableStress then stress = 0 end
             local show = true
             local player = PlayerPedId()
             local playerId = PlayerId()
@@ -1050,16 +1076,20 @@ RegisterNetEvent('hud:client:ShowAccounts', function(type, amount)
 end)
 
 RegisterNetEvent('hud:client:OnMoneyChange', function(type, amount, isMinus)
-    syncMoney()
+    pushMoneyHud()
     SendNUIMessage({
         action = 'updatemoney',
-        cash = Round(cashAmount),
-        bank = Round(bankAmount),
-        amount = Round(amount),
+        cash = math.floor(cashAmount),
+        bank = math.floor(bankAmount),
+        amount = math.floor(tonumber(amount) or 0),
         minus = isMinus,
         type = type,
         plus = not isMinus,
     })
+end)
+
+RegisterNetEvent('QBCore:Client:OnMoneyChange', function()
+    pushMoneyHud()
 end)
 
 -- Harness Check
@@ -1126,6 +1156,7 @@ end
 
 -- Stress Screen Effects
 
+if not config.DisableStress then
 local function GetBlurIntensity(stresslevel)
     for _, v in pairs(config.Intensity['blur']) do
         if stresslevel >= v.min and stresslevel <= v.max then
@@ -1179,6 +1210,7 @@ CreateThread(function()
         Wait(effectInterval)
     end
 end)
+end
 
 -- Sonsuz stamina (yorulma yok)
 if config.DisableStamina then
