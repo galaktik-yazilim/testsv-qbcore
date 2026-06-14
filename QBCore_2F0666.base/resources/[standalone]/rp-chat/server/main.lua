@@ -35,6 +35,10 @@ local function SendChat(target, color, label, message)
     })
 end
 
+local function NotifyPlayer(source, text, notifyType)
+    TriggerClientEvent('rp-chat:client:notify', source, text, notifyType or 'error')
+end
+
 local function BroadcastProximity(source, color, label, message, range)
     range = range or Config.ProximityRange
     for _, playerId in ipairs(GetNearbyPlayers(source, range)) do
@@ -58,7 +62,7 @@ QBCore.Commands.Add('b', 'Yakındaki oyunculara OOC mesaj gönder', {
     { name = 'mesaj', help = 'OOC mesajınız' },
 }, false, function(source, args)
     if #args < 1 then
-        TriggerClientEvent('QBCore:Notify', source, 'Mesaj yazmalısın.', 'error')
+        NotifyPlayer(source, 'Mesaj yazmalısın.', 'error')
         return
     end
 
@@ -72,7 +76,7 @@ QBCore.Commands.Add('do', 'Ortam eylemi belirt', {
     { name = 'mesaj', help = 'Ortam mesajı' },
 }, false, function(source, args)
     if #args < 1 then
-        TriggerClientEvent('QBCore:Notify', source, 'Mesaj yazmalısın.', 'error')
+        NotifyPlayer(source, 'Mesaj yazmalısın.', 'error')
         return
     end
 
@@ -83,6 +87,7 @@ end, 'user')
 
 exports('BroadcastProximity', BroadcastProximity)
 exports('GetCharName', GetCharName)
+exports('Notify', NotifyPlayer)
 
 RegisterNetEvent('rp-chat:server:vehicleIgnition', function(engineOn)
     local src = source
