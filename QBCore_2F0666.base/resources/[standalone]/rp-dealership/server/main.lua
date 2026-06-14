@@ -132,7 +132,7 @@ RegisterNetEvent('rp-dealership:server:buyVehicle', function(dealershipId, model
     end
 
     local plate = GeneratePlate()
-    MySQL.insert.await('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', {
+    MySQL.insert.await('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state, drivingdistance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
         Player.PlayerData.license,
         Player.PlayerData.citizenid,
         model,
@@ -140,6 +140,7 @@ RegisterNetEvent('rp-dealership:server:buyVehicle', function(dealershipId, model
         '{}',
         plate,
         dealership.garage,
+        0,
         0,
     })
 

@@ -784,38 +784,22 @@ local function getLocationLabel()
     return zone ~= '' and zone or street
 end
 
-local vehicleMileage = {}
-local lastMileagePos = nil
-local lastMileageVeh = nil
-
-local function updateMileage(vehicle)
-    local plate = QBCore.Functions.GetPlate(vehicle)
-    if not plate or plate == '' then return 0.0 end
-
-    local coords = GetEntityCoords(vehicle)
-    if lastMileageVeh == vehicle and lastMileagePos then
-        local dist = #(coords - lastMileagePos)
-        local delta = config.UseMPH and (dist * 0.000621371) or (dist / 1000.0)
-        vehicleMileage[plate] = (vehicleMileage[plate] or 0.0) + delta
-    end
-
-    lastMileagePos = coords
-    lastMileageVeh = vehicle
-    return vehicleMileage[plate] or 0.0
-end
-
 local function getVehicleHudData()
     local ped = PlayerPedId()
     local vehicle = GetVehiclePedIsIn(ped, false)
     if vehicle == 0 or IsThisModelABicycle(vehicle) then
-        lastMileagePos = nil
-        lastMileageVeh = nil
         return false, 0, 0, 0.0
     end
 
     local speed = math.ceil(GetEntitySpeed(vehicle) * speedMultiplier)
     local fuel = getFuelLevel(vehicle)
-    local mileage = updateMileage(vehicle)
+    local mileage = 0.0
+    if GetResourceState('rp-mileage') == 'started' then
+        mileage = exports['rp-mileage']:GetCurrentMileage()
+        if not config.UseMPH then
+            mileage = mileage * 1.60934
+        end
+    end
     return true, speed, fuel, mileage
 end
 
