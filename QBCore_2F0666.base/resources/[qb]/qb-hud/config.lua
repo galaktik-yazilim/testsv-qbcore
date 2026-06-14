@@ -6,6 +6,7 @@ Config.MinimumStress = 50         -- Minimum Stress Level For Screen Shaking
 Config.MinimumSpeedUnbuckled = 50 -- Going Over This Speed Unbuckled Will Cause Stress
 Config.MinimumSpeed = 100         -- Going Over This Speed While Buckled Will Cause Stress
 Config.DisableStress = false      -- If true will disable stress completely for all players
+Config.DisableStamina = true      -- Sonsuz stamina; ciğer/yorulma ikonu kapalı
 
 -- Stress
 Config.WhitelistedWeaponArmed = { -- Disable showing armed icon from weapons in this table

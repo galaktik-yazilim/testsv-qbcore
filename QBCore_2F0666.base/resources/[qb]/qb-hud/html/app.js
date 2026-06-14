@@ -939,15 +939,7 @@ const playerHud = {
                 this.showStress = true;
             }
 
-            if (data.dynamicOxygen == true) {
-                if (data.oxygen >= 100) {
-                    this.showOxygen = false;
-                } else {
-                    this.showOxygen = true;
-                }
-            } else if (data.dynamicOxygen == false) {
-                this.showOxygen = true;
-            }
+            this.showOxygen = false;
 
             if (data.dynamicEngine == true) {
                 if (data.engine >= 95) {

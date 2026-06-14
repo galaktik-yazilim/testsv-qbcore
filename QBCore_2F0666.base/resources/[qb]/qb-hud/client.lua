@@ -870,13 +870,14 @@ CreateThread(function()
             end
             playerDead = IsEntityDead(player) or PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] or false
             parachute = GetPedParachuteState(player)
-            -- Stamina
-            if not IsEntityInWater(player) then
-                oxygen = 100 - GetPlayerSprintStaminaRemaining(playerId)
-            end
-            -- Oxygen
-            if IsEntityInWater(player) then
-                oxygen = GetPlayerUnderwaterTimeRemaining(playerId) * 10
+            if not config.DisableStamina then
+                if not IsEntityInWater(player) then
+                    oxygen = 100 - GetPlayerSprintStaminaRemaining(playerId)
+                elseif IsEntityInWater(player) then
+                    oxygen = GetPlayerUnderwaterTimeRemaining(playerId) * 10
+                end
+            else
+                oxygen = 100
             end
             -- Player hud
             local talking = NetworkIsPlayerTalking(playerId)
@@ -1178,6 +1179,16 @@ CreateThread(function()
         Wait(effectInterval)
     end
 end)
+
+-- Sonsuz stamina (yorulma yok)
+if config.DisableStamina then
+    CreateThread(function()
+        while true do
+            RestorePlayerStamina(PlayerId(), 1.0)
+            Wait(0)
+        end
+    end)
+end
 
 -- Minimap update
 CreateThread(function()
