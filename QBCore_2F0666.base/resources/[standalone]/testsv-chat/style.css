@@ -1,0 +1,124 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+/* ── Mesaj penceresi: sol üst, şeffaf (RAGE MP tarzı) ── */
+.chat-window {
+    --line-h: 1.35rem;
+    --visible-lines: 12;
+
+    position: absolute;
+    left: 1.2rem;
+    top: 1.2rem;
+    right: auto;
+    width: min(38vw, 520px);
+    height: calc(var(--line-h) * var(--visible-lines)) !important;
+
+    background: transparent !important;
+    text-align: left;
+    user-select: none;
+}
+
+.chat-messages {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* ── Mesaj satırı: ince siyah kontur ── */
+.msg {
+    font-size: 0.82rem;
+    color: #ffffff;
+    line-height: var(--line-h);
+    margin-bottom: 0;
+    word-wrap: break-word;
+
+    text-shadow:
+        -1px -1px 0 rgba(0, 0, 0, 0.95),
+         1px -1px 0 rgba(0, 0, 0, 0.95),
+        -1px  1px 0 rgba(0, 0, 0, 0.95),
+         1px  1px 0 rgba(0, 0, 0, 0.95),
+         0    0   3px rgba(0, 0, 0, 0.85);
+}
+
+.msg .timestamp {
+    color: #b8b8b8;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.msg > span > span > b {
+    font-weight: 600;
+    vertical-align: baseline;
+    padding-right: 0.35rem;
+}
+
+.msg > span > span > span {
+    vertical-align: baseline;
+}
+
+.msg i:first-of-type {
+    font-style: normal;
+    color: #b8b8b8;
+}
+
+/* ── Yazı kutusu: sol alt ── */
+.chat-input {
+    position: absolute;
+    left: 1.2rem;
+    bottom: 18vh;
+    right: auto;
+    top: auto;
+    height: auto;
+    width: min(38vw, 520px);
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.chat-input > div {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    outline: none !important;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.chat-input .prefix {
+    margin: 0;
+    margin-left: 0.5%;
+    line-height: 1.6rem;
+    opacity: 0.75;
+}
+
+.chat-input > div + div {
+    position: absolute;
+    bottom: calc(100% + 4px);
+    width: 100%;
+    text-align: left;
+}
+
+.suggestions {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 2px;
+}
+
+.suggestions .suggestion {
+    font-size: 0.78rem;
+}
+
+textarea {
+    background: transparent;
+    color: #fff;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+}
+
+/* Ultra-wide düzeltme */
+@media screen and (min-aspect-ratio: 21/9) {
+    .chat-window,
+    .chat-input {
+        left: 2rem;
+    }
+}

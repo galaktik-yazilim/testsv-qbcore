@@ -316,12 +316,20 @@ QBCore.Commands.Add('me', Lang:t('command.me.help'), { { name = Lang:t('command.
     local pCoords = GetEntityCoords(ped)
     local msg = table.concat(args, ' '):gsub('[~<].-[>~]', '')
     local Players = QBCore.Functions.GetPlayers()
+    local Player = QBCore.Functions.GetPlayer(source)
+    local charName = Player and (Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname) or GetPlayerName(source)
+    local meColor = { 194, 162, 218 }
     for i = 1, #Players do
-        local Player = Players[i]
-        local target = GetPlayerPed(Player)
+        local targetId = Players[i]
+        local target = GetPlayerPed(targetId)
         local tCoords = GetEntityCoords(target)
         if target == ped or #(pCoords - tCoords) < 20 then
-            TriggerClientEvent('QBCore:Command:ShowMe3D', Player, source, msg)
+            TriggerClientEvent('QBCore:Command:ShowMe3D', targetId, source, msg)
+            TriggerClientEvent('chat:addMessage', targetId, {
+                color = meColor,
+                multiline = true,
+                args = { '* ' .. charName, msg },
+            })
         end
     end
 end, 'user')
