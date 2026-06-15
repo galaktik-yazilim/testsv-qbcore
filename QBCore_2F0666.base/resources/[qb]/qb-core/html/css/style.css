@@ -122,3 +122,10 @@ html::-webkit-scrollbar {
         width: 0%;
     }
 }
+
+/* rp-chat: toast bildirimleri chat'e yönlendirildi */
+#notify-container {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}

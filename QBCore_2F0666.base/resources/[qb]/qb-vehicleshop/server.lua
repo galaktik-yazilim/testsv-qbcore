@@ -23,6 +23,14 @@ local function Trim(value)
     return (string.gsub(value, '^%s*(.-)%s*$', '%1'))
 end
 
+local function BlockShowroomPurchase(src)
+    if Config.EnableClientShops == false then
+        TriggerClientEvent('QBCore:Notify', src, 'Aracı galeri girişindeki marker\'dan satın alın.', 'error')
+        return true
+    end
+    return false
+end
+
 local financetimer = {}
 
 local vehicleTypes = { -- https://docs.fivem.net/natives/?_0xA273060E
@@ -165,6 +173,7 @@ end)
 -- Sync vehicle for other players
 RegisterNetEvent('qb-vehicleshop:server:swapVehicle', function(data)
     local src = source
+    if BlockShowroomPurchase(src) then return end
     TriggerClientEvent('qb-vehicleshop:client:swapVehicle', -1, data)
     Wait(1500)                                                -- let new car spawn
     TriggerClientEvent('qb-vehicleshop:client:homeMenu', src) -- reopen main menu
@@ -173,6 +182,7 @@ end)
 -- Send customer for test drive
 RegisterNetEvent('qb-vehicleshop:server:customTestDrive', function(vehicle, playerid)
     local src = source
+    if BlockShowroomPurchase(src) then return end
     local target = tonumber(playerid)
     if not exports['qb-core']:GetPlayer(target) then
         TriggerClientEvent('QBCore:Notify', src, Lang:t('error.Invalid_ID'), 'error')
@@ -242,6 +252,7 @@ end)
 -- Buy public vehicle outright
 RegisterNetEvent('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle)
     local src = source
+    if BlockShowroomPurchase(src) then return end
     vehicle = vehicle.buyVehicle
     local pData = exports['qb-core']:GetPlayer(src)
     local cid = pData.PlayerData.citizenid
@@ -285,6 +296,7 @@ end)
 -- Finance public vehicle
 RegisterNetEvent('qb-vehicleshop:server:financeVehicle', function(downPayment, paymentAmount, vehicle)
     local src = source
+    if BlockShowroomPurchase(src) then return end
     downPayment = tonumber(downPayment)
     paymentAmount = tonumber(paymentAmount)
     local pData = exports['qb-core']:GetPlayer(src)
@@ -343,6 +355,7 @@ end)
 -- Sell vehicle to customer
 RegisterNetEvent('qb-vehicleshop:server:sellShowroomVehicle', function(data, playerid)
     local src = source
+    if BlockShowroomPurchase(src) then return end
     local player = exports['qb-core']:GetPlayer(src)
     local target = exports['qb-core']:GetPlayer(tonumber(playerid))
 
@@ -404,6 +417,7 @@ end)
 -- Finance vehicle to customer
 RegisterNetEvent('qb-vehicleshop:server:sellfinanceVehicle', function(downPayment, paymentAmount, vehicle, playerid)
     local src = source
+    if BlockShowroomPurchase(src) then return end
     local player = exports['qb-core']:GetPlayer(src)
     local target = exports['qb-core']:GetPlayer(tonumber(playerid))
 

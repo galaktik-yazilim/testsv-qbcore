@@ -170,6 +170,13 @@ end
 -- NUI Calls
 
 function QBCore.Functions.Notify(text, texttype, length, icon)
+    if GetResourceState('rp-chat') == 'started' then
+        local ok = pcall(function()
+            exports['rp-chat']:Notify(text, texttype, length, icon)
+        end)
+        if ok then return end
+    end
+
     local message = {
         action = 'notify',
         type = texttype or 'primary',

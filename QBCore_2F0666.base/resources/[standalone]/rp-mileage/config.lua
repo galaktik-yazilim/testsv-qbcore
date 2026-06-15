@@ -1,7 +1,7 @@
 Config = {}
 
--- Veritabanında mil olarak saklanır (player_vehicles.drivingdistance)
-Config.SyncIntervalMs = 30000
+-- Veritabanında mil olarak saklanır (player_vehicles.drivingdistance, FLOAT kolon)
+Config.SyncIntervalMs = 10000
 Config.MinSpeed = 1.0
 Config.MaxDeltaPerTick = 50.0
 

@@ -3,9 +3,9 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local active = nil
 local mileageData = {}
 
-local function trimPlate(plate)
+local function normalizePlate(plate)
     if not plate then return nil end
-    return QBCore.Shared.Trim(plate):upper()
+    return QBCore.Shared.Trim(plate):gsub('%s+', ''):upper()
 end
 
 local function metersToMiles(meters)
@@ -45,7 +45,7 @@ local function loadMileage(plate, cb)
 end
 
 local function startTracking(vehicle, plate)
-    plate = trimPlate(plate)
+    plate = normalizePlate(plate)
     if not plate then return end
 
     local function begin(total)
@@ -62,6 +62,21 @@ local function startTracking(vehicle, plate)
         begin(mileageData[plate])
     else
         loadMileage(plate, begin)
+    end
+end
+
+local function tryStartDriverTracking()
+    if active then return end
+    if not LocalPlayer.state.isLoggedIn then return end
+
+    local ped = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(ped, false)
+    if vehicle == 0 or shouldIgnoreVehicle(vehicle) then return end
+    if GetPedInVehicleSeat(vehicle, -1) ~= ped then return end
+
+    local plate = normalizePlate(QBCore.Functions.GetPlate(vehicle))
+    if plate then
+        startTracking(vehicle, plate)
     end
 end
 
@@ -114,14 +129,7 @@ end)
 CreateThread(function()
     while true do
         Wait(1500)
-        if not active and LocalPlayer.state.isLoggedIn then
-            local ped = PlayerPedId()
-            local vehicle = GetVehiclePedIsIn(ped, false)
-            if vehicle ~= 0 and GetPedInVehicleSeat(vehicle, -1) == ped and not shouldIgnoreVehicle(vehicle) then
-                local plate = QBCore.Functions.GetPlate(vehicle)
-                startTracking(vehicle, plate)
-            end
-        end
+        tryStartDriverTracking()
     end
 end)
 
@@ -134,8 +142,18 @@ AddEventHandler('gameEventTriggered', function(event)
     if GetPedInVehicleSeat(vehicle, -1) ~= ped then return end
 
     stopTracking()
-    local plate = QBCore.Functions.GetPlate(vehicle)
-    startTracking(vehicle, plate)
+    local plate = normalizePlate(QBCore.Functions.GetPlate(vehicle))
+    if plate then
+        startTracking(vehicle, plate)
+    end
+end)
+
+AddEventHandler('baseevents:leftVehicle', function()
+    stopTracking()
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    stopTracking()
 end)
 
 AddEventHandler('onResourceStop', function(resource)
@@ -149,7 +167,7 @@ exports('GetCurrentMileage', function()
 end)
 
 exports('GetMileageByPlate', function(plate)
-    plate = trimPlate(plate)
+    plate = normalizePlate(plate)
     if not plate then return 0.0 end
     if active and active.plate == plate then return active.total end
     return mileageData[plate] or 0.0

@@ -38,7 +38,23 @@ local function ResolveNotifyText(text)
     return StripFormatting(text)
 end
 
-local function NotifyToChat(text, texttype, length, icon)
+local function SendChatLine(line, color)
+    local payload = {
+        color = color,
+        multiline = true,
+        args = { line, '' },
+    }
+
+    TriggerEvent('chat:addMessage', payload)
+
+    if GetResourceState('chat') == 'started' then
+        pcall(function()
+            exports['chat']:addMessage(payload)
+        end)
+    end
+end
+
+function NotifyToChat(text, texttype, length, icon)
     if not Config.NotifyToChat then
         return FallbackToastNotify(text, texttype, length, icon)
     end
@@ -49,11 +65,7 @@ local function NotifyToChat(text, texttype, length, icon)
     local color = Config.NotifyColors[notifyType] or Config.Colors.system
     local line = prefix ~= '' and (prefix .. ' ' .. message) or message
 
-    TriggerEvent('chat:addMessage', {
-        color = color,
-        multiline = true,
-        args = { line, '' },
-    })
+    SendChatLine(line, color)
 end
 
 local function ApplyNotifyOverride()
@@ -68,6 +80,16 @@ AddEventHandler('onResourceStart', function(resource)
         Wait(500)
         ApplyNotifyOverride()
     end
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    Wait(500)
+    ApplyNotifyOverride()
+end)
+
+RegisterNetEvent('QBCore:Client:UpdateObject', function()
+    Wait(0)
+    ApplyNotifyOverride()
 end)
 
 RegisterNetEvent('rp-chat:client:notify', function(text, texttype)

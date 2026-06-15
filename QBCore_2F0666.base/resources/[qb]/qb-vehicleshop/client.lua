@@ -1,3 +1,27 @@
+local function cleanupShowroomVehicles()
+    for _, veh in ipairs(GetGamePool('CVehicle')) do
+        if DoesEntityExist(veh) then
+            local plate = (GetVehicleNumberPlateText(veh) or ''):gsub('%s+', ''):upper()
+            if plate == 'BUYME' or plate:find('BUY') then
+                if GetPedInVehicleSeat(veh, -1) == 0 then
+                    SetEntityAsMissionEntity(veh, true, true)
+                    DeleteVehicle(veh)
+                end
+            end
+        end
+    end
+end
+
+AddEventHandler('onResourceStart', function(resource)
+    if resource ~= GetCurrentResourceName() then return end
+    if Config.EnableClientShops == false then
+        CreateThread(function()
+            Wait(2000)
+            cleanupShowroomVehicles()
+        end)
+    end
+end)
+
 -- Variables
 local QBCore = exports['qb-core']:GetCoreObject({ 'Functions' })
 local sharedVehicles = exports['qb-core']:GetShared('Vehicles')
@@ -419,6 +443,7 @@ local function createFinanceZone(coords, name)
 end
 
 function Init()
+    if Config.EnableClientShops == false then return end
     Initialized = true
     CreateThread(function()
         for name, shop in pairs(Config.Shops) do
@@ -456,10 +481,12 @@ end
 
 -- Events
 RegisterNetEvent('qb-vehicleshop:client:homeMenu', function()
+    if Config.EnableClientShops == false then return end
     exports['qb-menu']:openMenu(vehicleMenu)
 end)
 
 RegisterNetEvent('qb-vehicleshop:client:showVehOptions', function()
+    if Config.EnableClientShops == false then return end
     exports['qb-menu']:openMenu(vehicleMenu, true, true)
 end)
 

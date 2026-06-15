@@ -33,22 +33,28 @@ Config.CategoryLabels = {
 }
 
 Config.Dealerships = {
-    -- Haritadaki "Premium Deluxe Motorsport" blip'inin tam önü (PDM girişi)
-    pdm = {
-        label = 'Premium Deluxe Motorsport',
+    -- Tek araç satın alma noktası (PDM girişi)
+    lscars = {
+        label = 'LS Cars',
         shop = 'pdm',
         garage = 'pillboxgarage',
         spawn = vector4(-56.79, -1109.85, 26.43, 71.5),
         interact = vector4(-45.67, -1098.34, 26.42, 70.0),
         marker = {
             type = 1,
-            scale = vector3(1.0, 1.0, 0.9),
-            color = { r = 0, g = 200, b = 80, a = 200 },
+            scale = vector3(1.2, 1.2, 1.0),
+            color = { r = 0, g = 200, b = 80, a = 210 },
         },
         blip = {
-            enabled = false,
+            enabled = true,
+            label = 'LS Cars',
+            sprite = 326,
+            color = 2,
+            scale = 0.85,
+            shortRange = true,
         },
         interactDistance = 2.5,
-        drawText = '[E] Galeriyi Aç',
+        drawText = '[E] LS Cars',
+        cleanupRadius = 90.0,
     },
 }

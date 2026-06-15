@@ -1,5 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local targetZones = {}
+local dealershipBlips = {}
 local currentDealership = nil
 local nuiOpen = false
 local initialized = false
@@ -78,7 +79,7 @@ local function addTargetZone(dealershipId, data, coords)
         options = {
             {
                 icon = 'fas fa-car',
-                label = 'Galeriyi Aç',
+                label = data.label or 'LS Cars',
                 action = function()
                     openDealership(dealershipId)
                 end,
@@ -89,16 +90,63 @@ local function addTargetZone(dealershipId, data, coords)
     targetZones[zoneName] = true
 end
 
-local function cleanupPdmShowroomVehicles()
-    local center = vector3(-45.67, -1098.34, 26.42)
-    for _, veh in ipairs(GetGamePool('CVehicle')) do
-        if DoesEntityExist(veh) and #(GetEntityCoords(veh) - center) < 80.0 then
-            local plate = (GetVehicleNumberPlateText(veh) or ''):gsub('%s+', '')
-            if plate == 'BUYME' or plate:find('BUY') then
+local function createBlip(dealershipId, data)
+    local blipCfg = data.blip
+    if not blipCfg or blipCfg.enabled == false then return end
+    if dealershipBlips[dealershipId] then return end
+
+    local coords = getInteractCoords(data)
+    if not coords then return end
+
+    local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
+    SetBlipSprite(blip, blipCfg.sprite or 326)
+    SetBlipDisplay(blip, 4)
+    SetBlipScale(blip, blipCfg.scale or 0.85)
+    SetBlipAsShortRange(blip, blipCfg.shortRange ~= false)
+    SetBlipColour(blip, blipCfg.color or 2)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName(blipCfg.label or data.label or 'LS Cars')
+    EndTextCommandSetBlipName(blip)
+    dealershipBlips[dealershipId] = blip
+end
+
+local function removeBlips()
+    for dealershipId, blip in pairs(dealershipBlips) do
+        if DoesBlipExist(blip) then
+            RemoveBlip(blip)
+        end
+        dealershipBlips[dealershipId] = nil
+    end
+end
+
+local function isShowroomVehicle(veh)
+    if not DoesEntityExist(veh) then return false end
+    if GetPedInVehicleSeat(veh, -1) ~= 0 then return false end
+
+    local plate = (GetVehicleNumberPlateText(veh) or ''):gsub('%s+', ''):upper()
+    if plate == 'BUYME' or plate:find('BUY') then return true end
+
+    if IsEntityPositionFrozen(veh) and GetVehicleDoorLockStatus(veh) == 3 then
+        return true
+    end
+
+    return false
+end
+
+local function cleanupShowroomVehicles()
+    for _, data in pairs(Config.Dealerships) do
+        local center = getInteractCoords(data)
+        if not center then goto continue end
+
+        local radius = data.cleanupRadius or 90.0
+        for _, veh in ipairs(GetGamePool('CVehicle')) do
+            if DoesEntityExist(veh) and #(GetEntityCoords(veh) - center) < radius and isShowroomVehicle(veh) then
                 SetEntityAsMissionEntity(veh, true, true)
                 DeleteVehicle(veh)
             end
         end
+
+        ::continue::
     end
 end
 
@@ -107,12 +155,13 @@ local function initDealerships()
     initialized = true
     hasTarget = GetResourceState('qb-target') == 'started'
 
-    cleanupPdmShowroomVehicles()
+    cleanupShowroomVehicles()
 
     for dealershipId, data in pairs(Config.Dealerships) do
         local coords = getInteractCoords(data)
         if not coords then goto continue end
 
+        createBlip(dealershipId, data)
         addTargetZone(dealershipId, data, coords)
 
         ::continue::
@@ -122,6 +171,14 @@ end
 CreateThread(function()
     Wait(2000)
     initDealerships()
+end)
+
+-- Eski qb-vehicleshop vitrin araçlarını periyodik temizle
+CreateThread(function()
+    while true do
+        Wait(15000)
+        cleanupShowroomVehicles()
+    end
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -160,9 +217,9 @@ CreateThread(function()
                     if dist < (data.interactDistance or 2.5) and LocalPlayer.state.isLoggedIn and not nuiOpen then
                         if not (Config.UseTarget and hasTarget) then
                             QBCore.Functions.DrawText3D(point.x, point.y, point.z + 0.35, data.drawText or '[E] Galeriyi Aç')
-                        end
-                        if IsControlJustReleased(0, 38) then
-                            openDealership(dealershipId)
+                            if IsControlJustReleased(0, 38) then
+                                openDealership(dealershipId)
+                            end
                         end
                     end
                 end
@@ -218,6 +275,7 @@ end)
 AddEventHandler('onResourceStop', function(resource)
     if resource ~= GetCurrentResourceName() then return end
     closeDealership()
+    removeBlips()
     if hasTarget then
         for zoneName in pairs(targetZones) do
             exports['qb-target']:RemoveZone(zoneName)
@@ -229,6 +287,7 @@ AddEventHandler('onResourceStart', function(resource)
     if resource ~= GetCurrentResourceName() then return end
     initialized = false
     targetZones = {}
+    removeBlips()
     Wait(2000)
     initDealerships()
 end)
