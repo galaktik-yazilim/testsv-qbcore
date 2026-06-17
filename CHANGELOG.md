@@ -17,7 +17,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - HUD varsayılan birimleri `km/s` + `km` (metrik fallback)
 - qb-adminmenu TR locale: hız etiketi `Km/s`
 - `/911` konum satırı: `Harita konumu X,Y` (Los Santos haritası)
-- Beta/açılış checklist'leri ve Discord rehberi evren standardına eklendi
+- Beta/açılış rehberleri hazır — progress bar eklendi
+- [ILERLEME.md](docs/ILERLEME.md) — genel ilerleme **58%**
 
 Operasyonel adımlar: [TODO.md](docs/TODO.md)
 

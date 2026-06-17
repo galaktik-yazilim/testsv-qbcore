@@ -22,6 +22,7 @@
 
 ## Mevcut durum özeti
 
+> **Genel ilerleme: 58%** (açılışa kadar) — [ILERLEME.md](./ILERLEME.md)  
 > **Kod geliştirmesi tamamlandı** (turlar 01–08). Detay: [gelistirme/DURUM.md](./gelistirme/DURUM.md)
 
 | Alan | Durum |

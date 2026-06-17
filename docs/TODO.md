@@ -1,12 +1,14 @@
 # Aktif TODO — Operasyonel
 
 > **Kod geliştirme turları (01–08) bitti.**  
-> Master özet: [gelistirme/DURUM.md](./gelistirme/DURUM.md)
+> Master özet: [gelistirme/DURUM.md](./gelistirme/DURUM.md)  
+> **İlerleme: 58%** → [ILERLEME.md](./ILERLEME.md)
 
 ---
 
 ```
-Geliştirme (kod)     ✅ 01–08 tamam
+Genel ilerleme       ███████████░░░░░░░░░  58%
+Geliştirme (kod)     ████████████████████ 100%
 Oyun içi test         ⏳ sen
 Kapalı beta           ⏳ test sonrası
 Açılış                ⏳ beta sonrası
@@ -59,4 +61,5 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 | [ROADMAP.md](./ROADMAP.md) | Vizyon & fazlar |
 | [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) | Güvenlik |
 | [oyuncu-hizli-referans.md](./tanitim/oyuncu-hizli-referans.md) | Oyuncu özeti |
+| [ILERLEME.md](../ILERLEME.md) | Genel ilerleme (%58) |
 | [komutlar.md](./tanitim/komutlar.md) | Komut rehberi · `/komutlar` |

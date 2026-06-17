@@ -3,7 +3,9 @@
 > **Kod ve dokümantasyon turları (01–08) tamamlandı.**  
 > Kalan işler **operasyonel** (senin sunucuda yapacağın adımlar).
 
-Son güncelleme: Evren/dil/birim standardı (Los Santos · Türkçe · metrik)
+**Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
+
+Son güncelleme: Komut rehberi + `/komutlar`
 
 ---
 

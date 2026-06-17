@@ -20,6 +20,7 @@
 | Dosya | İçerik |
 |-------|--------|
 | [DURUM.md](./DURUM.md) | Master durum özeti |
+| [../ILERLEME.md](../ILERLEME.md) | Genel ilerleme (% + progress bar) |
 | [../tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md) | Los Santos · TR · metrik |
 | [GUVENLIK-DENETIMI.md](./GUVENLIK-DENETIMI.md) | Güvenlik |
 | [KAPALI-BETA-CHECKLIST.md](./KAPALI-BETA-CHECKLIST.md) | Beta test |
