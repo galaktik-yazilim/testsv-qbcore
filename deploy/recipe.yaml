@@ -1,7 +1,7 @@
 name: testsv Hard RP — Güncelleme
-version: v1.1.0
+version: v1.1.1
 author: aosdev
-description: GitHub'dan kod güncelleme. DB ve server.cfg'ye dokunmaz — günlük deploy için.
+description: GitHub kod güncelleme. Mevcut server.cfg korunur (overwrite false). SQL yok.
 
 tasks:
   - action: download_github
@@ -43,6 +43,13 @@ tasks:
   - action: copy_path
     src: ./tmp/repo/QBCore_2F0666.base/myLogo.png
     dest: ./myLogo.png
+
+  # txAdmin deploy sonunda server.cfg zorunlu; mevcut dosya varsa üzerine yazma
+  - action: copy_path
+    src: ./tmp/repo/deploy/server.cfg.template
+    dest: ./server.cfg
+    overwrite: false
+    errorOnExist: false
 
   - action: remove_path
     path: ./tmp
