@@ -2,6 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local sharedVehicles = exports['qb-core']:GetShared('Vehicles')
 
 local buyCooldowns = {}
+local pendingSpawns = {}
 
 local StringCharset = {}
 local NumberCharset = {}
@@ -133,6 +134,7 @@ end
 
 AddEventHandler('playerDropped', function()
     buyCooldowns[source] = nil
+    pendingSpawns[source] = nil
 end)
 
 QBCore.Functions.CreateCallback('rp-dealership:server:getCatalog', function(source, cb, dealershipId)
@@ -163,13 +165,27 @@ local function asVector4(coords)
     return nil
 end
 
-QBCore.Functions.CreateCallback('rp-dealership:server:spawnPurchased', function(source, cb, plate, model, coords)
-    if type(plate) ~= 'string' or type(model) ~= 'string' then
+QBCore.Functions.CreateCallback('rp-dealership:server:spawnPurchased', function(source, cb, plate, model, dealershipId)
+    if type(plate) ~= 'string' or type(model) ~= 'string' or type(dealershipId) ~= 'string' then
         return cb(nil)
     end
 
-    local spawn = asVector4(coords)
+    local pending = pendingSpawns[source]
+    if not pending or pending.plate ~= plate or pending.model ~= model or pending.dealershipId ~= dealershipId then
+        return cb(nil)
+    end
+    if os.time() > pending.expires then
+        pendingSpawns[source] = nil
+        return cb(nil)
+    end
+
+    local dealership = Config.Dealerships[dealershipId]
+    if not dealership then return cb(nil) end
+
+    local spawn = asVector4(dealership.spawn)
     if not spawn then return cb(nil) end
+
+    if not isNearDealership(source, dealershipId) then return cb(nil) end
 
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return cb(nil) end
@@ -179,6 +195,8 @@ QBCore.Functions.CreateCallback('rp-dealership:server:spawnPurchased', function(
         { plate }
     )
     if owned ~= Player.PlayerData.citizenid then return cb(nil) end
+
+    pendingSpawns[source] = nil
 
     local vehType = sharedVehicles[model] and sharedVehicles[model].type or GetVehicleTypeByModel(model)
     local veh = CreateVehicleServerSetter(joaat(model), vehType, spawn.x, spawn.y, spawn.z, spawn.w)
@@ -226,19 +244,39 @@ RegisterNetEvent('rp-dealership:server:buyVehicle', function(dealershipId, model
     end
 
     local plate = GeneratePlate()
-    MySQL.insert.await('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state, drivingdistance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
-        Player.PlayerData.license,
-        Player.PlayerData.citizenid,
-        model,
-        joaat(model),
-        '{}',
-        plate,
-        dealership.garage,
-        0,
-        0,
-    })
 
-    Player.Functions.RemoveMoney(payType, price, 'rp-dealership-purchase')
+    if not Player.Functions.RemoveMoney(payType, price, 'rp-dealership-purchase') then
+        TriggerClientEvent('QBCore:Notify', src, 'Yeterli paranız yok.', 'error')
+        return
+    end
+
+    local ok = pcall(function()
+        MySQL.insert.await('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state, drivingdistance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
+            Player.PlayerData.license,
+            Player.PlayerData.citizenid,
+            model,
+            joaat(model),
+            '{}',
+            plate,
+            dealership.garage,
+            0,
+            0,
+        })
+    end)
+
+    if not ok then
+        Player.Functions.AddMoney(payType, price, 'rp-dealership-refund')
+        TriggerClientEvent('QBCore:Notify', src, 'Satın alma başarısız.', 'error')
+        return
+    end
+
+    pendingSpawns[src] = {
+        plate = plate,
+        model = model,
+        dealershipId = dealershipId,
+        expires = os.time() + 90,
+    }
+
     TriggerClientEvent('QBCore:Notify', src, ('%s satın alındı! Plaka: %s'):format(vehData.name or model, plate), 'success')
     TriggerClientEvent('rp-dealership:client:spawnPurchased', src, dealershipId, model, plate)
 end)

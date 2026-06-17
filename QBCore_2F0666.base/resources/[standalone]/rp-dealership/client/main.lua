@@ -186,11 +186,26 @@ CreateThread(function()
     initDealerships()
 end)
 
--- Eski qb-vehicleshop vitrin araçlarını periyodik temizle
+-- Eski qb-vehicleshop vitrin araçlarını periyodik temizle (yakındayken)
 CreateThread(function()
     while true do
         Wait(15000)
-        cleanupShowroomVehicles()
+        if not LocalPlayer.state.isLoggedIn then goto continue end
+
+        local pos = GetEntityCoords(PlayerPedId())
+        local nearDealership = false
+        for _, data in pairs(Config.Dealerships) do
+            local center = getInteractCoords(data)
+            if center and #(pos - center) < ((data.cleanupRadius or 90.0) + 50.0) then
+                nearDealership = true
+                break
+            end
+        end
+        if nearDealership then
+            cleanupShowroomVehicles()
+        end
+
+        ::continue::
     end
 end)
 
@@ -264,7 +279,7 @@ RegisterNetEvent('rp-dealership:client:spawnPurchased', function(dealershipId, m
         TriggerEvent('vehiclekeys:client:SetOwner', vehPlate)
         TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
         SetVehicleEngineOn(veh, false, true, true)
-    end, plate, model, dealership.spawn, true)
+    end, plate, model, dealershipId)
 end)
 
 RegisterNUICallback('close', function(_, cb)

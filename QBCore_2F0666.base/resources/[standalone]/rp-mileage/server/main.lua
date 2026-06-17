@@ -1,6 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 local syncState = {}
+local kmCooldowns = {}
 
 local function normalizePlate(plate)
     if not plate then return nil end
@@ -66,6 +67,7 @@ end)
 
 AddEventHandler('playerDropped', function()
     syncState[source] = nil
+    kmCooldowns[source] = nil
 end)
 
 QBCore.Functions.CreateCallback('rp-mileage:server:getMileage', function(_, cb, plate)
@@ -104,5 +106,8 @@ exports('GetMileage', function(plate)
 end)
 
 QBCore.Commands.Add('km', 'Bulunduğun aracın kilometresini göster', {}, false, function(source)
+    local now = os.time()
+    if kmCooldowns[source] and now - kmCooldowns[source] < 3 then return end
+    kmCooldowns[source] = now
     TriggerClientEvent('rp-mileage:client:showKm', source)
 end, 'user')

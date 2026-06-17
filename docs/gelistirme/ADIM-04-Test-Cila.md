@@ -1,6 +1,7 @@
 # Adım 04 — Test & Cila
 
-> **Durum:** ⏳ Devam ediyor (kod + test checklist)
+> **Durum:** ✅ Tamamlandı (kod + güvenlik + dokümantasyon)  
+> Oyun içi test: senin checklist'in — [aşağı](#senin-yapman-gereken--oyun-içi-test)
 
 Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksikleri kapatıyoruz. Whitelist kapalı kalır.
 
@@ -16,6 +17,8 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | `/km` — araç kilometresi | `rp-mileage` |
 | NPC temizliği (PDM / Ammunation) | `qb-smallresources`, `rp-dealership` |
 | CK / PK / MGK tanımları | `sunucu-kurallari.md` |
+| Güvenlik denetimi + düzeltmeler | [GUVENLIK-DENETIMI.md](./GUVENLIK-DENETIMI.md) |
+| Performans ince ayarı | ignition/dealership Wait optimizasyonu |
 
 ---
 
@@ -60,8 +63,8 @@ Sonra: whitelist aç, kapalı beta checklist, Discord.
 
 | Adım | Konu |
 |------|------|
-| **05** | Kapalı beta (whitelist + checklist) |
-| **06+** | P4+ — konut, telefon, taşımacılık (ihtiyaç halinde) |
+| **05** | Kapalı beta | [ADIM-05-Kapali-Beta.md](./ADIM-05-Kapali-Beta.md) |
+| **06** | P4+ plan | [ADIM-06-P4-Plan.md](./ADIM-06-P4-Plan.md) |
 | **Teknik borç** | [TEKNIK-BORC.md](../TEKNIK-BORC.md) |
 
 ---

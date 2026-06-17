@@ -61,8 +61,12 @@ CreateThread(function()
         if IsPedInAnyVehicle(ped, false) then
             local vehicle = GetVehiclePedIsIn(ped, false)
             if GetPedInVehicleSeat(vehicle, -1) == ped then
-                sleep = 0
                 currentVehicle = vehicle
+                if not ignitionOn then
+                    sleep = 0
+                else
+                    sleep = 200
+                end
 
                 if not ignitionOn then
                     SetVehicleEngineOn(vehicle, false, true, true)

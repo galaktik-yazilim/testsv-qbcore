@@ -34,6 +34,7 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 | Discord + başvuru | [discord-ve-basvuru.md](./discord-ve-basvuru.md) |
 | Admin / txAdmin | [admin-yonetim.md](./admin-yonetim.md) |
 | Geliştirme adımları | [gelistirme/README.md](../gelistirme/README.md) |
+| Güvenlik denetimi | [GUVENLIK-DENETIMI.md](../gelistirme/GUVENLIK-DENETIMI.md) |
 | Teknik borç (en son) | [TEKNIK-BORC.md](../TEKNIK-BORC.md) |
 
 ## Yeni modül eklerken

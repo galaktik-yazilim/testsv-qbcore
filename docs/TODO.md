@@ -1,51 +1,44 @@
 # Aktif TODO Listesi
 
-> **Adım 04** — oyun içi test & cila. Whitelist kapalı.
+> Geliştirme turları (01–04) **bitti**. Sırada: oyun içi test → kapalı beta.
 
-Detay: [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) · [CHANGELOG.md](../CHANGELOG.md)
+Detay: [gelistirme/README.md](./gelistirme/README.md)
 
 ---
 
 ## Durum özeti
 
 ```
-Adım 01–03                 ✅
-Adım 04 Test & cila        ⏳ (kod hazır, sen test edeceksin)
-Whitelist                  ❌ kapalı
-Adım 05 Kapalı beta        — test bitince
-P4+                        — açılış sonrası
-Teknik borç                — en son → TEKNIK-BORC.md
+Adım 01–04 (kod)           ✅
+Adım 05 Kapalı beta        📋 test bitince whitelist aç
+Adım 06 P4+                — açılış sonrası
+Whitelist                  ❌ kapalı (test)
+Teknik borç                — en son
 ```
 
 ---
 
-## Şimdi yap — Adım 04 test
+## Şimdi — oyun içi test
 
-Tam liste: [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
+[ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) checklist:
 
-- [ ] Restart
-- [ ] Karakter + chat (`/me`, `/ame`, `/do`, `/b`, `/s`, `/w`)
-- [ ] `/km` (araç içinde)
-- [ ] LS Cars → kontak → garaj
-- [ ] `/911` (PD/EMS on duty)
-- [ ] Admin: `/a test`
-- [ ] PDM çevresinde NPC yok mu?
+- [ ] Restart, karakter, chat (`/me`, `/ame`, `/km`…)
+- [ ] LS Cars → galeri satın al (**güvenlik fix sonrası tekrar dene**)
+- [ ] `/911`, admin `/a`, NPC yok
 
 ---
 
-## Test bitince — Adım 05 (whitelist)
+## Test bitince — Adım 05
 
-- [ ] `setr qb_whitelist 1` + ACE
-- [ ] [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
-
----
-
-## P4+ — Açılış sonrası
-
-[ROADMAP.md](./ROADMAP.md)
+[ADIM-05-Kapali-Beta.md](./gelistirme/ADIM-05-Kapali-Beta.md)
 
 ---
 
-## Teknik borç — en son
+## Referans
 
-[TEKNIK-BORC.md](./TEKNIK-BORC.md)
+| Dosya | İçerik |
+|-------|--------|
+| [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) | Güvenlik denetimi |
+| [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md) | Gelecek sistemler |
+| [TEKNIK-BORC.md](./TEKNIK-BORC.md) | Yedek, MySQL (en son) |
+| [ROADMAP.md](./ROADMAP.md) | Tam yol haritası |

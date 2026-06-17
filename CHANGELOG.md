@@ -7,16 +7,26 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 
 ## [Unreleased]
 
-### Added (Adım 04)
-- `/ame`, `/a` (admin), `/km` komutları
-- NPC temizliği (dondurulmuş pedler, PDM bölgesi)
-- CK/PK/MGK kural tanımları
+### Planlanan
+- Adım 05 kapalı beta (operasyonel)
+- P4+ — [ADIM-06-P4-Plan.md](docs/gelistirme/ADIM-06-P4-Plan.md)
+
+---
+
+## [0.9.0] — 2025-06-17
+
+### Added
+- Adım 04–06 dokümantasyonu, [GUVENLIK-DENETIMI.md](docs/gelistirme/GUVENLIK-DENETIMI.md)
+- `/ame`, `/a` (admin), `/km`; CK/PK/MGK kuralları; NPC temizliği
 
 ### Changed
 - `/ooc` kaldırıldı (yerel OOC: `/b`)
+- Performans: `rp-ignition`, `rp-dealership` cleanup, keybinds `Wait(5)`
 
-### Planlanan (P4+)
-- Konut, telefon, taşımacılık, injury script
+### Security
+- **rp-dealership:** spawn sunucuda; `pendingSpawns` token; ödeme önce çekilir
+- **qb-multicharacter:** yalnızca `cid = 1`
+- **rp-mileage:** `/km` cooldown
 
 ---
 

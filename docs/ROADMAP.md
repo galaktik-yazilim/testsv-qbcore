@@ -29,9 +29,11 @@
 | Event güvenliği | ✅ Custom `rp-*` sertleştirildi |
 | Tanıtım dokümantasyonu | ✅ `docs/tanitim/` |
 | MVP karakter kuralları | ✅ 1 slot, isim validasyonu, ekonomi |
-| Whitelist | ✅ hazır — şu an kapalı (test) |
-| Adım 04 — test & cila | ⏳ [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) |
-| Kapalı beta | — Adım 05 (test sonrası) |
+| Whitelist | ✅ hazır — kapalı (test) |
+| Adım 04 — test & cila | ✅ |
+| Adım 05 — kapalı beta | 📋 [ADIM-05-Kapali-Beta.md](./gelistirme/ADIM-05-Kapali-Beta.md) |
+| Adım 06 — P4+ | — [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md) |
+| Güvenlik denetimi | ✅ [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) |
 | Teknik borç (yedek, MySQL user…) | 📋 [TEKNIK-BORC.md](./TEKNIK-BORC.md) — en son |
 | Gelişmiş sistemler | — P4+ ertelendi |
 
@@ -251,16 +253,18 @@ qb-core
 
 ## Önerilen çalışma sırası
 
-### Şimdi — Adım 04
-1. [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) checklist — oyun içi test
-2. Bug/ayar geri bildirimi → düzelt
+### Şimdi
+1. Oyun içi test — [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
+2. Galeri satın almayı tekrar dene (güvenlik düzeltmeleri sonrası)
 
 ### Adım 05 — Kapalı beta
-3. Whitelist aç + [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
-4. Discord + başvuru
+3. Whitelist + [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
 
-### Açılış sonrası (P4+)
-5. Konut, telefon, injury — ihtiyaç halinde
+### Adım 06 — P4+
+4. [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md)
+
+### En son
+5. [TEKNIK-BORC.md](./TEKNIK-BORC.md)
 
 ### En son — teknik borç
 6. Yedek, MySQL kullanıcı, resmon, webhook logları — [TEKNIK-BORC.md](./TEKNIK-BORC.md)
@@ -273,8 +277,9 @@ qb-core
 
 | Dosya | Açıklama |
 |-------|----------|
-| [TODO.md](./TODO.md) | Aktif görev listesi (checkbox) |
-| [TEKNIK-BORC.md](./TEKNIK-BORC.md) | En düşük öncelik — yedek, MySQL, resmon |
+| [TODO.md](./TODO.md) | Aktif görev listesi |
+| [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) | Güvenlik denetimi |
+| [TEKNIK-BORC.md](./TEKNIK-BORC.md) | En düşük öncelik |
 | [CHANGELOG.md](../CHANGELOG.md) | Yapılan değişiklikler |
 | [tanitim/README.md](./tanitim/README.md) | Türkçe sistem & meslek rehberleri |
 | `QBCore_2F0666.base/server.cfg.example` | Sunucu başlatma şablonu |
