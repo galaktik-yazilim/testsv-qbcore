@@ -1,6 +1,6 @@
 -- Sunucu tuşları — fivem.cfg'den bağımsız, her oyuncuda aynı.
 -- F2 telefon | M kontak | K kilit | L kemer
--- Eski bind'ler (M→phone, L→togglelocks) boş komutlara gider; asıl iş burada.
+-- L = control 182 (INPUT_CELLPHONE_CAMERA_FOCUS_LOCK) — native "When Active / Visible / Hidden" engellenir.
 
 local KEYS = {
     { control = 289, command = 'openphone',       cooldown = 400, inVehicle = false }, -- F2
@@ -43,14 +43,32 @@ local function handleKeyPress(entry)
     ExecuteCommand(entry.command)
 end
 
+-- 182 = L (GTA native: kamera focus lock → "When Active / Visible / Hidden" yazısı)
+local function suppressSeatbeltNativeConflict()
+    DisableControlAction(0, 182, true)
+end
+
+local function wasKeyPressed(control)
+    if control == 182 then
+        return IsDisabledControlJustPressed(0, 182)
+    end
+    return IsControlJustPressed(0, control)
+end
+
 CreateThread(function()
     while true do
         if LocalPlayer.state.isLoggedIn and not IsPauseMenuActive() then
+            local ped = PlayerPedId()
+            local inVehicle = IsPedInAnyVehicle(ped, false)
+            if inVehicle then
+                suppressSeatbeltNativeConflict()
+            end
+
             local now = GetGameTimer()
 
             for i = 1, #KEYS do
                 local entry = KEYS[i]
-                if IsControlJustPressed(0, entry.control) then
+                if (not entry.inVehicle or inVehicle) and wasKeyPressed(entry.control) then
                     if not lastUsed[i] or now - lastUsed[i] > entry.cooldown then
                         lastUsed[i] = now
                         handleKeyPress(entry)

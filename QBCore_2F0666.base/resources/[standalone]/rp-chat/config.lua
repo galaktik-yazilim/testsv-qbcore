@@ -10,6 +10,14 @@ Config.MaxMessageLength = 256
 Config.CommandCooldownMs = 1500
 Config.VehicleActionCooldownMs = 800
 
+-- /fdoor · /dimsifirla — interior sıkışma (Rina tarzı)
+Config.StuckRecovery = {
+    FdoorCooldownMs = 45000,
+    DimResetCooldownMs = 60000,
+    FdoorMaxSearch = 60.0,
+    FdoorExitOffset = 1.35,
+}
+
 -- /911 acil çağrı (text dispatch — panel yok)
 Config.Emergency911Jobs = { 'police', 'ambulance' }
 Config.Emergency911RequireOnDuty = true
@@ -74,6 +82,8 @@ Config.CommandHelp = {
         '/job — İş bilgisi · /gang — Çete bilgisi',
         '/givekeys [id] — Araç anahtarı ver',
         '/id — Sunucu ID numaran',
+        '/fdoor — Bina çıkış kapısına ışınlan',
+        '/dimsifirla — Ana boyuta (dim 0) dön',
     },
     keys = {
         'M — Kontak · K — Kilit · L — Emniyet kemeri',
@@ -102,5 +112,5 @@ Config.WelcomeMessages = {
     'Los Santos hard RP — voice yok, iletişim chat ile.',
     '/kurallar · /komutlar · T konuş · /me /do /b',
     'Araç: M kontak, K kilit, L kemer, /km · Galeri: LS Cars',
-    'Takıldıysan: çık-gir → spawn ekranında Legion Meydanı seç.',
+    'Takıldıysan: /fdoor · /dimsifirla · çık-gir → Legion Meydanı',
 }

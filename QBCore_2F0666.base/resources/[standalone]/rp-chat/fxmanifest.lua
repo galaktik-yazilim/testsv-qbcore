@@ -10,10 +10,12 @@ shared_script 'config.lua'
 client_scripts {
     'client/notify.lua',
     'client/main.lua',
+    'client/stuck.lua',
 }
 
 server_scripts {
     'server/main.lua',
+    'server/stuck.lua',
 }
 
 dependency 'chat'

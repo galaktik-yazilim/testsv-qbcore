@@ -27,6 +27,8 @@ Helper text formatı (F8 / chat önerisi stili):
 | `/911` | `/911 <mesaj>` — Acil servislere text çağrı gönder (PD / EMS) · `mesaj`: Acil durum açıklaması |
 | `/kurallar` | Sunucu RP kurallarını göster (chat özeti) |
 | `/komutlar` | Oyun içi komut listesi (kısa özet) |
+| `/fdoor` | Bulunduğun binanın çıkış kapısına ışınlan (iç mekân) |
+| `/dimsifirla` | Ana boyuta (dim 0) dön — interior / instance sıkışması |
 | `/a` | `/a <mesaj>` — Admin duyurusu (tüm sunucu) · `mesaj`: Duyuru metni · **admin** |
 
 > `/ooc` kapatıldı — yerel OOC için `/b` kullanın.

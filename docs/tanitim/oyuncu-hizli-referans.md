@@ -60,6 +60,7 @@
 
 ### Takıldım / binadan çıkamıyorum
 
-1. Ekranda **kıyafet** veya **spawn** menüsü varsa → **Onayla** veya **Legion Meydanı** seç
-2. Hâlâ sıkışıksan → oyundan çık, tekrar gir, spawn’da **Legion Meydanı** seç (Son konum değil)
-3. Admin isen → `/admin` → hayalet modu veya `/tp` ile dışarı
+1. **`/fdoor`** — bina içindeyken en yakın çıkış kapısına ışınlan (45 sn cooldown)
+2. **`/dimsifirla`** — ana boyuta (dim 0) dön, iç mekân metadata sıfırla (60 sn cooldown)
+3. Ekranda menü varsa → **Onayla** veya spawn’da **Legion Meydanı**
+4. Admin → `/admin` → hayalet modu
