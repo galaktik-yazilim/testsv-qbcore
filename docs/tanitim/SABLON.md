@@ -1,6 +1,7 @@
 # Şablon — Yeni Sistem / Meslek Tanıtımı
 
-> Bu dosyayı kopyalayın: `docs/tanitim/sistemler/YENI-SISTEM.md` veya `docs/tanitim/meslekler/YENI-MESLEK.md`
+> Bu dosyayı kopyalayın: `docs/tanitim/sistemler/YENI-SISTEM.md` veya `docs/tanitim/meslekler/YENI-MESLEK.md`  
+> Evren: [evren-ve-dil.md](./evren-ve-dil.md) — Los Santos, Türkçe arayüz, metrik birimler.
 
 ---
 

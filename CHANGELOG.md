@@ -7,6 +7,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 
 ## [Unreleased]
 
+### Added
+- [evren-ve-dil.md](docs/tanitim/evren-ve-dil.md) — Los Santos evreni, Türkçe arayüz, metrik birimler (m, km, km/s)
+
+### Changed
+- `/kurallar`, sunucu kuralları ve tanıtım dokümanları evren/birim standardına göre güncellendi
+- HUD varsayılan birimleri `km/s` + `km` (metrik fallback)
+- qb-adminmenu TR locale: hız etiketi `Km/s`
+
 Operasyonel adımlar: [TODO.md](docs/TODO.md)
 
 ---
@@ -18,7 +26,7 @@ Operasyonel adımlar: [TODO.md](docs/TODO.md)
 
 ### Changed
 - ROADMAP MVP fazları işaretlendi
-- `/kurallar` ve qb-hud km/h
+- `/kurallar` ve qb-hud km/s (metrik)
 
 ### Security
 - rp-dealership model adı uzunluk limiti

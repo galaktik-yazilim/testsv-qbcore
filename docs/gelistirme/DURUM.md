@@ -3,7 +3,14 @@
 > **Kod ve dokümantasyon turları (01–08) tamamlandı.**  
 > Kalan işler **operasyonel** (senin sunucuda yapacağın adımlar).
 
-Son güncelleme: Adım 08 kapanışı
+Son güncelleme: Evren/dil/birim standardı (Los Santos · Türkçe · metrik)
+
+---
+
+## Evren standardı
+
+Oyuncuya yansıyan: **Los Santos (Amerika)**, arayüz **Türkçe**, birimler **metrik** (m, km, km/s).  
+Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 
 ---
 

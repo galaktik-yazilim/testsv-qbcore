@@ -19,6 +19,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | CK / PK / MGK tanımları | `sunucu-kurallari.md` |
 | Güvenlik denetimi + düzeltmeler | [GUVENLIK-DENETIMI.md](./GUVENLIK-DENETIMI.md) |
 | Performans ince ayarı | ignition/dealership Wait optimizasyonu |
+| Evren/dil/birim standardı | [evren-ve-dil.md](../tanitim/evren-ve-dil.md), HUD km/s, `/kurallar` |
 
 ---
 
@@ -32,7 +33,13 @@ Whitelist **kapalı** — herkes girebilir. Sırayla dene:
 - [ ] Chat: normal, `/me`, `/ame`, `/do`, `/b`, `/s`, `/w`
 - [ ] `/kurallar`
 - [ ] LS Cars → araç al → kontak → garaj
-- [ ] Araçtayken `/km`
+- [ ] Araçtayken `/km` — çıktı **km** biriminde
+- [ ] HUD: hız **km/s**, kilometre **km** (mil/mph yok)
+- [ ] `/kurallar` — Los Santos + metrik satırı görünür
+
+### Evren / birimler
+- [ ] Chat mesafeleri hissedilir (~20m normal, `/w` daha geniş)
+- [ ] Para birimi $ (USD)
 
 ### PD / EMS (2. hesap veya arkadaş)
 - [ ] PD on duty → sivil `/911` alır

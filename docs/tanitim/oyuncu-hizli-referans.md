@@ -27,8 +27,9 @@
 | **M** | Kontak aç/kapa |
 | **K** | Kilit |
 | **L** | Emniyet kemeri |
-| `/km` | Kilometre (araç içinde) |
+| `/km` | Kilometre (km) |
 
+- HUD (araçta): hız **km/s**, km sayacı **km**
 - Galeri: haritada **LS Cars** → `[E]`
 - Motor otomatik **çalışmaz**
 

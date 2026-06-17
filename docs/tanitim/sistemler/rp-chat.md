@@ -20,7 +20,7 @@ Tüm oyuncular.
 | `/w` | 40 m | `/w POLİS!` | Bağırma |
 | `/b` | 20 m | `/b lag var.` | Yerel OOC — `(( isim ))` formatında |
 | `/911` | PD/EMS | `/911 silahlı şüpheli` | Acil çağrı (60 sn cooldown) |
-| `/kurallar` | — | `/kurallar` | Kural özeti |
+| `/kurallar` | — | `/kurallar` | Kural özeti (evren + metrik) |
 | `/a` | Global | `/a sunucu 5 dk bakımda` | Admin duyuru (yalnızca admin) |
 
 > `/ooc` kapatıldı — yerel OOC için `/b` kullanın.

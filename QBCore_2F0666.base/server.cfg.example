@@ -42,7 +42,7 @@ sv_scriptHookAllowed 0
 
 # Text-based RP — ses altyapısı bilinçli olarak kapalı (pma-voice / qb-radio yüklenmez)
 
-# QBCore
+# QBCore — arayüz Türkçe; IC evren Los Santos (Amerika); birimler metrik (qb-hud, rp-mileage)
 setr qb_locale "tr"
 setr UseTarget false
 # Whitelist KAPALI (test) — sistemler bitince qb_whitelist 1 yapın

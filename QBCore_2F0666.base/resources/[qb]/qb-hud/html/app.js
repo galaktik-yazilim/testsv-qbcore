@@ -785,8 +785,8 @@ const playerHud = {
             vehicleSpeed: 0,
             vehicleFuel: 0,
             vehicleMileage: 0,
-            speedUnit: "mph",
-            mileageUnit: "mi",
+            speedUnit: "km/s",
+            mileageUnit: "km",
         };
     },
 
@@ -824,8 +824,8 @@ const playerHud = {
                 this.vehicleSpeed = event.data.speed || 0;
                 this.vehicleFuel = event.data.fuel || 0;
                 this.vehicleMileage = event.data.mileage || 0;
-                this.speedUnit = event.data.speedUnit || "mph";
-                this.mileageUnit = event.data.mileageUnit || "mi";
+                this.speedUnit = event.data.speedUnit || "km/s";
+                this.mileageUnit = event.data.mileageUnit || "km";
                 if (event.data.cash !== undefined) {
                     this.cashAmount = Number(event.data.cash) || 0;
                 }

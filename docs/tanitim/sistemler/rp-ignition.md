@@ -12,7 +12,7 @@ Anahtarı olan sürücü.
 
 1. Araca **sürücü koltuğuna** binin
 2. **M** — kontak aç/kapa
-3. Chat: `Ahmet Yılmaz isimli kişi aracı çalıştırdı`
+3. Chat: `James Miller isimli kişi aracı çalıştırdı`
 
 | Tuş | Eylem |
 |-----|-------|

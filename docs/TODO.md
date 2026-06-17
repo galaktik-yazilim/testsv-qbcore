@@ -22,6 +22,7 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 
 - [ ] Restart
 - [ ] Karakter, chat, `/km`, galeri, garaj
+- [ ] HUD km/s + km; `/kurallar` evren satırı
 - [ ] `/911`, `/a`, NPC kontrolü
 
 ---
@@ -58,3 +59,4 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 | [ROADMAP.md](./ROADMAP.md) | Vizyon & fazlar |
 | [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) | Güvenlik |
 | [oyuncu-hizli-referans.md](./tanitim/oyuncu-hizli-referans.md) | Oyuncu özeti |
+| [evren-ve-dil.md](./tanitim/evren-ve-dil.md) | Evren · TR · metrik |

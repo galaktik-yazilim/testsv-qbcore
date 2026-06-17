@@ -812,7 +812,7 @@ function sendInfoBar()
     syncMoney()
 
     local inVehicle, speed, fuel, mileage = getVehicleHudData()
-    local speedUnit = config.UseMPH and 'mph' or 'kph'
+    local speedUnit = config.UseMPH and 'mph' or 'km/s'
     local mileageUnit = config.UseMPH and 'mi' or 'km'
 
     SendNUIMessage({
