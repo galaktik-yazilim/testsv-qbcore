@@ -1,5 +1,7 @@
 Config = {}
 
+Config.CursorKey = 'F4' -- Mouse imleci aç/kapa (text RP)
+
 -- Mesafe katmanları (metre) — Los Santos evreni, metrik birim
 Config.ProximityRange = 20.0  -- normal konuşma, /me, /b, /do
 Config.WhisperRange = 3.0     -- /s fısıltı
@@ -91,7 +93,7 @@ Config.CommandHelp = {
         '/dimsifirla — Ana boyuta (dim 0) dön',
     },
     keys = {
-        'F2 — Telefon · TAB — Envanter · Z — Hotbar',
+        'F2 — Telefon · F4 — Mouse imleci · TAB — Envanter · Z — Hotbar',
         'M — Kontak · K — Kilit · L — Emniyet kemeri',
     },
     footer = 'Tam liste: docs/tanitim/komutlar.md',

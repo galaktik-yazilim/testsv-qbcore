@@ -10,6 +10,7 @@
 |------|----------|
 | txAdmin | Kick, ban, warn, whitelist, restart |
 | Oyun içi | `/logout` (admin), qb-adminmenu |
+| vMenu (opsiyonel) | Araç spawn, teleport, hava — sadece admin/dev; kurulum: [vmenu-kurulum.md](../gelistirme/vmenu-kurulum.md) |
 | Discord | Uyarı kaydı, başvuru onayı |
 
 ---

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8" />
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body tabindex="0">
+        <script>
+            function isCloseKey(event) {
+                return (
+                    event.key === "F4" ||
+                    event.code === "F4" ||
+                    event.keyCode === 115 ||
+                    event.key === "Escape" ||
+                    event.keyCode === 27
+                );
+            }
+
+            function requestClose() {
+                fetch("https://" + GetParentResourceName() + "/closeCursor", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: "{}",
+                });
+            }
+
+            window.addEventListener(
+                "keydown",
+                function (event) {
+                    if (!isCloseKey(event)) return;
+                    event.preventDefault();
+                    event.stopPropagation();
+                    requestClose();
+                },
+                true
+            );
+
+            document.body.focus();
+        </script>
+    </body>
+</html>

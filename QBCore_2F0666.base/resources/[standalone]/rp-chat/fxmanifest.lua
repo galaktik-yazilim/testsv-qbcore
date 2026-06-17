@@ -9,6 +9,7 @@ shared_script 'config.lua'
 
 client_scripts {
     'client/notify.lua',
+    'client/cursor.lua',
     'client/main.lua',
     'client/stuck.lua',
 }
@@ -21,8 +22,11 @@ server_scripts {
 dependency 'chat'
 dependency 'qb-core'
 
+ui_page 'html/cursor.html'
+
 file 'style.css'
 file 'theme.js'
+file 'html/cursor.html'
 
 chat_theme 'rp' {
     styleSheet = 'style.css',

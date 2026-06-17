@@ -341,6 +341,7 @@ local function OpenPhone()
         if HasPhone then
             PhoneData.PlayerData = QBCore.Functions.GetPlayerData()
             SetNuiFocus(true, true)
+            SetNuiFocusKeepInput(true)
             SendNUIMessage({
                 action = 'open',
                 Tweets = PhoneData.Tweets,
@@ -531,21 +532,73 @@ end
 
 -- Command
 
-local function openPhoneCommand()
-    local PlayerData = QBCore.Functions.GetPlayerData()
-    if not PhoneData.isOpen and LocalPlayer.state.isLoggedIn then
-        if not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() then
-            OpenPhone()
-        else
-            QBCore.Functions.Notify('Şu an telefon kullanılamaz.', 'error')
+local lastPhoneToggle = 0
+local PHONE_TOGGLE_MS = 400
+
+local function releasePhoneNuiFocus()
+    if GetResourceState('rp-chat') == 'started' then
+        local ok, cursorOn = pcall(function()
+            return exports['rp-chat']:IsCursorMode()
+        end)
+        if ok and cursorOn then
+            SetNuiFocus(true, true)
+            SetNuiFocusKeepInput(true)
+            return
         end
     end
+    SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
+end
+
+local function applyPhoneCloseGameState()
+    if not PhoneData.CallData.InCall then
+        DoPhoneAnimation('cellphone_text_out')
+        SetTimeout(400, function()
+            StopAnimTask(PlayerPedId(), PhoneData.AnimationData.lib, PhoneData.AnimationData.anim, 2.5)
+            deletePhone()
+            PhoneData.AnimationData.lib = nil
+            PhoneData.AnimationData.anim = nil
+        end)
+    else
+        PhoneData.AnimationData.lib = nil
+        PhoneData.AnimationData.anim = nil
+        DoPhoneAnimation('cellphone_text_to_call')
+    end
+    PhoneData.isOpen = false
+    releasePhoneNuiFocus()
+end
+
+local function ClosePhone()
+    if not PhoneData.isOpen then return end
+    SendNUIMessage({ action = 'ExternalClose' })
+    applyPhoneCloseGameState()
+end
+
+local function openPhoneCommand()
+    local now = GetGameTimer()
+    if now - lastPhoneToggle < PHONE_TOGGLE_MS then return end
+
+    if PhoneData.isOpen then
+        lastPhoneToggle = now
+        ClosePhone()
+        return
+    end
+
+    local PlayerData = QBCore.Functions.GetPlayerData()
+    if not LocalPlayer.state.isLoggedIn then return end
+    if PlayerData.metadata['ishandcuffed'] or PlayerData.metadata['inlaststand'] or PlayerData.metadata['isdead'] or IsPauseMenuActive() then
+        QBCore.Functions.Notify('Şu an telefon kullanılamaz.', 'error')
+        return
+    end
+
+    lastPhoneToggle = now
+    OpenPhone()
 end
 
 -- Eski fivem.cfg bind'leri (ör. M → phone) etkisiz kalsın
 RegisterCommand('phone', function() end, false)
 RegisterCommand('openphone', openPhoneCommand, false)
-RegisterKeyMapping('openphone', 'Telefonu Aç', 'keyboard', Config.OpenPhone)
+RegisterKeyMapping('openphone', 'Telefonu Aç/Kapat', 'keyboard', Config.OpenPhone)
 
 RegisterNetEvent('qb-phone:client:openPhoneFromItem', function()
     openPhoneCommand()
@@ -612,23 +665,12 @@ RegisterNUICallback('RemoveMail', function(data, cb)
 end)
 
 RegisterNUICallback('Close', function(_, cb)
-    if not PhoneData.CallData.InCall then
-        DoPhoneAnimation('cellphone_text_out')
-        SetTimeout(400, function()
-            StopAnimTask(PlayerPedId(), PhoneData.AnimationData.lib, PhoneData.AnimationData.anim, 2.5)
-            deletePhone()
-            PhoneData.AnimationData.lib = nil
-            PhoneData.AnimationData.anim = nil
-        end)
-    else
-        PhoneData.AnimationData.lib = nil
-        PhoneData.AnimationData.anim = nil
-        DoPhoneAnimation('cellphone_text_to_call')
-    end
-    SetNuiFocus(false, false)
-    SetTimeout(500, function()
-        PhoneData.isOpen = false
-    end)
+    applyPhoneCloseGameState()
+    cb('ok')
+end)
+
+RegisterNUICallback('TogglePhoneKey', function(_, cb)
+    openPhoneCommand()
     cb('ok')
 end)
 
@@ -2265,4 +2307,8 @@ CreateThread(function()
             end)
         end
     end
+end)
+
+exports('IsPhoneOpen', function()
+    return PhoneData.isOpen == true
 end)

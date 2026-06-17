@@ -62,7 +62,7 @@ end)
 
 RegisterNetEvent('qb-log:server:CreateLog', function(name, title, color, message, tagEveryone, imageUrl)
     local src = source
-    if src and src > 0 then
+    if type(src) == 'number' and src > 0 then
         if not clientLogWhitelist[name] then return end
         local now = GetGameTimer()
         if clientLogCooldown[src] and (now - clientLogCooldown[src]) < 10000 then return end

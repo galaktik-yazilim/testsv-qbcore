@@ -320,8 +320,7 @@ QB.Phone.Functions.ToggleApp = function(app, show) {
     $("."+app+"-app").css({"display":show});
 }
 
-QB.Phone.Functions.Close = function() {
-
+QB.Phone.Functions.CloseUiOnly = function() {
     if (QB.Phone.Data.currentApplication == "whatsapp") {
         setTimeout(function(){
             QB.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
@@ -353,8 +352,12 @@ QB.Phone.Functions.Close = function() {
     }
 
     QB.Phone.Animations.BottomSlideDown('.container', 300, -70);
-    $.post('https://qb-phone/Close');
     QB.Phone.Data.IsOpen = false;
+}
+
+QB.Phone.Functions.Close = function() {
+    QB.Phone.Functions.CloseUiOnly();
+    $.post('https://qb-phone/Close');
 }
 
 QB.Phone.Functions.HeaderTextColor = function(newColor, Timeout) {
@@ -512,20 +515,31 @@ QB.Screen.Notification = function(title, content, icon, timeout, color) {
     });
 }
 
-$(document).on('keydown', function() {
+$(document).on('keydown', function(event) {
     switch(event.keyCode) {
         case 27: // ESCAPE
-        if (up){
-            $('#popup').fadeOut('slow');
-            $('.popupclass').fadeOut('slow');
-            $('.popupclass').html("");
-            up = false
-        } else {
-            QB.Phone.Functions.Close();
+            if (up){
+                $('#popup').fadeOut('slow');
+                $('.popupclass').fadeOut('slow');
+                $('.popupclass').html("");
+                up = false
+            } else if (QB.Phone.Data.IsOpen) {
+                QB.Phone.Functions.Close();
+            }
             break;
-        }
     }
 });
+
+function isPhoneToggleKey(event) {
+    return event.keyCode === 113 || event.key === 'F2' || event.code === 'F2';
+}
+
+window.addEventListener('keydown', function(event) {
+    if (!isPhoneToggleKey(event) || !QB.Phone.Data.IsOpen) return;
+    event.preventDefault();
+    event.stopPropagation();
+    $.post('https://qb-phone/TogglePhoneKey');
+}, true);
 
 QB.Screen.popUp = function(source){
     if(!up){
@@ -548,6 +562,9 @@ QB.Screen.popDown = function(){
 $(document).ready(function(){
     window.addEventListener('message', function(event) {
         switch(event.data.action) {
+            case "ExternalClose":
+                QB.Phone.Functions.CloseUiOnly();
+                break;
             case "open":
                 QB.Phone.Functions.Open(event.data);
                 QB.Phone.Functions.SetupAppWarnings(event.data.AppData);
