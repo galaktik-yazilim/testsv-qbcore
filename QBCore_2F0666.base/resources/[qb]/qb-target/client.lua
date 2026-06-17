@@ -549,7 +549,7 @@ CreateThread(function()
 			DisableTarget(true)
 		end
 	end, false)
-	RegisterKeyMapping('+playerTarget', 'Enable targeting', 'keyboard', Config.OpenKey)
+	RegisterKeyMapping('+playerTarget', 'Hedefleme', 'keyboard', Config.OpenKey)
 	TriggerEvent('chat:removeSuggestion', '/+playerTarget')
 	TriggerEvent('chat:removeSuggestion', '/-playerTarget')
 

@@ -1,6 +1,6 @@
 # Aktif TODO — Operasyonel
 
-> **MVP kod geliştirmesi (Tur 01–21) bitti.** Operasyon senin tarafında.  
+> **MVP kod geliştirmesi (Tur 01–22) bitti.** Operasyon senin tarafında.  
 > Master özet: [gelistirme/DURUM.md](./gelistirme/DURUM.md)  
 > **İlerleme: 58%** → [ILERLEME.md](./ILERLEME.md)
 
@@ -8,7 +8,7 @@
 
 ```
 Genel ilerleme       ███████████░░░░░░░░░  58%
-Geliştirme (kod)     ████████████████████ 100%  (Tur 01–21)
+Geliştirme (kod)     ████████████████████ 100%  (Tur 01–22)
 Oyun içi test         ⏳ sen
 Kapalı beta           ⏳ test sonrası
 Açılış                ⏳ beta sonrası
@@ -21,6 +21,8 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 ## 1. Oyun içi test (şimdi)
 
 [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
+
+Hızlı rehber: [OYUN-ICI-TEST-HIZLI.md](./gelistirme/OYUN-ICI-TEST-HIZLI.md)
 
 - [ ] Restart
 - [ ] Karakter, chat, `/km`, galeri, garaj
@@ -35,6 +37,7 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 - [ ] Araç yakıt HUD hatasız (qb-fuel)
 - [ ] `.\scripts\preflight-server.ps1` — tam kontrol OK
 - [ ] **Tur 21:** PD off duty stash kapalı; banka ekstre TR
+- [ ] **Tur 22:** HUD menü TR; PD heli spotlight off duty kapalı
 
 ---
 

@@ -5,6 +5,23 @@ local sharedItems = exports['qb-core']:GetShared('Items')
 local doctorCount = 0
 local doctorCalled = false
 local Doctors = {}
+local hungerResetCooldown = {}
+
+local function validateHospitalBed(hospitalIndex, bedId)
+	local hospitals = Config.Locations['hospital']
+	if type(hospitalIndex) ~= 'number' or hospitalIndex < 1 or hospitalIndex > #hospitals then
+		return nil
+	end
+	local hospital = hospitals[hospitalIndex]
+	if type(bedId) ~= 'number' or bedId < 1 or bedId > #hospital['beds'] then
+		return nil
+	end
+	return hospital['beds'][bedId], hospital
+end
+
+AddEventHandler('playerDropped', function()
+	hungerResetCooldown[source] = nil
+end)
 
 -- Events
 
@@ -22,11 +39,20 @@ end)
 RegisterNetEvent('hospital:server:SendToBed', function(bedId, isRevive, hospitalIndex)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
-	TriggerClientEvent('hospital:client:SendToBed', src, bedId, Config.Locations['hospital'][hospitalIndex]['beds'][bedId], isRevive)
+	if not Player then return end
+
+	local bed, hospital = validateHospitalBed(hospitalIndex, bedId)
+	if not bed then return end
+
+	local playerPed = GetPlayerPed(src)
+	local playerCoords = GetEntityCoords(playerPed)
+	if #(playerCoords - hospital['location']) > 15.0 then return end
+
+	TriggerClientEvent('hospital:client:SendToBed', src, bedId, bed, isRevive)
 	TriggerClientEvent('hospital:client:SetBed', -1, bedId, true, hospitalIndex)
 	Player.RemoveMoney('bank', Config.BillCost, 'respawned-at-hospital')
 	exports['qb-banking']:AddMoney('ambulance', Config.BillCost, 'Player treatment')
-	TriggerClientEvent('hospital:client:SendBillEmail', src, Config.BillCost, Config.Locations['hospital'][hospitalIndex]['name'])
+	TriggerClientEvent('hospital:client:SendBillEmail', src, Config.BillCost, hospital['name'])
 end)
 
 RegisterNetEvent('hospital:server:RespawnAtHospital', function(hospitalIndex)
@@ -280,14 +306,17 @@ RegisterNetEvent('hospital:server:removePainkillers', function()
 end)
 
 RegisterNetEvent('hospital:server:resetHungerThirst', function()
-	local Player = exports['qb-core']:GetPlayer(source)
-
+	local src = source
+	local Player = exports['qb-core']:GetPlayer(src)
 	if not Player then return end
+	local now = GetGameTimer()
+	if hungerResetCooldown[src] and (now - hungerResetCooldown[src]) < 30000 then return end
+	hungerResetCooldown[src] = now
 
 	Player.SetMetaData('hunger', 100)
 	Player.SetMetaData('thirst', 100)
 
-	TriggerClientEvent('hud:client:UpdateNeeds', source, 100, 100)
+	TriggerClientEvent('hud:client:UpdateNeeds', src, 100, 100)
 end)
 
 RegisterNetEvent('qb-ambulancejob:server:stash', function()

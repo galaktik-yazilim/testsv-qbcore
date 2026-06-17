@@ -53,8 +53,27 @@ local colors = { -- https://www.spycolor.com/
 }
 
 local logQueue = {}
+local clientLogWhitelist = { death = true }
+local clientLogCooldown = {}
+
+AddEventHandler('playerDropped', function()
+    clientLogCooldown[source] = nil
+end)
 
 RegisterNetEvent('qb-log:server:CreateLog', function(name, title, color, message, tagEveryone, imageUrl)
+    local src = source
+    if src and src > 0 then
+        if not clientLogWhitelist[name] then return end
+        local now = GetGameTimer()
+        if clientLogCooldown[src] and (now - clientLogCooldown[src]) < 10000 then return end
+        clientLogCooldown[src] = now
+        if type(message) ~= 'string' then return end
+        title = type(title) == 'string' and title:sub(1, 128) or 'Log'
+        message = message:sub(1, 512)
+        tagEveryone = false
+        imageUrl = nil
+    end
+
     local tag = tagEveryone or false
 
     if Config.Logging == 'discord' then

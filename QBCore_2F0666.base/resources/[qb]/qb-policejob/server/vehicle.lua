@@ -30,8 +30,10 @@ end)
 -- Events
 
 RegisterNetEvent('heli:server:spotlight', function(state)
-    local serverID = source
-    TriggerClientEvent('heli:client:spotlight', -1, serverID, state)
+    local src = source
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not Player or Player.PlayerData.job.type ~= 'leo' or not Player.PlayerData.job.onduty then return end
+    TriggerClientEvent('heli:client:spotlight', -1, src, state == true)
 end)
 
 RegisterNetEvent('police:server:Impound', function(plate, fullImpound, price, body, engine, fuel)

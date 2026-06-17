@@ -1,6 +1,6 @@
 # Güvenlik Denetimi — rp-* & MVP
 
-> Son güncelleme: Tur 21 PD & tüketim güvenliği  
+> Son güncelleme: Tur 22 UI & güvenlik cilası  
 > Kapsam: `rp-chat`, `rp-mileage`, `rp-dealership`, `rp-ignition`, `qb-multicharacter` (MVP değişiklikleri)
 
 ---
@@ -70,6 +70,7 @@
 | Obje / spike spawn | ✅ **düzeltildi** | LEO + on duty |
 | Stash / delil off duty | ✅ **düzeltildi** | on duty zorunlu |
 | `policeAlert` spam | ✅ **düzeltildi** | 30 sn cooldown + 256 char |
+| Heli spotlight | ✅ **düzeltildi** | LEO + on duty |
 
 ---
 
@@ -79,6 +80,7 @@
 |------|--------|-----|
 | Hunger/thirst max spoof | ✅ **düzeltildi** | 0–100 clamp |
 | Tackle uzaktan | ✅ **düzeltildi** | 3 m mesafe |
+| Discord log client spam | ✅ **düzeltildi** | `death` only + cooldown |
 
 ---
 
@@ -109,6 +111,8 @@
 |------|--------|-----|
 | Armor/death metadata spoof | ✅ **kısmi** | Değer clamp; tam sunucu türevi P4+ |
 | EMS stash yetkisiz | ✅ **düzeltildi** | ambulance + on duty |
+| `SendToBed` uzaktan / sahte yatak | ✅ **düzeltildi** | Index doğrulama + 15 m mesafe |
+| Revive hunger reset spam | ✅ **düzeltildi** | 30 sn cooldown |
 
 ---
 
