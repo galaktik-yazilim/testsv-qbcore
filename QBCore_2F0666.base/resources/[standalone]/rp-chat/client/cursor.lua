@@ -32,6 +32,7 @@ local function applyMouseFocus()
         SetNuiFocus(true, true)
         SetNuiFocusKeepInput(false)
     else
+        TriggerEvent('rp-mouse:releaseFocus')
         SetNuiFocusKeepInput(false)
         SetNuiFocus(false, false)
     end

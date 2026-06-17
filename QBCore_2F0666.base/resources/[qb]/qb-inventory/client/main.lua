@@ -18,6 +18,10 @@ AddEventHandler('rp-mouse:applyFocus', function(visible, source)
     end
 end)
 
+AddEventHandler('rp-mouse:releaseFocus', function()
+    applyInventoryNuiFocus(false)
+end)
+
 local function syncInventoryMouse(visible)
     if GetResourceState('rp-chat') == 'started' then
         pcall(function()
@@ -131,6 +135,8 @@ end
 exports('HasItem', HasItem)
 
 local function releaseInventoryMouse()
+    applyInventoryNuiFocus(false)
+
     local keepMouse = false
     if GetResourceState('qb-phone') == 'started' then
         local ok, open = pcall(function()
@@ -138,7 +144,23 @@ local function releaseInventoryMouse()
         end)
         keepMouse = ok and open
     end
-    syncInventoryMouse(keepMouse)
+
+    if keepMouse then
+        local mouseVisible = true
+        if GetResourceState('rp-chat') == 'started' then
+            pcall(function()
+                mouseVisible = exports['rp-chat']:IsMouseVisible()
+            end)
+        end
+        TriggerEvent('rp-mouse:applyFocus', mouseVisible, 'phone')
+        return
+    end
+
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(false)
+        end)
+    end
 end
 
 -- Events
