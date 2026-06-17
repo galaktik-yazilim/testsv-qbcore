@@ -2,6 +2,15 @@ QBCore = exports['qb-core']:GetCoreObject()
 PlayerData = nil
 local hotbarShown = false
 
+AddEventHandler('rp-mouse:applyFocus', function(visible, source)
+    if source ~= 'inventory' or not LocalPlayer.state.inv_busy then return end
+    if visible then
+        SetNuiFocus(true, true)
+    else
+        SetNuiFocus(false, false)
+    end
+end)
+
 -- Handlers
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -104,6 +113,23 @@ end
 
 exports('HasItem', HasItem)
 
+local function releaseInventoryMouse()
+    local keepMouse = false
+    if GetResourceState('qb-phone') == 'started' then
+        local ok, open = pcall(function()
+            return exports['qb-phone']:IsPhoneOpen()
+        end)
+        keepMouse = ok and open
+    end
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(keepMouse)
+        end)
+    else
+        SetNuiFocus(false, false)
+    end
+end
+
 -- Events
 
 RegisterNetEvent('qb-inventory:client:requiredItems', function(items, bool)
@@ -135,6 +161,7 @@ RegisterNetEvent('qb-inventory:client:hotbar', function(items)
 end)
 
 RegisterNetEvent('qb-inventory:client:closeInv', function()
+    releaseInventoryMouse()
     SendNUIMessage({
         action = 'close',
     })
@@ -169,7 +196,13 @@ RegisterNetEvent('qb-inventory:server:RobPlayer', function(TargetId)
 end)
 
 RegisterNetEvent('qb-inventory:client:openInventory', function(items, other)
-    SetNuiFocus(true, true)
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(true)
+        end)
+    else
+        SetNuiFocus(true, true)
+    end
     SendNUIMessage({
         action = 'open',
         inventory = items,
@@ -200,7 +233,7 @@ RegisterNUICallback('AttemptPurchase', function(data, cb)
 end)
 
 RegisterNUICallback('CloseInventory', function(data, cb)
-    SetNuiFocus(false, false)
+    releaseInventoryMouse()
     if data.name then
         if data.name:find('trunk-') then
             CloseTrunk()
@@ -297,9 +330,15 @@ end)
 
 -- Commands
 
+local lastInvToggle = 0
+local INV_TOGGLE_MS = 300
+
 RegisterCommand('openInv', function()
-    if IsNuiFocused() or IsPauseMenuActive() then return end
+    if IsPauseMenuActive() then return end
     if not LocalPlayer.state.isLoggedIn then return end
+
+    local now = GetGameTimer()
+    if now - lastInvToggle < INV_TOGGLE_MS then return end
 
     local pdata = QBCore.Functions.GetPlayerData()
     if not pdata or not pdata.citizenid then return end
@@ -307,11 +346,15 @@ RegisterCommand('openInv', function()
     local meta = pdata.metadata or {}
     if meta.isdead or meta.inlaststand or meta.ishandcuffed then return end
 
-    if LocalPlayer.state.inv_busy and not IsNuiFocused() and not IsProgressActive() then
-        TriggerServerEvent('qb-inventory:server:recoverBusy')
-        Wait(100)
+    if LocalPlayer.state.inv_busy then
+        lastInvToggle = now
+        ExecuteCommand('closeInv')
+        return
     end
 
+    if IsNuiFocused() then return end
+
+    lastInvToggle = now
     TriggerServerEvent('qb-inventory:server:openKeybind')
 end, false)
 

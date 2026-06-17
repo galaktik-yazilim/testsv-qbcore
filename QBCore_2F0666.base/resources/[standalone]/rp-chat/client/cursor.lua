@@ -1,8 +1,9 @@
--- F4: mouse imleci aç/kapa (text RP — telefon/envanterden bağımsız katman)
+-- Merkezi mouse gorunurlugu (isMouseVisible)
+-- F4: toggle | Telefon/envanter acilinca: true | NUI focus UI sahibinde kalir (qb-phone vb.)
 
-local cursorActive = false
-local lastCloseAt = 0
-local CLOSE_GUARD_MS = 400
+local isMouseVisible = false
+local lastToggleAt = 0
+local TOGGLE_GUARD_MS = 300
 
 local function isPhoneOpen()
     if GetResourceState('qb-phone') ~= 'started' then return false end
@@ -16,41 +17,49 @@ local function isInventoryOpen()
     return LocalPlayer.state.inv_busy == true
 end
 
-local function restoreOtherNuiFocus()
+local function applyMouseFocus()
     if isPhoneOpen() then
-        SetNuiFocus(true, true)
-        SetNuiFocusKeepInput(true)
-        return true
+        TriggerEvent('rp-mouse:applyFocus', isMouseVisible, 'phone')
+        return
     end
 
     if isInventoryOpen() then
-        SetNuiFocus(true, true)
-        SetNuiFocusKeepInput(false)
-        return true
+        TriggerEvent('rp-mouse:applyFocus', isMouseVisible, 'inventory')
+        return
     end
 
-    return false
-end
-
-local function setCursor(enabled)
-    if enabled then
-        if GetGameTimer() - lastCloseAt < CLOSE_GUARD_MS then
-            return
-        end
-        cursorActive = true
+    if isMouseVisible then
         SetNuiFocus(true, true)
         SetNuiFocusKeepInput(true)
     else
-        cursorActive = false
-        lastCloseAt = GetGameTimer()
         SetNuiFocusKeepInput(false)
-        if not restoreOtherNuiFocus() then
-            SetNuiFocus(false, false)
-        end
+        SetNuiFocus(false, false)
     end
 end
 
-local function canToggleCursor()
+local function setMouseVisible(visible)
+    isMouseVisible = visible == true
+    applyMouseFocus()
+end
+
+-- Envanter kapandiginda inv_busy once false olur; mouse bayragi takilirsa temizle
+AddStateBagChangeHandler('inv_busy', nil, function(bagName, _, value)
+    local myBag = ('player:%s'):format(GetPlayerServerId(PlayerId()))
+    if bagName ~= myBag or value then return end
+    if isPhoneOpen() then return end
+    if isMouseVisible then
+        setMouseVisible(false)
+    end
+end)
+
+local function toggleMouseVisible()
+    local now = GetGameTimer()
+    if now - lastToggleAt < TOGGLE_GUARD_MS then return end
+    lastToggleAt = now
+    setMouseVisible(not isMouseVisible)
+end
+
+local function canEnableMouse()
     if not LocalPlayer.state.isLoggedIn then return false end
     if IsPauseMenuActive() then return false end
 
@@ -65,24 +74,24 @@ local function canToggleCursor()
     return true
 end
 
-local function toggleCursor()
-    if cursorActive then
-        setCursor(false)
+local function toggleMouseCommand()
+    if isMouseVisible then
+        toggleMouseVisible()
         return
     end
-
-    if GetGameTimer() - lastCloseAt < CLOSE_GUARD_MS then return end
-    if not canToggleCursor() then return end
-
-    setCursor(true)
+    if not canEnableMouse() then return end
+    toggleMouseVisible()
 end
 
-RegisterCommand('rpcursor', toggleCursor, false)
+RegisterCommand('rpcursor', toggleMouseCommand, false)
+
+RegisterNUICallback('toggleMouse', function(_, cb)
+    toggleMouseVisible()
+    cb('ok')
+end)
 
 RegisterNUICallback('closeCursor', function(_, cb)
-    if cursorActive then
-        setCursor(false)
-    end
+    setMouseVisible(false)
     cb('ok')
 end)
 
@@ -93,7 +102,7 @@ end)
 
 CreateThread(function()
     while true do
-        if cursorActive then
+        if isMouseVisible and not isPhoneOpen() and not isInventoryOpen() then
             DisableControlAction(0, 1, true)
             DisableControlAction(0, 2, true)
             DisableControlAction(0, 3, true)
@@ -105,7 +114,7 @@ CreateThread(function()
             DisableControlAction(0, 106, true)
 
             if IsDisabledControlJustPressed(0, 200) or IsDisabledControlJustPressed(0, 322) then
-                setCursor(false)
+                setMouseVisible(false)
             end
             Wait(0)
         else
@@ -114,20 +123,28 @@ CreateThread(function()
     end
 end)
 
+exports('IsMouseVisible', function()
+    return isMouseVisible
+end)
+
+exports('SetMouseVisible', function(visible)
+    setMouseVisible(visible)
+end)
+
+exports('ToggleMouseVisible', function()
+    toggleMouseVisible()
+end)
+
 exports('IsCursorMode', function()
-    return cursorActive
+    return isMouseVisible
 end)
 
 exports('SetCursorMode', function(enabled)
     if enabled then
-        if not canToggleCursor() then return false end
-        setCursor(true)
+        if not canEnableMouse() then return false end
+        setMouseVisible(true)
         return true
     end
-    if cursorActive then
-        setCursor(false)
-    end
+    setMouseVisible(false)
     return true
 end)
-
-exports('RestoreOtherNuiFocus', restoreOtherNuiFocus)

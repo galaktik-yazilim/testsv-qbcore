@@ -16,18 +16,20 @@
     </head>
     <body tabindex="0">
         <script>
-            function isCloseKey(event) {
+            function isF4Key(event) {
                 return (
                     event.key === "F4" ||
                     event.code === "F4" ||
-                    event.keyCode === 115 ||
-                    event.key === "Escape" ||
-                    event.keyCode === 27
+                    event.keyCode === 115
                 );
             }
 
-            function requestClose() {
-                fetch("https://" + GetParentResourceName() + "/closeCursor", {
+            function isEscapeKey(event) {
+                return event.key === "Escape" || event.keyCode === 27;
+            }
+
+            function postAction(action) {
+                fetch("https://" + GetParentResourceName() + "/" + action, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: "{}",
@@ -37,10 +39,17 @@
             window.addEventListener(
                 "keydown",
                 function (event) {
-                    if (!isCloseKey(event)) return;
-                    event.preventDefault();
-                    event.stopPropagation();
-                    requestClose();
+                    if (isF4Key(event)) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        postAction("toggleMouse");
+                        return;
+                    }
+                    if (isEscapeKey(event)) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        postAction("closeCursor");
+                    }
                 },
                 true
             );

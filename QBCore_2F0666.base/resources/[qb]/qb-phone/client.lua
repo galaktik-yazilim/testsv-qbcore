@@ -336,12 +336,41 @@ local function LoadPhone()
     end)
 end
 
+local function isInventoryOpen()
+    return LocalPlayer.state.inv_busy == true
+end
+
+local function applyPhoneFocus(visible)
+    if visible then
+        SetNuiFocus(true, true)
+        SetNuiFocusKeepInput(true)
+    else
+        SetNuiFocusKeepInput(false)
+        SetNuiFocus(false, false)
+    end
+end
+
+local function syncPhoneMouse(visible)
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(visible)
+        end)
+    else
+        applyPhoneFocus(visible)
+    end
+end
+
+AddEventHandler('rp-mouse:applyFocus', function(visible, source)
+    if source == 'phone' and PhoneData.isOpen then
+        applyPhoneFocus(visible)
+    end
+end)
+
 local function OpenPhone()
     QBCore.Functions.TriggerCallback('qb-phone:server:HasPhone', function(HasPhone)
         if HasPhone then
             PhoneData.PlayerData = QBCore.Functions.GetPlayerData()
-            SetNuiFocus(true, true)
-            SetNuiFocusKeepInput(true)
+            PhoneData.isOpen = true
             SendNUIMessage({
                 action = 'open',
                 Tweets = PhoneData.Tweets,
@@ -350,11 +379,20 @@ local function OpenPhone()
                 PlayerData = PhoneData.PlayerData,
                 TextOnly = Config.TextOnly,
             })
-            PhoneData.isOpen = true
+            syncPhoneMouse(true)
 
             CreateThread(function()
                 while PhoneData.isOpen do
-                    DisableDisplayControlActions()
+                    if GetResourceState('rp-chat') == 'started' then
+                        local ok, mouseOn = pcall(function()
+                            return exports['rp-chat']:IsMouseVisible()
+                        end)
+                        if ok and mouseOn then
+                            DisableDisplayControlActions()
+                        end
+                    else
+                        DisableDisplayControlActions()
+                    end
                     Wait(1)
                 end
             end)
@@ -536,18 +574,11 @@ local lastPhoneToggle = 0
 local PHONE_TOGGLE_MS = 400
 
 local function releasePhoneNuiFocus()
-    if GetResourceState('rp-chat') == 'started' then
-        local ok, cursorOn = pcall(function()
-            return exports['rp-chat']:IsCursorMode()
-        end)
-        if ok and cursorOn then
-            SetNuiFocus(true, true)
-            SetNuiFocusKeepInput(true)
-            return
-        end
+    if isInventoryOpen() then
+        syncPhoneMouse(true)
+    else
+        syncPhoneMouse(false)
     end
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
 end
 
 local function applyPhoneCloseGameState()
@@ -671,6 +702,15 @@ end)
 
 RegisterNUICallback('TogglePhoneKey', function(_, cb)
     openPhoneCommand()
+    cb('ok')
+end)
+
+RegisterNUICallback('ToggleMouseKey', function(_, cb)
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:ToggleMouseVisible()
+        end)
+    end
     cb('ok')
 end)
 

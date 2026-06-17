@@ -94,7 +94,10 @@ end, 'admin')
 -- Keybindings
 
 local function OpenInventoryKeybind(source)
-    if Player(source).state.inv_busy then return end
+    if Player(source).state.inv_busy then
+        CloseInventory(source)
+        return
+    end
     local QBPlayer = exports['qb-core']:GetPlayer(source)
     if not QBPlayer then return end
     if QBPlayer.PlayerData.metadata['isdead'] or QBPlayer.PlayerData.metadata['inlaststand'] or QBPlayer.PlayerData.metadata['ishandcuffed'] then return end

@@ -534,11 +534,22 @@ function isPhoneToggleKey(event) {
     return event.keyCode === 113 || event.key === 'F2' || event.code === 'F2';
 }
 
+function isMouseToggleKey(event) {
+    return event.keyCode === 115 || event.key === 'F4' || event.code === 'F4';
+}
+
 window.addEventListener('keydown', function(event) {
-    if (!isPhoneToggleKey(event) || !QB.Phone.Data.IsOpen) return;
-    event.preventDefault();
-    event.stopPropagation();
-    $.post('https://qb-phone/TogglePhoneKey');
+    if (isPhoneToggleKey(event) && QB.Phone.Data.IsOpen) {
+        event.preventDefault();
+        event.stopPropagation();
+        $.post('https://qb-phone/TogglePhoneKey');
+        return;
+    }
+    if (isMouseToggleKey(event) && QB.Phone.Data.IsOpen) {
+        event.preventDefault();
+        event.stopPropagation();
+        $.post('https://qb-phone/ToggleMouseKey');
+    }
 }, true);
 
 QB.Screen.popUp = function(source){
@@ -566,11 +577,15 @@ $(document).ready(function(){
                 QB.Phone.Functions.CloseUiOnly();
                 break;
             case "open":
+                QB.Phone.Data.PlayerData = event.data.PlayerData;
+                QB.Phone.Data.PlayerJob = event.data.PlayerData.job;
+                if (event.data.AppData) {
+                    QB.Phone.Functions.SetupApplications({ applications: event.data.AppData });
+                }
                 QB.Phone.Functions.Open(event.data);
                 QB.Phone.Functions.SetupAppWarnings(event.data.AppData);
                 QB.Phone.Functions.SetupCurrentCall(event.data.CallData);
                 QB.Phone.Data.IsOpen = true;
-                QB.Phone.Data.PlayerData = event.data.PlayerData;
                 QB.Phone.Data.TextOnly = event.data.TextOnly === true;
                 if (QB.Phone.Data.TextOnly) {
                     $("body").addClass("text-only-phone");
