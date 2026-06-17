@@ -5,7 +5,7 @@
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 13 test öncesi stabilizasyon
+Son güncelleme: Tur 14 garaj & interior çıkış
 
 ---
 
@@ -33,6 +33,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [11](./ADIM-11-Spawn-Dis-Guvenlik.md) | Spawn & dış mekân | ✅ | ✅ | Legion spawn doğrula |
 | [12](./ADIM-12-UI-Cila.md) | UI & chat cila | ✅ | ✅ | Chat/HUD/galeri test |
 | [13](./ADIM-13-Stabilizasyon.md) | Stabilizasyon | ✅ | ✅ | Giriş + galeri çift tık |
+| [14](./ADIM-14-Garaj-Interior.md) | Garaj & `/disari` | ✅ | ✅ | Garaj park/çıkar |
 
 ---
 

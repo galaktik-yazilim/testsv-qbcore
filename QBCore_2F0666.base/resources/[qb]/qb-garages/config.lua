@@ -3,7 +3,7 @@ Config.AutoRespawn = true          -- true == stores cars in garage on restart |
 Config.VisuallyDamageCars = true   -- true == damage car on spawn | false == no damage on spawn
 Config.SharedGarages = false       -- true == take any car from any garage | false == only take car from garage stored in
 Config.ClassSystem = false         -- true == restrict vehicles by class | false == any vehicle class in any garage
-Config.FuelResource = 'LegacyFuel' -- supports any that has a GetFuel() and SetFuel() export
+Config.FuelResource = 'qb-fuel' -- LegacyFuel alternatif; sunucuda ensure qb-fuel
 Config.Warp = true                 -- true == warp player into vehicle | false == vehicle spawns without warping
 
 -- https://docs.fivem.net/natives/?_0x29439776AAA00A62
@@ -199,7 +199,7 @@ Config.Garages = {
         category = Config.VehicleClass['car']
     },
     pillboxgarage = {
-        label = 'Pillbox Garage Parking',
+        label = 'Pillbox Garajı',
         takeVehicle = vector3(213.2, -796.05, 30.86),
         spawnPoint = {
             vector4(222.02, -804.19, 30.26, 248.19),

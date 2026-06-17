@@ -134,6 +134,17 @@ local function findExteriorPosition(interiorId, doorCoords)
     local minDist = cfg.ExteriorExitMinDist or 2.0
     local maxDist = cfg.ExteriorExitMaxDist or 22.0
 
+    local function scanFrom(origin, dir)
+        if #dir < 0.01 then return nil end
+        dir = dir / #dir
+        for dist = minDist, maxDist, 0.5 do
+            local test = origin + (dir * dist)
+            if GetInteriorAtCoords(test.x, test.y, test.z) == 0 then
+                return groundSnap(test), GetHeadingFromVector_2d(dir.x, dir.y)
+            end
+        end
+    end
+
     local center = getInteriorCenter(interiorId)
     local dir = doorCoords - center
     if #dir < 0.05 then
@@ -142,16 +153,9 @@ local function findExteriorPosition(interiorId, doorCoords)
         dir = dir / #dir
     end
 
-    local heading = GetHeadingFromVector_2d(dir.x, dir.y)
+    local pos, heading = scanFrom(doorCoords, dir)
+    if pos then return pos, heading end
 
-    for dist = minDist, maxDist, 0.5 do
-        local test = doorCoords + (dir * dist)
-        if GetInteriorAtCoords(test.x, test.y, test.z) == 0 then
-            return groundSnap(test), heading
-        end
-    end
-
-    -- Kapı yönü yetmezse dört yönde dene
     local dirs = {
         dir,
         vector3(-dir.y, dir.x, 0.0),
@@ -159,19 +163,47 @@ local function findExteriorPosition(interiorId, doorCoords)
         vector3(-dir.x, -dir.y, 0.0),
     }
     for i = 1, #dirs do
-        local d = dirs[i]
-        if #d > 0.01 then
-            d = d / #d
-            for dist = minDist, maxDist, 1.0 do
-                local test = doorCoords + (d * dist)
+        pos, heading = scanFrom(doorCoords, dirs[i])
+        if pos then return pos, heading end
+    end
+
+    return groundSnap(doorCoords + (dir * (maxDist * 0.5))), GetHeadingFromVector_2d(dir.x, dir.y)
+end
+
+local function findExteriorFromPlayer(interiorId, playerCoords)
+    local cfg = Config.StuckRecovery
+    local minDist = cfg.ExteriorExitMinDist or 2.0
+    local maxDist = cfg.ExteriorExitMaxDist or 22.0
+
+    local center = getInteriorCenter(interiorId)
+    local away = playerCoords - center
+    if #away < 0.05 then
+        away = vector3(1.0, 0.0, 0.0)
+    else
+        away = away / #away
+    end
+
+    local dirs = {
+        away,
+        vector3(-away.y, away.x, 0.0),
+        vector3(away.y, -away.x, 0.0),
+        vector3(-away.x, -away.y, 0.0),
+    }
+
+    for i = 1, #dirs do
+        local dir = dirs[i]
+        if #dir > 0.01 then
+            dir = dir / #dir
+            for dist = minDist, maxDist, 0.5 do
+                local test = playerCoords + (dir * dist)
                 if GetInteriorAtCoords(test.x, test.y, test.z) == 0 then
-                    return groundSnap(test), GetHeadingFromVector_2d(d.x, d.y)
+                    return groundSnap(test), GetHeadingFromVector_2d(dir.x, dir.y)
                 end
             end
         end
     end
 
-    return groundSnap(doorCoords + (dir * (maxDist * 0.5))), heading
+    return groundSnap(playerCoords + (away * maxDist)), GetHeadingFromVector_2d(away.x, away.y)
 end
 
 local function tryFdoor()
@@ -218,13 +250,14 @@ local function tryDisari()
     local playerCoords = GetEntityCoords(ped)
     local maxDist = Config.StuckRecovery.FdoorMaxSearch or 60.0
     local doorCoords = findNearestExitDoor(interiorId, playerCoords, maxDist)
+    local exitPos, heading
 
-    if not doorCoords then
-        notify('Çıkış noktası bulunamadı. /dimsifirla dene veya çık-gir.', 'error')
-        return false
+    if doorCoords then
+        exitPos, heading = findExteriorPosition(interiorId, doorCoords)
+    else
+        exitPos, heading = findExteriorFromPlayer(interiorId, playerCoords)
     end
 
-    local exitPos, heading = findExteriorPosition(interiorId, doorCoords)
     fadeTeleport(exitPos, heading)
 
     if GetInteriorFromEntity(PlayerPedId()) ~= 0 then

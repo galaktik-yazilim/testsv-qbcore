@@ -61,14 +61,42 @@ local function OpenGarageMenu(data)
     end, data.indexgarage, data.type, data.category)
 end
 
+local function getVehicleFuel(veh)
+    local resource = Config.FuelResource
+    if GetResourceState(resource) ~= 'started' then
+        if GetResourceState('qb-fuel') == 'started' then
+            resource = 'qb-fuel'
+        elseif GetResourceState('LegacyFuel') == 'started' then
+            resource = 'LegacyFuel'
+        else
+            return 100.0
+        end
+    end
+    return exports[resource]:GetFuel(veh)
+end
+
+local function setVehicleFuel(veh, amount)
+    local resource = Config.FuelResource
+    if GetResourceState(resource) ~= 'started' then
+        if GetResourceState('qb-fuel') == 'started' then
+            resource = 'qb-fuel'
+        elseif GetResourceState('LegacyFuel') == 'started' then
+            resource = 'LegacyFuel'
+        else
+            return
+        end
+    end
+    exports[resource]:SetFuel(veh, amount)
+end
+
 local function DepositVehicle(veh, data)
     local plate = QBCore.Functions.GetPlate(veh)
     QBCore.Functions.TriggerCallback('qb-garages:server:canDeposit', function(canDeposit)
         if canDeposit then
             local bodyDamage = math.ceil(GetVehicleBodyHealth(veh))
             local engineDamage = math.ceil(GetVehicleEngineHealth(veh))
-            local totalFuel = exports[Config.FuelResource]:GetFuel(veh)
-            TriggerServerEvent('qb-mechanicjob:server:SaveVehicleProps', QBCore.Functions.GetVehicleProperties(veh))
+            local totalFuel = getVehicleFuel(veh)
+            TriggerServerEvent('qb-garages:server:saveVehicleMods', plate, QBCore.Functions.GetVehicleProperties(veh))
             TriggerServerEvent('qb-garages:server:updateVehicleStats', plate, totalFuel, engineDamage, bodyDamage)
             CheckPlayers(veh)
             if plate then TriggerServerEvent('qb-garages:server:UpdateOutsideVehicle', plate, nil) end
@@ -299,7 +327,7 @@ RegisterNetEvent('qb-garages:client:takeOutGarage', function(data)
                 local veh = NetworkGetEntityFromNetworkId(netId)
                 Citizen.Await(CheckPlate(veh, vehPlate))
                 QBCore.Functions.SetVehicleProperties(veh, properties)
-                exports[Config.FuelResource]:SetFuel(veh, data.stats.fuel)
+                setVehicleFuel(veh, data.stats.fuel)
                 TriggerServerEvent('qb-garages:server:updateVehicleState', 0, vehPlate)
                 TriggerEvent('vehiclekeys:client:SetOwner', vehPlate)
                 if Config.Warp then TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1) end

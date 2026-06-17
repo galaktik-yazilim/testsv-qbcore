@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–13 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–14 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -17,6 +17,7 @@
 | [11](./ADIM-11-Spawn-Dis-Guvenlik.md) | Spawn & dış mekân | ✅ |
 | [12](./ADIM-12-UI-Cila.md) | UI & chat cila | ✅ |
 | [13](./ADIM-13-Stabilizasyon.md) | Test öncesi stabilizasyon | ✅ |
+| [14](./ADIM-14-Garaj-Interior.md) | Garaj & interior çıkış | ✅ |
 
 ---
 

@@ -27,7 +27,8 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 - [ ] **Tur 12:** notify/chat tek satır; HUD hizası; galeri spawn vitrin üstüne binmiyor
 - [ ] **Yeni karakter** → Legion Meydanı civarında açık alanda spawn
 - [ ] HUD km/s + km; `/kurallar` evren satırı
-- [ ] `/911`, `/a`, NPC kontrolü
+- [ ] LS Cars → araç al → **Pillbox Garajı** park / çıkar
+- [ ] Interior'da **`/disari`**
 - [ ] `.\scripts\verify-server-cfg.ps1` — qb-phone ensure yok
 
 ---

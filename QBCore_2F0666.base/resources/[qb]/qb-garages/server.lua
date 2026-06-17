@@ -173,6 +173,17 @@ RegisterNetEvent('qb-garages:server:updateVehicleStats', function(plate, fuel, e
     MySQL.update('UPDATE player_vehicles SET fuel = ?, engine = ?, body = ? WHERE plate = ? AND citizenid = ?', { fuel, engine, body, plate, Player.PlayerData.citizenid })
 end)
 
+RegisterNetEvent('qb-garages:server:saveVehicleMods', function(plate, props)
+    local src = source
+    if type(plate) ~= 'string' or type(props) ~= 'table' then return end
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not Player then return end
+    MySQL.update(
+        'UPDATE player_vehicles SET mods = ? WHERE plate = ? AND citizenid = ?',
+        { json.encode(props), plate, Player.PlayerData.citizenid }
+    )
+end)
+
 RegisterNetEvent('qb-garages:server:updateVehicleState', function(state, plate)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)

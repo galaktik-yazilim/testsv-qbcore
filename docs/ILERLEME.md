@@ -75,6 +75,7 @@ P4+ (konut, telefon, injury): [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.
 | 2025-06-17 | Tur 12: chat çift mesaj fix, HUD/chat UI, galeri spawn | 58% |
 | 2025-06-17 | Fix: multichar SetMetaData giriş hatası; hoş geldin chat kapatıldı | 58% |
 | 2025-06-17 | Tur 13: galeri çift satın alma koruması, giriş stabilizasyonu | 58% |
+| 2025-06-17 | Tur 14: `/disari`, qb-garages qb-fuel + mods kaydı | 58% |
 
 ---
 

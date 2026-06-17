@@ -17,6 +17,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 11: Legion Meydanı varsayılan spawn, inside metadata temizliği — [ADIM-11](docs/gelistirme/ADIM-11-Spawn-Dis-Guvenlik.md)
 - Tur 12: chat çift mesaj fix, HUD hizalama, galeri spawn — [ADIM-12](docs/gelistirme/ADIM-12-UI-Cila.md)
 - Tur 13: galeri çift satın alma, giriş stabilizasyon — [ADIM-13](docs/gelistirme/ADIM-13-Stabilizasyon.md)
+- Tur 14: garaj qb-fuel, mods kaydı, `/disari` iyileştirme — [ADIM-14](docs/gelistirme/ADIM-14-Garaj-Interior.md)
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
 ### Changed
@@ -37,7 +38,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **rp-chat:** giriş hoş geldin / tuş spam chat'i kapatıldı (`WelcomeEnabled = false`)
 - **rp-dealership:** satın alma spawn vitrin üstüne binme — yan park + boş nokta seçimi
 - **rp-dealership:** NUI kapanınca çift satın alma; pending spawn uyarısı
-- **qb-hud:** kemer/cruise HUD ikonu — `seatbelt:client:Toggle*` state senkronu
+- **qb-garages:** yakıt `qb-fuel`; park sırasında mods kaydı (`qb-mechanicjob` gereksiz)
 - **qb-multicharacter:** karakter seçiminde loading ekranında takılma (`qb-apartments` kapalıyken sonsuz callback)
 - **qb-multicharacter:** yeni karakter sonrası menünün tekrar açılması (`closeNUIdefault`)
 - **qb-doorlock:** eksik Türkçe locale (`keymapping_description`, `newdoor_command_description`, vb.)
