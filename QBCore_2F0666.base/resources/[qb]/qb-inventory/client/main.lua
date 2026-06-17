@@ -2,6 +2,32 @@ QBCore = exports['qb-core']:GetCoreObject()
 PlayerData = nil
 local hotbarShown = false
 
+local function applyInventoryNuiFocus(visible)
+    if visible then
+        SetNuiFocus(true, true)
+        SetNuiFocusKeepInput(false)
+    else
+        SetNuiFocusKeepInput(false)
+        SetNuiFocus(false, false)
+    end
+end
+
+AddEventHandler('rp-mouse:applyFocus', function(visible, source)
+    if source == 'inventory' and LocalPlayer.state.inv_busy then
+        applyInventoryNuiFocus(visible)
+    end
+end)
+
+local function syncInventoryMouse(visible)
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(visible)
+        end)
+    else
+        applyInventoryNuiFocus(visible)
+    end
+end
+
 -- Handlers
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -112,13 +138,7 @@ local function releaseInventoryMouse()
         end)
         keepMouse = ok and open
     end
-    if GetResourceState('rp-chat') == 'started' then
-        pcall(function()
-            exports['rp-chat']:SetMouseVisible(keepMouse)
-        end)
-    else
-        SetNuiFocus(false, false)
-    end
+    syncInventoryMouse(keepMouse)
 end
 
 -- Events
@@ -187,13 +207,6 @@ RegisterNetEvent('qb-inventory:server:RobPlayer', function(TargetId)
 end)
 
 RegisterNetEvent('qb-inventory:client:openInventory', function(items, other)
-    if GetResourceState('rp-chat') == 'started' then
-        pcall(function()
-            exports['rp-chat']:SetMouseVisible(true)
-        end)
-    else
-        SetNuiFocus(true, true)
-    end
     SendNUIMessage({
         action = 'open',
         inventory = items,
@@ -201,6 +214,17 @@ RegisterNetEvent('qb-inventory:client:openInventory', function(items, other)
         maxweight = Config.MaxWeight,
         other = other
     })
+    applyInventoryNuiFocus(true)
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisibleState(true)
+        end)
+    end
+    SetTimeout(0, function()
+        if LocalPlayer.state.inv_busy then
+            applyInventoryNuiFocus(true)
+        end
+    end)
 end)
 
 RegisterNetEvent('qb-inventory:client:giveAnim', function()

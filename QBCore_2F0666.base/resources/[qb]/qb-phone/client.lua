@@ -319,22 +319,30 @@ local function isInventoryOpen()
     return LocalPlayer.state.inv_busy == true
 end
 
-local function applyPhoneFocus(visible)
-    if GetResourceState('rp-chat') == 'started' then
-        pcall(function()
-            exports['rp-chat']:SetMouseVisible(visible)
-        end)
-    elseif visible then
+local function applyPhoneNuiFocus(visible)
+    if visible then
         SetNuiFocus(true, true)
-        SetNuiFocusKeepInput(true)
+        SetNuiFocusKeepInput(false)
     else
         SetNuiFocusKeepInput(false)
         SetNuiFocus(false, false)
     end
 end
 
+AddEventHandler('rp-mouse:applyFocus', function(visible, source)
+    if source == 'phone' and PhoneData.isOpen then
+        applyPhoneNuiFocus(visible)
+    end
+end)
+
 local function syncPhoneMouse(visible)
-    applyPhoneFocus(visible)
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(visible)
+        end)
+    else
+        applyPhoneNuiFocus(visible)
+    end
 end
 
 local function OpenPhone()
@@ -350,7 +358,17 @@ local function OpenPhone()
                 PlayerData = PhoneData.PlayerData,
                 TextOnly = Config.TextOnly,
             })
-            syncPhoneMouse(true)
+            applyPhoneNuiFocus(true)
+            if GetResourceState('rp-chat') == 'started' then
+                pcall(function()
+                    exports['rp-chat']:SetMouseVisibleState(true)
+                end)
+            end
+            SetTimeout(0, function()
+                if PhoneData.isOpen then
+                    applyPhoneNuiFocus(true)
+                end
+            end)
 
             if not PhoneData.CallData.InCall then
                 DoPhoneAnimation('cellphone_text_in')
@@ -530,7 +548,13 @@ local PHONE_TOGGLE_MS = 400
 
 local function releasePhoneNuiFocus()
     if isInventoryOpen() then
-        syncPhoneMouse(true)
+        local mouseVisible = true
+        if GetResourceState('rp-chat') == 'started' then
+            pcall(function()
+                mouseVisible = exports['rp-chat']:IsMouseVisible()
+            end)
+        end
+        TriggerEvent('rp-mouse:applyFocus', mouseVisible, 'inventory')
     else
         syncPhoneMouse(false)
     end
