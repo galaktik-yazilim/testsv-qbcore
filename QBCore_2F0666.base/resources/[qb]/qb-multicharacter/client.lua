@@ -95,18 +95,30 @@ end
 
 -- Events
 
-RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function() -- This event is only for no starting apartments
+RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function()
     DeleteEntity(charPed)
+    charPed = nil
     SetNuiFocus(false, false)
+    SetTimecycleModifier('default')
+    if cam then
+        SetCamActive(cam, false)
+        DestroyCam(cam, true)
+        RenderScriptCams(false, false, 1, true, true)
+        cam = nil
+    end
     DoScreenFadeOut(500)
     Wait(2000)
-    SetEntityCoords(PlayerPedId(), Config.DefaultSpawn.x, Config.DefaultSpawn.y, Config.DefaultSpawn.z)
+    local ped = PlayerPedId()
+    SetEntityCoords(ped, Config.DefaultSpawn.x, Config.DefaultSpawn.y, Config.DefaultSpawn.z)
     TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-    TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
-    TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
-    Wait(500)
-    openCharMenu()
-    SetEntityVisible(PlayerPedId(), true)
+    if GetResourceState('qb-houses') == 'started' then
+        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+    end
+    if GetResourceState('qb-apartments') == 'started' then
+        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+    end
+    SetEntityVisible(ped, true)
+    FreezeEntityPosition(ped, false)
     Wait(500)
     DoScreenFadeIn(250)
     TriggerEvent('qb-weathersync:client:EnableSync')

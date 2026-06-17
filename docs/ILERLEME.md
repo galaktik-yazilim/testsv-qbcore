@@ -1,6 +1,6 @@
 # Genel İlerleme
 
-> **Son güncelleme:** 2025-06-17 — Tur 09 beta öncesi cila  
+> **Son güncelleme:** 2025-06-17 — Tur 10 giriş & PD cila  
 > **Hedef:** MVP sunucunun kapalı beta → açılış yolu (P4+ backlog hariç)
 
 ---
@@ -70,6 +70,7 @@ P4+ (konut, telefon, injury): [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.
 | 2025-06-17 | İlk progress dosyası; kod/doc tamamlandı sayıldı | **58%** |
 | 2025-06-17 | +2 puan: komutlar.md + `/komutlar` | 58% *(tabloya eklendi)* |
 | 2025-06-17 | Fix: loading takılması (apartments callback), doorlock TR locale | 58% |
+| 2025-06-17 | Tur 10: yeni karakter NUI, `/fine` phone guard, spawn TR, verify script, PD alert guard | 58% |
 
 ---
 

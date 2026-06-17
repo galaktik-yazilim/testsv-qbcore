@@ -21,6 +21,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Performans ince ayarı | ignition/dealership Wait optimizasyonu |
 | Evren/dil/birim standardı | [evren-ve-dil.md](../tanitim/evren-ve-dil.md), HUD km/s, `/kurallar` |
 | Loading takılması fix | `qb-multicharacter` — apartments callback guard |
+| Tur 10 giriş/PD | Yeni karakter NUI, `/fine` phone guard, spawn TR — [ADIM-10](./ADIM-10-Giris-PD-Cila.md) |
 
 ---
 
@@ -31,6 +32,7 @@ Whitelist **kapalı** — herkes girebilir. Sırayla dene:
 ### Temel akış
 - [ ] Restart → hata yok
 - [ ] Karakter olu (1 slot, geçersiz isim reddi)
+- [ ] **Yeni karakter** akışı → kıyafet ekranı açılır, karakter menüsü geri gelmez
 - [ ] Chat: normal, `/me`, `/ame`, `/do`, `/b`, `/s`, `/w`
 - [ ] `/kurallar`
 - [ ] LS Cars → araç al → kontak → garaj

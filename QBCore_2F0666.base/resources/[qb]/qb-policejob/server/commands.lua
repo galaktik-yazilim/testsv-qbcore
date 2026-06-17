@@ -197,13 +197,16 @@ QBCore.Commands.Add('fine', Lang:t('commands.fine'), { { name = 'id', help = Lan
         TriggerClientEvent('QBCore:Notify', source, Lang:t('info.fine_issued'), 'success')
         TriggerClientEvent('QBCore:Notify', billed.PlayerData.source, Lang:t('info.received_fine'))
         exports['qb-banking']:AddMoney(biller.PlayerData.job.name, amount, 'Fine')
-    else
+    elseif GetResourceState('qb-phone') == 'started' then
         MySQL.Async.insert('INSERT INTO phone_invoices (citizenid, amount, society, sender, sendercitizenid) VALUES (?, ?, ?, ?, ?)', { billed.PlayerData.citizenid, amount, biller.PlayerData.job.name, biller.PlayerData.charinfo.firstname, biller.PlayerData.citizenid }, function(id)
             if id then
                 TriggerClientEvent('qb-phone:client:AcceptorDenyInvoice', billed.PlayerData.source, id, biller.PlayerData.charinfo.firstname, biller.PlayerData.job.name, biller.PlayerData.citizenid, amount, GetInvokingResource())
             end
         end)
         TriggerClientEvent('qb-phone:RefreshPhone', billed.PlayerData.source)
+    else
+        TriggerClientEvent('QBCore:Notify', source, Lang:t('error.not_enough_money'), 'error')
+        TriggerClientEvent('QBCore:Notify', billed.PlayerData.source, Lang:t('error.not_enough_money'), 'error')
     end
 end)
 
@@ -357,7 +360,9 @@ QBCore.Commands.Add('911p', Lang:t('commands.police_report'), { { name = 'messag
     for _, v in pairs(players) do
         if v and v.PlayerData.job.type == 'leo' and v.PlayerData.job.onduty then
             local alertData = { title = Lang:t('commands.emergency_call'), coords = { x = coords.x, y = coords.y, z = coords.z }, description = message }
-            TriggerClientEvent('qb-phone:client:addPoliceAlert', v.PlayerData.source, alertData)
+            if GetResourceState('qb-phone') == 'started' then
+                TriggerClientEvent('qb-phone:client:addPoliceAlert', v.PlayerData.source, alertData)
+            end
             TriggerClientEvent('police:client:policeAlert', v.PlayerData.source, coords, message)
         end
     end

@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–09 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–10 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -13,6 +13,7 @@
 | [07](./ADIM-07-Acilis.md) | Açılış | 📋 operasyonel |
 | [08](./ADIM-08-Teknik-Borc.md) | Teknik borç | 📋 en son |
 | [09](./ADIM-09-Beta-Oncesi-Cila.md) | Beta öncesi cila | ✅ |
+| [10](./ADIM-10-Giris-PD-Cila.md) | Giriş & PD/EMS cila | ✅ |
 
 ---
 

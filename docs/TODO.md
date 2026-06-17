@@ -24,8 +24,10 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 
 - [ ] Restart
 - [ ] Karakter, chat, `/km`, galeri, garaj
+- [ ] **Yeni karakter** oluştur → kıyafet ekranı (menü geri gelmez)
 - [ ] HUD km/s + km; `/kurallar` evren satırı
 - [ ] `/911`, `/a`, NPC kontrolü
+- [ ] `.\scripts\verify-server-cfg.ps1` — qb-phone ensure yok
 
 ---
 

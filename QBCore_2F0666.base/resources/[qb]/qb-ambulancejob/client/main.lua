@@ -667,6 +667,14 @@ end)
 
 RegisterNetEvent('hospital:client:SendBillEmail', function(amount, hospitalName)
     SetTimeout(math.random(2500, 4000), function()
+        if GetResourceState('qb-phone') ~= 'started' then
+            QBCore.Functions.Notify(Lang:t('mail.message', {
+                gender = QBCore.Functions.GetPlayerData().charinfo.gender == 1 and Lang:t('info.mrs') or Lang:t('info.mr'),
+                lastname = QBCore.Functions.GetPlayerData().charinfo.lastname,
+                costs = amount,
+            }), 'primary', 7500)
+            return
+        end
         local gender = Lang:t('info.mr')
         if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then
             gender = Lang:t('info.mrs')

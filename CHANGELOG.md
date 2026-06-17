@@ -12,6 +12,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - [komutlar.md](docs/tanitim/komutlar.md) — tüm aktif komutlar (helper text formatı)
 - **`/komutlar`** — oyun içi komut özeti (`rp-chat`, yetkiye göre PD/EMS/admin bölümleri)
 - Tur 09: loading Los Santos metinleri, hoş geldin chat, `rp-ignition` phone bağımlılığı kaldırıldı, `toggle-whitelist.ps1`
+- Tur 10: `scripts/verify-server-cfg.ps1` — yasak resource (`qb-phone`, voice vb.) kontrolü
+- [ADIM-10-Giris-PD-Cila.md](docs/gelistirme/ADIM-10-Giris-PD-Cila.md)
 
 ### Changed
 - `/kurallar`, sunucu kuralları ve tanıtım dokümanları evren/birim standardına göre güncellendi
@@ -20,10 +22,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - `/911` konum satırı: `Harita konumu X,Y` (Los Santos haritası)
 - Beta/açılış rehberleri hazır — progress bar eklendi
 - [ILERLEME.md](docs/ILERLEME.md) — genel ilerleme **58%**
+- **qb-spawn:** spawn noktası etiketleri Türkçe
+- **qb-policejob:** PD alert / `/fine` — `qb-phone` kapalıyken güvenli fallback; TR locale tamamlandı
 
 ### Fixed
 - **qb-multicharacter:** karakter seçiminde loading ekranında takılma (`qb-apartments` kapalıyken sonsuz callback)
+- **qb-multicharacter:** yeni karakter sonrası menünün tekrar açılması (`closeNUIdefault`)
 - **qb-doorlock:** eksik Türkçe locale (`keymapping_description`, `newdoor_command_description`, vb.)
+- **qb-policejob:** `/fine` ve PD alert — phone olmadan crash/ sessiz hata yok
+- **qb-ambulancejob:** hastane faturası — phone olmadan QBCore notify
 
 Operasyonel adımlar: [TODO.md](docs/TODO.md)
 
