@@ -94,3 +94,12 @@ Config.CommandHelp = {
         '/revive · /aheal — Canlandır / iyileştir (admin)',
     },
 }
+
+-- İlk giriş karşılama (QBCore:Server:PlayerLoaded)
+Config.WelcomeEnabled = true
+Config.WelcomeDelayMs = 10000
+Config.WelcomeMessages = {
+    'Los Santos hard RP — voice yok, iletişim chat ile.',
+    '/kurallar · /komutlar · T konuş · /me /do /b',
+    'Araç: M kontak, K kilit, L kemer, /km · Galeri: LS Cars',
+}

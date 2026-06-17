@@ -11,6 +11,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - [evren-ve-dil.md](docs/tanitim/evren-ve-dil.md) — Los Santos evreni, Türkçe arayüz, metrik birimler (m, km, km/s)
 - [komutlar.md](docs/tanitim/komutlar.md) — tüm aktif komutlar (helper text formatı)
 - **`/komutlar`** — oyun içi komut özeti (`rp-chat`, yetkiye göre PD/EMS/admin bölümleri)
+- Tur 09: loading Los Santos metinleri, hoş geldin chat, `rp-ignition` phone bağımlılığı kaldırıldı, `toggle-whitelist.ps1`
 
 ### Changed
 - `/kurallar`, sunucu kuralları ve tanıtım dokümanları evren/birim standardına göre güncellendi
@@ -19,6 +20,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - `/911` konum satırı: `Harita konumu X,Y` (Los Santos haritası)
 - Beta/açılış rehberleri hazır — progress bar eklendi
 - [ILERLEME.md](docs/ILERLEME.md) — genel ilerleme **58%**
+
+### Fixed
+- **qb-multicharacter:** karakter seçiminde loading ekranında takılma (`qb-apartments` kapalıyken sonsuz callback)
+- **qb-doorlock:** eksik Türkçe locale (`keymapping_description`, `newdoor_command_description`, vb.)
 
 Operasyonel adımlar: [TODO.md](docs/TODO.md)
 

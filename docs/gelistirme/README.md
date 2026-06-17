@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Tüm turlar (01–08) tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–09 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -12,6 +12,7 @@
 | [06](./ADIM-06-P4-Plan.md) | P4+ backlog | 📋 açılış sonrası |
 | [07](./ADIM-07-Acilis.md) | Açılış | 📋 operasyonel |
 | [08](./ADIM-08-Teknik-Borc.md) | Teknik borç | 📋 en son |
+| [09](./ADIM-09-Beta-Oncesi-Cila.md) | Beta öncesi cila | ✅ |
 
 ---
 

@@ -195,6 +195,14 @@ RegisterNetEvent('qb-multicharacter:server:loadUserData', function(cData)
         loadHouseData(src)
         if Config.SkipSelection then
             local coords = json.decode(cData.position)
+            if type(coords) ~= 'table' or not coords.x or not coords.y or not coords.z then
+                coords = {
+                    x = Config.DefaultSpawn.x,
+                    y = Config.DefaultSpawn.y,
+                    z = Config.DefaultSpawn.z,
+                    w = Config.DefaultSpawn.w or 0.0,
+                }
+            end
             TriggerClientEvent('qb-multicharacter:client:spawnLastLocation', src, coords, cData)
         else
             if GetResourceState('qb-apartments') == 'started' then

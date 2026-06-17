@@ -15,7 +15,15 @@ Adım 04 oyun içi test checklist'i tamamlandığında:
 
 ## Whitelist açma
 
-### 1. server.cfg
+### 1. Script (önerilen)
+
+PowerShell (txData kökünden):
+
+```powershell
+.\scripts\toggle-whitelist.ps1 -Set 1
+```
+
+### 2. Elle server.cfg
 
 ```
 setr qb_whitelist 1
@@ -28,11 +36,11 @@ add_ace group.whitelisted join allow
 add_principal identifier.license:ROCKSTAR_LICENSE group.whitelisted
 ```
 
-### 2. txAdmin alternatifi
+### 3. txAdmin alternatifi
 
 txAdmin whitelist kullanırsan `qb_whitelist 0` bırakabilirsin.
 
-### 3. Restart
+### 4. Restart
 
 ---
 

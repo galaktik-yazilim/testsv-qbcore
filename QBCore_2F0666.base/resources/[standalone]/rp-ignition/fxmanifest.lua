@@ -13,5 +13,4 @@ client_scripts {
 
 dependency 'qb-core'
 dependency 'qb-vehiclekeys'
-dependency 'qb-phone'
 dependency 'rp-chat'

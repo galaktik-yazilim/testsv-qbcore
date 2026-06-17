@@ -5,7 +5,7 @@
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Komut rehberi + `/komutlar`
+Son güncelleme: Tur 09 beta öncesi cila
 
 ---
 
@@ -28,6 +28,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [06](./ADIM-06-P4-Plan.md) | P4+ backlog | — | ✅ | Açılış sonrası |
 | [07](./ADIM-07-Acilis.md) | Açılış | ✅ | ✅ | Discord, duyuru |
 | [08](./ADIM-08-Teknik-Borc.md) | Yedek, MySQL, resmon | ✅ script | ✅ | Prod'da kur |
+| [09](./ADIM-09-Beta-Oncesi-Cila.md) | Beta öncesi cila | ✅ | ✅ | Test ile doğrula |
 
 ---
 

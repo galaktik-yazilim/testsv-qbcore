@@ -20,6 +20,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Güvenlik denetimi + düzeltmeler | [GUVENLIK-DENETIMI.md](./GUVENLIK-DENETIMI.md) |
 | Performans ince ayarı | ignition/dealership Wait optimizasyonu |
 | Evren/dil/birim standardı | [evren-ve-dil.md](../tanitim/evren-ve-dil.md), HUD km/s, `/kurallar` |
+| Loading takılması fix | `qb-multicharacter` — apartments callback guard |
 
 ---
 
@@ -37,6 +38,8 @@ Whitelist **kapalı** — herkes girebilir. Sırayla dene:
 - [ ] HUD: hız **km/s**, kilometre **km** (mil/mph yok)
 - [ ] `/kurallar` — Los Santos + metrik satırı görünür
 - [ ] `/komutlar` — genel liste + footer (tam liste linki)
+- [ ] Giriş sonrası `» Hoş geldin` chat satırları (~10 sn)
+- [ ] Loading ekranı Los Santos / text RP metinleri
 
 ### Evren / birimler
 - [ ] Chat mesafeleri hissedilir (~20m normal, `/w` daha geniş)

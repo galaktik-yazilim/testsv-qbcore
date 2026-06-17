@@ -313,3 +313,19 @@ RegisterNetEvent('rp-chat:server:vehicleSeatbelt', function(buckled)
         or ('* ' .. charName .. ' emniyet kemerini çıkartır')
     BroadcastProximity(source, Config.Colors.me, msg, '')
 end)
+
+AddEventHandler('QBCore:Server:PlayerLoaded', function(Player)
+    if not Config.WelcomeEnabled or not Config.WelcomeMessages then return end
+    if not Player or not Player.PlayerData or not Player.PlayerData.source then return end
+
+    local src = Player.PlayerData.source
+    local delay = Config.WelcomeDelayMs or 10000
+
+    CreateThread(function()
+        Wait(delay)
+        if GetPlayerPed(src) == 0 then return end
+        for i = 1, #Config.WelcomeMessages do
+            SendChat(src, Config.Colors.system, '» Hoş geldin', Config.WelcomeMessages[i])
+        end
+    end)
+end)
