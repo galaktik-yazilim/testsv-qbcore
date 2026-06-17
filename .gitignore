@@ -19,6 +19,9 @@ default/data/playersDB.backup.json
 default/data/cachedData.json
 default/data/stats_*.json
 
+# FiveM yerel LevelDB (sunucu çalışırken LOCK kilitli — commit etme)
+QBCore_2F0666.base/db/
+
 # txAdmin config.json takip edilir; sadece runtime data ignore.
 
 # --- FiveM sunucu cache (yarn/webpack derleme önbelleği) ---

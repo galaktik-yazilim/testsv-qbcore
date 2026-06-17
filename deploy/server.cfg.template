@@ -78,9 +78,9 @@ ensure rp-ignition
 ensure rp-mileage
 ensure rp-dealership
 
-# --- vMenu (opsiyonel — repoda yok; bkz. docs/gelistirme/vmenu-kurulum.md) ---
-# exec @vMenu/config/permissions.cfg
-# ensure vMenu
+# --- vMenu (admin/gelistirme) ---
+exec @vMenu/config/permissions.cfg
+ensure vMenu
 
 ensure dealer_map
 ensure hospital_map
