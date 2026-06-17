@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 delete: false,
             },
             registerData: {
-                date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+                date: "1990-06-15",
                 firstname: undefined,
                 lastname: undefined,
                 nationality: undefined,
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.show.characters = false;
                 this.show.register = true;
                 this.registerData = {
-                    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+                    date: "1990-06-15",
                     firstname: undefined,
                     lastname: undefined,
                     nationality: undefined,
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         nationality: registerData.nationality,
                         birthdate: registerData.date,
                         gender: registerData.gender,
-                        cid: this.selectedCharacter,
+                        cid: this.selectedCharacter >= 0 ? this.selectedCharacter + 1 : 1,
                     });
 
                     setTimeout(() => {

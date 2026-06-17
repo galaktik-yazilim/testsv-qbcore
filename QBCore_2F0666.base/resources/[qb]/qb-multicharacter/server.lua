@@ -98,6 +98,20 @@ local function isValidNamePart(name)
     return true
 end
 
+local function normalizeGender(gender)
+    if gender == 0 or gender == 1 then return gender end
+    if type(gender) == 'string' then
+        local g = gender:lower()
+        if g == '0' then return 0 end
+        if g == '1' then return 1 end
+        if g == 'erkek' or g == 'male' or g == 'm' then return 0 end
+        if g == 'kadın' or g == 'kadin' or g == 'female' or g == 'f' then return 1 end
+        if gender == Lang:t('ui.male') then return 0 end
+        if gender == Lang:t('ui.female') then return 1 end
+    end
+    return nil
+end
+
 local function isValidBirthdate(dateStr)
     if type(dateStr) ~= 'string' then return false end
     local y, m, d = dateStr:match('^(%d%d%d%d)-(%d%d)-(%d%d)$')
@@ -124,7 +138,7 @@ local function validateCreatePayload(data)
     if not isValidBirthdate(data.birthdate) then
         return false
     end
-    if data.gender ~= 0 and data.gender ~= 1 then
+    if normalizeGender(data.gender) == nil then
         return false
     end
     if type(data.nationality) ~= 'string' or trim(data.nationality) == '' then
@@ -137,12 +151,16 @@ local function validateCreatePayload(data)
 end
 
 local function sanitizeCreatePayload(data)
+    local cid = tonumber(data.cid)
+    if not cid or cid < 1 then
+        cid = 1
+    end
     return {
-        cid = tonumber(data.cid) or 1,
+        cid = cid,
         firstname = trim(data.firstname):gsub('%s+', ' '),
         lastname = trim(data.lastname):gsub('%s+', ' '),
         birthdate = data.birthdate,
-        gender = data.gender == 1 and 1 or 0,
+        gender = normalizeGender(data.gender),
         nationality = trim(data.nationality),
     }
 end
