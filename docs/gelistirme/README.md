@@ -8,6 +8,7 @@
 
 Ek:
 - [KAPALI-BETA-CHECKLIST.md](./KAPALI-BETA-CHECKLIST.md)
+- [TEKNIK-BORC.md](../TEKNIK-BORC.md) — yedek, MySQL, resmon (en son)
 - [PERFORMANS-NOTLARI.md](./PERFORMANS-NOTLARI.md)
 
 P4+ (açılış sonrası): konut, telefon, taşımacılık, injury script — bkz. [ROADMAP.md](../ROADMAP.md)

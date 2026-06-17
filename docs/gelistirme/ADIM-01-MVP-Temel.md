@@ -56,6 +56,8 @@ if (-not (Test-Path server.cfg)) {
 
 ### 2. MySQL güvenliği
 
+> Teknik borç — şimdilik root ile devam. Detay: [TEKNIK-BORC.md](../TEKNIK-BORC.md)
+
 ```sql
 CREATE USER 'fivem'@'localhost' IDENTIFIED BY 'GUCLU_SIFRE_BURAYA';
 GRANT SELECT, INSERT, UPDATE, DELETE ON veritabani_adi.* TO 'fivem'@'localhost';

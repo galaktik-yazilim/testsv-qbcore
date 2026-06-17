@@ -75,7 +75,7 @@ Hard RP: faction başvurusu + whitelist zorunlu.
 
 - txAdmin → Scheduled Restart (günlük 06:00 önerilir)
 - Restart öncesi: `#duyurular` 5 dk uyarı
-- Yedek: `scripts/backup-data.ps1`
+- Yedek: `scripts/backup-data.ps1` *(henüz kurulmadıysa manuel dump — bkz. [TEKNIK-BORC.md](../TEKNIK-BORC.md))*
 
 ---
 

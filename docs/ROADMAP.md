@@ -12,8 +12,9 @@
 |-------|--------|----------------|
 | **MVP (P1)** | 5–10 kişi içeride RP yapabilir | 1–2 hafta |
 | **Kapalı beta (P2)** | Kurallar + PD/EMS config testi | +1–2 hafta |
-| **Açılış (P3)** | Whitelist + Discord + yedek | +1 hafta |
+| **Açılış (P3)** | Whitelist + Discord | +1 hafta |
 | **Büyüme (P4+)** | Meslek, konut, injury vb. | Açılış sonrası |
+| **Teknik borç** | Yedek, MySQL kullanıcı, resmon | En son — [TEKNIK-BORC.md](./TEKNIK-BORC.md) |
 
 ---
 
@@ -28,8 +29,9 @@
 | Event güvenliği | ✅ Custom `rp-*` sertleştirildi |
 | Tanıtım dokümantasyonu | ✅ `docs/tanitim/` |
 | MVP karakter kuralları | ✅ 1 slot, isim validasyonu, ekonomi |
-| Whitelist / yedek | ✅ ACE + scriptler hazır |
+| Whitelist | ✅ ACE hazır |
 | Kapalı beta | ⏳ Operasyonel test (checklist hazır) |
+| Teknik borç (yedek, MySQL user…) | 📋 [TEKNIK-BORC.md](./TEKNIK-BORC.md) — en son |
 | Gelişmiş sistemler | — P4+ ertelendi |
 
 ---
@@ -41,13 +43,11 @@
 ### 0.1 Güvenlik
 
 - [ ] `server.cfg` sadece txAdmin / yerel makinede; repoda **asla** gerçek key/şifre
-- [ ] MySQL kullanıcısı: sadece gerekli yetkiler, güçlü şifre, localhost bind
 - [ ] ACE izinleri: sadece güvenilen identifier'lar `group.admin` / `qbcore.god`
 - [ ] `sv_scriptHookAllowed 0` (cheat engeli)
-- [ ] OneSync ayarı (öneri: `set onesync on` veya infinity — slot sayısına göre)
 - [ ] Tüm custom `RegisterNetEvent` handler'larına sunucu tarafı doğrulama ekle (Faz 1.2)
 - [ ] Rate limit: chat, satın alma, mileage sync
-- [ ] Discord webhook logları: admin, para, araç, ban
+- [ ] MySQL ayrı kullanıcı, webhook logları, OneSync ince ayarı → [TEKNIK-BORC.md](./TEKNIK-BORC.md)
 
 ### 0.2 Performans — resource budama (en büyük kazanç)
 
@@ -96,8 +96,7 @@ pma-voice, qb-radio — bilinçli kapalı (text RP)
 
 - [ ] QBCore SQL şeması import
 - [ ] `rp-mileage` için `drivingdistance` kolonu (otomatik migration var)
-- [ ] Düzenli yedek: `scripts/backup-data.ps1` + MySQL dump zamanlaması
-- [ ] Prod'da `EXPLAIN` ile yavaş sorguları izle
+- [ ] Düzenli yedek, yavaş sorgu izleme → [TEKNIK-BORC.md](./TEKNIK-BORC.md)
 
 ### 0.4 Sunucu config şablonu
 
@@ -251,17 +250,19 @@ qb-core
 
 ## Önerilen çalışma sırası
 
-### Şimdi (MVP'ye kadar)
-1. Yerel `server.cfg` güncelle + `resmon` ölçümü
-2. Karakter: 1 slot, whitelist, düşük başlangıç parası
-3. Kurallar metni + kapalı beta (3–5 kişi)
+### Şimdi
+1. Yerel `server.cfg` + restart — oyuna gir, temel RP testi
+2. Kapalı beta (3–5 kişi) — [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
 
 ### Beta sonrası (P3)
-4. Discord + başvuru formu + yedekleme
-5. Açılış
+3. Discord + başvuru formu
+4. Açılış
 
-### Açılış sonrası (P4+ — acele etme)
-6. İhtiyaç halinde: basit `/911`, meslek açma, konut, injury scripti
+### Açılış sonrası (P4+)
+5. İhtiyaç halinde: meslek açma, konut, injury scripti
+
+### En son — teknik borç
+6. Yedek, MySQL kullanıcı, resmon, webhook logları — [TEKNIK-BORC.md](./TEKNIK-BORC.md)
 
 ~~6. Faz 2.1 — Yaralanma~~ → **P4+**, MVP'de gerek yok
 
@@ -272,6 +273,7 @@ qb-core
 | Dosya | Açıklama |
 |-------|----------|
 | [TODO.md](./TODO.md) | Aktif görev listesi (checkbox) |
+| [TEKNIK-BORC.md](./TEKNIK-BORC.md) | En düşük öncelik — yedek, MySQL, resmon |
 | [CHANGELOG.md](../CHANGELOG.md) | Yapılan değişiklikler |
 | [tanitim/README.md](./tanitim/README.md) | Türkçe sistem & meslek rehberleri |
 | `QBCore_2F0666.base/server.cfg.example` | Sunucu başlatma şablonu |

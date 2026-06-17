@@ -1,6 +1,6 @@
 # Aktif TODO Listesi
 
-> Kod tarafı (Adım 01–03) **bitti**. Kalan iş: sunucuyu aç, içeri gir, test et.
+> Kod tarafı (Adım 01–03) **bitti**. Odak: sunucuyu aç, içeri gir, test et.
 
 Detay: [gelistirme/README.md](./gelistirme/README.md) · [CHANGELOG.md](../CHANGELOG.md)
 
@@ -13,6 +13,7 @@ Adım 01 MVP temel          ✅
 Adım 02 Kapalı beta prep   ✅
 Adım 03 Açılış hazırlığı   ✅
 P4+ (konut, telefon…)      — açılış sonrası
+Teknik borç (yedek, MySQL…) — en son → TEKNIK-BORC.md
 ```
 
 ---
@@ -35,16 +36,6 @@ P4+ (konut, telefon…)      — açılış sonrası
 
 ---
 
-## Sonra yap — açılış sonrası (şimdilik önemsiz)
-
-MySQL ayrı kullanıcı, günlük yedek, `resmon` kaydı — sunucu ayakta ve oyuncu varken anlamlı. Scriptler hazır, acele yok.
-
-- [ ] `scripts/setup-mysql.sql` → `fivem` kullanıcısı (root yerine)
-- [ ] `scripts/backup-data.ps1` / günlük görev
-- [ ] F8 `resmon 1` → [PERFORMANS-NOTLARI.md](./gelistirme/PERFORMANS-NOTLARI.md)
-
----
-
 ## Tamamlanan geliştirmeler (arşiv)
 
 <details>
@@ -53,13 +44,21 @@ MySQL ayrı kullanıcı, günlük yedek, `resmon` kaydı — sunucu ayakta ve oy
 - [x] Explicit server.cfg, voice kapalı, event güvenliği
 - [x] MVP: 1 slot, chat, /911, ekonomi, PD/EMS config
 - [x] Whitelist ACE + Discord convar altyapısı
-- [x] Yedek/MySQL scriptleri (kullanım: sonra)
+- [x] Yedek/MySQL scriptleri (henüz kurulmadı → [TEKNIK-BORC.md](./TEKNIK-BORC.md))
 - [x] `docs/tanitim/` + `docs/gelistirme/`
 
 </details>
 
 ---
 
-## P4+ — Açılış sonrası
+## P4+ — Açılış sonrası özellikler
 
 Konut, telefon, taşımacılık — [ROADMAP.md](./ROADMAP.md)
+
+---
+
+## Teknik borç — en son
+
+MySQL ayrı kullanıcı, günlük yedek, `resmon`, webhook logları… Scriptler hazır; **sunucu + beta oturunca** bak.
+
+→ [TEKNIK-BORC.md](./TEKNIK-BORC.md)

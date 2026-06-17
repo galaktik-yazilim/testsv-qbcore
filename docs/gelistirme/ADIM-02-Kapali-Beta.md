@@ -65,7 +65,7 @@ Aktif resource'larda pma-voice referansı:
 
 ## Sonraki adım
 
-**Adım 03:** Discord + başvuru formu + günlük MySQL yedek + açılış
+**Adım 03:** Discord + başvuru formu + açılış. (Yedek/MySQL → [TEKNIK-BORC.md](../TEKNIK-BORC.md))
 
 ---
 

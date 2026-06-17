@@ -10,8 +10,8 @@
 |------|---------------------|
 | Whitelist (QBCore ACE) | `setr qb_whitelist`, `group.whitelisted` + `join` ACE |
 | Discord link | `sets qb_discord` → qb-core config |
-| MySQL güvenli kullanıcı | `scripts/setup-mysql.sql` |
-| Günlük yedek | `scripts/backup-data.ps1` + `install-daily-backup.ps1` |
+| MySQL güvenli kullanıcı | `scripts/setup-mysql.sql` *(kurulum: [TEKNIK-BORC.md](../TEKNIK-BORC.md))* |
+| Günlük yedek | `scripts/backup-data.ps1` *(kurulum: [TEKNIK-BORC.md](../TEKNIK-BORC.md))* |
 | Slot / performans | `sv_maxclients 32` (example), performans notları |
 | Sunucu listesi metni | hostname, tags, projectDesc |
 | PD/EMS hard RP config | `qb-policejob`, `qb-ambulancejob` |
@@ -42,7 +42,9 @@ txAdmin → Settings → Whitelist kullanırsanız `qb_whitelist 0` bırakıp ya
 
 ---
 
-## MySQL güvenli kurulum *(açılış sonrası — şimdilik root yeterli)*
+## MySQL güvenli kurulum
+
+> **Teknik borç** — detay ve checklist: [TEKNIK-BORC.md](../TEKNIK-BORC.md). Şimdilik root yeterli.
 
 ```powershell
 # Şifreyi scripts/setup-mysql.sql içinde değiştirin
@@ -62,7 +64,9 @@ copy scripts\mysql.env.example scripts\mysql.env
 
 ---
 
-## Günlük yedek *(açılış sonrası — oyuncu/veri varken anlamlı)*
+## Günlük yedek
+
+> **Teknik borç** — [TEKNIK-BORC.md](../TEKNIK-BORC.md)
 
 ```powershell
 .\scripts\backup-data.ps1
@@ -92,10 +96,7 @@ copy scripts\mysql.env.example scripts\mysql.env
 - [ ] Discord + kurallar pin
 - [ ] `qb_discord` ve hostname güncel
 
-**Açılış sonrası (isteğe bağlı):**
-- [ ] MySQL `fivem` kullanıcısı — [MySQL bölümü](#mysql-güvenli-kurulum)
-- [ ] Günlük yedek — [Günlük yedek](#günlük-yedek)
-- [ ] `resmon 1` kaydı
+**Teknik borç (en son):** [TEKNIK-BORC.md](../TEKNIK-BORC.md) — MySQL `fivem` kullanıcısı, yedek, `resmon`
 
 ---
 
@@ -105,4 +106,4 @@ copy scripts\mysql.env.example scripts\mysql.env
 |------|------|-------|
 | 01 | MVP temel (karakter, ekonomi, cfg) | [ADIM-01-MVP-Temel.md](./ADIM-01-MVP-Temel.md) |
 | 02 | Voice kaldır, /911, kurallar | [ADIM-02-Kapali-Beta.md](./ADIM-02-Kapali-Beta.md) |
-| 03 | Whitelist, açılış (yedek/MySQL: sonra) | Bu dosya |
+| 03 | Whitelist, açılış | Bu dosya |

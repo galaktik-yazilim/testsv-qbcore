@@ -1,6 +1,7 @@
 # Performans Notları
 
-> Text-based hard RP sunucusu için referans değerleri.
+> Text-based hard RP sunucusu için referans değerleri.  
+> **Öncelik:** teknik borç — ölçüm sunucu dolunca; bkz. [TEKNIK-BORC.md](../TEKNIK-BORC.md)
 
 ---
 
@@ -67,6 +68,8 @@ Kaydedin:
 ---
 
 ## MySQL
+
+> Kurulum maddeleri teknik borç: [TEKNIK-BORC.md](../TEKNIK-BORC.md)
 
 - Ayrı `fivem` kullanıcısı — `scripts/setup-mysql.sql`
 - Index: QBCore default `citizenid`, `plate` ✅
