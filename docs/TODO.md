@@ -24,6 +24,7 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 
 - [ ] Restart
 - [ ] Karakter, chat, `/km`, galeri, garaj
+- [ ] **Tur 12:** notify/chat tek satır; HUD hizası; galeri spawn vitrin üstüne binmiyor
 - [ ] **Yeni karakter** → Legion Meydanı civarında açık alanda spawn
 - [ ] HUD km/s + km; `/kurallar` evren satırı
 - [ ] `/911`, `/a`, NPC kontrolü

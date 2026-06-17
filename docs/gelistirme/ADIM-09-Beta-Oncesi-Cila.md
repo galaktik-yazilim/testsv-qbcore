@@ -22,7 +22,7 @@ Test öncesi son kod cilası — beta ve açılışa hazırlık.
 
 - [ ] Restart — `rp-ignition` qb-phone hatası yok
 - [ ] Loading slaytları Los Santos / text RP metni gösteriyor
-- [ ] Karakter yüklendikten ~10 sn sonra chat'te `» Hoş geldin` satırları
+- [ ] Karakter yüklendikten sonra chat'te otomatik hoş geldin / tuş mesajı **yok**
 - [ ] `scripts/toggle-whitelist.ps1` — test modunda `0` kalsın; beta öncesi `-Set 1`
 
 ---

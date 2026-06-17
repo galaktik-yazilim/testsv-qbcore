@@ -165,6 +165,38 @@ local function asVector4(coords)
     return nil
 end
 
+local function isSpawnClear(coords, radius)
+    radius = radius or 3.5
+    local point = vector3(coords.x, coords.y, coords.z)
+    for _, veh in ipairs(GetAllVehicles()) do
+        if DoesEntityExist(veh) and #(GetEntityCoords(veh) - point) < radius then
+            return false
+        end
+    end
+    return true
+end
+
+local function resolveSpawnPoint(dealership)
+    local candidates = {}
+    local primary = asVector4(dealership.spawn)
+    if primary then candidates[#candidates + 1] = primary end
+
+    if dealership.spawnAlternates then
+        for i = 1, #dealership.spawnAlternates do
+            local alt = asVector4(dealership.spawnAlternates[i])
+            if alt then candidates[#candidates + 1] = alt end
+        end
+    end
+
+    for i = 1, #candidates do
+        if isSpawnClear(candidates[i]) then
+            return candidates[i]
+        end
+    end
+
+    return primary
+end
+
 QBCore.Functions.CreateCallback('rp-dealership:server:spawnPurchased', function(source, cb, plate, model, dealershipId)
     if type(plate) ~= 'string' or type(model) ~= 'string' or type(dealershipId) ~= 'string' then
         return cb(nil)
@@ -182,7 +214,7 @@ QBCore.Functions.CreateCallback('rp-dealership:server:spawnPurchased', function(
     local dealership = Config.Dealerships[dealershipId]
     if not dealership then return cb(nil) end
 
-    local spawn = asVector4(dealership.spawn)
+    local spawn = resolveSpawnPoint(dealership)
     if not spawn then return cb(nil) end
 
     if not isNearDealership(source, dealershipId) then return cb(nil) end

@@ -5,7 +5,7 @@
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 11 spawn & dış mekân güvenliği
+Son güncelleme: Tur 12 UI & chat cila
 
 ---
 
@@ -31,6 +31,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [09](./ADIM-09-Beta-Oncesi-Cila.md) | Beta öncesi cila | ✅ | ✅ | Test ile doğrula |
 | [10](./ADIM-10-Giris-PD-Cila.md) | Giriş & PD cila | ✅ | ✅ | Yeni karakter + `/fine` test |
 | [11](./ADIM-11-Spawn-Dis-Guvenlik.md) | Spawn & dış mekân | ✅ | ✅ | Legion spawn doğrula |
+| [12](./ADIM-12-UI-Cila.md) | UI & chat cila | ✅ | ✅ | Chat/HUD/galeri test |
 
 ---
 

@@ -633,12 +633,20 @@ RegisterNetEvent('hud:client:ToggleShowSeatbelt', function()
     showSeatbelt = not showSeatbelt
 end)
 
-RegisterNetEvent('seatbelt:client:ToggleSeatbelt', function() -- Triggered in smallresources
-    seatbeltOn = not seatbeltOn
+RegisterNetEvent('seatbelt:client:ToggleSeatbelt', function(state) -- Triggered in smallresources
+    if type(state) == 'boolean' then
+        seatbeltOn = state
+    else
+        seatbeltOn = not seatbeltOn
+    end
 end)
 
-RegisterNetEvent('seatbelt:client:ToggleCruise', function() -- Triggered in smallresources
-    cruiseOn = not cruiseOn
+RegisterNetEvent('seatbelt:client:ToggleCruise', function(state) -- Triggered in smallresources
+    if type(state) == 'boolean' then
+        cruiseOn = state
+    else
+        cruiseOn = not cruiseOn
+    end
 end)
 
 RegisterNetEvent('hud:client:UpdateNitrous', function(nitroLevel, bool)

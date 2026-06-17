@@ -105,12 +105,7 @@ Config.CommandHelp = {
     },
 }
 
--- İlk giriş karşılama (QBCore:Server:PlayerLoaded)
-Config.WelcomeEnabled = true
+-- İlk giriş karşılama (QBCore:Server:PlayerLoaded) — kapalı; chat spam istenmiyor
+Config.WelcomeEnabled = false
 Config.WelcomeDelayMs = 10000
-Config.WelcomeMessages = {
-    'Los Santos hard RP — voice yok, iletişim chat ile.',
-    '/kurallar · /komutlar · T konuş · /me /do /b',
-    'Araç: M kontak, K kilit, L kemer, /km · Galeri: LS Cars',
-    'Takıldıysan: /fdoor · /dimsifirla · çık-gir → Legion Meydanı',
-}
+Config.WelcomeMessages = {}

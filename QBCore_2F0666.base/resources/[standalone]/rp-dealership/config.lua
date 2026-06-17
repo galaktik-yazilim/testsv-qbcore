@@ -43,7 +43,12 @@ Config.Dealerships = {
         label = 'LS Cars',
         shop = 'pdm',
         garage = 'pillboxgarage',
-        spawn = vector4(-56.79, -1109.85, 26.43, 71.5),
+        spawn = vector4(-31.03, -1090.38, 26.42, 340.0),
+        -- Vitrin / dolu alan olursa sırayla dene (metre, Los Santos PDM)
+        spawnAlternates = {
+            vector4(-23.59, -1094.57, 27.05, 330.0),
+            vector4(-39.65, -1101.52, 26.42, 70.0),
+        },
         interact = vector4(-45.67, -1098.34, 26.42, 70.0),
         marker = {
             type = 1,

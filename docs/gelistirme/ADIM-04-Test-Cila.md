@@ -23,6 +23,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Loading takılması fix | `qb-multicharacter` — apartments callback guard |
 | Tur 10 giriş/PD | Yeni karakter NUI, `/fine` phone guard — [ADIM-10](./ADIM-10-Giris-PD-Cila.md) |
 | Tur 11 spawn | Legion varsayılan, inside metadata — [ADIM-11](./ADIM-11-Spawn-Dis-Guvenlik.md) |
+| Tur 12 UI | Chat çift mesaj, HUD, galeri spawn — [ADIM-12](./ADIM-12-UI-Cila.md) |
 
 ---
 
@@ -41,7 +42,7 @@ Whitelist **kapalı** — herkes girebilir. Sırayla dene:
 - [ ] HUD: hız **km/s**, kilometre **km** (mil/mph yok)
 - [ ] `/kurallar` — Los Santos + metrik satırı görünür
 - [ ] `/komutlar` — genel liste + footer (tam liste linki)
-- [ ] Giriş sonrası `» Hoş geldin` chat satırları (~10 sn)
+- [ ] Giriş sonrası chat'te otomatik `» Hoş geldin` satırları **gelmemeli**
 - [ ] Loading ekranı Los Santos / text RP metinleri
 
 ### Evren / birimler

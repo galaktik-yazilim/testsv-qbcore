@@ -15,6 +15,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 10: `scripts/verify-server-cfg.ps1` — yasak resource (`qb-phone`, voice vb.) kontrolü
 - [ADIM-10-Giris-PD-Cila.md](docs/gelistirme/ADIM-10-Giris-PD-Cila.md)
 - Tur 11: Legion Meydanı varsayılan spawn, inside metadata temizliği — [ADIM-11](docs/gelistirme/ADIM-11-Spawn-Dis-Guvenlik.md)
+- Tur 12: chat çift mesaj fix, HUD hizalama, galeri spawn — [ADIM-12](docs/gelistirme/ADIM-12-UI-Cila.md)
+- `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
 ### Changed
 - `/kurallar`, sunucu kuralları ve tanıtım dokümanları evren/birim standardına göre güncellendi
@@ -26,8 +28,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-spawn:** spawn noktası etiketleri Türkçe
 - **qb-policejob:** PD alert / `/fine` — `qb-phone` kapalıyken güvenli fallback; TR locale tamamlandı
 - **Varsayılan spawn:** havaalanı → **Legion Meydanı** (açık alan, yeni oyuncu UX)
+- **qb-hud:** stat satırı minimap hizası, tek renk paleti, nakit kutusu sadeleştirme
+- **rp-chat:** chat pencere/yazı boyutu hafif büyütme
 
 ### Fixed
+- **qb-multicharacter:** giriş hatası `SetMetaData` nil — `Player.Functions.SetMetaData` kullanımı
+- **rp-chat:** giriş hoş geldin / tuş spam chat'i kapatıldı (`WelcomeEnabled = false`)
+- **rp-dealership:** satın alma spawn vitrin üstüne binme — yan park + boş nokta seçimi
+- **qb-hud:** kemer/cruise HUD ikonu — `seatbelt:client:Toggle*` state senkronu
 - **qb-multicharacter:** karakter seçiminde loading ekranında takılma (`qb-apartments` kapalıyken sonsuz callback)
 - **qb-multicharacter:** yeni karakter sonrası menünün tekrar açılması (`closeNUIdefault`)
 - **qb-doorlock:** eksik Türkçe locale (`keymapping_description`, `newdoor_command_description`, vb.)

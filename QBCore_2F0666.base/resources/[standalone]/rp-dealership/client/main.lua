@@ -275,6 +275,7 @@ RegisterNetEvent('rp-dealership:client:spawnPurchased', function(dealershipId, m
         if properties then
             QBCore.Functions.SetVehicleProperties(veh, properties)
         end
+        SetVehicleOnGroundProperly(veh)
         setFuel(veh, 100.0)
         TriggerEvent('vehiclekeys:client:SetOwner', vehPlate)
         TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)

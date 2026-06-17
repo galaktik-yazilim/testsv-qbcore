@@ -46,7 +46,7 @@ local function clearStaleInsideMetadata(src)
     if not apartmentsOn and apt and (apt.apartmentType or apt.apartmentId) then stale = true end
 
     if stale or (not housesOn and not apartmentsOn) then
-        Player.SetMetaData('inside', {
+        Player.Functions.SetMetaData('inside', {
             house = nil,
             apartment = { apartmentType = nil, apartmentId = nil },
         })
