@@ -59,9 +59,14 @@ local function isNearDealership(source, dealershipId)
 end
 
 local function canBuy(source)
+    if pendingSpawns[source] then
+        return false, 'pending'
+    end
     local now = os.time()
     local last = buyCooldowns[source] or 0
-    if now - last < Config.BuyCooldownSec then return false end
+    if now - last < Config.BuyCooldownSec then
+        return false, 'cooldown'
+    end
     buyCooldowns[source] = now
     return true
 end
@@ -249,7 +254,15 @@ RegisterNetEvent('rp-dealership:server:buyVehicle', function(dealershipId, model
     if type(dealershipId) ~= 'string' or type(model) ~= 'string' then return end
     if #model > 64 then return end
     if not isNearDealership(src, dealershipId) then return end
-    if not canBuy(src) then return end
+    local allowed, blockReason = canBuy(src)
+    if not allowed then
+        if blockReason == 'pending' then
+            TriggerClientEvent('QBCore:Notify', src, 'Satın alma işlemi devam ediyor.', 'warning')
+        elseif blockReason == 'cooldown' then
+            TriggerClientEvent('QBCore:Notify', src, 'Çok hızlı, biraz bekle.', 'warning')
+        end
+        return
+    end
 
     local dealership = Config.Dealerships[dealershipId]
     if not dealership then return end

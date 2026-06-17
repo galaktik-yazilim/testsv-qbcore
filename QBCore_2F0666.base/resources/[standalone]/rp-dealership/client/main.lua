@@ -293,7 +293,11 @@ RegisterNUICallback('buy', function(data, cb)
         cb({ ok = false })
         return
     end
-    TriggerServerEvent('rp-dealership:server:buyVehicle', currentDealership, data.model, data.payType or 'cash')
+    local dealershipId = currentDealership
+    local model = data.model
+    local payType = data.payType or 'cash'
+    closeDealership()
+    TriggerServerEvent('rp-dealership:server:buyVehicle', dealershipId, model, payType)
     cb({ ok = true })
 end)
 

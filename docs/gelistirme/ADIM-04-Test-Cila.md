@@ -24,6 +24,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Tur 10 giriş/PD | Yeni karakter NUI, `/fine` phone guard — [ADIM-10](./ADIM-10-Giris-PD-Cila.md) |
 | Tur 11 spawn | Legion varsayılan, inside metadata — [ADIM-11](./ADIM-11-Spawn-Dis-Guvenlik.md) |
 | Tur 12 UI | Chat çift mesaj, HUD, galeri spawn — [ADIM-12](./ADIM-12-UI-Cila.md) |
+| Tur 13 | Giriş fix, hoş geldin kapalı, galeri çift tık — [ADIM-13](./ADIM-13-Stabilizasyon.md) |
 
 ---
 

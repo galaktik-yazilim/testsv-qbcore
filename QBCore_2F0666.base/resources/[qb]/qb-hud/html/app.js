@@ -718,8 +718,7 @@ const moneyHud = Vue.createApp({
 
 // PLAYER HUD
 
-const STAT_FILL = 'rgba(235, 235, 235, 0.88)';
-const STAT_WARN = 'rgba(210, 72, 72, 0.92)';
+const STAT_WARN = '#e05555';
 
 const playerHud = {
     data() {
@@ -889,7 +888,7 @@ const playerHud = {
                 this.showHealth = true;
             }
             if (data.playerDead === false) {
-                this.healthColor = data.health <= 25 ? STAT_WARN : STAT_FILL;
+                this.healthColor = data.health <= 25 ? STAT_WARN : '#3FA554';
             } else {
                 this.healthColor = STAT_WARN;
                 this.health = 100;
@@ -905,7 +904,7 @@ const playerHud = {
                 this.showArmor = true;
             }
 
-            this.armorColor = data.armor <= 0 ? STAT_WARN : STAT_FILL;
+            this.armorColor = data.armor <= 0 ? STAT_WARN : '#326dbf';
 
             if (data.dynamicHunger == true) {
                 if (data.hunger >= 100) {
@@ -916,7 +915,7 @@ const playerHud = {
             } else if (data.dynamicHunger == false) {
                 this.showHunger = true;
             }
-            this.hungerColor = data.hunger <= 30 ? STAT_WARN : STAT_FILL;
+            this.hungerColor = data.hunger <= 30 ? STAT_WARN : '#dd6e14';
 
             if (data.dynamicThirst == true) {
                 if (data.thirst >= 100) {
@@ -927,7 +926,7 @@ const playerHud = {
             } else if (data.dynamicThirst == false) {
                 this.showThirst = true;
             }
-            this.thirstColor = data.thirst <= 30 ? STAT_WARN : STAT_FILL;
+            this.thirstColor = data.thirst <= 30 ? STAT_WARN : '#1a7cad';
 
             this.showStress = false;
 

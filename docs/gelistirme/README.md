@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–11 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–13 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -15,6 +15,8 @@
 | [09](./ADIM-09-Beta-Oncesi-Cila.md) | Beta öncesi cila | ✅ |
 | [10](./ADIM-10-Giris-PD-Cila.md) | Giriş & PD/EMS cila | ✅ |
 | [11](./ADIM-11-Spawn-Dis-Guvenlik.md) | Spawn & dış mekân | ✅ |
+| [12](./ADIM-12-UI-Cila.md) | UI & chat cila | ✅ |
+| [13](./ADIM-13-Stabilizasyon.md) | Test öncesi stabilizasyon | ✅ |
 
 ---
 

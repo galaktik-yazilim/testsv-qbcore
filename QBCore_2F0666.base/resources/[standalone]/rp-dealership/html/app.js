@@ -66,6 +66,8 @@ function closeUi() {
     app.classList.add('hidden');
     selectedModel = null;
     buying = false;
+    btnBuyCash.disabled = false;
+    btnBuyBank.disabled = false;
     post('close');
 }
 
@@ -230,8 +232,9 @@ function renderList() {
 function buy(payType) {
     if (!selectedModel || buying) return;
     buying = true;
+    btnBuyCash.disabled = true;
+    btnBuyBank.disabled = true;
     post('buy', { model: selectedModel, payType }).finally(() => {
-        buying = false;
         post('refreshMoney').then((money) => {
             if (money) {
                 cashAmount.textContent = formatMoney(money.cash);
@@ -242,6 +245,9 @@ function buy(payType) {
 }
 
 function openDealership(data) {
+    buying = false;
+    btnBuyCash.disabled = false;
+    btnBuyBank.disabled = false;
     allVehicles = data.vehicles || [];
     shopTitle.textContent = data.label || 'Galeri';
     cashAmount.textContent = formatMoney(data.cash);

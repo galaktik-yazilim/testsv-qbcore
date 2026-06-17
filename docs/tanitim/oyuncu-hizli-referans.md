@@ -60,7 +60,8 @@
 
 ### Takıldım / binadan çıkamıyorum
 
-1. **`/fdoor`** — bina içindeyken en yakın çıkış kapısına ışınlan (45 sn cooldown)
-2. **`/dimsifirla`** — ana boyuta (dim 0) dön, iç mekân metadata sıfırla (60 sn cooldown)
-3. Ekranda menü varsa → **Onayla** veya spawn’da **Legion Meydanı**
-4. Admin → `/admin` → hayalet modu
+1. **`/disari`** — iç mekândan dışarı çıkar (45 sn cooldown)
+2. **`/fdoor`** — çıkış kapısı önüne ışınlanır; yetmezse `/disari`
+3. **`/dimsifirla`** — ana boyuta (dim 0) dön, iç mekân metadata sıfırla (60 sn cooldown)
+4. Ekranda menü varsa → **Onayla** veya spawn’da **Legion Meydanı**
+5. Admin → `/admin` → hayalet modu

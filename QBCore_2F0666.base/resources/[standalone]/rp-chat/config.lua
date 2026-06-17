@@ -10,12 +10,15 @@ Config.MaxMessageLength = 256
 Config.CommandCooldownMs = 1500
 Config.VehicleActionCooldownMs = 800
 
--- /fdoor · /dimsifirla — interior sıkışma (Rina tarzı)
+-- /fdoor · /disari · /dimsifirla — interior sıkışma
 Config.StuckRecovery = {
     FdoorCooldownMs = 45000,
+    DisariCooldownMs = 45000,
     DimResetCooldownMs = 60000,
     FdoorMaxSearch = 60.0,
     FdoorExitOffset = 1.35,
+    ExteriorExitMinDist = 2.0,
+    ExteriorExitMaxDist = 22.0,
 }
 
 -- /911 acil çağrı (text dispatch — panel yok)
@@ -82,6 +85,7 @@ Config.CommandHelp = {
         '/job — İş bilgisi · /gang — Çete bilgisi',
         '/givekeys [id] — Araç anahtarı ver',
         '/id — Sunucu ID numaran',
+        '/disari — İç mekândan dışarı çık (takılma)',
         '/fdoor — Bina çıkış kapısına ışınlan',
         '/dimsifirla — Ana boyuta (dim 0) dön',
     },

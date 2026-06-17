@@ -47,6 +47,26 @@ QBCore.Commands.Add('fdoor', 'Bulunduğun binanın çıkış kapısına ışınl
     TriggerClientEvent('rp-chat:client:fdoor', source)
 end, 'user')
 
+QBCore.Commands.Add('disari', 'Bulunduğun iç mekândan dışarı çık', {}, false, function(source)
+    if not checkCooldown(source, 'cmd:disari', Config.StuckRecovery.DisariCooldownMs) then
+        notify(source, 'Biraz bekle, sonra tekrar dene.', 'warning')
+        return
+    end
+
+    TriggerClientEvent('rp-chat:client:disari', source)
+end, 'user')
+
+RegisterNetEvent('rp-chat:server:disariDone', function()
+    local src = source
+    local bucket = GetPlayerRoutingBucket(src)
+
+    if bucket ~= 0 then
+        QBCore.Functions.SetPlayerBucket(src, 0)
+    end
+
+    clearInsideMetadata(src)
+end)
+
 QBCore.Commands.Add('dimsifirla', 'Ana harita boyutuna (dim 0) dön — interior sıkışması', {}, false, function(source)
     if not checkCooldown(source, 'cmd:dimsifirla', Config.StuckRecovery.DimResetCooldownMs) then
         notify(source, 'Biraz bekle, sonra tekrar dene.', 'warning')
