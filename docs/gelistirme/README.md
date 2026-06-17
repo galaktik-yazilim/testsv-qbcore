@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–15 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–16 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -19,6 +19,7 @@
 | [13](./ADIM-13-Stabilizasyon.md) | Test öncesi stabilizasyon | ✅ |
 | [14](./ADIM-14-Garaj-Interior.md) | Garaj & interior çıkış | ✅ |
 | [15](./ADIM-15-MVP-Cila.md) | MVP son cila paketi | ✅ |
+| [16](./ADIM-16-EMS-Garaj-Guvenlik.md) | EMS yakıt & garaj güvenlik | ✅ |
 
 ---
 

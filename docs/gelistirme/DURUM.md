@@ -5,7 +5,7 @@
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 15 MVP son cila paketi
+Son güncelleme: Tur 16 EMS yakıt & garaj güvenliği
 
 ---
 
@@ -35,6 +35,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [13](./ADIM-13-Stabilizasyon.md) | Stabilizasyon | ✅ | ✅ | Giriş + galeri çift tık |
 | [14](./ADIM-14-Garaj-Interior.md) | Garaj & `/disari` | ✅ | ✅ | Garaj park/çıkar |
 | [15](./ADIM-15-MVP-Cila.md) | MVP son cila | ✅ | ✅ | Yakıt HUD, verify script |
+| [16](./ADIM-16-EMS-Garaj-Guvenlik.md) | EMS & garaj güvenlik | ✅ | ✅ | EMS araç, garaj exploit |
 
 ---
 

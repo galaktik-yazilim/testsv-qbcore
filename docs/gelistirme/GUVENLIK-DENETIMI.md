@@ -49,6 +49,18 @@
 | Araç event spoof | ✅ | Sürücü koltuğu + cooldown |
 | `/a` yetkisiz | ✅ | QBCore `admin` permission |
 | `/911` spam | ✅ | 60 sn cooldown |
+| `/disari` metadata spoof | ✅ | Komut cooldown + `disariDone` player guard |
+
+---
+
+## qb-garages
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Başkasının aracını spawn | ✅ **düzeltildi** | `spawnvehicle` plaka sahiplik kontrolü |
+| Stats/mods manipülasyonu | ✅ **düzeltildi** | Plaka sanitize + sahiplik + fuel/engine/body sınırı |
+| Depot ödeme spoof | ✅ **düzeltildi** | Plaka sahiplik kontrolü |
+| `syncGarage` config overwrite | ✅ **düzeltildi** | Yalnızca `type = house` birleştirme |
 
 ---
 
@@ -92,3 +104,4 @@
 | rp-mileage | `server/main.lua` |
 | rp-chat | `server/main.lua` |
 | qb-multicharacter | `server.lua` |
+| qb-garages | `server.lua` |

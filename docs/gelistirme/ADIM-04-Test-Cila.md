@@ -27,6 +27,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Tur 13 | Giriş fix, hoş geldin kapalı, galeri çift tık — [ADIM-13](./ADIM-13-Stabilizasyon.md) |
 | Tur 14 | `/disari`, garaj qb-fuel, mods kaydı — [ADIM-14](./ADIM-14-Garaj-Interior.md) |
 | Tur 15 | HUD/dealership qb-fuel, garaj TR, verify script — [ADIM-15](./ADIM-15-MVP-Cila.md) |
+| Tur 16 | EMS qb-fuel, garaj güvenlik — [ADIM-16](./ADIM-16-EMS-Garaj-Guvenlik.md) |
 
 ---
 
@@ -55,6 +56,7 @@ Whitelist **kapalı** — herkes girebilir. Sırayla dene:
 ### PD / EMS (2. hesap veya arkadaş)
 - [ ] PD on duty → sivil `/911` alır
 - [ ] Off duty → `/911` gitmez
+- [ ] EMS meslek aracı çıkar → yakıt dolu, hata yok
 - [ ] EMS ölüm / respawn (envanter korunur)
 
 ### Admin

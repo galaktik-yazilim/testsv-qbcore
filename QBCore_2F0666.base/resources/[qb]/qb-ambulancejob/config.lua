@@ -1,5 +1,6 @@
 Config = {}
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
+Config.FuelResource = 'qb-fuel'
 -- Hard RP: EMS online ise NPC check-in kapalı; 0 = her zaman EMS çağrısı (self-revive yok)
 Config.MinimalDoctors = 0
 Config.DocCooldown = 5

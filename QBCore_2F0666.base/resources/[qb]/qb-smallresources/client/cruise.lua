@@ -35,8 +35,7 @@ local function triggerCruiseControl(veh)
                     QBCore.Functions.Notify(Lang:t('cruise.not_Enough_Fuel'), 'error')
                     return
                 end
-            end
-            if GetResourceState('LegacyFuel') == 'started' then
+            elseif GetResourceState('LegacyFuel') == 'started' then
                 if exports['LegacyFuel']:GetFuel(veh) <= 10 then
                     QBCore.Functions.Notify(Lang:t('cruise.not_Enough_Fuel'), 'error')
                     return

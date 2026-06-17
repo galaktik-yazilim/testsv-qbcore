@@ -24,8 +24,8 @@ local Translations = {
         car_e = 'E - Garaj',
         sea_e = 'E - Tekne garajı',
         air_e = 'E - Hangar',
-        rig_e = 'E - Sondaj platformu yeri',
-        depot_e = 'E - Depo',
+        rig_e = 'E - TIR otoparkı',
+        depot_e = 'E - Çekilmiş araçlar',
         house_garage = 'E - Ev garajı',
     }
 }

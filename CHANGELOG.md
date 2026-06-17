@@ -19,6 +19,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 13: galeri çift satın alma, giriş stabilizasyon — [ADIM-13](docs/gelistirme/ADIM-13-Stabilizasyon.md)
 - Tur 14: garaj qb-fuel, mods kaydı, `/disari` iyileştirme — [ADIM-14](docs/gelistirme/ADIM-14-Garaj-Interior.md)
 - Tur 15: HUD/dealership qb-fuel, garaj TR etiketleri, verify genişletme — [ADIM-15](docs/gelistirme/ADIM-15-MVP-Cila.md)
+- Tur 16: EMS qb-fuel, garaj sunucu güvenliği — [ADIM-16](docs/gelistirme/ADIM-16-EMS-Garaj-Guvenlik.md)
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
 ### Changed
@@ -35,7 +36,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-hud:** yakıt okuma `qb-fuel` öncelikli (LegacyFuel fallback)
 - **rp-dealership:** satın alma yakıtı `qb-fuel` öncelikli
 - **qb-garages:** tüm oyuncuya görünen garaj/blip etiketleri Türkçe
-- **`/kurallar`:** interior kurtarma (`/disari`, `/fdoor`, `/dimsifirla`) satırı
+- **qb-ambulancejob:** meslek aracı yakıtı `qb-fuel` (`Config.FuelResource`)
+- **qb-garages:** spawn/stats/mods/depot sunucu doğrulama; `syncGarage` house-only merge
+- **qb-garages/locales/tr:** TIR ve çekilmiş araç etiketleri
+- **qb-smallresources:** cruise yakıt kontrolü çift tetikleme düzeltmesi
 
 ### Fixed
 - **qb-multicharacter:** giriş hatası `SetMetaData` nil — `Player.Functions.SetMetaData` kullanımı

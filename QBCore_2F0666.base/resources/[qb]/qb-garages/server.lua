@@ -68,6 +68,17 @@ local function filterVehiclesByCategory(vehicles, category)
     return filtered
 end
 
+local function sanitizePlate(plate)
+    if type(plate) ~= 'string' then return end
+    plate = plate:gsub('^%s*(.-)%s*$', '%1')
+    if plate == '' or #plate > 8 then return end
+    return plate
+end
+
+local function playerOwnsPlate(citizenid, plate)
+    return MySQL.scalar.await('SELECT citizenid FROM player_vehicles WHERE plate = ? LIMIT 1', { plate }) == citizenid
+end
+
 -- Callbacks
 
 QBCore.Functions.CreateCallback('qb-garages:server:getHouseGarage', function(_, cb, house)
@@ -123,6 +134,10 @@ end
 
 -- Spawns a vehicle and returns its network ID and properties.
 QBCore.Functions.CreateCallback('qb-garages:server:spawnvehicle', function(source, cb, plate, vehicle, coords)
+    local Player = exports['qb-core']:GetPlayer(source)
+    if not Player then return end
+    plate = sanitizePlate(plate)
+    if not plate or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
     local vehType = sharedVehicles[vehicle] and sharedVehicles[vehicle].type or GetVehicleTypeByModel(vehicle)
     local hash = type(vehicle) == 'number' and vehicle or type(vehicle) == 'string' and GetHashKey(vehicle) or nil
     if not vehicle then return end
@@ -170,14 +185,21 @@ RegisterNetEvent('qb-garages:server:updateVehicleStats', function(plate, fuel, e
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
+    plate = sanitizePlate(plate)
+    if not plate or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
+    fuel = math.max(0, math.min(100, tonumber(fuel) or 0))
+    engine = math.max(0, math.min(1000, tonumber(engine) or 0))
+    body = math.max(0, math.min(1000, tonumber(body) or 0))
     MySQL.update('UPDATE player_vehicles SET fuel = ?, engine = ?, body = ? WHERE plate = ? AND citizenid = ?', { fuel, engine, body, plate, Player.PlayerData.citizenid })
 end)
 
 RegisterNetEvent('qb-garages:server:saveVehicleMods', function(plate, props)
     local src = source
-    if type(plate) ~= 'string' or type(props) ~= 'table' then return end
+    if type(props) ~= 'table' then return end
+    plate = sanitizePlate(plate)
+    if not plate then return end
     local Player = exports['qb-core']:GetPlayer(src)
-    if not Player then return end
+    if not Player or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
     MySQL.update(
         'UPDATE player_vehicles SET mods = ? WHERE plate = ? AND citizenid = ?',
         { json.encode(props), plate, Player.PlayerData.citizenid }
@@ -212,9 +234,12 @@ end)
 RegisterNetEvent('qb-garages:server:PayDepotPrice', function(data)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
+    if not Player or type(data) ~= 'table' then return end
+    local plate = sanitizePlate(data.plate)
+    if not plate or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
     local cashBalance = Player.PlayerData.money['cash']
     local bankBalance = Player.PlayerData.money['bank']
-    MySQL.scalar('SELECT depotprice FROM player_vehicles WHERE plate = ?', { data.plate }, function(result)
+    MySQL.scalar('SELECT depotprice FROM player_vehicles WHERE plate = ? AND citizenid = ?', { plate, Player.PlayerData.citizenid }, function(result)
         if result then
             local depotPrice = result
 
@@ -234,7 +259,12 @@ end)
 -- House Garages
 
 RegisterNetEvent('qb-garages:server:syncGarage', function(updatedGarages)
-    Config.Garages = updatedGarages
+    if type(updatedGarages) ~= 'table' then return end
+    for key, garage in pairs(updatedGarages) do
+        if type(key) == 'string' and type(garage) == 'table' and garage.type == 'house' and type(garage.houseName) == 'string' then
+            Config.Garages[key] = garage
+        end
+    end
 end)
 
 --Call from qb-phone

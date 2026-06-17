@@ -26,6 +26,7 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 - [ ] Karakter, chat, `/km`, galeri, garaj
 - [ ] **Tur 12:** notify/chat tek satır; HUD hizası; galeri spawn vitrin üstüne binmiyor
 - [ ] **Tur 15:** garaj TR etiketleri; HUD yakıt; verify script tam kontrol
+- [ ] **Tur 16:** EMS araç yakıtı; garaj park/depot normal
 - [ ] **Yeni karakter** → Legion Meydanı civarında açık alanda spawn
 - [ ] HUD km/s + km; `/kurallar` evren satırı
 - [ ] LS Cars → araç al → **Pillbox Garajı** park / çıkar
