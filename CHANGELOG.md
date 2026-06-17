@@ -7,9 +7,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 
 ## [Unreleased]
 
-### Planlanan
-- Adım 05 kapalı beta (operasyonel)
-- P4+ — [ADIM-06-P4-Plan.md](docs/gelistirme/ADIM-06-P4-Plan.md)
+Operasyonel adımlar: [TODO.md](docs/TODO.md)
+
+---
+
+## [1.0.0] — 2025-06-17 — MVP kod tamamlandı
+
+### Added
+- Turlar 01–08: [DURUM.md](docs/gelistirme/DURUM.md), Adım 07/08, beta geri bildirim, oyuncu hızlı referans
+
+### Changed
+- ROADMAP MVP fazları işaretlendi
+- `/kurallar` ve qb-hud km/h
+
+### Security
+- rp-dealership model adı uzunluk limiti
 
 ---
 

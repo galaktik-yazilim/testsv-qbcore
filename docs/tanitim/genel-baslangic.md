@@ -41,10 +41,19 @@ Bu proje **hard roleplay**, **text-based** (yazı tabanlı) bir FiveM sunucusudu
 | `/s mesaj` | ~3m | Fısıltı |
 | `/w mesaj` | ~40m | Bağırma |
 | `/b mesaj` | ~20m | Yerel OOC |
-| `/911 mesaj` | PD/EMS | Acil çağrı (görevdekilere) |
+| `/911 mesaj` | PD/EMS | Acil çağrı |
 | `/kurallar` | — | Kural özeti |
+| `/km` | — | Araç km (içindeyken) |
 
-Detay: [rp-chat.md](./sistemler/rp-chat.md) · Tam kurallar: [sunucu-kurallari.md](./sunucu-kurallari.md)
+## Tuşlar (araç)
+
+| Tuş | Eylem |
+|-----|-------|
+| **M** | Kontak |
+| **K** | Kilit |
+| **L** | Kemer |
+
+Detay: [rp-chat.md](./sistemler/rp-chat.md) · [oyuncu-hizli-referans.md](./oyuncu-hizli-referans.md) · [sunucu-kurallari.md](./sunucu-kurallari.md)
 
 ## Araç kullanımı (özet)
 

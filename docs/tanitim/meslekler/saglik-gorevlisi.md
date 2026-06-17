@@ -22,6 +22,15 @@ Acil tıp personeli. Yaralı oyunculara müdahale, hastane nakli ve tedavi RP'si
 - Hastane respawn envanter **silmez**
 - `/me` ve `/do` ile muayene zorunlu
 
+## Hastane akışı (script değil prosedür)
+
+1. Sivil `/911` gönderir
+2. EMS on duty çağrıyı alır, olay yerine gider
+3. Olay yerinde `/me` + `/do` müdahale
+4. Gerekirse hastaneye nakil RP'si
+5. Ölüm durumunda: 6 dk bekleme → EMS müdahalesi veya hastane respawn
+6. **Self-revive yok** — NPC check-in kapalı
+
 ## RP örnekleri
 
 **Olay yerinde:**

@@ -215,6 +215,7 @@ end)
 RegisterNetEvent('rp-dealership:server:buyVehicle', function(dealershipId, model, payType)
     local src = source
     if type(dealershipId) ~= 'string' or type(model) ~= 'string' then return end
+    if #model > 64 then return end
     if not isNearDealership(src, dealershipId) then return end
     if not canBuy(src) then return end
 

@@ -1,7 +1,7 @@
 # Adım 05 — Kapalı Beta
 
-> **Durum:** 📋 Hazır — whitelist **test bitince** açılır  
-> Şu an: `setr qb_whitelist 0` (herkes girebilir)
+> **Durum:** ✅ Rehber hazır — **operasyonel** (test bitince uygula)  
+> Şu an: `setr qb_whitelist 0`
 
 ---
 
@@ -46,9 +46,9 @@ txAdmin whitelist kullanırsan `qb_whitelist 0` bırakabilirsin.
 
 ## Beta sonrası
 
-- Geri bildirim topla (chat mesafesi, ekonomi ince ayarı)
-- Discord + başvuru formu ([discord-ve-basvuru.md](../tanitim/discord-ve-basvuru.md))
-- Kritik bug fix → açılış planı
+- Geri bildirim: [BETA-GERI-BILDIRIM.md](./BETA-GERI-BILDIRIM.md)
+- Discord + başvuru ([discord-ve-basvuru.md](../tanitim/discord-ve-basvuru.md))
+- Kritik bug fix → [ADIM-07-Acilis.md](./ADIM-07-Acilis.md)
 
 ---
 
@@ -59,4 +59,6 @@ txAdmin whitelist kullanırsan `qb_whitelist 0` bırakabilirsin.
 | 01–03 | MVP + açılış altyapısı ✅ |
 | 04 | Test & cila ✅ |
 | 05 | Kapalı beta | Bu dosya |
-| 06 | P4+ plan | [ADIM-06-P4-Plan.md](./ADIM-06-P4-Plan.md) |
+| 06 | P4+ backlog | [ADIM-06-P4-Plan.md](./ADIM-06-P4-Plan.md) |
+| 07 | Açılış | [ADIM-07-Acilis.md](./ADIM-07-Acilis.md) |
+| 08 | Teknik borç | [ADIM-08-Teknik-Borc.md](./ADIM-08-Teknik-Borc.md) |

@@ -11,8 +11,14 @@ Anahtarı olan sürücü.
 ## Nasıl kullanılır?
 
 1. Araca **sürücü koltuğuna** binin
-2. Kontağı açmak/kapatmak için atanmış tuşa basın (keybind — `rp-ignition/client/keybinds.lua`)
-3. Chat'te görünür: `Ahmet Yılmaz isimli kişi aracı çalıştırdı`
+2. **M** — kontak aç/kapa
+3. Chat: `Ahmet Yılmaz isimli kişi aracı çalıştırdı`
+
+| Tuş | Eylem |
+|-----|-------|
+| **M** | Kontak |
+| **K** | Araç kilidi (`qb-vehiclekeys`) |
+| **L** | Emniyet kemeri |
 
 ## RP kuralları
 

@@ -27,7 +27,7 @@
 | Rastgele araç spawn | ✅ **düzeltildi** | `pendingSpawns` token — satın alma sonrası 90 sn |
 | Fiyat manipülasyonu | ✅ | Fiyat `sharedVehicles` sunucudan |
 | Para çekilmeden araç | ✅ **düzeltildi** | Önce `RemoveMoney`, insert fail → iade |
-| Model injection | ✅ | Model shared listesinde yoksa red |
+| Model injection | ✅ | Model shared listesinde + max 64 char |
 
 ---
 

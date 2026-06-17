@@ -1,7 +1,7 @@
 # Adım 06 — P4+ Büyüme Planı
 
-> **Durum:** Ertelendi — kapalı beta + açılış sonrası, ihtiyaç netleşince  
-> MVP ve beta stabil olmadan **başlama**.
+> **Durum:** 📋 Backlog — **açılış sonrası**, tur 06 uygulaması ihtiyaç halinde  
+> Kod geliştirmesi (01–05) tamam; bu tur **plan + doc only**
 
 ---
 

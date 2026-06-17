@@ -51,8 +51,8 @@ Config.NotifyPrefixes = {
 
 -- /kurallar — oyuncuya chat'te gösterilen özet (detay: docs/tanitim/sunucu-kurallari.md)
 Config.RulesMessages = {
-    'Hard RP / text-based sunucu — iletişim chat ile yapılır, sesli konuşma yoktur.',
-    'IC/OOC ayrımı: OOC için /b kullanın. Metagaming ve powergaming yasaktır.',
-    'Fear RP: tehdit altında mantıklı davranın. NLRP: ölümden sonra olayı unutursunuz.',
-    'Tek karakter kuralı geçerlidir. Detaylı kurallar: docs/tanitim/sunucu-kurallari.md',
+    'Hard RP / text-based — voice yok; chat: T, /me, /ame, /do, /s, /w, /b.',
+    'OOC: /b kullanın. /911 yalnızca acil durum; troll yasak.',
+    'Fear RP + NLRP geçerli. 1 karakter, silme yok (CK admin).',
+    'Araç: M kontak, K kilit, L kemer, /km. Detay: docs/tanitim/sunucu-kurallari.md',
 }

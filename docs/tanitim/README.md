@@ -5,8 +5,9 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 ## Nereden başlamalı?
 
 1. [Genel Başlangıç](./genel-baslangic.md) — kurulum, ilk giriş, temel RP kuralları
-2. [Sistemler](#sistemler) — chat, araç, galeri vb.
-3. [Meslekler](./meslekler/README.md) — polis, sağlık ve ileride eklenecek meslekler
+2. [Hızlı Referans](./oyuncu-hizli-referans.md) — tek sayfa komut/tuş özeti
+3. [Sistemler](#sistemler) — chat, araç, galeri vb.
+4. [Meslekler](./meslekler/README.md) — polis, sağlık
 
 ## Sistemler
 
@@ -33,9 +34,7 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 |------|-------|
 | Discord + başvuru | [discord-ve-basvuru.md](./discord-ve-basvuru.md) |
 | Admin / txAdmin | [admin-yonetim.md](./admin-yonetim.md) |
-| Geliştirme adımları | [gelistirme/README.md](../gelistirme/README.md) |
-| Güvenlik denetimi | [GUVENLIK-DENETIMI.md](../gelistirme/GUVENLIK-DENETIMI.md) |
-| Teknik borç (en son) | [TEKNIK-BORC.md](../TEKNIK-BORC.md) |
+| Geliştirme durumu | [DURUM.md](../gelistirme/DURUM.md) |
 
 ## Yeni modül eklerken
 

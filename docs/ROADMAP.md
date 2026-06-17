@@ -20,22 +20,24 @@
 
 ## Mevcut durum özeti
 
+> **Kod geliştirmesi tamamlandı** (turlar 01–08). Detay: [gelistirme/DURUM.md](./gelistirme/DURUM.md)
+
+| Alan | Durum |
+|------|--------|
+| Geliştirme turları 01–08 | ✅ kod + doc |
+| Operasyon (test/beta/açılış) | ⏳ [TODO.md](./TODO.md) |
+| P4+ backlog | 📋 [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md) |
+| Teknik borç | 📋 [ADIM-08-Teknik-Borc.md](./gelistirme/ADIM-08-Teknik-Borc.md) |
+
 | Alan | Durum |
 |------|--------|
 | Framework iskeleti | ✅ QBCore + oxmysql |
-| Text RP chat | ✅ `rp-chat` tam (proximity, `/me` `/do` `/b` `/s` `/w`) |
+| Text RP chat | ✅ proximity, `/me` `/ame` `/do` `/b` `/s` `/w` `/a` |
 | Araç RP | ✅ ignition, mileage, dealership, garaj |
-| Resource yükü | ✅ Explicit `server.cfg` (~32 resource) |
-| Event güvenliği | ✅ Custom `rp-*` sertleştirildi |
+| Resource yükü | ✅ ~32 explicit resource |
+| Event güvenliği | ✅ [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) |
 | Tanıtım dokümantasyonu | ✅ `docs/tanitim/` |
-| MVP karakter kuralları | ✅ 1 slot, isim validasyonu, ekonomi |
-| Whitelist | ✅ hazır — kapalı (test) |
-| Adım 04 — test & cila | ✅ |
-| Adım 05 — kapalı beta | 📋 [ADIM-05-Kapali-Beta.md](./gelistirme/ADIM-05-Kapali-Beta.md) |
-| Adım 06 — P4+ | — [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md) |
-| Güvenlik denetimi | ✅ [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) |
-| Teknik borç (yedek, MySQL user…) | 📋 [TEKNIK-BORC.md](./TEKNIK-BORC.md) — en son |
-| Gelişmiş sistemler | — P4+ ertelendi |
+| Whitelist | ✅ hazır — testte kapalı |
 
 ---
 
@@ -45,12 +47,12 @@
 
 ### 0.1 Güvenlik
 
-- [ ] `server.cfg` sadece txAdmin / yerel makinede; repoda **asla** gerçek key/şifre
-- [ ] ACE izinleri: sadece güvenilen identifier'lar `group.admin` / `qbcore.god`
-- [ ] `sv_scriptHookAllowed 0` (cheat engeli)
-- [ ] Tüm custom `RegisterNetEvent` handler'larına sunucu tarafı doğrulama ekle (Faz 1.2)
-- [ ] Rate limit: chat, satın alma, mileage sync
-- [ ] MySQL ayrı kullanıcı, webhook logları, OneSync ince ayarı → [TEKNIK-BORC.md](./TEKNIK-BORC.md)
+- [x] `server.cfg` gitignore'da; repoda key/şifre yok
+- [x] `sv_scriptHookAllowed 0`
+- [x] Custom event doğrulama + rate limit (rp-*)
+- [x] [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md)
+- [ ] ACE: yalnızca güvenilen admin identifier'lar (operasyonel kontrol)
+- [ ] MySQL ayrı kullanıcı, webhook → [ADIM-08-Teknik-Borc.md](./gelistirme/ADIM-08-Teknik-Borc.md)
 
 ### 0.2 Performans — resource budama (en büyük kazanç)
 
@@ -97,16 +99,16 @@ pma-voice, qb-radio — bilinçli kapalı (text RP)
 
 ### 0.3 Veritabanı
 
-- [ ] QBCore SQL şeması import
-- [ ] `rp-mileage` için `drivingdistance` kolonu (otomatik migration var)
-- [ ] Düzenli yedek, yavaş sorgu izleme → [TEKNIK-BORC.md](./TEKNIK-BORC.md)
+- [ ] QBCore SQL şeması import (operasyonel)
+- [x] `rp-mileage` drivingdistance migration
+- [ ] Yedek → [ADIM-08-Teknik-Borc.md](./gelistirme/ADIM-08-Teknik-Borc.md)
 
 ### 0.4 Sunucu config şablonu
 
-- [ ] `server.cfg.example` → explicit ensure listesi ( `[qb]` yerine )
-- [ ] `qb_locale "tr"`
-- [ ] `sv_maxclients` gerçekçi slot (performans testi sonrası)
-- [ ] Voice: text RP sunucusunda opsiyonel; açılacaksa `voice_useSendingRangeOnly true`
+- [x] `server.cfg.example` explicit ensure
+- [x] `qb_locale "tr"`
+- [x] `sv_maxclients 32` (example)
+- [x] Voice kapalı (text RP)
 
 ---
 
@@ -114,101 +116,75 @@ pma-voice, qb-radio — bilinçli kapalı (text RP)
 
 > Oyuncunun hissettiği deneyim. Text RP omurgası.
 
-### 1.1 Chat sistemi tamamlama
+### 1.1 Chat sistemi
 
-- [ ] `/me` → `rp-chat`'e taşı (qb-core'daki 3D text kaldır; sadece chat)
-- [ ] Mesafe katmanları: normal (20m), `/s` fısıltı (~3m), `/w` bağırma (~40m)
-- [ ] `/ame` — eylem sadece yakındakilere, isim göstermeden
-- [ ] `/do` formatını Rina standardına sabitle
-- [ ] OOC flood koruması (cooldown)
-- [ ] Chat mesaj uzunluk limiti (exploit / lag önleme)
-- [ ] Admin `/a` ve `/ooc` global (yetki kontrollü)
+- [x] `/me`, `/ame`, `/do`, `/b`, `/s`, `/w` — rp-chat
+- [x] `/a` admin, `/kurallar`, `/911`
+- [x] Cooldown + 256 char limit
+- [x] `/ooc` kaldırıldı → `/b`
 
-### 1.2 Güvenlik — custom event sertleştirme
+### 1.2 Güvenlik — custom events
 
-| Event | Eksik doğrulama | Yapılacak |
-|-------|-----------------|-----------|
-| `rp-chat:server:vehicle*` | Araçta mı, mesafe | Ped in vehicle + driver seat check |
-| `rp-mileage:server:syncDelta` | Delta manipülasyonu | Rate limit + max delta/s sync + hız kontrolü |
-| `rp-dealership:server:buyVehicle` | Uzaktan satın alma | Dealership mesafe + cooldown + fiyat server-side |
+- [x] rp-chat vehicle events
+- [x] rp-mileage syncDelta
+- [x] rp-dealership buy/spawn
 
 ### 1.3 Araç RP
 
-- [ ] `rp-ignition` — bisiklet/motor hariç tutarlılık
-- [ ] `rp-mileage` — HUD entegrasyonu veya text gösterim
-- [ ] `rp-dealership` — `UseTarget false` ile uyum (`[E]` interact)
-- [ ] `qb-vehiclekeys` lock → chat mesajları (✅ kısmen var)
-- [ ] Emniyet kemeri chat mesajı (✅ event var, client bağlantısı kontrol)
+- [x] rp-ignition (bisiklet hariç)
+- [x] `/km` mileage
+- [x] rp-dealership `[E]`
+- [x] kilit + kemer → chat
 
-### 1.4 Karakter akışı
+### 1.4 Karakter
 
-- [ ] `qb-multicharacter` — slot limiti, isim kuralları
-- [ ] Karakter oluşturma: yaş, boy, açıklama (hard RP zorunluluğu)
-- [ ] Spawn: tek başlangıç noktası veya sınırlı seçenek
-- [ ] Whitelist kapalı → test; prod'da whitelist açık
+- [x] 1 slot, isim/yaş validasyonu, cid=1
+- [x] SkipSelection spawn
+- [x] Whitelist altyapı (testte kapalı)
 
-### 1.5 Kurallar & dokümantasyon
+### 1.5 Kurallar
 
-- [ ] Sunucu kuralları (Discord + oyun içi `/kurallar`)
-- [ ] CK / PK / MGK tanımları
-- [ ] Powergaming, metagaming, OOC in IC tanımları
+- [x] sunucu-kurallari.md, `/kurallar`
+- [x] CK/PK/MGK tanımları
 
 ---
 
-## Faz 2 — Hard RP sistemleri (ÖNCELİK: ORTA)
+## Faz 2 — Hard RP (kısmi — MVP yeterli)
 
-### 2.1 Sağlık & yaralanma
+### 2.1 Sağlık
 
-- [ ] `qb-ambulancejob` sadeleştir (hızlı revive kapat)
-- [ ] Yaralanma sistemi (downed state, text-based tedavi)
-- [ ] Hastane RP akışı (script değil prosedür + minimal mekanik)
+- [x] EMS config (self-revive kapalı, envanter korunur)
+- [ ] Yaralanma scripti → P4+
+- [x] Hastane prosedür doc → saglik-gorevlisi.md
 
-### 2.2 Polis & adalet
+### 2.2 Polis
 
-- [ ] `qb-policejob` — hard RP prosedürleri
-- [ ] Kelepçe, arama, el koyma → chat `/me` zorunluluğu
-- [ ] Dispatch: minimal text tabanlı (911 chat komutu)
-- [ ] Hapishane: `qb-prison` veya custom text RP
+- [x] `/911` text dispatch
+- [x] PD config (fuel, spike)
+- [x] polis.md prosedür
 
 ### 2.3 Ekonomi
 
-- [ ] Başlangıç parası düşük
-- [ ] `qb-banking` ATM / transfer
-- [ ] İş verme admin/onaylı (otomatik job NPC'leri kapalı)
-- [ ] Vergi / maaş döngüsü (management)
+- [x] Düşük başlangıç parası, işsiz maaş 0
+- [x] qb-banking aktif
+- [ ] Vergi/management → P4+
 
-### 2.4 Envanter & eşya
+### 2.4–2.5
 
-- [ ] `qb-inventory` ağırlık / slot dengesi
-- [ ] Silah ruhsatı RP'si (metadata)
-- [ ] Crafting: başlangıçta kapalı veya çok sınırlı
-
-### 2.5 Admin araçları
-
-- [ ] `qb-adminmenu` yetki seviyeleri
-- [ ] Spectate, freeze, warn log
-- [ ] txAdmin + Discord entegrasyonu
+- [x] Crafting kapalı (resource yok)
+- [x] qb-adminmenu + txAdmin doc
 
 ---
 
-## Faz 3 — İçerik & büyüme (ÖNCELİK: DÜŞÜK)
+## Faz 3 — P4+ backlog
 
-- [ ] Konut: `qb-apartments` veya `qb-houses`
-- [ ] Oyuncu araç satışı: `qb-vehiclesales`
-- [ ] Tamirci: `qb-mechanicjob`
-- [ ] Minimal telefon (text SMS) veya tamamen chat tabanlı
-- [ ] Özel MLO / harita (performans budget ile)
-- [ ] Faction başvuruları (PD, EMS, mekanik)
+→ [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md) — açılış sonrası
 
 ---
 
-## Faz 4 — Launch hazırlığı
+## Faz 4 — Launch (operasyonel)
 
-- [ ] Kapalı beta (5–10 oyuncu, stress test)
-- [ ] `resmon` / txAdmin performans profili
-- [ ] 48+ slot hedefi için sunucu donanımı ve OneSync testi
-- [ ] Whitelist + Discord başvuru botu
-- [ ] Tanıtım materyalleri
+→ [ADIM-05](./gelistirme/ADIM-05-Kapali-Beta.md) · [ADIM-07](./gelistirme/ADIM-07-Acilis.md) · [TODO.md](./TODO.md)
 
 ---
 
@@ -231,11 +207,11 @@ pma-voice, qb-radio — bilinçli kapalı (text RP)
 | Kontrol | Durum |
 |---------|--------|
 | Sırlar `.gitignore`'da | ✅ |
-| Client'tan para/item verme yok | ⚠️ Tüm ekonomi server-side doğrulanmalı |
+| Client'tan para/item verme yok | ✅ rp-dealership server-side |
 | Event spam koruması | ✅ rp-chat, rp-mileage, rp-dealership |
-| SQL injection | ✅ oxmysql parametreli sorgular |
-| Admin komutları ACE korumalı | ⚠️ Gözden geçir |
-| Anti-cheat (opsiyonel) | Faz 4 — Electron/FiveGuard vb. |
+| SQL injection (custom kod) | ✅ oxmysql parametreli |
+| Admin komutları ACE korumalı | ✅ admin/god |
+| Anti-cheat | P4+ backlog |
 
 ---
 
@@ -251,25 +227,13 @@ qb-core
 
 ---
 
-## Önerilen çalışma sırası
+## Önerilen sıra (operasyonel)
 
-### Şimdi
-1. Oyun içi test — [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
-2. Galeri satın almayı tekrar dene (güvenlik düzeltmeleri sonrası)
-
-### Adım 05 — Kapalı beta
-3. Whitelist + [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
-
-### Adım 06 — P4+
-4. [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md)
-
-### En son
-5. [TEKNIK-BORC.md](./TEKNIK-BORC.md)
-
-### En son — teknik borç
-6. Yedek, MySQL kullanıcı, resmon, webhook logları — [TEKNIK-BORC.md](./TEKNIK-BORC.md)
-
-~~6. Faz 2.1 — Yaralanma~~ → **P4+**, MVP'de gerek yok
+1. [ADIM-04](./gelistirme/ADIM-04-Test-Cila.md) — oyun içi test
+2. [ADIM-05](./gelistirme/ADIM-05-Kapali-Beta.md) — whitelist + beta
+3. [ADIM-07](./gelistirme/ADIM-07-Acilis.md) — açılış
+4. [ADIM-06](./gelistirme/ADIM-06-P4-Plan.md) — ihtiyaç halinde
+5. [ADIM-08](./gelistirme/ADIM-08-Teknik-Borc.md) — en son
 
 ---
 
@@ -277,9 +241,8 @@ qb-core
 
 | Dosya | Açıklama |
 |-------|----------|
-| [TODO.md](./TODO.md) | Aktif görev listesi |
-| [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) | Güvenlik denetimi |
-| [TEKNIK-BORC.md](./TEKNIK-BORC.md) | En düşük öncelik |
+| [DURUM.md](./gelistirme/DURUM.md) | Geliştirme turları özeti |
+| [TODO.md](./TODO.md) | Operasyonel checklist |
 | [CHANGELOG.md](../CHANGELOG.md) | Yapılan değişiklikler |
 | [tanitim/README.md](./tanitim/README.md) | Türkçe sistem & meslek rehberleri |
 | `QBCore_2F0666.base/server.cfg.example` | Sunucu başlatma şablonu |

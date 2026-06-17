@@ -38,7 +38,7 @@ Hard RP sunucusunda **her oyuncunun 1 karakteri** vardır. Karakter silme oyuncu
 
 ## Whitelist
 
-Kapalı beta döneminde sunucu whitelist ile korunabilir. Detay: [ADIM-01](../gelistirme/ADIM-01-MVP-Temel.md)
+> **Test döneminde kapalı** — herkes girebilir. Beta öncesi açılacak: [ADIM-05](../gelistirme/ADIM-05-Kapali-Beta.md)
 
 ## Teknik
 

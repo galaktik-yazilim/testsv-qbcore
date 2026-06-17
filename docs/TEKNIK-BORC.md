@@ -3,9 +3,9 @@
 > **En düşük öncelik.** Sunucu ayakta, oyuncu içeride, beta/açılış akışı oturduktan **sonra** ele alınır.  
 > Unutulmasın diye burada; şu an bloklayıcı değil.
 
-Öncelik sırası: **Sunucuyu aç** → **Kapalı beta** → **P4+ özellikler** → **bu liste**.
+Öncelik sırası: **Sunucuyu aç** → **Kapalı beta** → **Açılış** → **P4+ özellikler** → **bu liste**.
 
-Aktif işler: [TODO.md](./TODO.md)
+Tur rehberi: [ADIM-08-Teknik-Borc.md](./gelistirme/ADIM-08-Teknik-Borc.md) · Özet: [DURUM.md](./gelistirme/DURUM.md)
 
 ---
 

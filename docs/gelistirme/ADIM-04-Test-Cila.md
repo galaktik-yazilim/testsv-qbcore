@@ -76,4 +76,5 @@ Sonra: whitelist aç, kapalı beta checklist, Discord.
 | 01 | MVP temel | [ADIM-01-MVP-Temel.md](./ADIM-01-MVP-Temel.md) |
 | 02 | Kapalı beta prep | [ADIM-02-Kapali-Beta.md](./ADIM-02-Kapali-Beta.md) |
 | 03 | Açılış altyapısı | [ADIM-03-Acilis.md](./ADIM-03-Acilis.md) |
-| 04 | Test & cila | Bu dosya |
+| 04 | Test & cila | [ADIM-04-Test-Cila.md](./ADIM-04-Test-Cila.md) |
+| 05–08 | Beta → açılış → borç | [DURUM.md](./DURUM.md) |
