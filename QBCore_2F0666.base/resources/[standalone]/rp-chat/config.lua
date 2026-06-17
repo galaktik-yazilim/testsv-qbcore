@@ -65,6 +65,7 @@ Config.RulesMessages = {
     'Los Santos (Amerika) evreni — arayüz Türkçe, mesafe/km metrik (m, km).',
     'Voice yok; chat: T, /me, /ame, /do, /s, /w, /b. OOC: /b.',
     'Fear RP + NLRP. 1 karakter. Araç: M kontak, K kilit, L kemer, /km.',
+    'Interior takılması: /disari · /fdoor · /dimsifirla.',
     'Detay: docs/tanitim/sunucu-kurallari.md · /komutlar',
 }
 

@@ -18,10 +18,10 @@ local function getInteractCoords(data)
 end
 
 local function setFuel(vehicle, amount)
-    if GetResourceState('LegacyFuel') == 'started' then
-        exports['LegacyFuel']:SetFuel(vehicle, amount)
-    elseif GetResourceState('qb-fuel') == 'started' then
+    if GetResourceState('qb-fuel') == 'started' then
         exports['qb-fuel']:SetFuel(vehicle, amount)
+    elseif GetResourceState('LegacyFuel') == 'started' then
+        exports['LegacyFuel']:SetFuel(vehicle, amount)
     end
 end
 

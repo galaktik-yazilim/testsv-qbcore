@@ -1,4 +1,4 @@
-# Yasak / istenmeyen resource kontrolu (MVP listesi disi)
+# server.cfg dogrulama — yasak resource + zorunlu MVP ensure
 # Kullanim: .\scripts\verify-server-cfg.ps1
 
 $ErrorActionPreference = "Stop"
@@ -24,6 +24,8 @@ if (-not $cfgPath) {
 Write-Host "Kontrol edilen: $cfgPath"
 
 $content = Get-Content $cfgPath -Raw
+$failed = $false
+
 $forbidden = @(
     'qb-phone',
     'qb-vehicleshop',
@@ -34,22 +36,50 @@ $forbidden = @(
     'qb-drugs'
 )
 
-$warn = @()
+$required = @(
+    'qb-core',
+    'qb-fuel',
+    'qb-garages',
+    'rp-chat',
+    'rp-dealership',
+    'rp-ignition',
+    'rp-mileage'
+)
+
+$forbiddenFound = @()
 foreach ($res in $forbidden) {
     if ($content -match "(?m)^\s*ensure\s+$([regex]::Escape($res))\s*$") {
-        $warn += $res
+        $forbiddenFound += $res
     }
 }
 
-if ($warn.Count -eq 0) {
-    Write-Host "[OK] Yasakli resource ensure edilmiyor."
-    exit 0
+$missingRequired = @()
+foreach ($res in $required) {
+    if ($content -notmatch "(?m)^\s*ensure\s+$([regex]::Escape($res))\s*$") {
+        $missingRequired += $res
+    }
 }
 
-Write-Host "[UYARI] Asagidaki resource'lar MVP disi - kaldirin veya bilincli ekleyin:"
-foreach ($r in $warn) {
-    Write-Host "  - ensure $r"
+if ($forbiddenFound.Count -eq 0) {
+    Write-Host "[OK] Yasakli resource ensure edilmiyor."
+} else {
+    $failed = $true
+    Write-Host "[HATA] MVP disi resource ensure ediliyor:"
+    foreach ($r in $forbiddenFound) {
+        Write-Host "  - ensure $r"
+    }
+    Write-Host "Text RP icin qb-phone, pma-voice, qb-radio kapali kalmali."
 }
-Write-Host ""
-Write-Host "Text RP icin ozellikle qb-phone, pma-voice, qb-radio kapali kalmali."
-exit 1
+
+if ($missingRequired.Count -eq 0) {
+    Write-Host "[OK] Zorunlu MVP resource'lari ensure ediliyor."
+} else {
+    $failed = $true
+    Write-Host "[HATA] Eksik ensure satirlari:"
+    foreach ($r in $missingRequired) {
+        Write-Host "  - ensure $r"
+    }
+}
+
+if ($failed) { exit 1 }
+exit 0

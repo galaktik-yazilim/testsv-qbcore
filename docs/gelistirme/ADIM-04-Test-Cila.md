@@ -25,6 +25,8 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Tur 11 spawn | Legion varsayılan, inside metadata — [ADIM-11](./ADIM-11-Spawn-Dis-Guvenlik.md) |
 | Tur 12 UI | Chat çift mesaj, HUD, galeri spawn — [ADIM-12](./ADIM-12-UI-Cila.md) |
 | Tur 13 | Giriş fix, hoş geldin kapalı, galeri çift tık — [ADIM-13](./ADIM-13-Stabilizasyon.md) |
+| Tur 14 | `/disari`, garaj qb-fuel, mods kaydı — [ADIM-14](./ADIM-14-Garaj-Interior.md) |
+| Tur 15 | HUD/dealership qb-fuel, garaj TR, verify script — [ADIM-15](./ADIM-15-MVP-Cila.md) |
 
 ---
 

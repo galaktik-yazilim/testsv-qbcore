@@ -39,8 +39,11 @@
 | `/911` | Acil çağrı (PD / EMS) |
 | `/km` | Araç kilometresi (içindeyken) |
 | `/komutlar` | Tüm komutların kısa özeti |
+| `/disari` | İç mekândan dışarı çık (takılma kurtarma) |
+| `/fdoor` | Bina çıkış kapısına ışınlan |
+| `/dimsifirla` | Ana boyuta (dim 0) dön |
 
-Global chat yoktur. OOC için `/b` kullanın (eski `/ooc` kapalı). Admin duyuru: `/a`.
+Interior'da sıkışırsan önce **`/disari`** dene; olmazsa `/fdoor` veya `/dimsifirla`. Cooldown uygulanır. OOC için `/b` kullanın (eski `/ooc` kapalı). Admin duyuru: `/a`.
 
 ## 4. Acil servisler
 

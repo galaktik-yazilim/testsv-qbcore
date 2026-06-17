@@ -1,6 +1,6 @@
 # Genel İlerleme
 
-> **Son güncelleme:** 2025-06-17 — Tur 12 UI & chat cila  
+> **Son güncelleme:** 2025-06-17 — Tur 15 MVP cila paketi  
 > **Hedef:** MVP sunucunun kapalı beta → açılış yolu (P4+ backlog hariç)
 
 ---
@@ -76,6 +76,7 @@ P4+ (konut, telefon, injury): [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.
 | 2025-06-17 | Fix: multichar SetMetaData giriş hatası; hoş geldin chat kapatıldı | 58% |
 | 2025-06-17 | Tur 13: galeri çift satın alma koruması, giriş stabilizasyonu | 58% |
 | 2025-06-17 | Tur 14: `/disari`, qb-garages qb-fuel + mods kaydı | 58% |
+| 2025-06-17 | Tur 15: HUD/dealership qb-fuel, garaj TR etiketleri, verify script genişletme | 58% |
 
 ---
 

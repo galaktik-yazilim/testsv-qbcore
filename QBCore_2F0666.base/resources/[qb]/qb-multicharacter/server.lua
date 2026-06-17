@@ -298,6 +298,7 @@ RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
             TriggerClientEvent('qb-multicharacter:client:closeNUI', src)
             TriggerClientEvent('apartments:client:setupSpawnUI', src, newData)
             GiveStarterItems(src)
+            clearStaleInsideMetadata(src)
         else
             print('^2[qb-core]^7 ' .. GetPlayerName(src) .. ' has successfully loaded!')
             QBCore.Commands.Refresh(src)

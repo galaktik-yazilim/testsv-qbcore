@@ -2,6 +2,22 @@ local QBCore = exports['qb-core']:GetCoreObject({ 'Functions' })
 local PlayerData = QBCore.Functions.GetPlayerData()
 local config = Config
 local speedMultiplier = config.UseMPH and 2.23694 or 3.6
+
+local function getFuelExportResource()
+    if GetResourceState('qb-fuel') == 'started' then
+        return 'qb-fuel'
+    end
+    if GetResourceState('LegacyFuel') == 'started' then
+        return 'LegacyFuel'
+    end
+end
+
+local function readVehicleFuel(vehicle)
+    if not vehicle or vehicle == 0 then return 100 end
+    local resource = getFuelExportResource()
+    if not resource then return 100 end
+    return exports[resource]:GetFuel(vehicle)
+end
 local seatbeltOn = false
 local cruiseOn = false
 local showAltitude = false
@@ -754,7 +770,7 @@ local function getFuelLevel(vehicle)
     local updateTick = GetGameTimer()
     if (updateTick - lastFuelUpdate) > 2000 then
         lastFuelUpdate = updateTick
-        lastFuelCheck = math.floor(exports['LegacyFuel']:GetFuel(vehicle))
+        lastFuelCheck = math.floor(readVehicleFuel(vehicle))
     end
     return lastFuelCheck
 end
@@ -1033,7 +1049,7 @@ CreateThread(function()
         if LocalPlayer.state.isLoggedIn then
             local ped = PlayerPedId()
             if IsPedInAnyVehicle(ped, false) and not IsThisModelABicycle(GetEntityModel(GetVehiclePedIsIn(ped, false))) then
-                if exports['LegacyFuel']:GetFuel(GetVehiclePedIsIn(ped, false)) <= 20 then -- At 20% Fuel Left
+                if readVehicleFuel(GetVehiclePedIsIn(ped, false)) <= 20 then
                     if Menu.isLowFuelChecked then
                         TriggerServerEvent('InteractSound_SV:PlayOnSource', 'pager', 0.10)
                         QBCore.Functions.Notify(Lang:t('notify.low_fuel'), 'error')

@@ -5,7 +5,7 @@
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 14 garaj & interior çıkış
+Son güncelleme: Tur 15 MVP son cila paketi
 
 ---
 
@@ -34,6 +34,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [12](./ADIM-12-UI-Cila.md) | UI & chat cila | ✅ | ✅ | Chat/HUD/galeri test |
 | [13](./ADIM-13-Stabilizasyon.md) | Stabilizasyon | ✅ | ✅ | Giriş + galeri çift tık |
 | [14](./ADIM-14-Garaj-Interior.md) | Garaj & `/disari` | ✅ | ✅ | Garaj park/çıkar |
+| [15](./ADIM-15-MVP-Cila.md) | MVP son cila | ✅ | ✅ | Yakıt HUD, verify script |
 
 ---
 

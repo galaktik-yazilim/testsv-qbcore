@@ -58,6 +58,8 @@ end, 'user')
 
 RegisterNetEvent('rp-chat:server:disariDone', function()
     local src = source
+    if not QBCore.Functions.GetPlayer(src) then return end
+
     local bucket = GetPlayerRoutingBucket(src)
 
     if bucket ~= 0 then

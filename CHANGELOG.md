@@ -12,12 +12,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - [komutlar.md](docs/tanitim/komutlar.md) — tüm aktif komutlar (helper text formatı)
 - **`/komutlar`** — oyun içi komut özeti (`rp-chat`, yetkiye göre PD/EMS/admin bölümleri)
 - Tur 09: loading Los Santos metinleri, hoş geldin chat, `rp-ignition` phone bağımlılığı kaldırıldı, `toggle-whitelist.ps1`
-- Tur 10: `scripts/verify-server-cfg.ps1` — yasak resource (`qb-phone`, voice vb.) kontrolü
+- Tur 10: `scripts/verify-server-cfg.ps1` — yasak + zorunlu MVP ensure kontrolü
 - [ADIM-10-Giris-PD-Cila.md](docs/gelistirme/ADIM-10-Giris-PD-Cila.md)
 - Tur 11: Legion Meydanı varsayılan spawn, inside metadata temizliği — [ADIM-11](docs/gelistirme/ADIM-11-Spawn-Dis-Guvenlik.md)
 - Tur 12: chat çift mesaj fix, HUD hizalama, galeri spawn — [ADIM-12](docs/gelistirme/ADIM-12-UI-Cila.md)
 - Tur 13: galeri çift satın alma, giriş stabilizasyon — [ADIM-13](docs/gelistirme/ADIM-13-Stabilizasyon.md)
 - Tur 14: garaj qb-fuel, mods kaydı, `/disari` iyileştirme — [ADIM-14](docs/gelistirme/ADIM-14-Garaj-Interior.md)
+- Tur 15: HUD/dealership qb-fuel, garaj TR etiketleri, verify genişletme — [ADIM-15](docs/gelistirme/ADIM-15-MVP-Cila.md)
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
 ### Changed
@@ -31,7 +32,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-policejob:** PD alert / `/fine` — `qb-phone` kapalıyken güvenli fallback; TR locale tamamlandı
 - **Varsayılan spawn:** havaalanı → **Legion Meydanı** (açık alan, yeni oyuncu UX)
 - **qb-hud:** stat satırı minimap hizası, tek renk paleti, nakit kutusu sadeleştirme
-- **rp-chat:** chat pencere/yazı boyutu hafif büyütme
+- **qb-hud:** yakıt okuma `qb-fuel` öncelikli (LegacyFuel fallback)
+- **rp-dealership:** satın alma yakıtı `qb-fuel` öncelikli
+- **qb-garages:** tüm oyuncuya görünen garaj/blip etiketleri Türkçe
+- **`/kurallar`:** interior kurtarma (`/disari`, `/fdoor`, `/dimsifirla`) satırı
 
 ### Fixed
 - **qb-multicharacter:** giriş hatası `SetMetaData` nil — `Player.Functions.SetMetaData` kullanımı

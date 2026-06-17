@@ -28,4 +28,4 @@
 
 ## Sonraki adım
 
-[ADIM-04-Test-Cila.md](./ADIM-04-Test-Cila.md)
+[Tur 15 — MVP cila](./ADIM-15-MVP-Cila.md) · [ADIM-04 test checklist](./ADIM-04-Test-Cila.md)

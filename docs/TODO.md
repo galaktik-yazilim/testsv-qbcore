@@ -25,11 +25,14 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 - [ ] Restart
 - [ ] Karakter, chat, `/km`, galeri, garaj
 - [ ] **Tur 12:** notify/chat tek satır; HUD hizası; galeri spawn vitrin üstüne binmiyor
+- [ ] **Tur 15:** garaj TR etiketleri; HUD yakıt; verify script tam kontrol
 - [ ] **Yeni karakter** → Legion Meydanı civarında açık alanda spawn
 - [ ] HUD km/s + km; `/kurallar` evren satırı
 - [ ] LS Cars → araç al → **Pillbox Garajı** park / çıkar
 - [ ] Interior'da **`/disari`**
-- [ ] `.\scripts\verify-server-cfg.ps1` — qb-phone ensure yok
+- [ ] Garaj menüsü / blip etiketleri Türkçe (**Açık Otopark**, **Pillbox Garajı**)
+- [ ] Araç yakıt HUD hatasız (qb-fuel)
+- [ ] `.\scripts\verify-server-cfg.ps1` — yasak + zorunlu MVP ensure OK
 
 ---
 
