@@ -5,9 +5,9 @@
 :root {
     --chat-left: 1.2rem;
     --chat-top: 1.2rem;
-    --line-h: 1.35rem;
+    --line-h: 1.5rem;
     --visible-lines: 12;
-    --chat-width: min(30vw, 460px);
+    --chat-width: min(34vw, 500px);
 }
 
 /* ── Mesaj penceresi: sol üst, şeffaf (RAGE MP tarzı) ── */
@@ -37,7 +37,7 @@
 
 /* ── Mesaj satırı: ince siyah kontur ── */
 .msg {
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     color: #ffffff;
     line-height: var(--line-h);
     margin-bottom: 0;
@@ -113,7 +113,7 @@
 }
 
 .suggestions .suggestion {
-    font-size: 0.78rem;
+    font-size: 0.86rem;
 }
 
 textarea {
@@ -121,7 +121,7 @@ textarea {
     color: #ffffff;
     padding: 2px 4px;
     margin: 0;
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     line-height: var(--line-h);
     min-height: var(--line-h);
     resize: none;

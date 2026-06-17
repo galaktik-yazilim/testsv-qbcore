@@ -185,8 +185,12 @@ div#q-loading-bar {
     --map-width: 29vh;
     --map-height: 18.5vh;
     --map-bottom: 6.3%;
-    --stat-size: 2.15rem;
-    --stat-gap: 1.2vh;
+    --stat-size: 2.25rem;
+    --stat-gap: 0.75vh;
+    --stat-fill: rgba(235, 235, 235, 0.88);
+    --stat-fill-warn: rgba(210, 72, 72, 0.92);
+    --stat-track: rgba(255, 255, 255, 0.12);
+    --hud-panel: rgba(0, 0, 0, 0.48);
 }
 
 #ui-container {
@@ -197,20 +201,25 @@ div#q-loading-bar {
     pointer-events: none;
 }
 
-#playerhud {
+#playerhud,
+#playerHud {
     position: absolute;
     left: calc(var(--map-left) + var(--map-width) + var(--stat-gap));
-    bottom: calc(var(--map-bottom) + (var(--map-height) - var(--stat-size)) / 2);
+    bottom: var(--map-bottom);
+    height: var(--map-height);
     display: flex;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.28rem;
+    padding: 0 0.42rem;
+    background: var(--hud-panel);
+    box-sizing: border-box;
 }
 
-/* Kare stat ikonları (RAGE MP) */
+/* Kare stat ikonları — tek renk paleti, minimap ile aynı dikey hizada */
 .stat-box {
     position: relative;
-    width: 2.15rem;
-    height: 2.15rem;
+    width: var(--stat-size);
+    height: var(--stat-size);
     flex-shrink: 0;
     overflow: hidden;
 }
@@ -218,7 +227,8 @@ div#q-loading-bar {
 .stat-box-track {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: var(--stat-track);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 0;
 }
 
@@ -228,10 +238,10 @@ div#q-loading-bar {
     right: 0;
     bottom: 0;
     height: var(--stat-pct, 100%);
-    background: var(--stat-color, #ffffff);
-    opacity: 0.92;
+    background: var(--stat-color, var(--stat-fill));
+    opacity: 1;
     border-radius: 0;
-    transition: height 0.25s ease;
+    transition: height 0.25s ease, background 0.2s ease;
 }
 
 .stat-box-icon {
@@ -239,10 +249,11 @@ div#q-loading-bar {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    font-size: 0.82rem !important;
+    font-size: 0.88rem !important;
     z-index: 2;
     margin: 0 !important;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    color: #ffffff !important;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.85);
 }
 
 #playerhud .q-ml-xl {
@@ -426,25 +437,28 @@ div#q-loading-bar {
     font-weight: 300;
 }
 
-/* Nakit — stat ikonlarının sağında yeşil kutu */
+/* Nakit — stat satırıyla aynı stil */
 #money-cash-ragemp {
     display: flex;
     align-items: center;
-    margin-left: 0.15rem;
-    padding: 0.25rem 0.55rem;
-    min-height: 2.15rem;
-    background: rgba(0, 120, 40, 0.85);
+    margin-left: 0.2rem;
+    padding: 0 0.6rem;
+    height: var(--stat-size);
+    background: var(--stat-track);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 0;
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 600;
-    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    color: #f0f0f0;
     white-space: nowrap;
 }
 
 #money-cash-ragemp .cash-sign {
-    margin-right: 0.15rem;
-    opacity: 0.9;
+    margin-right: 0.2rem;
+    opacity: 0.75;
+    font-weight: 500;
 }
 
 /* Vehicle HUD */

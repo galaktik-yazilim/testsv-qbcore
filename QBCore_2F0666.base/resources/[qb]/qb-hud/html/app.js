@@ -718,6 +718,9 @@ const moneyHud = Vue.createApp({
 
 // PLAYER HUD
 
+const STAT_FILL = 'rgba(235, 235, 235, 0.88)';
+const STAT_WARN = 'rgba(210, 72, 72, 0.92)';
+
 const playerHud = {
     data() {
         return {
@@ -886,9 +889,9 @@ const playerHud = {
                 this.showHealth = true;
             }
             if (data.playerDead === false) {
-                this.healthColor = "#3FA554";
+                this.healthColor = data.health <= 25 ? STAT_WARN : STAT_FILL;
             } else {
-                this.healthColor = "#ff0000";
+                this.healthColor = STAT_WARN;
                 this.health = 100;
             }
 
@@ -902,11 +905,7 @@ const playerHud = {
                 this.showArmor = true;
             }
 
-            if (data.armor <= 0) {
-                this.armorColor = "#FF0000";
-            } else {
-                this.armorColor = "#326dbf";
-            }
+            this.armorColor = data.armor <= 0 ? STAT_WARN : STAT_FILL;
 
             if (data.dynamicHunger == true) {
                 if (data.hunger >= 100) {
@@ -917,13 +916,7 @@ const playerHud = {
             } else if (data.dynamicHunger == false) {
                 this.showHunger = true;
             }
-            if (data.hunger >= 100) {
-                this.hungerColor = "#dd6e14";
-            } else if (data.hunger <= 30) {
-                this.hungerColor = "#ff0000";
-            } else {
-                this.hungerColor = "#dd6e14";
-            }
+            this.hungerColor = data.hunger <= 30 ? STAT_WARN : STAT_FILL;
 
             if (data.dynamicThirst == true) {
                 if (data.thirst >= 100) {
@@ -934,13 +927,7 @@ const playerHud = {
             } else if (data.dynamicThirst == false) {
                 this.showThirst = true;
             }
-            if (data.thirst >= 100) {
-                this.thirstColor = "#1a7cad";
-            } else if (data.thirst <= 30) {
-                this.thirstColor = "#ff0000";
-            } else {
-                this.thirstColor = "#1a7cad";
-            }
+            this.thirstColor = data.thirst <= 30 ? STAT_WARN : STAT_FILL;
 
             this.showStress = false;
 
