@@ -10,6 +10,11 @@ Config.MaxMessageLength = 256
 Config.CommandCooldownMs = 1500
 Config.VehicleActionCooldownMs = 800
 
+-- /911 acil çağrı (text dispatch — panel yok)
+Config.Emergency911Jobs = { 'police', 'ambulance' }
+Config.Emergency911RequireOnDuty = true
+Config.Emergency911CooldownMs = 60000
+
 -- Renkler (RGB)
 Config.Colors = {
     say      = { 255, 255, 255 },
@@ -21,6 +26,7 @@ Config.Colors = {
     ooc      = { 255, 151, 133 },
     admin    = { 180, 50, 50 },
     system   = { 100, 200, 100 },
+    emergency = { 255, 90, 90 },
 }
 
 -- QBCore toast (Notify) → chat yönlendirmesi
@@ -40,4 +46,12 @@ Config.NotifyPrefixes = {
     warning = '!',
     primary = '»',
     info    = '»',
+}
+
+-- /kurallar — oyuncuya chat'te gösterilen özet (detay: docs/tanitim/sunucu-kurallari.md)
+Config.RulesMessages = {
+    'Hard RP / text-based sunucu — iletişim chat ile yapılır, sesli konuşma yoktur.',
+    'IC/OOC ayrımı: OOC için /b kullanın. Metagaming ve powergaming yasaktır.',
+    'Fear RP: tehdit altında mantıklı davranın. NLRP: ölümden sonra olayı unutursunuz.',
+    'Tek karakter kuralı geçerlidir. Detaylı kurallar: docs/tanitim/sunucu-kurallari.md',
 }

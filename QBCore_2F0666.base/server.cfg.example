@@ -40,14 +40,7 @@ sv_scriptHookAllowed 0
 # OneSync (slot sayısına göre ayarlayın)
 ## set onesync on
 
-# Voice — text RP sunucusunda opsiyonel; açıksa mesafe sınırı önerilir
-setr voice_useNativeAudio true
-setr voice_defaultCycle "GRAVE"
-setr voice_defaultVolume 0.3
-setr voice_enableRadioAnim 1
-setr voice_syncData 1
-setr voice_useSendingRangeOnly true
-setr voice_enableUi 0
+# Text-based RP — ses altyapısı bilinçli olarak kapalı (pma-voice / qb-radio yüklenmez)
 
 # QBCore
 setr qb_locale "tr"
@@ -99,10 +92,6 @@ ensure rp-chat
 ensure rp-ignition
 ensure rp-mileage
 ensure rp-dealership
-
-# --- Ses (opsiyonel — text RP'de kapatabilirsiniz) ---
-ensure pma-voice
-ensure qb-radio
 
 # --- Haritalar ---
 ensure dealer_map

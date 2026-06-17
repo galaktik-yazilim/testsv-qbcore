@@ -8,9 +8,41 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 ## [Unreleased]
 
 ### Planlanan
-- Whitelist ve karakter başvuru akışı
-- Minimal HUD veya `qb-hud` tam sadeleştirme
-- Taşımacılık mesleği rehberi + resource
+- Adım 03: Discord + başvuru + yedekleme + açılış
+
+---
+
+## [0.7.0] — 2025-06-17
+
+### Added
+- **Adım 02** — `/911` text acil çağrı, `/kurallar` komutu
+- `docs/tanitim/sunucu-kurallari.md` — tam kural metni
+- `docs/gelistirme/KAPALI-BETA-CHECKLIST.md`
+
+### Changed
+- **Voice kaldırıldı:** `pma-voice`, `qb-radio` artık start edilmiyor (text RP)
+- `server.cfg` voice convar'ları temizlendi
+
+### Security
+- `/911`: cooldown, sanitizasyon, yalnızca on-duty PD/EMS
+
+---
+
+## [0.6.0] — 2025-06-17
+
+### Added
+- **Adım 01 MVP temel** — `docs/gelistirme/ADIM-01-MVP-Temel.md`
+- Karakter rehberi — `docs/tanitim/sistemler/karakter-olusturma.md`
+- Sunucu tarafı karakter doğrulama (isim, yaş 18+, slot limiti)
+
+### Changed
+- Multichar: 1 slot, oyuncu karakter silme kapalı
+- Başlangıç: $150 cash + $850 bank; işsiz maaş $0; paycheck 60 dk
+- `loadHouseData`: yalnızca `qb-houses` aktifken çalışır
+
+### Security
+- `createCharacter` sunucu validasyonu; client bypass engellendi
+- Karakter limiti ve isim sanitizasyonu sunucuda zorunlu
 
 ---
 

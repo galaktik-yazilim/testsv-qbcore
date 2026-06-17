@@ -2,7 +2,7 @@
 
 ## Sunucu türü
 
-Bu proje **hard roleplay**, **text-based** (yazı tabanlı) bir FiveM sunucusudur. Sesli konuşma ikincil plandadır; iletişim chat üzerinden yapılır.
+Bu proje **hard roleplay**, **text-based** (yazı tabanlı) bir FiveM sunucusudur. **Sesli konuşma (voice) kapalıdır** — tüm iletişim chat üzerinden yapılır.
 
 ## İlk kurulum (sunucu sahibi)
 
@@ -41,8 +41,10 @@ Bu proje **hard roleplay**, **text-based** (yazı tabanlı) bir FiveM sunucusudu
 | `/s mesaj` | ~3m | Fısıltı |
 | `/w mesaj` | ~40m | Bağırma |
 | `/b mesaj` | ~20m | Yerel OOC |
+| `/911 mesaj` | PD/EMS | Acil çağrı (görevdekilere) |
+| `/kurallar` | — | Kural özeti |
 
-Detay: [rp-chat.md](./sistemler/rp-chat.md)
+Detay: [rp-chat.md](./sistemler/rp-chat.md) · Tam kurallar: [sunucu-kurallari.md](./sunucu-kurallari.md)
 
 ## Araç kullanımı (özet)
 

@@ -5,6 +5,99 @@ local Countries = json.decode(LoadResourceFile(GetCurrentResourceName(), '/count
 
 -- Functions
 
+local function trim(value)
+    if type(value) ~= 'string' then return '' end
+    return (value:gsub('^%s*(.-)%s*$', '%1'))
+end
+
+local function getMaxCharacters(license)
+    local numOfChars = Config.DefaultNumberOfCharacters
+    if Config.PlayersNumberOfCharacters and next(Config.PlayersNumberOfCharacters) then
+        for i = 1, #Config.PlayersNumberOfCharacters do
+            local entry = Config.PlayersNumberOfCharacters[i]
+            if entry.license == license then
+                numOfChars = entry.numberOfChars
+                break
+            end
+        end
+    end
+    return numOfChars
+end
+
+local function countCharacters(license)
+    if not license then return 0 end
+    return MySQL.scalar.await('SELECT COUNT(*) FROM players WHERE license = ?', { license }) or 0
+end
+
+local function isValidNamePart(name)
+    name = trim(name)
+    if name == '' then return false end
+
+    local len = utf8.len(name)
+    if not len or len < Config.MinNameLength or len > Config.MaxNameLength then
+        return false
+    end
+
+    if name:find('[%d<>\"\\;/|{}%[%]%%@#%$%^%(%)=+%*%?]') then
+        return false
+    end
+
+    if name:find('%s%s') then
+        return false
+    end
+
+    return true
+end
+
+local function isValidBirthdate(dateStr)
+    if type(dateStr) ~= 'string' then return false end
+    local y, m, d = dateStr:match('^(%d%d%d%d)-(%d%d)-(%d%d)$')
+    if not y then return false end
+
+    y, m, d = tonumber(y), tonumber(m), tonumber(d)
+    if not y or not m or not d then return false end
+    if m < 1 or m > 12 or d < 1 or d > 31 then return false end
+
+    local now = os.date('*t')
+    local age = now.year - y
+    if now.month < m or (now.month == m and now.day < d) then
+        age = age - 1
+    end
+
+    return age >= Config.MinAge and age <= Config.MaxAge
+end
+
+local function validateCreatePayload(data)
+    if type(data) ~= 'table' then return false end
+    if not isValidNamePart(data.firstname) or not isValidNamePart(data.lastname) then
+        return false
+    end
+    if not isValidBirthdate(data.birthdate) then
+        return false
+    end
+    if data.gender ~= 0 and data.gender ~= 1 then
+        return false
+    end
+    if type(data.nationality) ~= 'string' or trim(data.nationality) == '' then
+        return false
+    end
+    if trim(data.nationality):find('[<>\"\\;/|{}]') then
+        return false
+    end
+    return true
+end
+
+local function sanitizeCreatePayload(data)
+    return {
+        cid = tonumber(data.cid) or 1,
+        firstname = trim(data.firstname):gsub('%s+', ' '),
+        lastname = trim(data.lastname):gsub('%s+', ' '),
+        birthdate = data.birthdate,
+        gender = data.gender == 1 and 1 or 0,
+        nationality = trim(data.nationality),
+    }
+end
+
 local function GiveStarterItems(source)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
@@ -28,6 +121,8 @@ local function GiveStarterItems(source)
 end
 
 local function loadHouseData(src)
+    if GetResourceState('qb-houses') ~= 'started' then return end
+
     local HouseGarages = {}
     local Houses = {}
     local result = MySQL.query.await('SELECT * FROM houselocations', {})
@@ -89,6 +184,8 @@ end)
 
 RegisterNetEvent('qb-multicharacter:server:loadUserData', function(cData)
     local src = source
+    if type(cData) ~= 'table' or type(cData.citizenid) ~= 'string' then return end
+
     if QBCore.Player.Login(src, cData.citizenid) then
         repeat
             Wait(10)
@@ -113,9 +210,26 @@ end)
 
 RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
     local src = source
-    local newData = {}
-    newData.cid = data.cid
-    newData.charinfo = data
+    if not validateCreatePayload(data) then
+        TriggerClientEvent('QBCore:Notify', src, 'Geçersiz karakter bilgisi.', 'error')
+        return
+    end
+
+    local license = QBCore.Functions.GetIdentifier(src, 'license')
+    if not license then return end
+
+    local maxChars = getMaxCharacters(license)
+    if countCharacters(license) >= maxChars then
+        TriggerClientEvent('QBCore:Notify', src, 'Karakter limitine ulaştınız.', 'error')
+        return
+    end
+
+    local clean = sanitizeCreatePayload(data)
+    local newData = {
+        cid = clean.cid,
+        charinfo = clean,
+    }
+
     if QBCore.Player.Login(src, false, newData) then
         repeat
             Wait(10)
@@ -142,6 +256,7 @@ end)
 
 RegisterNetEvent('qb-multicharacter:server:deleteCharacter', function(citizenid)
     local src = source
+    if type(citizenid) ~= 'string' or citizenid == '' then return end
     if not Config.EnableDeleteButton then return end
     QBCore.Player.DeleteCharacter(src, citizenid)
     TriggerClientEvent('QBCore:Notify', src, Lang:t('notifications.char_deleted'), 'success')
@@ -165,23 +280,8 @@ QBCore.Functions.CreateCallback('qb-multicharacter:server:GetServerLogs', functi
 end)
 
 QBCore.Functions.CreateCallback('qb-multicharacter:server:GetNumberOfCharacters', function(source, cb)
-    local src = source
-    local license = QBCore.Functions.GetIdentifier(src, 'license')
-    local numOfChars = 0
-
-    if next(Config.PlayersNumberOfCharacters) then
-        for _, v in pairs(Config.PlayersNumberOfCharacters) do
-            if v.license == license then
-                numOfChars = v.numberOfChars
-                break
-            else
-                numOfChars = Config.DefaultNumberOfCharacters
-            end
-        end
-    else
-        numOfChars = Config.DefaultNumberOfCharacters
-    end
-    cb(numOfChars, Countries)
+    local license = QBCore.Functions.GetIdentifier(source, 'license')
+    cb(getMaxCharacters(license), Countries)
 end)
 
 QBCore.Functions.CreateCallback('qb-multicharacter:server:setupCharacters', function(source, cb)

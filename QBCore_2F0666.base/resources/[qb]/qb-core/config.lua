@@ -7,10 +7,10 @@ QBCore.Config.UpdateInterval = 5                             -- how often to upd
 QBCore.Config.StatusInterval = 5000                          -- how often to check hunger/thirst status in milliseconds
 
 QBCore.Config.Money = {}
-QBCore.Config.Money.MoneyTypes = { cash = 500, bank = 5000, crypto = 0 } -- type = startamount - Add or remove money types for your server (for ex. blackmoney = 0), remember once added it will not be removed from the database!
+QBCore.Config.Money.MoneyTypes = { cash = 150, bank = 850, crypto = 0 } -- MVP: düşük başlangıç (toplam ~1000)
 QBCore.Config.Money.DontAllowMinus = { 'cash', 'crypto' }                -- Money that is not allowed going in minus
 QBCore.Config.Money.MinusLimit = -5000                                   -- The maximum amount you can be negative
-QBCore.Config.Money.PayCheckTimeOut = 10                                 -- The time in minutes that it will give the paycheck
+QBCore.Config.Money.PayCheckTimeOut = 60                                 -- MVP: saatlik (dakika); iş verilince job payment devreye girer
 QBCore.Config.Money.PayCheckSociety = false                              -- If true paycheck will come from the society account that the player is employed at, requires qb-management
 
 QBCore.Config.Player = {}
@@ -109,8 +109,8 @@ QBCore.Config.Server = {}                                    -- General server c
 QBCore.Config.Server.Closed = false                          -- Set server closed (no one can join except people with ace permission 'qbadmin.join')
 QBCore.Config.Server.ClosedReason = 'Server Closed'          -- Reason message to display when people can't join the server
 QBCore.Config.Server.Uptime = 0                              -- Time the server has been up.
-QBCore.Config.Server.Whitelist = false                       -- Enable or disable whitelist on the server
-QBCore.Config.Server.WhitelistPermission = 'admin'           -- Permission that's able to enter the server when the whitelist is on
+QBCore.Config.Server.Whitelist = false                       -- Kapalı beta: true yap + admin ACE whitelist (bkz. docs/gelistirme/ADIM-01)
+QBCore.Config.Server.WhitelistPermission = 'admin'           -- Whitelist açıkken girebilen yetki grubu
 QBCore.Config.Server.PVP = true                              -- Enable or disable pvp on the server (Ability to shoot other players)
 QBCore.Config.Server.Discord = ''                            -- Discord invite link
 QBCore.Config.Server.CheckDuplicateLicense = true            -- Check for duplicate rockstar license on join

@@ -18,6 +18,8 @@ Tüm oyuncular.
 | `/s` | 3 m | `/s gel buraya.` | Fısıltı |
 | `/w` | 40 m | `/w POLİS!` | Bağırma |
 | `/b` | 20 m | `/b lag var.` | Yerel OOC — `(( isim ))` formatında |
+| `/911` | PD/EMS | `/911 silahlı şüpheli` | Acil çağrı (60 sn cooldown) |
+| `/kurallar` | — | `/kurallar` | Kural özeti |
 
 ## RP örnekleri
 
@@ -64,3 +66,17 @@ QBCore bildirimleri (hata, başarı) chat'e yönlendirilir. Ekranda popup yerine
 | `/me` | qb-core'dan kaldırıldı; yalnızca rp-chat'te |
 
 Mesafe değerlerini `config.lua` içinden değiştirebilirsiniz.
+
+## /911 acil çağrı
+
+Text-based dispatch — panel yok. Görevdeki `police` ve `ambulance` job'ları chat'te `[911]` mesajı alır.
+
+```
+/911 kavga var, yardım edin
+```
+
+- 60 saniye cooldown
+- Konum yaklaşık X,Y olarak gönderilir
+- Görevde (on duty) personel yoksa çağrı iletilmez
+
+Detay: [sunucu-kurallari.md](../sunucu-kurallari.md)

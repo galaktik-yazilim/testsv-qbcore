@@ -12,7 +12,9 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 
 | Sistem | Dosya | Kısa açıklama |
 |--------|-------|---------------|
+| Sunucu kuralları | [sunucu-kurallari.md](./sunucu-kurallari.md) | Hard RP kuralları, ceza özeti |
 | Text RP Chat | [rp-chat.md](./sistemler/rp-chat.md) | Proximity chat, `/me`, `/do`, `/b` |
+| Karakter | [karakter-olusturma.md](./sistemler/karakter-olusturma.md) | 1 slot, isim kuralları, başlangıç parası |
 | Araç kontağı | [rp-ignition.md](./sistemler/rp-ignition.md) | Motor çalıştırma, text RP |
 | Kilometre | [rp-mileage.md](./sistemler/rp-mileage.md) | Araç km takibi |
 | Galeri | [rp-dealership.md](./sistemler/rp-dealership.md) | LS Cars araç satın alma |

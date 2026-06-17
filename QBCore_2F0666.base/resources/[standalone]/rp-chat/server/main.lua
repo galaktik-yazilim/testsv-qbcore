@@ -143,6 +143,72 @@ AddProximityCommand('w', 'Bağırarak konuş (~40m)', Config.ShoutRange, Config.
     return charName .. ' bağırır:', msg
 end)
 
+local emergencyJobs = {}
+for i = 1, #Config.Emergency911Jobs do
+    emergencyJobs[Config.Emergency911Jobs[i]] = true
+end
+
+local function GetEmergencyRecipients()
+    local recipients = {}
+    for _, playerId in ipairs(QBCore.Functions.GetPlayers()) do
+        local Player = QBCore.Functions.GetPlayer(playerId)
+        if Player then
+            local job = Player.PlayerData.job
+            if job and emergencyJobs[job.name] then
+                if not Config.Emergency911RequireOnDuty or job.onduty then
+                    recipients[#recipients + 1] = playerId
+                end
+            end
+        end
+    end
+    return recipients
+end
+
+QBCore.Commands.Add('911', 'Acil servislere text çağrı gönder (PD / EMS)', {
+    { name = 'mesaj', help = 'Acil durum açıklaması' },
+}, false, function(source, args)
+    if #args < 1 then
+        NotifyPlayer(source, 'Acil durumu kısaca yazmalısın.', 'error')
+        return
+    end
+    if not CheckCooldown(source, 'cmd:911', Config.Emergency911CooldownMs) then
+        NotifyPlayer(source, 'Yeni 911 çağrısı için biraz bekle.', 'warning')
+        return
+    end
+
+    local msg = SanitizeMessage(table.concat(args, ' '))
+    if not msg then return end
+
+    local ped = GetPlayerPed(source)
+    if ped == 0 then return end
+
+    local coords = GetEntityCoords(ped)
+    local loc = ('%.0f, %.0f'):format(coords.x, coords.y)
+    local charName = GetCharName(source)
+    local recipients = GetEmergencyRecipients()
+
+    if #recipients == 0 then
+        NotifyPlayer(source, 'Şu an görevde acil personel yok.', 'warning')
+        return
+    end
+
+    local label = '[911] ' .. charName
+    local body = ('Konum ~%s: %s'):format(loc, msg)
+
+    for i = 1, #recipients do
+        SendChat(recipients[i], Config.Colors.emergency, label, body)
+    end
+
+    NotifyPlayer(source, '911 çağrın gönderildi.', 'success')
+end, 'user')
+
+QBCore.Commands.Add('kurallar', 'Sunucu RP kurallarını göster', {}, false, function(source)
+    if not CheckCooldown(source, 'cmd:kurallar', 5000) then return end
+    for i = 1, #Config.RulesMessages do
+        SendChat(source, Config.Colors.system, '» Kural', Config.RulesMessages[i])
+    end
+end, 'user')
+
 exports('BroadcastProximity', BroadcastProximity)
 exports('GetCharName', GetCharName)
 exports('Notify', NotifyPlayer)

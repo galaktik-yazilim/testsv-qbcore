@@ -26,9 +26,9 @@ Başlangıçta **oynanabilir, güvenli, sade bir sunucu** hedeflenir. Gelişmiş
 ## Şu an neredeyiz?
 
 ```
-P0 ██████████░  ~%90   (kalan: resmon ölçümü, yerel server.cfg, MySQL kullanıcısı)
-P1 ██████░░░░  ~%60   (chat/araç bitti; karakter kuralları + whitelist kaldı)
-P2 ░░░░░░░░░░  %0     (henüz başlama)
+P0 ██████████░  ~%95   (kalan: resmon, MySQL kullanıcısı)
+P1 █████████░  ~%90   (whitelist açma kaldı)
+P2 ░░░░░░░░░░  checklist hazır — beta test bekliyor
 P3 ░░░░░░░░░░  %0
 P4 ░░░░░░░░░░  bilinçli ertelendi
 ```
@@ -43,9 +43,9 @@ P4 ░░░░░░░░░░  bilinçli ertelendi
 - [x] Custom `rp-*` event güvenliği
 - [x] `qb_locale` → `tr`
 - [x] Tanıtım dokümantasyonu (`docs/tanitim/`)
-- [ ] Yerel `server.cfg` güncelle (example'dan kopyala)
+- [x] Yerel `server.cfg` explicit ensure listesi (voice kaldırıldı)
 - [ ] MySQL: ayrı kullanıcı, minimum yetki, güçlü şifre
-- [ ] Boş sunucuda `resmon 1` — önce/sonra ms kaydet
+- [ ] Boş sunucuda `resmon 1` — voice kaldırıldıktan sonra ms kaydet
 
 ---
 
@@ -54,22 +54,24 @@ P4 ░░░░░░░░░░  bilinçli ertelendi
 > Text RP + karakter + araç + para. **Basit tut.**
 
 ### Karakter & giriş
-- [ ] Multichar slot: **1** (hard RP için yeterli; sonra artırılır)
-- [ ] Gerçekçi isim kuralı (config veya basit sunucu kuralı metni)
-- [ ] Whitelist: txAdmin veya `QBCore.Config.Server.Whitelist = true` + manuel onay
-- [ ] Başlangıç parası: düşük cash/bank (`qb-core` config) — tek rakam, karmaşık ekonomi yok
+- [x] Multichar slot: **1**
+- [x] Gerçekçi isim kuralı — sunucu tarafı doğrulama
+- [ ] Whitelist: kapalı beta için aç (config + txAdmin)
+- [x] Başlangıç parası: $150 cash + $850 bank, işsiz maaş $0
 
 ### Oyun içi minimum
 - [x] Proximity chat + `/me` `/do` `/b` `/s` `/w`
 - [x] Araç: galeri, kontak, km, garaj, yakıt
-- [ ] Sunucu kuralları metni (Discord + `docs/tanitim/genel-baslangic.md` güncelle)
-- [ ] Türkçe: sadece **aktif** resource locale'leri (tüm 56 değil)
+- [x] Sunucu kuralları + `/kurallar` + `/911`
+- [x] Voice kaldırıldı (`pma-voice`, `qb-radio`)
+- [ ] Türkçe: sadece **aktif** resource locale'leri
 
 ### Bilinçli olarak MVP'de yok
 - [—] Telefon, konut, meslek NPC'leri, soygun, drugs
 - [—] Özel yaralanma / downed scripti
-- [—] Dispatch, MDW, kanıt sistemi
+- [—] Dispatch paneli, MDW, kanıt sistemi
 - [—] Taşımacılık ve diğer meslekler
+- [—] Voice chat altyapısı
 
 ---
 
@@ -77,11 +79,11 @@ P4 ░░░░░░░░░░  bilinçli ertelendi
 
 > MVP stabil; gerçek oyuncu davranışına göre ince ayar.
 
-- [ ] 3–7 gün kapalı beta test planı (checklist)
-- [ ] PD/EMS: mevcut `qb-policejob` / `qb-ambulancejob` — sadece **config sadeleştirme**, yeni script yok
-- [ ] Basit `/911 [mesaj]` chat komutu (dispatch paneli **değil**)
+- [x] Kapalı beta checklist — [KAPALI-BETA-CHECKLIST.md](gelistirme/KAPALI-BETA-CHECKLIST.md)
+- [ ] PD/EMS config sadeleştirme (yeni script yok)
+- [x] `/911` text acil çağrı
 - [ ] Admin: txAdmin warn/kick/ban prosedürü dokümante et
-- [ ] Beta geri bildirimlerine göre chat mesafeleri / ekonomi rakamları ayarla
+- [ ] Beta testi (5–15 oyuncu)
 
 ---
 
@@ -126,16 +128,17 @@ P4 ░░░░░░░░░░  bilinçli ertelendi
 - [x] Galeri `[E]` interact, spawn bağımsız
 - [x] Kemer → chat entegrasyonu
 - [x] Tanıtım rehberleri (sistemler + polis/EMS taslağı)
+- [x] `/911`, `/kurallar`, voice kaldırma, sunucu kuralları
 
 </details>
 
 ---
 
-## Sıradaki 3 iş (önerilen sıra)
+## Sıradaki 3 iş
 
-1. **Yerel `server.cfg` güncelle** + sunucu restart
-2. **P1 karakter:** 1 slot + whitelist + düşük başlangıç parası
-3. **Kapalı beta** için 3–5 kişiyle chat/araç/galeri testi
+1. **Restart** + `resmon 1` (voice yok mu doğrula)
+2. **Whitelist aç** — kapalı beta
+3. **Beta checklist** ile 5–15 kişi test — [KAPALI-BETA-CHECKLIST.md](gelistirme/KAPALI-BETA-CHECKLIST.md)
 
 ---
 
@@ -144,4 +147,5 @@ P4 ░░░░░░░░░░  bilinçli ertelendi
 | Tarih | Not |
 |-------|-----|
 | 2025-06-17 | Öncelikler MVP odaklı yeniden düzenlendi; P4+ bilinçli ertelendi |
-| 2025-06-17 | P0 güvenlik + chat/araç geliştirmeleri tamamlandı |
+| 2025-06-17 | Adım 02: voice kaldırıldı, /911, kurallar |
+| 2025-06-17 | Adım 01: MVP karakter + ekonomi + server.cfg |

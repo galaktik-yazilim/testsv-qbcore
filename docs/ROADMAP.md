@@ -66,7 +66,7 @@ qb-input, qb-menu
 qb-policejob, qb-ambulancejob
 qb-adminmenu
 rp-chat, rp-ignition, rp-mileage, rp-dealership
-pma-voice (opsiyonel — text RP'de düşük öncelik)
+pma-voice, qb-radio — bilinçli kapalı (text RP)
 ```
 
 #### Devre dışı bırakılacaklar (arcade / çakışma / fazla)

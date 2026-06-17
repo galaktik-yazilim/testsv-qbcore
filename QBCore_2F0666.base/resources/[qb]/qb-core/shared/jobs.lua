@@ -1,6 +1,6 @@
 QBCore.Shared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefaultDuty | false: set duty state from database last saved
 QBCore.Shared.Jobs = {
-	unemployed = { label = 'Sivil', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Serbest Çalışan', payment = 10 } } },
+	unemployed = { label = 'Sivil', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Serbest Çalışan', payment = 0 } } },
 	bus = { label = 'Otobüs', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Şoför', payment = 50 } } },
 	judge = { label = 'Onursal', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Hakim', payment = 100 } } },
 	lawyer = { label = 'Hukuk Bürosu', defaultDuty = true, offDutyPay = false, grades = { ['0'] = { name = 'Avukat', payment = 50 } } },
