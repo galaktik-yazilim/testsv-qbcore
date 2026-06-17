@@ -362,8 +362,8 @@ QBCore.Functions.CreateCallback('qb-banking:server:openAccount', function(source
     if Player.PlayerData.money.bank < initialAmount then return cb({ success = false, message = Lang:t('error.money') }) end
     Player.RemoveMoney('bank', initialAmount, 'Opened account ' .. accountName)
     if not CreatePlayerAccount(src, accountName, initialAmount, json.encode({})) then return cb({ success = false, message = Lang:t('error.error') }) end
-    if not CreateBankStatement(src, accountName, initialAmount, 'Initial deposit', 'deposit', 'shared') then return cb({ success = false, message = Lang:t('error.error') }) end
-    if not CreateBankStatement(src, 'checking', initialAmount, 'Initial deposit for ' .. accountName, 'withdraw', 'player') then return cb({ success = false, message = Lang:t('error.error') }) end
+    if not CreateBankStatement(src, accountName, initialAmount, Lang:t('success.initial_deposit'), 'deposit', 'shared') then return cb({ success = false, message = Lang:t('error.error') }) end
+    if not CreateBankStatement(src, 'checking', initialAmount, Lang:t('success.initial_deposit_for', { account = accountName }), 'withdraw', 'player') then return cb({ success = false, message = Lang:t('error.error') }) end
     TriggerEvent('qb-log:server:CreateLog', 'banking', 'Account Opened', 'green', string.format('**%s** opened account **%s** with an initial deposit of **$%s**', GetPlayerName(src), accountName, initialAmount))
     cb({ success = true, message = Lang:t('success.account') })
 end)

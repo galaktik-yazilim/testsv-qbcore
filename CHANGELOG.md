@@ -21,6 +21,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 15: HUD/dealership qb-fuel, garaj TR etiketleri, verify genişletme — [ADIM-15](docs/gelistirme/ADIM-15-MVP-Cila.md)
 - Tur 16: EMS qb-fuel, garaj sunucu güvenliği — [ADIM-16](docs/gelistirme/ADIM-16-EMS-Garaj-Guvenlik.md)
 - Tur 17–20: güvenlik sertleştirme, TR UI, preflight — [ADIM-17–20](docs/gelistirme/ADIM-17-20-Kapanis-Paketi.md)
+- Tur 21: PD obje/alert, tüketim clamp, admin log — [ADIM-21](docs/gelistirme/ADIM-21-PD-Tuketim-Guvenlik.md)
 - `scripts/preflight-server.ps1` — MVP ön kontrol
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
@@ -45,7 +46,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-policejob:** impound LEO + on duty guard
 - **qb-doorlock:** kapı state spoof (`sentSource`) engeli
 - **qb-banking / qb-hud:** oyuncuya görünen NUI Türkçe
-- **scripts/preflight-server.ps1** — MVP ön kontrol (ensure + locale + yakıt)
+- **qb-policejob:** obje/spike LEO guard; alert cooldown; stash on duty
+- **qb-smallresources:** hunger/thirst clamp; tackle mesafe; keybind TR
+- **qb-multicharacter:** `GetServerLogs` admin-only
+- **qb-banking:** ortak hesap ekstre metinleri Türkçe
 
 ### Fixed
 - **qb-multicharacter:** giriş hatası `SetMetaData` nil — `Player.Functions.SetMetaData` kullanımı

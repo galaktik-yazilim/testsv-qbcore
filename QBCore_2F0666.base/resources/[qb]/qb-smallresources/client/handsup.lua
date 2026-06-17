@@ -19,5 +19,5 @@ RegisterCommand(Config.HandsUp.command, function()
     end
 end, false)
 
-RegisterKeyMapping(Config.HandsUp.command, 'Hands Up', 'keyboard', Config.HandsUp.keybind)
+RegisterKeyMapping(Config.HandsUp.command, 'Eller Yukarı', 'keyboard', Config.HandsUp.keybind)
 exports('getHandsup', function() return handsUp end)

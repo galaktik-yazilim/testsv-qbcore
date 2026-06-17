@@ -1,4 +1,10 @@
 RegisterNetEvent('tackle:server:TacklePlayer', function(playerId)
+    local src = source
+    if type(playerId) ~= 'number' then return end
+    local srcPed = GetPlayerPed(src)
+    local targetPed = GetPlayerPed(playerId)
+    if srcPed == 0 or targetPed == 0 then return end
+    if #(GetEntityCoords(srcPed) - GetEntityCoords(targetPed)) > 3.0 then return end
     TriggerClientEvent('tackle:client:GetTackled', playerId)
 end)
 

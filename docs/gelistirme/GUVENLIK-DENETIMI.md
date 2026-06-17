@@ -1,6 +1,6 @@
 # Güvenlik Denetimi — rp-* & MVP
 
-> Son güncelleme: Tur 17–20 kapanış paketi  
+> Son güncelleme: Tur 21 PD & tüketim güvenliği  
 > Kapsam: `rp-chat`, `rp-mileage`, `rp-dealership`, `rp-ignition`, `qb-multicharacter` (MVP değişiklikleri)
 
 ---
@@ -67,6 +67,31 @@
 | Risk | Durum | Not |
 |------|--------|-----|
 | Impound yetkisiz | ✅ **düzeltildi** | LEO + on duty + değer sınırı |
+| Obje / spike spawn | ✅ **düzeltildi** | LEO + on duty |
+| Stash / delil off duty | ✅ **düzeltildi** | on duty zorunlu |
+| `policeAlert` spam | ✅ **düzeltildi** | 30 sn cooldown + 256 char |
+
+---
+
+## qb-smallresources
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Hunger/thirst max spoof | ✅ **düzeltildi** | 0–100 clamp |
+| Tackle uzaktan | ✅ **düzeltildi** | 3 m mesafe |
+
+---
+
+## qb-multicharacter (MVP)
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Client isim/yaş bypass | ✅ | Sunucu validasyonu |
+| Slot aşımı | ✅ | COUNT + max 1 |
+| Yanlış slot (cid) | ✅ **düzeltildi** | Yalnızca `cid = 1` |
+| Başkasının karakteri | ✅ | `QBCore.Player.Login` license eşleşmesi |
+| Oyuncu silme | ✅ | `EnableDeleteButton = false` |
+| `GetServerLogs` herkese açık | ✅ **düzeltildi** | Admin permission |
 
 ---
 
@@ -98,18 +123,6 @@
 
 ---
 
-## qb-multicharacter (MVP)
-
-| Risk | Durum | Not |
-|------|--------|-----|
-| Client isim/yaş bypass | ✅ | Sunucu validasyonu |
-| Slot aşımı | ✅ | COUNT + max 1 |
-| Yanlış slot (cid) | ✅ **düzeltildi** | Yalnızca `cid = 1` |
-| Başkasının karakteri | ✅ | `QBCore.Player.Login` license eşleşmesi |
-| Oyuncu silme | ✅ | `EnableDeleteButton = false` |
-
----
-
 ## Bilinçli açık / ertelenen
 
 | Konu | Neden |
@@ -118,6 +131,7 @@
 | Anti-cheat | P4+ / açılış sonrası |
 | Discord webhook log | Teknik borç |
 | qb-adminmenu tam audit | QBCore varsayılan — ACE yeterli MVP için |
+| `SetHandcuffStatus` client | Kelepçe metadata — tam sunucu türevi P4+ |
 
 ---
 

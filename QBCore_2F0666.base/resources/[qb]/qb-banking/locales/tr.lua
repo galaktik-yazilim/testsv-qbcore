@@ -11,6 +11,8 @@ local Translations = {
         card = 'Kart oluşturuldu',
         give = '$%s nakit verildi',
         receive = '$%s nakit alındı',
+        initial_deposit = 'İlk yatırma',
+        initial_deposit_for = 'İlk yatırma — %{account}',
     },
     error = {
         error = 'Bir hata oluştu',

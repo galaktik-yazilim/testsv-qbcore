@@ -1,11 +1,11 @@
 # Geliştirme Durumu — Özet
 
-> **MVP kod geliştirmesi (Tur 01–20) tamamlandı.**  
+> **MVP kod geliştirmesi (Tur 01–21) tamamlandı.**  
 > Kalan işler **operasyonel** (test, beta, açılış, teknik borç).
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 17–20 kapanış paketi
+Son güncelleme: Tur 21 PD & tüketim güvenliği
 
 ---
 
@@ -37,6 +37,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [15](./ADIM-15-MVP-Cila.md) | MVP son cila | ✅ | ✅ | Yakıt HUD, verify script |
 | [16](./ADIM-16-EMS-Garaj-Guvenlik.md) | EMS & garaj güvenlik | ✅ | ✅ | EMS araç, garaj exploit |
 | [17–20](./ADIM-17-20-Kapanis-Paketi.md) | Kapanış paketi | ✅ | ✅ | Preflight, TR UI, güvenlik |
+| [21](./ADIM-21-PD-Tuketim-Guvenlik.md) | PD & tüketim güvenlik | ✅ | ✅ | PD obje, banka TR |
 
 ---
 

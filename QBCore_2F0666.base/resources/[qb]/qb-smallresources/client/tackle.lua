@@ -28,7 +28,7 @@ RegisterCommand('tackle', function()
     end
 end)
 
-RegisterKeyMapping('tackle', 'Tackle Someone', 'KEYBOARD', 'LMENU')
+RegisterKeyMapping('tackle', 'Tackle', 'KEYBOARD', 'LMENU')
 
 RegisterNetEvent('tackle:client:GetTackled', function()
     SetPedToRagdoll(PlayerPedId(), math.random(1000, 6000), math.random(1000, 6000), 0, false, false, false)

@@ -330,7 +330,11 @@ QBCore.Functions.CreateCallback('qb-multicharacter:server:GetUserCharacters', fu
     end)
 end)
 
-QBCore.Functions.CreateCallback('qb-multicharacter:server:GetServerLogs', function(_, cb)
+QBCore.Functions.CreateCallback('qb-multicharacter:server:GetServerLogs', function(source, cb)
+    if not QBCore.Functions.HasPermission(source, 'admin') then
+        cb({})
+        return
+    end
     MySQL.query('SELECT * FROM server_logs', {}, function(result)
         cb(result)
     end)

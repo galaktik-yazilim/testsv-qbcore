@@ -1,6 +1,6 @@
 # Aktif TODO — Operasyonel
 
-> **MVP kod geliştirmesi (Tur 01–20) bitti.** Operasyon senin tarafında.  
+> **MVP kod geliştirmesi (Tur 01–21) bitti.** Operasyon senin tarafında.  
 > Master özet: [gelistirme/DURUM.md](./gelistirme/DURUM.md)  
 > **İlerleme: 58%** → [ILERLEME.md](./ILERLEME.md)
 
@@ -8,7 +8,7 @@
 
 ```
 Genel ilerleme       ███████████░░░░░░░░░  58%
-Geliştirme (kod)     ████████████████████ 100%  (Tur 01–20)
+Geliştirme (kod)     ████████████████████ 100%  (Tur 01–21)
 Oyun içi test         ⏳ sen
 Kapalı beta           ⏳ test sonrası
 Açılış                ⏳ beta sonrası
@@ -34,7 +34,7 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 - [ ] Garaj menüsü / blip etiketleri Türkçe (**Açık Otopark**, **Pillbox Garajı**)
 - [ ] Araç yakıt HUD hatasız (qb-fuel)
 - [ ] `.\scripts\preflight-server.ps1` — tam kontrol OK
-- [ ] **Tur 17–20:** banka/HUD Türkçe; anahtar sahiplik; preflight
+- [ ] **Tur 21:** PD off duty stash kapalı; banka ekstre TR
 
 ---
 

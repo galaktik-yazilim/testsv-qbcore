@@ -11,6 +11,8 @@ local Translations = {
         card = 'Card created',
         give = '$%s cash given',
         receive = '$%s cash received',
+        initial_deposit = 'Initial deposit',
+        initial_deposit_for = 'Initial deposit for %{account}',
     },
     error = {
         error = 'An error occurred',

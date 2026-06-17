@@ -2,6 +2,11 @@
 QBCore = exports['qb-core']:GetCoreObject({ 'Functions', 'Commands' })
 local sharedWeapons = exports['qb-core']:GetShared('Weapons')
 local updatingCops = false
+local policeAlertCooldowns = {}
+
+AddEventHandler('playerDropped', function()
+    policeAlertCooldowns[source] = nil
+end)
 
 -- Functions
 
@@ -118,7 +123,7 @@ RegisterNetEvent('qb-policejob:server:stash', function()
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
-    if Player.PlayerData.job.type ~= 'leo' then return end
+    if Player.PlayerData.job.type ~= 'leo' or not Player.PlayerData.job.onduty then return end
     local citizenId = Player.PlayerData.citizenid
     local stashName = 'policestash_' .. citizenId
     exports['qb-inventory']:OpenInventory(src, stashName)
@@ -128,7 +133,7 @@ RegisterNetEvent('qb-policejob:server:trash', function()
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
-    if Player.PlayerData.job.type ~= 'leo' then return end
+    if Player.PlayerData.job.type ~= 'leo' or not Player.PlayerData.job.onduty then return end
     exports['qb-inventory']:OpenInventory(src, 'policetrash', {
         maxweight = 4000000,
         slots = 300,
@@ -139,7 +144,7 @@ RegisterNetEvent('qb-policejob:server:evidence', function(currentEvidence)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
-    if Player.PlayerData.job.type ~= 'leo' then return end
+    if Player.PlayerData.job.type ~= 'leo' or not Player.PlayerData.job.onduty then return end
     exports['qb-inventory']:OpenInventory(src, currentEvidence, {
         maxweight = 4000000,
         slots = 500,
@@ -148,6 +153,12 @@ end)
 
 RegisterNetEvent('police:server:policeAlert', function(text)
     local src = source
+    if type(text) ~= 'string' then return end
+    text = text:gsub('[~<].-[>~]', ''):sub(1, 256)
+    if text:match('^%s*$') then return end
+    local now = GetGameTimer()
+    if policeAlertCooldowns[src] and (now - policeAlertCooldowns[src]) < 30000 then return end
+    policeAlertCooldowns[src] = now
     local ped = GetPlayerPed(src)
     local coords = GetEntityCoords(ped)
     local players = QBCore.Functions.GetQBPlayers()

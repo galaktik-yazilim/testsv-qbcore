@@ -257,8 +257,8 @@ const bankingApp = Vue.createApp({
                             balance: this.createAccountAmount,
                             users: JSON.stringify([this.playerName]),
                         });
-                        this.addStatement(this.accountNumber, "checking", "Initial deposit for " + this.createAccountName, this.createAccountAmount, "withdraw");
-                        this.addStatement(this.accountNumber, this.createAccountName, "Initial deposit", this.createAccountAmount, "deposit");
+                        this.addStatement(this.accountNumber, "checking", "İlk yatırma — " + this.createAccountName, this.createAccountAmount, "withdraw");
+                        this.addStatement(this.accountNumber, this.createAccountName, "İlk yatırma", this.createAccountAmount, "deposit");
                         this.createAccountName = "";
                         this.createAccountAmount = 0;
                         this.addNotification(response.data.message, "success");
