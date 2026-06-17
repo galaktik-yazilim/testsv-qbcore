@@ -293,7 +293,7 @@ RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
     end
 
     local clean = sanitizeCreatePayload(data)
-    if clean.cid ~= 1 then
+    if clean.cid < 1 or clean.cid > maxChars then
         TriggerClientEvent('QBCore:Notify', src, 'Geçersiz karakter slotu.', 'error')
         return
     end

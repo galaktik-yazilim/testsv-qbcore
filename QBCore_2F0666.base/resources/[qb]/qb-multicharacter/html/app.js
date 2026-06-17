@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         nationality: registerData.nationality,
                         birthdate: registerData.date,
                         gender: registerData.gender,
-                        cid: this.selectedCharacter >= 0 ? this.selectedCharacter + 1 : 1,
+                        cid: this.selectedCharacter >= 1 ? this.selectedCharacter : 1,
                     });
 
                     setTimeout(() => {
