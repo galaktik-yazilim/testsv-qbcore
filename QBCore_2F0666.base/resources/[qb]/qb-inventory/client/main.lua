@@ -12,9 +12,9 @@ local function applyInventoryNuiFocus(visible)
     end
 end
 
-AddEventHandler('rp-mouse:applyFocus', function(visible, source)
+AddEventHandler('rp-mouse:applyFocus', function(_, source)
     if source == 'inventory' and LocalPlayer.state.inv_busy then
-        applyInventoryNuiFocus(visible)
+        applyInventoryNuiFocus(true)
     end
 end)
 
@@ -146,13 +146,7 @@ local function releaseInventoryMouse()
     end
 
     if keepMouse then
-        local mouseVisible = true
-        if GetResourceState('rp-chat') == 'started' then
-            pcall(function()
-                mouseVisible = exports['rp-chat']:IsMouseVisible()
-            end)
-        end
-        TriggerEvent('rp-mouse:applyFocus', mouseVisible, 'phone')
+        TriggerEvent('rp-mouse:applyFocus', true, 'phone')
         return
     end
 

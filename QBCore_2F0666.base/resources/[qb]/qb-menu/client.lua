@@ -3,6 +3,19 @@ local sharedItems = exports['qb-core']:GetShared('Items')
 local headerShown = false
 local sendData = nil
 
+local function setModuleUiFocus(enabled)
+    if GetResourceState('rp-chat') == 'started' then
+        if enabled then
+            pcall(function() exports['rp-chat']:OpenModuleUi() end)
+        else
+            pcall(function() exports['rp-chat']:CloseModuleUi() end)
+        end
+        return
+    end
+    SetNuiFocusKeepInput(false)
+    SetNuiFocus(enabled, enabled)
+end
+
 -- Functions
 
 local function sortData(data, skipfirst)
@@ -26,7 +39,7 @@ local function openMenu(data, sort, skipFirst)
             end
         end
     end
-    SetNuiFocus(true, true)
+    setModuleUiFocus(true)
     headerShown = false
     sendData = data
     SendNUIMessage({
@@ -38,7 +51,7 @@ end
 local function closeMenu()
     sendData = nil
     headerShown = false
-    SetNuiFocus(false)
+    setModuleUiFocus(false)
     SendNUIMessage({
         action = 'CLOSE_MENU'
     })
@@ -69,7 +82,7 @@ end)
 RegisterNUICallback('clickedButton', function(option, cb)
     if headerShown then headerShown = false end
     PlaySoundFrontend(-1, 'Highlight_Cancel', 'DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
-    SetNuiFocus(false)
+    setModuleUiFocus(false)
     if sendData then
         local data = sendData[tonumber(option)]
         sendData = nil
@@ -101,7 +114,7 @@ end)
 RegisterNUICallback('closeMenu', function(_, cb)
     headerShown = false
     sendData = nil
-    SetNuiFocus(false)
+    setModuleUiFocus(false)
     cb('ok')
     TriggerEvent('qb-menu:client:menuClosed')
 end)
@@ -110,7 +123,7 @@ end)
 
 RegisterCommand('playerfocus', function()
     if headerShown then
-        SetNuiFocus(true, true)
+        setModuleUiFocus(true)
     end
 end)
 

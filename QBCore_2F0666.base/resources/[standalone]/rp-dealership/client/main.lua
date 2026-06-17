@@ -35,6 +35,19 @@ local function ensurePlate(vehicle, plate)
     end)
 end
 
+local function setModuleUiFocus(enabled)
+    if GetResourceState('rp-chat') == 'started' then
+        if enabled then
+            pcall(function() exports['rp-chat']:OpenModuleUi() end)
+        else
+            pcall(function() exports['rp-chat']:CloseModuleUi() end)
+        end
+        return
+    end
+    SetNuiFocusKeepInput(false)
+    SetNuiFocus(enabled, enabled)
+end
+
 local function openDealership(dealershipId)
     if nuiOpen then return end
     if not LocalPlayer.state.isLoggedIn then
@@ -48,7 +61,7 @@ local function openDealership(dealershipId)
         end
         currentDealership = dealershipId
         nuiOpen = true
-        SetNuiFocus(true, true)
+        setModuleUiFocus(true)
         SendNUIMessage({
             action = 'open',
             dealership = data,
@@ -60,7 +73,7 @@ local function closeDealership()
     if not nuiOpen then return end
     nuiOpen = false
     currentDealership = nil
-    SetNuiFocus(false, false)
+    setModuleUiFocus(false)
     SendNUIMessage({ action = 'close' })
 end
 

@@ -4,6 +4,19 @@ local Config = {
 
 local properties = nil
 
+local function setModuleUiFocus(enabled)
+    if GetResourceState('rp-chat') == 'started' then
+        if enabled then
+            pcall(function() exports['rp-chat']:OpenModuleUi() end)
+        else
+            pcall(function() exports['rp-chat']:CloseModuleUi() end)
+        end
+        return
+    end
+    SetNuiFocusKeepInput(false)
+    SetNuiFocus(enabled, enabled)
+end
+
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then
         return
@@ -23,14 +36,14 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 end)
 
 RegisterNUICallback('buttonSubmit', function(data, cb)
-    SetNuiFocus(false)
+    setModuleUiFocus(false)
     properties:resolve(data.data)
     properties = nil
     cb('ok')
 end)
 
 RegisterNUICallback('closeMenu', function(_, cb)
-    SetNuiFocus(false)
+    setModuleUiFocus(false)
     properties:resolve(nil)
     properties = nil
     cb('ok')
@@ -43,7 +56,7 @@ local function ShowInput(data)
 
     properties = promise.new()
 
-    SetNuiFocus(true, true)
+    setModuleUiFocus(true)
     SendNUIMessage({
         action = 'OPEN_MENU',
         data = data

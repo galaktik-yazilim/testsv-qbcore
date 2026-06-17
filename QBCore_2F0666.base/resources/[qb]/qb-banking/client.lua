@@ -3,11 +3,24 @@ local zones = {}
 
 local isPlayerInsideBankZone = false
 
+local function setModuleUiFocus(enabled)
+    if GetResourceState('rp-chat') == 'started' then
+        if enabled then
+            pcall(function() exports['rp-chat']:OpenModuleUi() end)
+        else
+            pcall(function() exports['rp-chat']:CloseModuleUi() end)
+        end
+        return
+    end
+    SetNuiFocusKeepInput(false)
+    SetNuiFocus(enabled, enabled)
+end
+
 -- Functions
 
 local function OpenBank()
     QBCore.Functions.TriggerCallback('qb-banking:server:openBank', function(accounts, statements, playerData)
-        SetNuiFocus(true, true)
+        setModuleUiFocus(true)
         SendNUIMessage({
             action = 'openBank',
             accounts = accounts,
@@ -33,7 +46,7 @@ local function OpenATM()
         rotation = vector3(0.0, 0.0, 180.0),
     }, {}, function()
         QBCore.Functions.TriggerCallback('qb-banking:server:openATM', function(accounts, playerData, acceptablePins)
-            SetNuiFocus(true, true)
+            setModuleUiFocus(true)
             SendNUIMessage({
                 action = 'openATM',
                 accounts = accounts,
@@ -58,7 +71,7 @@ end
 -- NUI Callback
 
 RegisterNUICallback('closeApp', function(_, cb)
-    SetNuiFocus(false, false)
+    setModuleUiFocus(false)
     cb('ok')
 end)
 
