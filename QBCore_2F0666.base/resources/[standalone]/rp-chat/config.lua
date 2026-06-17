@@ -102,4 +102,5 @@ Config.WelcomeMessages = {
     'Los Santos hard RP — voice yok, iletişim chat ile.',
     '/kurallar · /komutlar · T konuş · /me /do /b',
     'Araç: M kontak, K kilit, L kemer, /km · Galeri: LS Cars',
+    'Takıldıysan: çık-gir → spawn ekranında Legion Meydanı seç.',
 }

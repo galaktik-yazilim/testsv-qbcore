@@ -10,6 +10,30 @@ local Houses = {}
 local cam = nil
 local cam2 = nil
 
+local function clearInsideMetaOnServer()
+    if GetResourceState('qb-houses') == 'started' then
+        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+    end
+    if GetResourceState('qb-apartments') == 'started' then
+        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+    end
+end
+
+local function applyInteriorSpawn(insideMeta)
+    if not insideMeta then return end
+    if GetResourceState('qb-houses') == 'started' and insideMeta.house then
+        TriggerEvent('qb-houses:client:LastLocationHouse', insideMeta.house)
+        return
+    end
+    local apt = insideMeta.apartment
+    if GetResourceState('qb-apartments') == 'started'
+        and apt
+        and apt.apartmentType
+        and apt.apartmentId then
+        TriggerEvent('qb-apartments:client:LastLocationHouse', apt.apartmentType, apt.apartmentId)
+    end
+end
+
 -- Functions
 
 local function SetDisplay(bool)
@@ -118,11 +142,19 @@ RegisterNUICallback('setCam', function(data, cb)
             SetCam(PlayerData.position)
         end)
     elseif type == 'house' then
-        SetCam(Houses[location].coords.enter)
+        if GetResourceState('qb-houses') == 'started' and Houses[location] then
+            SetCam(Houses[location].coords.enter)
+        else
+            SetCam(QB.Spawns.legion.coords)
+        end
     elseif type == 'normal' then
         SetCam(QB.Spawns[location].coords)
     elseif type == 'appartment' then
-        SetCam(Apartments.Locations[location].coords.enter)
+        if GetResourceState('qb-apartments') == 'started' and Apartments and Apartments.Locations[location] then
+            SetCam(Apartments.Locations[location].coords.enter)
+        else
+            SetCam(QB.Spawns.legion.coords)
+        end
     end
     cb('ok')
 end)
@@ -168,40 +200,43 @@ RegisterNUICallback('spawnplayer', function(data, cb)
     local type = tostring(data.typeLoc)
     local ped = PlayerPedId()
     local PlayerData = QBCore.Functions.GetPlayerData()
-    local insideMeta = PlayerData.metadata['inside']
+    local insideMeta = PlayerData.metadata and PlayerData.metadata['inside'] or {}
     if type == 'current' then
         PreSpawnPlayer()
         QBCore.Functions.GetPlayerData(function(pd)
             ped = PlayerPedId()
             SetEntityCoords(ped, pd.position.x, pd.position.y, pd.position.z)
-            SetEntityHeading(ped, pd.position.a)
+            SetEntityHeading(ped, pd.position.a or pd.position.w or 0.0)
             FreezeEntityPosition(ped, false)
         end)
 
-        if insideMeta.house ~= nil then
-            local houseId = insideMeta.house
-            TriggerEvent('qb-houses:client:LastLocationHouse', houseId)
-        elseif insideMeta.apartment.apartmentType ~= nil or insideMeta.apartment.apartmentId ~= nil then
-            local apartmentType = insideMeta.apartment.apartmentType
-            local apartmentId = insideMeta.apartment.apartmentId
-            TriggerEvent('qb-apartments:client:LastLocationHouse', apartmentType, apartmentId)
-        end
+        applyInteriorSpawn(insideMeta)
         TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
         PostSpawnPlayer()
     elseif type == 'house' then
-        PreSpawnPlayer()
-        TriggerEvent('qb-houses:client:enterOwnedHouse', location)
-        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
-        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
-        PostSpawnPlayer()
-    elseif type == 'normal' then
-        local pos = QB.Spawns[location].coords
+        if GetResourceState('qb-houses') ~= 'started' then
+            type = 'normal'
+            location = 'legion'
+        else
+            PreSpawnPlayer()
+            TriggerEvent('qb-houses:client:enterOwnedHouse', location)
+            TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
+            clearInsideMetaOnServer()
+            PostSpawnPlayer()
+            cb('ok')
+            return
+        end
+    end
+    if type == 'normal' then
+        local spawn = QB.Spawns[location]
+        if not spawn then
+            spawn = QB.Spawns.legion
+        end
+        local pos = spawn.coords
         PreSpawnPlayer()
         SetEntityCoords(ped, pos.x, pos.y, pos.z)
         TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
-        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+        clearInsideMetaOnServer()
         Wait(500)
         SetEntityCoords(ped, pos.x, pos.y, pos.z)
         SetEntityHeading(ped, pos.w)

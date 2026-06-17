@@ -110,6 +110,7 @@ RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function()
     Wait(2000)
     local ped = PlayerPedId()
     SetEntityCoords(ped, Config.DefaultSpawn.x, Config.DefaultSpawn.y, Config.DefaultSpawn.z)
+    SetEntityHeading(ped, Config.DefaultSpawn.w or 0.0)
     TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
     if GetResourceState('qb-houses') == 'started' then
         TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)

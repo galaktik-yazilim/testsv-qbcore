@@ -57,3 +57,9 @@
 - [evren-ve-dil.md](./evren-ve-dil.md) — Los Santos, metrik, Türkçe arayüz
 - [genel-baslangic.md](./genel-baslangic.md)
 - [README.md](./README.md)
+
+### Takıldım / binadan çıkamıyorum
+
+1. Ekranda **kıyafet** veya **spawn** menüsü varsa → **Onayla** veya **Legion Meydanı** seç
+2. Hâlâ sıkışıksan → oyundan çık, tekrar gir, spawn’da **Legion Meydanı** seç (Son konum değil)
+3. Admin isen → `/admin` → hayalet modu veya `/tp` ile dışarı

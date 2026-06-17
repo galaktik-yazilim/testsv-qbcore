@@ -29,6 +29,55 @@ local function countCharacters(license)
     return MySQL.scalar.await('SELECT COUNT(*) FROM players WHERE license = ?', { license }) or 0
 end
 
+local function clearStaleInsideMetadata(src)
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+
+    local housesOn = GetResourceState('qb-houses') == 'started'
+    local apartmentsOn = GetResourceState('qb-apartments') == 'started'
+    if housesOn and apartmentsOn then return end
+
+    local inside = Player.PlayerData.metadata.inside
+    if not inside then return end
+
+    local stale = false
+    if not housesOn and inside.house then stale = true end
+    local apt = inside.apartment
+    if not apartmentsOn and apt and (apt.apartmentType or apt.apartmentId) then stale = true end
+
+    if stale or (not housesOn and not apartmentsOn) then
+        Player.SetMetaData('inside', {
+            house = nil,
+            apartment = { apartmentType = nil, apartmentId = nil },
+        })
+    end
+end
+
+-- Eski MVP spawn (LSIA terminal) — mevcut karakterler Legion'a yönlendirilir
+local LEGACY_AIRPORT_SPAWN = vector3(-1035.71, -2731.87, 12.86)
+
+local function sanitizeSpawnCoords(coords)
+    local fallback = {
+        x = Config.DefaultSpawn.x,
+        y = Config.DefaultSpawn.y,
+        z = Config.DefaultSpawn.z,
+        w = Config.DefaultSpawn.w or 0.0,
+    }
+    if type(coords) ~= 'table' or not coords.x or not coords.y or not coords.z then
+        return fallback
+    end
+    local dx = coords.x - LEGACY_AIRPORT_SPAWN.x
+    local dy = coords.y - LEGACY_AIRPORT_SPAWN.y
+    local dz = coords.z - LEGACY_AIRPORT_SPAWN.z
+    if (dx * dx + dy * dy + dz * dz) < 400.0 then
+        return fallback
+    end
+    if not coords.w and coords.a then
+        coords.w = coords.a
+    end
+    return coords
+end
+
 local function isValidNamePart(name)
     name = trim(name)
     if name == '' then return false end
@@ -193,16 +242,9 @@ RegisterNetEvent('qb-multicharacter:server:loadUserData', function(cData)
         print('^2[qb-core]^7 ' .. GetPlayerName(src) .. ' (Citizen ID: ' .. cData.citizenid .. ') has successfully loaded!')
         QBCore.Commands.Refresh(src)
         loadHouseData(src)
+        clearStaleInsideMetadata(src)
         if Config.SkipSelection then
-            local coords = json.decode(cData.position)
-            if type(coords) ~= 'table' or not coords.x or not coords.y or not coords.z then
-                coords = {
-                    x = Config.DefaultSpawn.x,
-                    y = Config.DefaultSpawn.y,
-                    z = Config.DefaultSpawn.z,
-                    w = Config.DefaultSpawn.w or 0.0,
-                }
-            end
+            local coords = sanitizeSpawnCoords(json.decode(cData.position))
             TriggerClientEvent('qb-multicharacter:client:spawnLastLocation', src, coords, cData)
         else
             if GetResourceState('qb-apartments') == 'started' then

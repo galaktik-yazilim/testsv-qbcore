@@ -21,7 +21,8 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Performans ince ayarı | ignition/dealership Wait optimizasyonu |
 | Evren/dil/birim standardı | [evren-ve-dil.md](../tanitim/evren-ve-dil.md), HUD km/s, `/kurallar` |
 | Loading takılması fix | `qb-multicharacter` — apartments callback guard |
-| Tur 10 giriş/PD | Yeni karakter NUI, `/fine` phone guard, spawn TR — [ADIM-10](./ADIM-10-Giris-PD-Cila.md) |
+| Tur 10 giriş/PD | Yeni karakter NUI, `/fine` phone guard — [ADIM-10](./ADIM-10-Giris-PD-Cila.md) |
+| Tur 11 spawn | Legion varsayılan, inside metadata — [ADIM-11](./ADIM-11-Spawn-Dis-Guvenlik.md) |
 
 ---
 

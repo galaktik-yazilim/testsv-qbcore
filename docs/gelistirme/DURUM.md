@@ -5,7 +5,7 @@
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 10 giriş & PD cila
+Son güncelleme: Tur 11 spawn & dış mekân güvenliği
 
 ---
 
@@ -30,6 +30,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [08](./ADIM-08-Teknik-Borc.md) | Yedek, MySQL, resmon | ✅ script | ✅ | Prod'da kur |
 | [09](./ADIM-09-Beta-Oncesi-Cila.md) | Beta öncesi cila | ✅ | ✅ | Test ile doğrula |
 | [10](./ADIM-10-Giris-PD-Cila.md) | Giriş & PD cila | ✅ | ✅ | Yeni karakter + `/fine` test |
+| [11](./ADIM-11-Spawn-Dis-Guvenlik.md) | Spawn & dış mekân | ✅ | ✅ | Legion spawn doğrula |
 
 ---
 
