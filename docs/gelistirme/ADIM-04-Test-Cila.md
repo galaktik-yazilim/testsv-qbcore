@@ -28,6 +28,7 @@ Adım 01–03 bitti. Bu adımda MVP'yi **oyun içinde test edip** küçük eksik
 | Tur 14 | `/disari`, garaj qb-fuel, mods kaydı — [ADIM-14](./ADIM-14-Garaj-Interior.md) |
 | Tur 15 | HUD/dealership qb-fuel, garaj TR, verify script — [ADIM-15](./ADIM-15-MVP-Cila.md) |
 | Tur 16 | EMS qb-fuel, garaj güvenlik — [ADIM-16](./ADIM-16-EMS-Garaj-Guvenlik.md) |
+| Tur 17–20 | Güvenlik, TR UI, preflight — [ADIM-17–20](./ADIM-17-20-Kapanis-Paketi.md) |
 
 ---
 

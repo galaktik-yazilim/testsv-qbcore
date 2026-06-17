@@ -36,7 +36,14 @@ end)
 
 RegisterNetEvent('police:server:Impound', function(plate, fullImpound, price, body, engine, fuel)
     local src = source
-    price = price and price or 0
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not Player or Player.PlayerData.job.type ~= 'leo' or not Player.PlayerData.job.onduty then return end
+    if type(plate) ~= 'string' then return end
+    plate = plate:sub(1, 8)
+    price = math.max(0, math.min(50000, tonumber(price) or 0))
+    body = math.max(0, math.min(1000, tonumber(body) or 1000))
+    engine = math.max(0, math.min(1000, tonumber(engine) or 1000))
+    fuel = math.max(0, math.min(100, tonumber(fuel) or 100))
     if IsVehicleOwned(plate) then
         if not fullImpound then
             MySQL.query('UPDATE player_vehicles SET state = ?, depotprice = ?, body = ?, engine = ?, fuel = ? WHERE plate = ?', { 0, price, body, engine, fuel, plate })

@@ -23,11 +23,11 @@
 ## Mevcut durum özeti
 
 > **Genel ilerleme: 58%** (açılışa kadar) — [ILERLEME.md](./ILERLEME.md)  
-> **Kod geliştirmesi tamamlandı** (turlar 01–08). Detay: [gelistirme/DURUM.md](./gelistirme/DURUM.md)
+> **MVP kod geliştirmesi (Tur 01–20) tamamlandı.** Detay: [gelistirme/DURUM.md](./gelistirme/DURUM.md)
 
 | Alan | Durum |
 |------|--------|
-| Geliştirme turları 01–08 | ✅ kod + doc |
+| Geliştirme turları 01–20 | ✅ kod + doc |
 | Operasyon (test/beta/açılış) | ⏳ [TODO.md](./TODO.md) |
 | P4+ backlog | 📋 [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.md) |
 | Teknik borç | 📋 [ADIM-08-Teknik-Borc.md](./gelistirme/ADIM-08-Teknik-Borc.md) |
@@ -38,7 +38,7 @@
 | Text RP chat | ✅ proximity, `/me` `/ame` `/do` `/b` `/s` `/w` `/a` |
 | Araç RP | ✅ ignition, mileage, dealership, garaj |
 | Resource yükü | ✅ ~32 explicit resource |
-| Event güvenliği | ✅ [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) |
+| Event güvenliği | ✅ rp-* + MVP qb-* ([GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md)) |
 | Tanıtım dokümantasyonu | ✅ `docs/tanitim/` |
 | Whitelist | ✅ hazır — testte kapalı |
 

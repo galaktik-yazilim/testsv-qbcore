@@ -210,10 +210,20 @@ RegisterNetEvent('qb-garages:server:updateVehicleState', function(state, plate)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
     if not Player then return end
+    plate = sanitizePlate(plate)
+    if not plate or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
+    state = tonumber(state)
+    if state ~= 0 and state ~= 1 and state ~= 2 then return end
     MySQL.update('UPDATE player_vehicles SET state = ?, depotprice = ? WHERE plate = ? AND citizenid = ?', { state, 0, plate, Player.PlayerData.citizenid })
 end)
 
 RegisterNetEvent('qb-garages:server:UpdateOutsideVehicle', function(plate, vehicleNetID)
+    local src = source
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not Player then return end
+    plate = sanitizePlate(plate)
+    if not plate or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
+    if type(vehicleNetID) ~= 'number' then return end
     OutsideVehicles[plate] = {
         netID = vehicleNetID,
         entity = NetworkGetEntityFromNetworkId(vehicleNetID)
@@ -222,6 +232,10 @@ end)
 
 RegisterNetEvent('qb-garages:server:trackVehicle', function(plate)
     local src = source
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not Player then return end
+    plate = sanitizePlate(plate)
+    if not plate or not playerOwnsPlate(Player.PlayerData.citizenid, plate) then return end
     local vehicleData = OutsideVehicles[plate]
     if vehicleData and DoesEntityExist(vehicleData.entity) then
         TriggerClientEvent('qb-garages:client:trackVehicle', src, GetEntityCoords(vehicleData.entity))

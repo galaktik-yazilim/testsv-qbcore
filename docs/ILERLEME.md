@@ -1,6 +1,6 @@
 # Genel İlerleme
 
-> **Son güncelleme:** 2025-06-17 — Tur 16 EMS & garaj güvenliği  
+> **Son güncelleme:** 2025-06-17 — Tur 17–20 kapanış paketi (kod tamam)  
 > **Hedef:** MVP sunucunun kapalı beta → açılış yolu (P4+ backlog hariç)
 
 ---
@@ -10,7 +10,7 @@
 | Metrik | Oran | Durum |
 |--------|------|--------|
 | **Genel (açılışa kadar)** | **58%** | Kod/doc bitti · operasyon bekliyor |
-| Kod & dokümantasyon | 100% | Turlar 01–08 + evren + komutlar ✅ |
+| Kod & dokümantasyon | 100% | Turlar 01–20 ✅ (kod kapanış paketi) |
 | Operasyon (sen) | 0% | Test, beta, açılış, teknik borç ⏳ |
 | P4+ büyüme (sonra) | 0% | Yalnızca plan 📋 |
 
@@ -78,6 +78,7 @@ P4+ (konut, telefon, injury): [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.
 | 2025-06-17 | Tur 14: `/disari`, qb-garages qb-fuel + mods kaydı | 58% |
 | 2025-06-17 | Tur 15: HUD/dealership qb-fuel, garaj TR etiketleri, verify script genişletme | 58% |
 | 2025-06-17 | Tur 16: EMS qb-fuel, garaj sunucu güvenliği, locale | 58% |
+| 2025-06-17 | Tur 17–20: güvenlik, TR UI, preflight — **MVP kod kapanış** | 58% |
 
 ---
 

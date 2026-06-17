@@ -1,6 +1,6 @@
 # Güvenlik Denetimi — rp-* & MVP
 
-> Son güncelleme: Adım 04–05 turu  
+> Son güncelleme: Tur 17–20 kapanış paketi  
 > Kapsam: `rp-chat`, `rp-mileage`, `rp-dealership`, `rp-ignition`, `qb-multicharacter` (MVP değişiklikleri)
 
 ---
@@ -50,6 +50,40 @@
 | `/a` yetkisiz | ✅ | QBCore `admin` permission |
 | `/911` spam | ✅ | 60 sn cooldown |
 | `/disari` metadata spoof | ✅ | Komut cooldown + `disariDone` player guard |
+
+---
+
+## qb-vehiclekeys
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Uzaktan anahtar alma | ✅ **düzeltildi** | DB sahiplik veya sürücü koltuğu |
+| Uzaktan kilit | ✅ **düzeltildi** | 15 m mesafe kontrolü |
+
+---
+
+## qb-policejob
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Impound yetkisiz | ✅ **düzeltildi** | LEO + on duty + değer sınırı |
+
+---
+
+## qb-doorlock
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Kapı açma spoof (`sentSource`) | ✅ **düzeltildi** | Yalnızca `source` kullanılır |
+
+---
+
+## qb-ambulancejob
+
+| Risk | Durum | Not |
+|------|--------|-----|
+| Armor/death metadata spoof | ✅ **kısmi** | Değer clamp; tam sunucu türevi P4+ |
+| EMS stash yetkisiz | ✅ **düzeltildi** | ambulance + on duty |
 
 ---
 
@@ -105,3 +139,5 @@
 | rp-chat | `server/main.lua` |
 | qb-multicharacter | `server.lua` |
 | qb-garages | `server.lua` |
+| qb-vehiclekeys | `server.lua` |
+| qb-doorlock | `server.lua` |

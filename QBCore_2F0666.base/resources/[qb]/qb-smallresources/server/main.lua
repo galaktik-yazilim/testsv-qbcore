@@ -2,7 +2,7 @@ RegisterNetEvent('tackle:server:TacklePlayer', function(playerId)
     TriggerClientEvent('tackle:client:GetTackled', playerId)
 end)
 
-QBCore.Commands.Add('id', 'Check Your ID #', {}, false, function(source)
+QBCore.Commands.Add('id', 'Sunucu ID numaranı göster', {}, false, function(source)
     TriggerClientEvent('QBCore:Notify', source, 'ID: ' .. source)
 end)
 

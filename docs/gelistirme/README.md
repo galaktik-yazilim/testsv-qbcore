@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–16 kod/doc tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–20 MVP kod kapanış paketi tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -20,6 +20,7 @@
 | [14](./ADIM-14-Garaj-Interior.md) | Garaj & interior çıkış | ✅ |
 | [15](./ADIM-15-MVP-Cila.md) | MVP son cila paketi | ✅ |
 | [16](./ADIM-16-EMS-Garaj-Guvenlik.md) | EMS yakıt & garaj güvenlik | ✅ |
+| [17–20](./ADIM-17-20-Kapanis-Paketi.md) | Kapanış paketi (güvenlik, TR, preflight) | ✅ |
 
 ---
 

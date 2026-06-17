@@ -138,7 +138,7 @@ end)
 -- Events
 
 RegisterNetEvent('qb-doorlock:server:updateState', function(doorID, locked, src, usedLockpick, unlockAnyway, enableSounds, enableAnimation, sentSource)
-	local playerId = sentSource or source
+	local playerId = source
 	local Player = exports['qb-core']:GetPlayer(playerId)
 	if not Player then return end
 	if type(doorID) ~= 'number' and type(doorID) ~= 'string' then

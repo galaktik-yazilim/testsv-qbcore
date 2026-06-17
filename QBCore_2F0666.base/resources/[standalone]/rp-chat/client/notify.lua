@@ -8,8 +8,8 @@ local function FallbackToastNotify(text, texttype, length, icon)
     }
 
     if type(text) == 'table' then
-        message.text = text.text or 'Placeholder'
-        message.caption = text.caption or 'Placeholder'
+        message.text = text.text or 'Bildirim'
+        message.caption = text.caption or 'Bildirim'
     else
         message.text = text
     end

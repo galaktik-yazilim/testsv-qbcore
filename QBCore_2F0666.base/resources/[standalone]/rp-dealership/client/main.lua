@@ -20,8 +20,6 @@ end
 local function setFuel(vehicle, amount)
     if GetResourceState('qb-fuel') == 'started' then
         exports['qb-fuel']:SetFuel(vehicle, amount)
-    elseif GetResourceState('LegacyFuel') == 'started' then
-        exports['LegacyFuel']:SetFuel(vehicle, amount)
     end
 end
 

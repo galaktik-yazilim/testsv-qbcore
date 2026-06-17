@@ -1,11 +1,11 @@
 # Geliştirme Durumu — Özet
 
-> **Kod ve dokümantasyon turları (01–08) tamamlandı.**  
-> Kalan işler **operasyonel** (senin sunucuda yapacağın adımlar).
+> **MVP kod geliştirmesi (Tur 01–20) tamamlandı.**  
+> Kalan işler **operasyonel** (test, beta, açılış, teknik borç).
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 16 EMS yakıt & garaj güvenliği
+Son güncelleme: Tur 17–20 kapanış paketi
 
 ---
 
@@ -36,6 +36,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [14](./ADIM-14-Garaj-Interior.md) | Garaj & `/disari` | ✅ | ✅ | Garaj park/çıkar |
 | [15](./ADIM-15-MVP-Cila.md) | MVP son cila | ✅ | ✅ | Yakıt HUD, verify script |
 | [16](./ADIM-16-EMS-Garaj-Guvenlik.md) | EMS & garaj güvenlik | ✅ | ✅ | EMS araç, garaj exploit |
+| [17–20](./ADIM-17-20-Kapanis-Paketi.md) | Kapanış paketi | ✅ | ✅ | Preflight, TR UI, güvenlik |
 
 ---
 

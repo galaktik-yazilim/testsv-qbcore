@@ -860,7 +860,7 @@ RegisterNetEvent('qb-ambulancejob:checkin', function()
         if distance < 3 then
             if doctorCount >= Config.MinimalDoctors then
                 TriggerServerEvent('hospital:server:SendDoctorAlert', Config.Locations['hospital'][i]['name'])
-                QBCore.Functions.Notify('Called a Doctor', 'primary')
+                QBCore.Functions.Notify(Lang:t('info.doctor_called'), 'primary')
             else
                 TriggerEvent('animations:client:EmoteCommandStart', { 'notepad' })
                 QBCore.Functions.Progressbar('hospital_checkin', Lang:t('progress.checking_in'), 2000, false, true, {

@@ -7,9 +7,6 @@ local function getFuelExportResource()
     if GetResourceState('qb-fuel') == 'started' then
         return 'qb-fuel'
     end
-    if GetResourceState('LegacyFuel') == 'started' then
-        return 'LegacyFuel'
-    end
 end
 
 local function readVehicleFuel(vehicle)
@@ -214,7 +211,7 @@ RegisterNUICallback('closeMenu', function(_, cb)
     cb('ok')
 end)
 
-RegisterKeyMapping('menu', 'Open Menu', 'keyboard', config.OpenMenu)
+RegisterKeyMapping('menu', 'HUD Menüsü', 'keyboard', config.OpenMenu)
 
 -- Reset hud
 local function restartHud()

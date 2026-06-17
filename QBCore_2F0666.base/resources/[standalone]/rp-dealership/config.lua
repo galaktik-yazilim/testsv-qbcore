@@ -34,7 +34,7 @@ Config.CategoryLabels = {
     military = 'Askeri',
     commercial = 'Ticari',
     trains = 'Tren',
-    openwheel = 'Open Wheel',
+    openwheel = 'Açık Teker',
 }
 
 Config.Dealerships = {

@@ -37,9 +37,29 @@ RegisterNetEvent('qb-vehiclekeys:server:GiveVehicleKeys', function(receiver, pla
     end
 end)
 
+local function isDriverOfPlate(src, plate)
+    local ped = GetPlayerPed(src)
+    if ped == 0 then return false end
+    local veh = GetVehiclePedIsIn(ped, false)
+    if veh == 0 then return false end
+    return Trim(GetVehicleNumberPlateText(veh)) == plate
+end
+
 RegisterNetEvent('qb-vehiclekeys:server:AcquireVehicleKeys', function(plate)
     local src = source
-    GiveKeys(src, plate)
+    plate = Trim(plate)
+    if not plate or #plate > 8 then return end
+
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not Player then return end
+
+    local owned = MySQL.scalar.await(
+        'SELECT 1 FROM player_vehicles WHERE plate = ? AND citizenid = ? LIMIT 1',
+        { plate, Player.PlayerData.citizenid }
+    )
+    if owned or isDriverOfPlate(src, plate) then
+        GiveKeys(src, plate)
+    end
 end)
 
 RegisterNetEvent('qb-vehiclekeys:server:RemoveVehicleKeys', function(plate)
@@ -60,7 +80,14 @@ RegisterNetEvent('qb-vehiclekeys:server:breakLockpick', function(itemName)
 end)
 
 RegisterNetEvent('qb-vehiclekeys:server:setVehLockState', function(vehNetId, state)
-    SetVehicleDoorsLocked(NetworkGetEntityFromNetworkId(vehNetId), state)
+    if type(vehNetId) ~= 'number' or type(state) ~= 'number' then return end
+    local src = source
+    local ent = NetworkGetEntityFromNetworkId(vehNetId)
+    if ent == 0 or not DoesEntityExist(ent) then return end
+    local ped = GetPlayerPed(src)
+    if ped == 0 then return end
+    if #(GetEntityCoords(ped) - GetEntityCoords(ent)) > 15.0 then return end
+    SetVehicleDoorsLocked(ent, state)
 end)
 
 QBCore.Functions.CreateCallback('qb-vehiclekeys:server:GetVehicleKeys', function(source, cb)

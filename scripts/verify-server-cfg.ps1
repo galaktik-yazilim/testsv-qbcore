@@ -1,4 +1,4 @@
-# server.cfg dogrulama — yasak resource + zorunlu MVP ensure
+# server.cfg dogrulama — yasak resource + zorunlu MVP ensure + locale
 # Kullanim: .\scripts\verify-server-cfg.ps1
 
 $ErrorActionPreference = "Stop"
@@ -37,9 +37,19 @@ $forbidden = @(
 )
 
 $required = @(
+    'oxmysql',
     'qb-core',
-    'qb-fuel',
+    'qb-multicharacter',
+    'qb-spawn',
+    'qb-clothing',
+    'qb-inventory',
+    'qb-banking',
+    'qb-vehiclekeys',
     'qb-garages',
+    'qb-fuel',
+    'qb-policejob',
+    'qb-ambulancejob',
+    'qb-hud',
     'rp-chat',
     'rp-dealership',
     'rp-ignition',
@@ -68,7 +78,6 @@ if ($forbiddenFound.Count -eq 0) {
     foreach ($r in $forbiddenFound) {
         Write-Host "  - ensure $r"
     }
-    Write-Host "Text RP icin qb-phone, pma-voice, qb-radio kapali kalmali."
 }
 
 if ($missingRequired.Count -eq 0) {
@@ -79,6 +88,13 @@ if ($missingRequired.Count -eq 0) {
     foreach ($r in $missingRequired) {
         Write-Host "  - ensure $r"
     }
+}
+
+if ($content -match 'setr\s+qb_locale\s+"tr"') {
+    Write-Host "[OK] qb_locale = tr"
+} else {
+    $failed = $true
+    Write-Host "[HATA] setr qb_locale `"tr`" eksik."
 }
 
 if ($failed) { exit 1 }

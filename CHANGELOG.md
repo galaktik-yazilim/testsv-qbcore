@@ -20,6 +20,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 14: garaj qb-fuel, mods kaydı, `/disari` iyileştirme — [ADIM-14](docs/gelistirme/ADIM-14-Garaj-Interior.md)
 - Tur 15: HUD/dealership qb-fuel, garaj TR etiketleri, verify genişletme — [ADIM-15](docs/gelistirme/ADIM-15-MVP-Cila.md)
 - Tur 16: EMS qb-fuel, garaj sunucu güvenliği — [ADIM-16](docs/gelistirme/ADIM-16-EMS-Garaj-Guvenlik.md)
+- Tur 17–20: güvenlik sertleştirme, TR UI, preflight — [ADIM-17–20](docs/gelistirme/ADIM-17-20-Kapanis-Paketi.md)
+- `scripts/preflight-server.ps1` — MVP ön kontrol
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
 ### Changed
@@ -39,7 +41,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-ambulancejob:** meslek aracı yakıtı `qb-fuel` (`Config.FuelResource`)
 - **qb-garages:** spawn/stats/mods/depot sunucu doğrulama; `syncGarage` house-only merge
 - **qb-garages/locales/tr:** TIR ve çekilmiş araç etiketleri
-- **qb-smallresources:** cruise yakıt kontrolü çift tetikleme düzeltmesi
+- **qb-vehiclekeys:** anahtar alma sahiplik/sürücü doğrulama; kilit mesafe kontrolü
+- **qb-policejob:** impound LEO + on duty guard
+- **qb-doorlock:** kapı state spoof (`sentSource`) engeli
+- **qb-banking / qb-hud:** oyuncuya görünen NUI Türkçe
+- **scripts/preflight-server.ps1** — MVP ön kontrol (ensure + locale + yakıt)
 
 ### Fixed
 - **qb-multicharacter:** giriş hatası `SetMetaData` nil — `Player.Functions.SetMetaData` kullanımı

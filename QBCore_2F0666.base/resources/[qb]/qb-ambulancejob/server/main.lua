@@ -130,7 +130,7 @@ RegisterNetEvent('hospital:server:SetDeathStatus', function(isDead)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
 	if Player then
-		Player.SetMetaData('isdead', isDead)
+		Player.SetMetaData('isdead', isDead == true)
 	end
 end)
 
@@ -138,7 +138,7 @@ RegisterNetEvent('hospital:server:SetLaststandStatus', function(bool)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
 	if Player then
-		Player.SetMetaData('inlaststand', bool)
+		Player.SetMetaData('inlaststand', bool == true)
 	end
 end)
 
@@ -146,7 +146,7 @@ RegisterNetEvent('hospital:server:SetArmor', function(amount)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
 	if Player then
-		Player.SetMetaData('armor', amount)
+		Player.SetMetaData('armor', math.max(0, math.min(100, tonumber(amount) or 0)))
 	end
 end)
 
@@ -240,7 +240,7 @@ RegisterNetEvent('hospital:server:SendDoctorAlert', function(hospitalName)
 			doctorCalled = false
 		end)
 	else
-		TriggerClientEvent('QBCore:Notify', src, 'Doctor has already been notified', 'error')
+		TriggerClientEvent('QBCore:Notify', src, Lang:t('info.doctor_already_notified'), 'error')
 	end
 end)
 
@@ -294,6 +294,7 @@ RegisterNetEvent('qb-ambulancejob:server:stash', function()
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
 	if not Player then return end
+	if Player.PlayerData.job.name ~= 'ambulance' or not Player.PlayerData.job.onduty then return end
 	local citizenId = Player.PlayerData.citizenid
 	local stashName = 'ambulancestash_' .. citizenId
 	exports['qb-inventory']:OpenInventory(src, stashName)

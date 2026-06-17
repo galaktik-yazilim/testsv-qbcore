@@ -62,31 +62,13 @@ local function OpenGarageMenu(data)
 end
 
 local function getVehicleFuel(veh)
-    local resource = Config.FuelResource
-    if GetResourceState(resource) ~= 'started' then
-        if GetResourceState('qb-fuel') == 'started' then
-            resource = 'qb-fuel'
-        elseif GetResourceState('LegacyFuel') == 'started' then
-            resource = 'LegacyFuel'
-        else
-            return 100.0
-        end
-    end
-    return exports[resource]:GetFuel(veh)
+    if GetResourceState('qb-fuel') ~= 'started' then return 100.0 end
+    return exports['qb-fuel']:GetFuel(veh)
 end
 
 local function setVehicleFuel(veh, amount)
-    local resource = Config.FuelResource
-    if GetResourceState(resource) ~= 'started' then
-        if GetResourceState('qb-fuel') == 'started' then
-            resource = 'qb-fuel'
-        elseif GetResourceState('LegacyFuel') == 'started' then
-            resource = 'LegacyFuel'
-        else
-            return
-        end
-    end
-    exports[resource]:SetFuel(veh, amount)
+    if GetResourceState('qb-fuel') ~= 'started' then return end
+    exports['qb-fuel']:SetFuel(veh, amount)
 end
 
 local function DepositVehicle(veh, data)
