@@ -5,7 +5,7 @@ description: testsv-qbcore GitHub deploy — QBCore hard RP (Zap / txAdmin)
 
 tasks:
   - action: download_github
-    src: alionurserce/testsv-qbcore
+    src: galaktik-yazilim/testsv-qbcore
     ref: main
     dest: ./tmp/repo
 
