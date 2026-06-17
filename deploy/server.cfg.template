@@ -8,9 +8,9 @@ increase_pool_size "netGameEvent" 400
 increase_pool_size "CMoveObject" 75
 increase_pool_size "LightEntity" 1000
 
-endpoint_add_tcp "0.0.0.0:30120"
-endpoint_add_udp "0.0.0.0:30120"
-sv_maxclients 32
+endpoint_add_tcp "0.0.0.0:30202"
+endpoint_add_udp "0.0.0.0:30202"
+sv_maxclients 26
 set onesync on
 
 setr qb_whitelist 0
