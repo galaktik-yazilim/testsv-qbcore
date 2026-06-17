@@ -1,64 +1,51 @@
 # Aktif TODO Listesi
 
-> Kod tarafı (Adım 01–03) **bitti**. Odak: sunucuyu aç, içeri gir, test et.
+> **Adım 04** — oyun içi test & cila. Whitelist kapalı.
 
-Detay: [gelistirme/README.md](./gelistirme/README.md) · [CHANGELOG.md](../CHANGELOG.md)
+Detay: [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) · [CHANGELOG.md](../CHANGELOG.md)
 
 ---
 
 ## Durum özeti
 
 ```
-Adım 01 MVP temel          ✅
-Adım 02 Kapalı beta prep   ✅
-Adım 03 Açılış hazırlığı   ✅
-P4+ (konut, telefon…)      — açılış sonrası
-Teknik borç (yedek, MySQL…) — en son → TEKNIK-BORC.md
+Adım 01–03                 ✅
+Adım 04 Test & cila        ⏳ (kod hazır, sen test edeceksin)
+Whitelist                  ❌ kapalı
+Adım 05 Kapalı beta        — test bitince
+P4+                        — açılış sonrası
+Teknik borç                — en son → TEKNIK-BORC.md
 ```
 
 ---
 
-## Şimdi yap — sunucuyu aç
+## Şimdi yap — Adım 04 test
 
-- [ ] `server.cfg`: `sv_licenseKey`, `mysql_connection_string`, `steam_webApiKey` dolu mu?
-- [ ] MySQL çalışıyor, QBCore veritabanı import edildi mi?
-- [ ] Sunucu **restart** → txAdmin / konsolda hata yok mu?
-- [ ] Oyuna gir: karakter olu, chat (`/me`, `/s`), araç/galeri dene
-- [ ] İsteğe bağlı: `sets qb_discord` gerçek invite linki
+Tam liste: [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
 
-**Kapalı beta** (herkese açmayacaksan):
-- [ ] `setr qb_whitelist 1` veya txAdmin whitelist
-- [ ] Beta oyunculara `group.whitelisted` ACE
+- [ ] Restart
+- [ ] Karakter + chat (`/me`, `/ame`, `/do`, `/b`, `/s`, `/w`)
+- [ ] `/km` (araç içinde)
+- [ ] LS Cars → kontak → garaj
+- [ ] `/911` (PD/EMS on duty)
+- [ ] Admin: `/a test`
+- [ ] PDM çevresinde NPC yok mu?
+
+---
+
+## Test bitince — Adım 05 (whitelist)
+
+- [ ] `setr qb_whitelist 1` + ACE
 - [ ] [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
 
-**Discord** (oyuncu toplamadan önce şart değil):
-- [ ] Sunucu kur + [discord-ve-basvuru.md](./tanitim/discord-ve-basvuru.md)
-
 ---
 
-## Tamamlanan geliştirmeler (arşiv)
+## P4+ — Açılış sonrası
 
-<details>
-<summary>Tıkla — kod & dokümantasyon</summary>
-
-- [x] Explicit server.cfg, voice kapalı, event güvenliği
-- [x] MVP: 1 slot, chat, /911, ekonomi, PD/EMS config
-- [x] Whitelist ACE + Discord convar altyapısı
-- [x] Yedek/MySQL scriptleri (henüz kurulmadı → [TEKNIK-BORC.md](./TEKNIK-BORC.md))
-- [x] `docs/tanitim/` + `docs/gelistirme/`
-
-</details>
-
----
-
-## P4+ — Açılış sonrası özellikler
-
-Konut, telefon, taşımacılık — [ROADMAP.md](./ROADMAP.md)
+[ROADMAP.md](./ROADMAP.md)
 
 ---
 
 ## Teknik borç — en son
 
-MySQL ayrı kullanıcı, günlük yedek, `resmon`, webhook logları… Scriptler hazır; **sunucu + beta oturunca** bak.
-
-→ [TEKNIK-BORC.md](./TEKNIK-BORC.md)
+[TEKNIK-BORC.md](./TEKNIK-BORC.md)

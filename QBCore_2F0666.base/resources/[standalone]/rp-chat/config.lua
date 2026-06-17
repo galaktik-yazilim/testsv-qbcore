@@ -19,6 +19,7 @@ Config.Emergency911CooldownMs = 60000
 Config.Colors = {
     say      = { 255, 255, 255 },
     me       = { 194, 162, 218 },
+    ame      = { 170, 140, 200 },
     do_cmd   = { 163, 195, 255 },
     whisper  = { 200, 200, 220 },
     shout    = { 255, 220, 180 },

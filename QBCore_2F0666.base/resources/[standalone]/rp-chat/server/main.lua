@@ -127,6 +127,10 @@ AddProximityCommand('me', 'Yakındakilere eylem mesajı gönder', Config.Proximi
     return '* ' .. charName, msg
 end)
 
+AddProximityCommand('ame', 'İsimsiz eylem mesajı (yakın)', Config.ProximityRange, Config.Colors.ame, function(_, msg)
+    return '*', msg
+end)
+
 AddProximityCommand('b', 'Yakındaki oyunculara OOC mesaj gönder', Config.ProximityRange, Config.Colors.b, function(charName, msg)
     return '(( ' .. charName .. ' ))', msg
 end)
@@ -208,6 +212,27 @@ QBCore.Commands.Add('kurallar', 'Sunucu RP kurallarını göster', {}, false, fu
         SendChat(source, Config.Colors.system, '» Kural', Config.RulesMessages[i])
     end
 end, 'user')
+
+QBCore.Commands.Add('a', 'Admin duyurusu (tüm sunucu)', {
+    { name = 'mesaj', help = 'Duyuru metni' },
+}, false, function(source, args)
+    if #args < 1 then
+        NotifyPlayer(source, 'Duyuru yazmalısın.', 'error')
+        return
+    end
+    if not CheckCooldown(source, 'cmd:a', 3000) then
+        NotifyPlayer(source, 'Çok hızlı, biraz bekle.', 'warning')
+        return
+    end
+
+    local msg = SanitizeMessage(table.concat(args, ' '))
+    if not msg then return end
+
+    local label = '[ADMIN] ' .. GetCharName(source)
+    for _, playerId in ipairs(QBCore.Functions.GetPlayers()) do
+        SendChat(playerId, Config.Colors.admin, label, msg)
+    end
+end, 'admin')
 
 exports('BroadcastProximity', BroadcastProximity)
 exports('GetCharName', GetCharName)

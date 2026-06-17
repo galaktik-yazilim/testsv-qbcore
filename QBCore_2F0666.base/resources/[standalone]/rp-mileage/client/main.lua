@@ -161,6 +161,33 @@ AddEventHandler('onResourceStop', function(resource)
     stopTracking()
 end)
 
+local function formatDistance(miles)
+    if Config.DisplayMetricKm then
+        return ('%.1f km'):format(miles * 1.60934)
+    end
+    return ('%.1f mil'):format(miles)
+end
+
+RegisterNetEvent('rp-mileage:client:showKm', function()
+    local ped = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(ped, false)
+    if vehicle == 0 then
+        QBCore.Functions.Notify('Bir aracın içinde olmalısın.', 'error')
+        return
+    end
+
+    local plate = normalizePlate(QBCore.Functions.GetPlate(vehicle))
+    if not plate then return end
+
+    local miles = exports[GetCurrentResourceName()]:GetMileageByPlate(plate)
+    local dist = formatDistance(miles)
+    TriggerEvent('chat:addMessage', {
+        color = { 120, 200, 140 },
+        multiline = true,
+        args = { '» Araç', ('%s — %s'):format(plate, dist) },
+    })
+end)
+
 exports('GetCurrentMileage', function()
     if active then return active.total end
     return 0.0

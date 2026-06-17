@@ -102,3 +102,7 @@ exports('GetMileage', function(plate)
     if not row then return 0.0 end
     return tonumber(row.drivingdistance) or 0.0
 end)
+
+QBCore.Commands.Add('km', 'Bulunduğun aracın kilometresini göster', {}, false, function(source)
+    TriggerClientEvent('rp-mileage:client:showKm', source)
+end, 'user')

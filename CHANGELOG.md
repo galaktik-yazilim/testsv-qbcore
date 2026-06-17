@@ -7,6 +7,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 
 ## [Unreleased]
 
+### Added (Adım 04)
+- `/ame`, `/a` (admin), `/km` komutları
+- NPC temizliği (dondurulmuş pedler, PDM bölgesi)
+- CK/PK/MGK kural tanımları
+
+### Changed
+- `/ooc` kaldırıldı (yerel OOC: `/b`)
+
 ### Planlanan (P4+)
 - Konut, telefon, taşımacılık, injury script
 

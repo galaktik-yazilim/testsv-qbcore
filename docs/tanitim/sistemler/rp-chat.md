@@ -14,12 +14,16 @@ Tüm oyuncular.
 |-------|--------|-------|----------|
 | `T` + yazı | 20 m | `Merhaba.` | Normal IC konuşma |
 | `/me` | 20 m | `/me cebinden cüzdanını çıkarır.` | Karakter eylemi |
+| `/ame` | 20 m | `/ame cebine uzanır.` | İsimsiz eylem (`* mesaj`) |
 | `/do` | 20 m | `/do Cüzdan eski görünüyor.` | Ortam / nesne durumu |
 | `/s` | 3 m | `/s gel buraya.` | Fısıltı |
 | `/w` | 40 m | `/w POLİS!` | Bağırma |
 | `/b` | 20 m | `/b lag var.` | Yerel OOC — `(( isim ))` formatında |
 | `/911` | PD/EMS | `/911 silahlı şüpheli` | Acil çağrı (60 sn cooldown) |
 | `/kurallar` | — | `/kurallar` | Kural özeti |
+| `/a` | Global | `/a sunucu 5 dk bakımda` | Admin duyuru (yalnızca admin) |
+
+> `/ooc` kapatıldı — yerel OOC için `/b` kullanın.
 
 ## RP örnekleri
 

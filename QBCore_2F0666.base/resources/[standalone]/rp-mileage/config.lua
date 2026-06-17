@@ -14,3 +14,6 @@ Config.IgnoreClasses = {
     [15] = true,
     [16] = true,
 }
+
+-- /km çıktısı: true = km, false = mil (DB mil saklar)
+Config.DisplayMetricKm = true

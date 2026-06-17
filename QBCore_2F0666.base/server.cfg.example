@@ -45,6 +45,7 @@ sv_scriptHookAllowed 0
 # QBCore
 setr qb_locale "tr"
 setr UseTarget false
+# Whitelist KAPALI (test) — sistemler bitince qb_whitelist 1 yapın
 setr qb_whitelist 0
 # Kapalı beta / açılış öncesi: 1 yapın ve aşağıdaki ACE whitelist'i doldurun
 sets qb_discord "https://discord.gg/DEGISTIR"
@@ -121,7 +122,7 @@ add_principal qbcore.god group.admin
 add_principal qbcore.god qbcore.admin
 add_principal qbcore.admin qbcore.mod
 
-# Whitelist (setr qb_whitelist 1 iken)
+# Whitelist — qb_whitelist 1 iken aktif edin
 add_ace group.admin join allow
-add_ace group.whitelisted join allow
+# add_ace group.whitelisted join allow
 # add_principal identifier.license:ROCKSTAR_LICENSE group.whitelisted

@@ -29,8 +29,9 @@
 | Event güvenliği | ✅ Custom `rp-*` sertleştirildi |
 | Tanıtım dokümantasyonu | ✅ `docs/tanitim/` |
 | MVP karakter kuralları | ✅ 1 slot, isim validasyonu, ekonomi |
-| Whitelist | ✅ ACE hazır |
-| Kapalı beta | ⏳ Operasyonel test (checklist hazır) |
+| Whitelist | ✅ hazır — şu an kapalı (test) |
+| Adım 04 — test & cila | ⏳ [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) |
+| Kapalı beta | — Adım 05 (test sonrası) |
 | Teknik borç (yedek, MySQL user…) | 📋 [TEKNIK-BORC.md](./TEKNIK-BORC.md) — en son |
 | Gelişmiş sistemler | — P4+ ertelendi |
 
@@ -250,16 +251,16 @@ qb-core
 
 ## Önerilen çalışma sırası
 
-### Şimdi
-1. Yerel `server.cfg` + restart — oyuna gir, temel RP testi
-2. Kapalı beta (3–5 kişi) — [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
+### Şimdi — Adım 04
+1. [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md) checklist — oyun içi test
+2. Bug/ayar geri bildirimi → düzelt
 
-### Beta sonrası (P3)
-3. Discord + başvuru formu
-4. Açılış
+### Adım 05 — Kapalı beta
+3. Whitelist aç + [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
+4. Discord + başvuru
 
 ### Açılış sonrası (P4+)
-5. İhtiyaç halinde: meslek açma, konut, injury scripti
+5. Konut, telefon, injury — ihtiyaç halinde
 
 ### En son — teknik borç
 6. Yedek, MySQL kullanıcı, resmon, webhook logları — [TEKNIK-BORC.md](./TEKNIK-BORC.md)

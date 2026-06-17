@@ -16,9 +16,14 @@ Araç sahipleri (sürücü koltuğunda sürerken km artar).
 
 ## Oyuncu için
 
-Km değerini doğrudan HUD'da görmeyebilirsiniz (sunucu ayarına bağlı). Mekanik veya satış RP'sinde admin/mekanik sorgulayabilir.
+Araçtayken **`/km`** yazarak plaka ve kilometresini chat'te görebilirsiniz.
 
-## RP kullanım örnekleri
+```
+/km
+» Araç: ABC123 — 84.3 km
+```
+
+RP'de de `/me` + `/do` ile kullanılabilir:
 
 ```
 /me kilometre sayacına bakar.

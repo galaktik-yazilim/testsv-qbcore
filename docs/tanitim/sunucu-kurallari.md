@@ -30,13 +30,15 @@
 |-------|----------|
 | `T` + mesaj | Normal konuşma (~20m) |
 | `/me` | Eylem |
+| `/ame` | İsimsiz eylem (isim göstermez) |
 | `/do` | Ortam |
 | `/s` | Fısıltı (~3m) |
 | `/w` | Bağırma (~40m) |
 | `/b` | Yerel OOC |
 | `/911` | Acil çağrı (PD / EMS) |
+| `/km` | Araç kilometresi (içindeyken) |
 
-Global chat yoktur. Her eylemi `/me` ile destekleyin.
+Global chat yoktur. OOC için `/b` kullanın (eski `/ooc` kapalı). Admin duyuru: `/a`.
 
 ## 4. Acil servisler
 
@@ -61,9 +63,20 @@ Global chat yoktur. Her eylemi `/me` ile destekleyin.
 
 Detay admin takdirindedir.
 
-## 7. Whitelist (kapalı beta)
+## 6b. CK / PK / MGK
 
-Kapalı beta döneminde sunucu whitelist ile korunur. Detay: [discord-ve-basvuru.md](./discord-ve-basvuru.md)
+| Terim | Anlam |
+|-------|--------|
+| **CK** (Character Kill) | Karakterin kalıcı ölümü — admin onaylı. Karakter silinir, yeni karakter açılamaz (1 slot). |
+| **PK** (Player Kill) | Oyuncunun karakterinin öldürülmesi; NLRP ile devam edilir (CK değilse yeni karakter yok). |
+| **MGK** (Meta Gaming Kill) | Metagaming nedeniyle ceza — admin müdahalesi. |
+
+CK yalnızca admin prosedürü ile uygulanır. Oyuncu kendi karakterini silemez.
+
+## 7. Whitelist
+
+> **Şu an kapalı** — test döneminde herkes girebilir. Sistemler oturunca açılacak.  
+> Detay: [discord-ve-basvuru.md](./discord-ve-basvuru.md)
 
 ---
 
