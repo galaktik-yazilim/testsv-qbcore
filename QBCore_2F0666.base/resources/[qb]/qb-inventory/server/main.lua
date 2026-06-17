@@ -56,6 +56,8 @@ RegisterNetEvent('QBCore:Server:UpdateObject', function()
 end)
 
 AddEventHandler('QBCore:Server:PlayerLoaded', function(Player)
+    Player(Player.PlayerData.source).state.inv_busy = false
+
     QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'AddItem', function(item, amount, slot, info, reason)
         return AddItem(Player.PlayerData.source, item, amount, slot, info, reason)
     end)

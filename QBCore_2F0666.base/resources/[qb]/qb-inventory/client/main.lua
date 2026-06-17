@@ -28,8 +28,16 @@ end)
 AddEventHandler('onResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then
         PlayerData = QBCore.Functions.GetPlayerData()
+        if LocalPlayer.state.isLoggedIn then
+            LocalPlayer.state:set('inv_busy', false, true)
+        end
     end
 end)
+
+local function IsProgressActive()
+    if GetResourceState('progressbar') ~= 'started' then return false end
+    return exports['progressbar']:isDoingSomething()
+end
 
 -- Functions
 
@@ -291,7 +299,20 @@ end)
 
 RegisterCommand('openInv', function()
     if IsNuiFocused() or IsPauseMenuActive() then return end
-    ExecuteCommand('inventory')
+    if not LocalPlayer.state.isLoggedIn then return end
+
+    local pdata = QBCore.Functions.GetPlayerData()
+    if not pdata or not pdata.citizenid then return end
+
+    local meta = pdata.metadata or {}
+    if meta.isdead or meta.inlaststand or meta.ishandcuffed then return end
+
+    if LocalPlayer.state.inv_busy and not IsNuiFocused() and not IsProgressActive() then
+        TriggerServerEvent('qb-inventory:server:recoverBusy')
+        Wait(100)
+    end
+
+    TriggerServerEvent('qb-inventory:server:openKeybind')
 end, false)
 
 RegisterCommand('toggleHotbar', function()

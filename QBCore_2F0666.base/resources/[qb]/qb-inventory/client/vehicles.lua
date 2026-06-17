@@ -59,7 +59,7 @@ QBCore.Functions.CreateClientCallback('qb-inventory:client:vehicleCheck', functi
                 cb(inventory, class)
             else
                 QBCore.Functions.Notify(Lang:t('notify.vlocked'), 'error')
-                return
+                cb(nil)
             end
         end
     end
