@@ -133,12 +133,25 @@ local function isShowroomVehicle(veh)
     return false
 end
 
+local function cleanupAreaNpcs(center, radius)
+    for _, ped in ipairs(GetGamePool('CPed')) do
+        if DoesEntityExist(ped) and not IsPedAPlayer(ped) and ped ~= PlayerPedId() then
+            if #(GetEntityCoords(ped) - center) < radius then
+                SetEntityAsMissionEntity(ped, true, true)
+                DeleteEntity(ped)
+            end
+        end
+    end
+end
+
 local function cleanupShowroomVehicles()
     for _, data in pairs(Config.Dealerships) do
         local center = getInteractCoords(data)
         if not center then goto continue end
 
         local radius = data.cleanupRadius or 90.0
+        cleanupAreaNpcs(center, radius)
+
         for _, veh in ipairs(GetGamePool('CVehicle')) do
             if DoesEntityExist(veh) and #(GetEntityCoords(veh) - center) < radius and isShowroomVehicle(veh) then
                 SetEntityAsMissionEntity(veh, true, true)

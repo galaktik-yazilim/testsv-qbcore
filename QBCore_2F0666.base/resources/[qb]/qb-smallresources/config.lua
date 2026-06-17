@@ -79,6 +79,10 @@ Config.Density = {
     scenario = 0.0,
 }
 
+-- Hard RP: mağaza / harita NPC'leri (dondurulmuş clerk vb.) — karakter seçim ekranında dokunulmaz
+Config.RemoveScriptAndFrozenPeds = true
+Config.PedCleanupOnlyWhenLoggedIn = true
+
 Config.Disable = {
     hudComponents = { 1, 2, 3, 4, 7, 9, 13, 14, 19, 20, 21, 22 }, -- Hud Components: https://docs.fivem.net/natives/?_0x6806C51AD12B83B8
     controls = { 37 },                                            -- Controls: https://docs.fivem.net/docs/game-references/controls/

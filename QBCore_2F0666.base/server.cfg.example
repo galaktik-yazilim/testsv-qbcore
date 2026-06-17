@@ -107,7 +107,8 @@ ensure prison_canteen
 ensure prison_meeting
 
 # NOT: Arcade scriptler (soygun, drugs, crypto, qb-phone vb.) bilinçli olarak
-# bu listede yok. İhtiyaç halinde tek tek ekleyin — docs/ROADMAP.md
+# bu listede yok. qb-shops da kapalı — NPC'li 24/7 mağaza hard RP ile uyumsuz.
+# İhtiyaç halinde tek tek ekleyin — docs/ROADMAP.md
 
 ## Permissions ##
 add_ace group.admin command allow

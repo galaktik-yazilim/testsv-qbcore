@@ -47,9 +47,17 @@ CreateThread(function()
 
         if Config.Density.peds == 0 then
             local playerPed = PlayerPedId()
+            local loggedIn = LocalPlayer.state.isLoggedIn
+            local cleanupFrozen = Config.RemoveScriptAndFrozenPeds
+                and (loggedIn or not Config.PedCleanupOnlyWhenLoggedIn)
+
             for _, ped in ipairs(GetGamePool('CPed')) do
-                if ped ~= playerPed and not IsPedAPlayer(ped) and not IsEntityPositionFrozen(ped) then
-                    if ambientPedTypes[GetEntityPopulationType(ped)] then
+                if ped ~= playerPed and not IsPedAPlayer(ped) then
+                    local popType = GetEntityPopulationType(ped)
+                    local isAmbient = ambientPedTypes[popType]
+                    local shouldDelete = isAmbient or (cleanupFrozen and not IsPedInAnyVehicle(ped, false))
+
+                    if shouldDelete then
                         DeleteEntity(ped)
                     end
                 end
