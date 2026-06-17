@@ -8,7 +8,8 @@ QBCore tabanlı **hard RP / text-based** FiveM sunucusu. txAdmin `txData` klasö
 |-------|--------|
 | [docs/tanitim/README.md](docs/tanitim/README.md) | Oyuncu & geliştirici rehberleri (Türkçe) |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Geliştirme yol haritası |
-| [docs/TODO.md](docs/TODO.md) | Aktif görev listesi |
+| [docs/gelistirme/README.md](docs/gelistirme/README.md) | Geliştirme adımları 01–03 |
+| [docs/TODO.md](docs/TODO.md) | Operasyonel checklist (restart, beta) |
 | [CHANGELOG.md](CHANGELOG.md) | Yapılan değişiklikler |
 
 ## Klasör yapısı

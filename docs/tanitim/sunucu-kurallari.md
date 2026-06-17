@@ -63,7 +63,7 @@ Detay admin takdirindedir.
 
 ## 7. Whitelist (kapalı beta)
 
-Kapalı beta döneminde sunucu whitelist ile korunur. Başvuru onayı olmadan giriş yapılamaz.
+Kapalı beta döneminde sunucu whitelist ile korunur. Detay: [discord-ve-basvuru.md](./discord-ve-basvuru.md)
 
 ---
 

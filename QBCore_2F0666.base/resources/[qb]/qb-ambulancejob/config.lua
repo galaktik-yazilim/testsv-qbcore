@@ -1,14 +1,15 @@
 Config = {}
-Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add setr UseTarget true)
-Config.MinimalDoctors = 2                                    -- How many players with the ambulance job to prevent the hospital check-in system from being used
-Config.DocCooldown = 1                                       -- Cooldown between doctor calls allowed, in minutes
-Config.WipeInventoryOnRespawn = true                         -- Enable or disable removing all the players items when they respawn at the hospital
-Config.RespawnAtNearestHospital = true                       -- Enable or disable respawning at the closest hospital
-Config.Helicopter = 'polmav'                                 -- Helicopter model that players with the ambulance job can use
-Config.BillCost = 2000                                       -- Price that players are charged for using the hospital check-in system
-Config.DeathTime = 300                                       -- How long the timer is for players to bleed out completely and respawn at the hospital
-Config.ReviveInterval = 360                                  -- How long the timer is for players to revive a player in laststand
-Config.MinimumRevive = 300                                   -- How long the timer is for players to revive a player in laststand
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
+-- Hard RP: EMS online ise NPC check-in kapalı; 0 = her zaman EMS çağrısı (self-revive yok)
+Config.MinimalDoctors = 0
+Config.DocCooldown = 5
+Config.WipeInventoryOnRespawn = false
+Config.RespawnAtNearestHospital = true
+Config.Helicopter = 'polmav'
+Config.BillCost = 500
+Config.DeathTime = 360
+Config.ReviveInterval = 360
+Config.MinimumRevive = 360
 Config.PainkillerInterval = 60                               -- Set the length of time painkillers last (per one)
 Config.HealthDamage = 5                                      -- Minumum damage done to health before checking for injuries
 Config.ArmorDamage = 5                                       -- Minumum damage done to armor before checking for injuries

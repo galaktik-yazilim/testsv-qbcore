@@ -11,19 +11,16 @@ Acil tıp personeli. Yaralı oyunculara müdahale, hastane nakli ve tedavi RP'si
 
 ## Temel görevler
 
-- 911 / sağlık çağrılarına gitmek
+- `/911` çağrılarına gitmek
 - Yaralıyı stabilize etmek, hastaneye nakletmek
 - Ölüm / downed durumunda hard RP prosedürü uygulamak
 
 ## Hard RP farkı
 
-Bu sunucuda **hızlı self-revive** ve arcade tedavi hedeflenmez. Yaralanma ciddiye alınır:
-
-- `/me` ile muayene yapın
-- `/do` ile tespit yazın
-- Gerekirse hastane RP'si uzatılır
-
-> **Planlanan:** Gelişmiş yaralanma sistemi — şu an temel `qb-ambulancejob` aktif.
+- **NPC hastane check-in kapalı** — self-revive yok (`MinimalDoctors = 0`)
+- Ölüm süresi: **6 dakika**
+- Hastane respawn envanter **silmez**
+- `/me` ve `/do` ile muayene zorunlu
 
 ## RP örnekleri
 
@@ -40,10 +37,6 @@ Bu sunucuda **hızlı self-revive** ve arcade tedavi hedeflenmez. Yaralanma cidd
 Merhaba, ben EMS paramedik [isim]. Size yardım edeceğiz.
 ```
 
-## Komutlar
-
-Resource: `qb-ambulancejob` — revive, sedye, hastane noktaları config'de.
-
 ## Yasak davranışlar
 
 - Sebepsiz revive (admin onayı olmadan)
@@ -56,10 +49,9 @@ Resource: `qb-ambulancejob` — revive, sedye, hastane noktaları config'de.
 |------|-------|
 | Resource | `qb-ambulancejob` |
 | Job adı | `ambulance` |
-| Harita | `hospital_map` (pillbox hastane) |
+| Harita | `hospital_map` |
 
-## İleride eklenecek
+## İleride eklenecek (P4+)
 
-- Downed / injury state
-- `/911` text dispatch
+- Downed / injury state scripti
 - Hastane kayıt RP'si

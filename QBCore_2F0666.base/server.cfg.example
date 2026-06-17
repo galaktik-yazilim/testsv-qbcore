@@ -17,7 +17,7 @@
 ## You CAN edit the following:
 endpoint_add_tcp "0.0.0.0:30120"
 endpoint_add_udp "0.0.0.0:30120"
-sv_maxclients 48
+sv_maxclients 32
 set steam_webApiKey "YOUR_STEAM_WEB_API_KEY"
 sets tags "hardrp, textrp, qbcore, turkish"
 
@@ -45,6 +45,12 @@ sv_scriptHookAllowed 0
 # QBCore
 setr qb_locale "tr"
 setr UseTarget false
+setr qb_whitelist 0
+# Kapalı beta / açılış öncesi: 1 yapın ve aşağıdaki ACE whitelist'i doldurun
+sets qb_discord "https://discord.gg/DEGISTIR"
+
+# Toast → rp-chat (opsiyonel, qb-smallresources ile uyumlu)
+setr qb_notify_to_chat true
 
 # --- CFX varsayılan ---
 ensure mapmanager
@@ -113,3 +119,8 @@ add_ace qbcore.god command allow
 add_principal qbcore.god group.admin
 add_principal qbcore.god qbcore.admin
 add_principal qbcore.admin qbcore.mod
+
+# Whitelist (setr qb_whitelist 1 iken)
+add_ace group.admin join allow
+add_ace group.whitelisted join allow
+# add_principal identifier.license:ROCKSTAR_LICENSE group.whitelisted

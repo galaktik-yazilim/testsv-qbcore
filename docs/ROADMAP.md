@@ -27,9 +27,10 @@
 | Resource yükü | ✅ Explicit `server.cfg` (~32 resource) |
 | Event güvenliği | ✅ Custom `rp-*` sertleştirildi |
 | Tanıtım dokümantasyonu | ✅ `docs/tanitim/` |
-| MVP karakter kuralları | ⏳ Whitelist, slot, isim kuralı bekliyor |
-| Kapalı beta | ❌ Henüz |
-| Gelişmiş sistemler | ❌ Bilinçli ertelendi (P4+) |
+| MVP karakter kuralları | ✅ 1 slot, isim validasyonu, ekonomi |
+| Whitelist / yedek | ✅ ACE + scriptler hazır |
+| Kapalı beta | ⏳ Operasyonel test (checklist hazır) |
+| Gelişmiş sistemler | — P4+ ertelendi |
 
 ---
 

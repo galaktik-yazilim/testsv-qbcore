@@ -7,8 +7,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 
 ## [Unreleased]
 
-### Planlanan
-- Adım 03: Discord + başvuru + yedekleme + açılış
+### Planlanan (P4+)
+- Konut, telefon, taşımacılık, injury script
+
+---
+
+## [0.8.0] — 2025-06-17
+
+### Added
+- Adım 03: whitelist ACE, MySQL setup, günlük yedek scriptleri
+- Discord/başvuru + admin yönetim rehberleri
+- Performans notları dokümanı
+
+### Changed
+- PD/EMS hard RP config
+- sv_maxclients 32, qb_whitelist/qb_discord convar
 
 ---
 

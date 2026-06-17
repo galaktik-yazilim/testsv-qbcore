@@ -107,12 +107,12 @@ QBCore.Config.Player.PlayerDefaults = {
 
 QBCore.Config.Server = {}                                    -- General server config
 QBCore.Config.Server.Closed = false                          -- Set server closed (no one can join except people with ace permission 'qbadmin.join')
-QBCore.Config.Server.ClosedReason = 'Server Closed'          -- Reason message to display when people can't join the server
-QBCore.Config.Server.Uptime = 0                              -- Time the server has been up.
-QBCore.Config.Server.Whitelist = false                       -- Kapalı beta: true yap + admin ACE whitelist (bkz. docs/gelistirme/ADIM-01)
-QBCore.Config.Server.WhitelistPermission = 'admin'           -- Whitelist açıkken girebilen yetki grubu
-QBCore.Config.Server.PVP = true                              -- Enable or disable pvp on the server (Ability to shoot other players)
-QBCore.Config.Server.Discord = ''                            -- Discord invite link
+QBCore.Config.Server.ClosedReason = 'Sunucu kapalı — Discord\'dan bilgi alın.'
+QBCore.Config.Server.Uptime = 0
+QBCore.Config.Server.Whitelist = GetConvarInt('qb_whitelist', 0) == 1
+QBCore.Config.Server.WhitelistPermission = 'join'
+QBCore.Config.Server.PVP = true
+QBCore.Config.Server.Discord = GetConvar('qb_discord', '')
 QBCore.Config.Server.CheckDuplicateLicense = true            -- Check for duplicate rockstar license on join
 QBCore.Config.Server.Permissions = { 'god', 'admin', 'mod' } -- Add as many groups as you want here after creating them in your server.cfg
 

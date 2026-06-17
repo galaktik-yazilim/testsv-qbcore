@@ -59,10 +59,16 @@ DUR! Ellerini görebileceğim yere koy!
 |------|-------|
 | Resource | `qb-policejob` |
 | Job adı | `police` |
-| Bağımlılık | `qb-core`, envanter, garaj |
+| Yakıt | `qb-fuel` |
+| Hard RP | UseTarget kapalı — etkileşimler chat + [E] |
 
-## İleride eklenecek
+## Hard RP notları (config)
 
-- Text tabanlı 911 dispatch
+- Güvenlik kameraları aktif — metagaming yapmayın
+- Spike limiti: 3
+- `/911` çağrılarına görevde yanıt verin
+
+## İleride eklenecek (P4+)
+
 - Kanıt / MDW sadeleştirmesi
 - Faction başvuru formu

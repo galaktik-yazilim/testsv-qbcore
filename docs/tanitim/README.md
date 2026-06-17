@@ -27,6 +27,14 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 | Sağlık (EMS) | Aktif (temel) | [saglik-gorevlisi.md](./meslekler/saglik-gorevlisi.md) |
 | Taşımacılık | Planlanıyor | — |
 
+## Topluluk & yönetim
+
+| Konu | Dosya |
+|------|-------|
+| Discord + başvuru | [discord-ve-basvuru.md](./discord-ve-basvuru.md) |
+| Admin / txAdmin | [admin-yonetim.md](./admin-yonetim.md) |
+| Geliştirme adımları | [gelistirme/README.md](../gelistirme/README.md) |
+
 ## Yeni modül eklerken
 
 Her yeni özellik veya meslek için [SABLON.md](./SABLON.md) dosyasını kopyalayıp doldurun. Geliştirme yol haritası: [ROADMAP.md](../ROADMAP.md)

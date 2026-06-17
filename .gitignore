@@ -60,5 +60,8 @@ Desktop.ini
 # --- Yerel yedekler (scripts/backup-data.ps1 çıktısı) ---
 _backups/
 
+# --- MySQL yedek ayarları (scripts/mysql.env) ---
+scripts/mysql.env
+
 # --- Büyük indirilebilir asset paketleri (varsa buraya ekle) ---
 # Örnek: **/stream/*.ytd

@@ -63,4 +63,5 @@ Detay: [rp-ignition.md](./sistemler/rp-ignition.md), [rp-mileage.md](./sistemler
 ## Yardım
 
 - Sistem rehberleri: [README.md](./README.md)
-- Geliştirme planı: [ROADMAP.md](../ROADMAP.md)
+- Geliştirme adımları: [gelistirme/README.md](../gelistirme/README.md)
+- Operasyonel checklist: [TODO.md](../TODO.md)
