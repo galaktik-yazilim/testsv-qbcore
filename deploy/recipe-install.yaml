@@ -1,7 +1,7 @@
-name: testsv Hard RP — Güncelleme
+name: testsv Hard RP — İlk Kurulum
 version: v1.1.0
 author: aosdev
-description: GitHub'dan kod güncelleme. DB ve server.cfg'ye dokunmaz — günlük deploy için.
+description: Sıfır sunucu veya tam yeniden kurulum. server.cfg + MySQL tabloları dahil.
 
 tasks:
   - action: download_github
@@ -14,7 +14,6 @@ tasks:
     dest: ./resources
     overwrite: true
 
-  # Git'te dist/ yok — release zip (derlenmiş) kullan
   - action: remove_path
     path: ./resources/[standalone]/oxmysql
 
@@ -41,8 +40,32 @@ tasks:
     dest: ./resources/[standalone]/menuv
 
   - action: copy_path
+    src: ./tmp/repo/deploy/server.cfg.template
+    dest: ./server.cfg
+
+  - action: copy_path
     src: ./tmp/repo/QBCore_2F0666.base/myLogo.png
     dest: ./myLogo.png
 
   - action: remove_path
     path: ./tmp
+
+  - action: connect_database
+
+  - action: query_database
+    file: ./resources/[qb]/qb-core/qbcore.sql
+
+  - action: query_database
+    file: ./resources/[qb]/qb-garages/player_vehicles.sql
+
+  - action: query_database
+    file: ./resources/[qb]/qb-inventory/qb-inventory.sql
+
+  - action: query_database
+    file: ./resources/[qb]/qb-banking/banking.sql
+
+  - action: query_database
+    file: ./resources/[qb]/qb-clothing/qb-clothing.sql
+
+  - action: query_database
+    file: ./resources/[standalone]/rp-mileage/mileage.sql
