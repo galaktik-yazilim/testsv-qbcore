@@ -1,5 +1,5 @@
 name: testsv Hard RP
-version: v1.0.0
+version: v1.0.1
 author: aosdev
 description: testsv-qbcore GitHub deploy — QBCore hard RP (Zap / txAdmin)
 
@@ -13,6 +13,32 @@ tasks:
     src: ./tmp/repo/QBCore_2F0666.base/resources
     dest: ./resources
     overwrite: true
+
+  # Git'te dist/ yok — release zip (derlenmiş) kullan
+  - action: remove_path
+    path: ./resources/[standalone]/oxmysql
+
+  - action: remove_path
+    path: ./resources/[standalone]/menuv
+
+  - action: ensure_dir
+    path: ./tmp/files
+
+  - action: download_file
+    url: https://github.com/overextended/oxmysql/releases/download/v2.14.1/oxmysql.zip
+    path: ./tmp/files/oxmysql.zip
+
+  - action: unzip
+    src: ./tmp/files/oxmysql.zip
+    dest: ./resources/[standalone]
+
+  - action: download_file
+    url: https://github.com/ThymonA/menuv/releases/download/v1.4.1/menuv_v1.4.1.zip
+    path: ./tmp/files/menuv.zip
+
+  - action: unzip
+    src: ./tmp/files/menuv.zip
+    dest: ./resources/[standalone]/menuv
 
   - action: copy_path
     src: ./tmp/repo/deploy/server.cfg.template
