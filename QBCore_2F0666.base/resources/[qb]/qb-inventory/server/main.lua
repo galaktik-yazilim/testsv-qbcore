@@ -55,35 +55,36 @@ RegisterNetEvent('QBCore:Server:UpdateObject', function()
     QBCore = exports['qb-core']:GetCoreObject()
 end)
 
-AddEventHandler('QBCore:Server:PlayerLoaded', function(Player)
-    Player(Player.PlayerData.source).state.inv_busy = false
+AddEventHandler('QBCore:Server:PlayerLoaded', function(QBPlayer)
+    local src = QBPlayer.PlayerData.source
+    Player(src).state.inv_busy = false
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'AddItem', function(item, amount, slot, info, reason)
-        return AddItem(Player.PlayerData.source, item, amount, slot, info, reason)
+    QBCore.Functions.AddPlayerMethod(src, 'AddItem', function(item, amount, slot, info, reason)
+        return AddItem(src, item, amount, slot, info, reason)
     end)
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'RemoveItem', function(item, amount, slot, reason)
-        return RemoveItem(Player.PlayerData.source, item, amount, slot, reason)
+    QBCore.Functions.AddPlayerMethod(src, 'RemoveItem', function(item, amount, slot, reason)
+        return RemoveItem(src, item, amount, slot, reason)
     end)
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'GetItemBySlot', function(slot)
-        return GetItemBySlot(Player.PlayerData.source, slot)
+    QBCore.Functions.AddPlayerMethod(src, 'GetItemBySlot', function(slot)
+        return GetItemBySlot(src, slot)
     end)
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'GetItemByName', function(item)
-        return GetItemByName(Player.PlayerData.source, item)
+    QBCore.Functions.AddPlayerMethod(src, 'GetItemByName', function(item)
+        return GetItemByName(src, item)
     end)
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'GetItemsByName', function(item)
-        return GetItemsByName(Player.PlayerData.source, item)
+    QBCore.Functions.AddPlayerMethod(src, 'GetItemsByName', function(item)
+        return GetItemsByName(src, item)
     end)
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'ClearInventory', function(filterItems)
-        ClearInventory(Player.PlayerData.source, filterItems)
+    QBCore.Functions.AddPlayerMethod(src, 'ClearInventory', function(filterItems)
+        ClearInventory(src, filterItems)
     end)
 
-    QBCore.Functions.AddPlayerMethod(Player.PlayerData.source, 'SetInventory', function(items)
-        SetInventory(Player.PlayerData.source, items)
+    QBCore.Functions.AddPlayerMethod(src, 'SetInventory', function(items)
+        SetInventory(src, items)
     end)
 end)
 

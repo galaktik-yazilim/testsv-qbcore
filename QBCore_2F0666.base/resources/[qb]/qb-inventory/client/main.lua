@@ -316,7 +316,9 @@ RegisterCommand('openInv', function()
 end, false)
 
 RegisterCommand('toggleHotbar', function()
-    ExecuteCommand('hotbar')
+    if IsNuiFocused() or IsPauseMenuActive() then return end
+    if not LocalPlayer.state.isLoggedIn then return end
+    TriggerServerEvent('qb-inventory:server:openHotbar')
 end, false)
 
 for i = 1, 5 do

@@ -149,3 +149,18 @@ RegisterNetEvent('qb-inventory:server:recoverBusy', function()
         CloseInventory(source)
     end
 end)
+
+RegisterNetEvent('qb-inventory:server:openHotbar', function()
+    if Player(source).state.inv_busy then return end
+    local QBPlayer = exports['qb-core']:GetPlayer(source)
+    if not QBPlayer then return end
+    if QBPlayer.PlayerData.metadata['isdead'] or QBPlayer.PlayerData.metadata['inlaststand'] or QBPlayer.PlayerData.metadata['ishandcuffed'] then return end
+    local hotbarItems = {
+        QBPlayer.PlayerData.items[1],
+        QBPlayer.PlayerData.items[2],
+        QBPlayer.PlayerData.items[3],
+        QBPlayer.PlayerData.items[4],
+        QBPlayer.PlayerData.items[5],
+    }
+    TriggerClientEvent('qb-inventory:client:hotbar', source, hotbarItems)
+end)
