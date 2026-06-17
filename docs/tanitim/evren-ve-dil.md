@@ -23,7 +23,7 @@
 | Chat mesafesi | **metre (m)** | Normal ~20m, `/s` ~3m, `/w` ~40m |
 | Araç hızı (HUD) | **km/s** | `qb-hud` — `UseMPH = false` |
 | Araç kilometresi | **km** | `/km`, HUD; DB iç hesap mil → ekranda km |
-| Harita koordinatları | oyun birimi | `/911` konum satırı |
+| Harita koordinatları | oyun birimi | `/911` — `Harita konumu X,Y` (sokak adı yok) |
 
 Mil/miles **gösterilmez** (config: `rp-mileage` `DisplayMetricKm = true`).
 
@@ -66,5 +66,7 @@ Yeni özellik eklerken:
 1. Mesafe/hız **metrik** mi?
 2. Oyuncuya giden metin **Türkçe** mi?
 3. IC dünya **Los Santos** ile çelişiyor mu?
+
+Kapalı meslekler açılırken (ör. `qb-taxijob`) config'teki **mil/mile** fiyatlarını km/metrik mantığa çevirin.
 
 İlgili config: `rp-chat/config.lua`, `rp-mileage/config.lua`, `qb-hud/config.lua`

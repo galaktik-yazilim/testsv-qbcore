@@ -1,14 +1,15 @@
 # testsv — FiveM QBCore (txAdmin)
 
-QBCore tabanlı **hard RP / text-based** FiveM sunucusu. txAdmin `txData` klasör yapısına göre düzenlenmiştir.
+QBCore tabanlı **hard RP / text-based** FiveM sunucusu. **Evren: Los Santos (Amerika)** · **Arayüz: Türkçe** · **Birimler: metrik** (m, km, km/s). txAdmin `txData` klasör yapısına göre düzenlenmiştir.
 
 ## Dokümantasyon
 
 | Dosya | İçerik |
 |-------|--------|
 | [docs/tanitim/README.md](docs/tanitim/README.md) | Oyuncu & geliştirici rehberleri (Türkçe) |
+| [docs/tanitim/evren-ve-dil.md](docs/tanitim/evren-ve-dil.md) | Los Santos · TR arayüz · metrik birimler |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Geliştirme yol haritası |
-| [docs/gelistirme/README.md](docs/gelistirme/README.md) | Geliştirme adımları 01–03 |
+| [docs/gelistirme/DURUM.md](docs/gelistirme/DURUM.md) | Geliştirme durumu (turlar 01–08) |
 | [docs/TODO.md](docs/TODO.md) | Operasyonel checklist (restart, beta) |
 | [CHANGELOG.md](CHANGELOG.md) | Yapılan değişiklikler |
 

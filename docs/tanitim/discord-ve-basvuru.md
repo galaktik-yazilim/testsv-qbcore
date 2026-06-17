@@ -9,7 +9,7 @@
 | Kanal | Tür | Açıklama |
 |-------|-----|----------|
 | `#duyurular` | Sadece admin | Sunucu güncellemeleri |
-| `#kurallar` | Sadece admin | [sunucu-kurallari.md](./sunucu-kurallari.md) özeti + link |
+| `#kurallar` | Sadece admin | [sunucu-kurallari.md](./sunucu-kurallari.md) + [evren-ve-dil.md](./evren-ve-dil.md) özeti |
 | `#basvuru` | Herkes | Form linki + süreç |
 | `#destek` | Herkes | Teknik sorunlar |
 | `#genel-ooc` | Herkes | OOC sohbet |
@@ -26,7 +26,8 @@ Form alanları önerisi:
 3. FiveM / RP deneyimi (kısa)
 4. Karakter adı + kısa hikaye (2–3 paragraf)
 5. Hard RP kurallarını okudum (checkbox)
-6. Rockstar license (isteğe bağlı — admin onayında txAdmin'den alınabilir)
+6. Los Santos evreni + metrik birimler (m/km) — arayüz Türkçe (checkbox / kısa not)
+7. Rockstar license (isteğe bağlı — admin onayında txAdmin'den alınabilir)
 
 Onay sonrası:
 - Discord rolü: `Whitelist` / `Oyuncu`

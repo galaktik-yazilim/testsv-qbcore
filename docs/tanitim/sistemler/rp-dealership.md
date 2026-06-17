@@ -2,7 +2,7 @@
 
 ## Özet
 
-Şehirdeki tek resmi araç galerisi. `qb-vehicleshop` yerine hard RP'ye uygun sade bir arayüz kullanır.
+Şehirdeki tek resmi araç galerisi (**Premium Deluxe Motorsport / PDM** bölgesi, Los Santos). `qb-vehicleshop` yerine hard RP'ye uygun sade bir arayüz kullanır. Fiyatlar **$ USD**.
 
 ## Kimler kullanabilir?
 

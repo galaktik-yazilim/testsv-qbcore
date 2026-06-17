@@ -21,6 +21,7 @@
 | Lag / FPS sorunu? | | |
 | Chat komutları çalıştı mı? | | |
 | Galeri / araç alımı OK? | | |
+| `/km` ve HUD birimleri (km, km/s) doğru mu? | | |
 | Garaj OK? | | |
 | NPC / clerk gördün mü? | | |
 
@@ -31,6 +32,7 @@
 | Soru | Cevap |
 |------|--------|
 | Chat mesafeleri (20/3/40m) uygun mu? | |
+| HUD hız (km/s) ve km sayacı anlaşılır mı? | |
 | Ekonomi ($150+$850) çok mu az mı? | |
 | PD/EMS `/911` işe yaradı mı? | |
 | Eksik hissettiğin sistem? | |

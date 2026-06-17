@@ -7,13 +7,14 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 1. [Genel Başlangıç](./genel-baslangic.md) — kurulum, evren (Los Santos), metrik birimler
 2. [Evren, Dil ve Birimler](./evren-ve-dil.md) — Türkçe UI + Amerika evreni + m/km
 3. [Hızlı Referans](./oyuncu-hizli-referans.md) — tek sayfa komut/tuş özeti
-3. [Sistemler](#sistemler) — chat, araç, galeri vb.
-4. [Meslekler](./meslekler/README.md) — polis, sağlık
+4. [Sistemler](#sistemler) — chat, araç, galeri vb.
+5. [Meslekler](./meslekler/README.md) — polis, sağlık
 
 ## Sistemler
 
 | Sistem | Dosya | Kısa açıklama |
 |--------|-------|---------------|
+| Evren & birimler | [evren-ve-dil.md](./evren-ve-dil.md) | Los Santos, TR UI, m/km/km/s |
 | Sunucu kuralları | [sunucu-kurallari.md](./sunucu-kurallari.md) | Hard RP kuralları, ceza özeti |
 | Text RP Chat | [rp-chat.md](./sistemler/rp-chat.md) | Proximity chat, `/me`, `/do`, `/b` |
 | Karakter | [karakter-olusturma.md](./sistemler/karakter-olusturma.md) | 1 slot, isim kuralları, başlangıç parası |

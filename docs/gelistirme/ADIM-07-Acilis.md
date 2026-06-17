@@ -27,6 +27,7 @@
 
 ### Oyuncu deneyimi
 - [ ] [genel-baslangic.md](../tanitim/genel-baslangic.md) linki Discord'da
+- [ ] [evren-ve-dil.md](../tanitim/evren-ve-dil.md) — Los Santos + metrik özeti pin (opsiyonel)
 - [ ] [oyuncu-hizli-referans.md](../tanitim/oyuncu-hizli-referans.md) pin (opsiyonel)
 
 ### Admin

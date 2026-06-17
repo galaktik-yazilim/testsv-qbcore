@@ -65,7 +65,8 @@ Detay: [rp-chat.md](./sistemler/rp-chat.md) · [oyuncu-hizli-referans.md](./oyun
 
 - Motor **otomatik çalışmaz** — kontağı siz açarsınız
 - Anahtarınız olmayan aracı çalıştıramazsınız
-- Kilometre takibi yapılır
+- Kilometre takibi yapılır (**km** — `/km` ve HUD)
+- HUD hız göstergesi **km/s**
 
 Detay: [rp-ignition.md](./sistemler/rp-ignition.md), [rp-mileage.md](./sistemler/rp-mileage.md)
 
@@ -77,6 +78,7 @@ Detay: [rp-ignition.md](./sistemler/rp-ignition.md), [rp-mileage.md](./sistemler
 
 ## Yardım
 
+- Evren & birimler: [evren-ve-dil.md](./evren-ve-dil.md)
 - Sistem rehberleri: [README.md](./README.md)
 - Geliştirme adımları: [gelistirme/README.md](../gelistirme/README.md)
 - Operasyonel checklist: [TODO.md](../TODO.md)

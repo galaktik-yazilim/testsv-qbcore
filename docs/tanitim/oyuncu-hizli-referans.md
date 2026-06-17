@@ -53,5 +53,6 @@
 
 ## Yardım
 
+- [evren-ve-dil.md](./evren-ve-dil.md) — Los Santos, metrik, Türkçe arayüz
 - [genel-baslangic.md](./genel-baslangic.md)
 - [README.md](./README.md)

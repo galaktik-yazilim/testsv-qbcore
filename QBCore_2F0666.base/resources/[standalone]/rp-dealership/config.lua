@@ -1,6 +1,7 @@
 Config = {}
 
--- Her zaman yeşil marker göster (giriş noktasında)
+-- Los Santos (Premium Deluxe / PDM) — IC evren ABD, fiyatlar $ USD
+-- Etkileşim mesafesi metre (metrik)
 Config.ShowMarker = true
 
 -- [E] ile etkileşim (UseTarget false iken qb-target gerekmez)

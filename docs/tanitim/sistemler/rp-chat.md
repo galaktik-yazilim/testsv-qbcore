@@ -80,7 +80,7 @@ Text-based dispatch — panel yok. Görevdeki `police` ve `ambulance` job'ları 
 ```
 
 - 60 saniye cooldown
-- Konum yaklaşık X,Y olarak gönderilir
+- **Harita konumu** X,Y olarak gönderilir (sokak adı değil — PD/EMS IC yorumlar)
 - Görevde (on duty) personel yoksa çağrı iletilmez
 
 Detay: [sunucu-kurallari.md](../sunucu-kurallari.md)

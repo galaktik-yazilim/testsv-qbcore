@@ -25,6 +25,8 @@
 | 4 | `/kurallar` | |
 | 5 | Galeri `[E]` — araç al, kontak aç | |
 | 6 | Garaj — araç çıkar / park et | |
+| 7 | `/km` — çıktı **km** | |
+| 8 | HUD — hız **km/s**, sayaç **km** | |
 
 ---
 

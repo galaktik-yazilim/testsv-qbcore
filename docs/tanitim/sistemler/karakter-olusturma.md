@@ -29,6 +29,8 @@ Hard RP sunucusunda **her oyuncunun 1 karakteri** vardır. Karakter silme oyuncu
 3. Ad, soyad, doğum tarihi, cinsiyet, uyruk gir
 4. Onayla — karakter son konumunda veya varsayılan spawn'da başlar
 
+**Uyruk (IC):** Los Santos evreninde yaşayan karakterin kökeni — örn. `American`, `Mexican`, `Turkish`. Arayüz Türkçe olması evrenin Türkiye olduğu anlamına gelmez.
+
 ## Başlangıç ekonomisi (MVP)
 
 | Hesap | Miktar |

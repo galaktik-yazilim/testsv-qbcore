@@ -2,7 +2,7 @@
 
 ## Özet
 
-Acil tıp personeli. Yaralı oyunculara müdahale, hastane nakli ve tedavi RP'si yapar.
+Acil tıp personeli (**Pillbox Hill Medical Center** / EMS). Yaralı oyunculara müdahale, hastane nakli ve tedavi RP'si yapar.
 
 ## Kimler oynayabilir?
 

@@ -1,6 +1,6 @@
 # Meslekler Rehberi
 
-Bu klasörde her meslek için ayrı Türkçe tanıtım dosyası bulunur.
+Bu klasörde her meslek için ayrı Türkçe tanıtım dosyası bulunur. **IC evren: Los Santos** (LSPD, Pillbox EMS vb.) — bkz. [evren-ve-dil.md](../evren-ve-dil.md).
 
 ## Aktif meslekler
 

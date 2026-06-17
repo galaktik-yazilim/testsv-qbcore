@@ -197,7 +197,7 @@ QBCore.Commands.Add('911', 'Acil servislere text çağrı gönder (PD / EMS)', {
     end
 
     local label = '[911] ' .. charName
-    local body = ('Konum ~%s: %s'):format(loc, msg)
+    local body = ('Harita konumu %s — %s'):format(loc, msg)
 
     for i = 1, #recipients do
         SendChat(recipients[i], Config.Colors.emergency, label, body)
