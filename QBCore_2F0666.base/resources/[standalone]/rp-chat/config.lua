@@ -1,6 +1,6 @@
 Config = {}
 
--- Mesafe katmanları (metre)
+-- Mesafe katmanları (metre) — Los Santos evreni, metrik birim
 Config.ProximityRange = 20.0  -- normal konuşma, /me, /b, /do
 Config.WhisperRange = 3.0     -- /s fısıltı
 Config.ShoutRange = 40.0      -- /w bağırma
@@ -51,8 +51,8 @@ Config.NotifyPrefixes = {
 
 -- /kurallar — oyuncuya chat'te gösterilen özet (detay: docs/tanitim/sunucu-kurallari.md)
 Config.RulesMessages = {
-    'Hard RP / text-based — voice yok; chat: T, /me, /ame, /do, /s, /w, /b.',
-    'OOC: /b kullanın. /911 yalnızca acil durum; troll yasak.',
-    'Fear RP + NLRP geçerli. 1 karakter, silme yok (CK admin).',
-    'Araç: M kontak, K kilit, L kemer, /km. Detay: docs/tanitim/sunucu-kurallari.md',
+    'Los Santos (Amerika) evreni — arayüz Türkçe, mesafe/km metrik (m, km).',
+    'Voice yok; chat: T, /me, /ame, /do, /s, /w, /b. OOC: /b.',
+    'Fear RP + NLRP. 1 karakter. Araç: M kontak, K kilit, L kemer, /km.',
+    'Detay: docs/tanitim/sunucu-kurallari.md · docs/tanitim/evren-ve-dil.md',
 }

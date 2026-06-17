@@ -1,6 +1,6 @@
 # Oyuncu Hızlı Referans
 
-> Text-based Hard RP — tek sayfa özet
+> Text-based Hard RP — Los Santos · Türkçe arayüz · mesafeler metre (m)
 
 ---
 

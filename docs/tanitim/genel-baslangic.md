@@ -1,5 +1,11 @@
 # Genel Başlangıç
 
+## Evren
+
+**Los Santos, San Andreas (Amerika)** — GTA evreni. Arayüz ve komutlar **Türkçe**; mesafe, hız ve kilometre **metrik** (m, km, km/s). Para birimi **$ USD**.
+
+Detay: [evren-ve-dil.md](./evren-ve-dil.md)
+
 ## Sunucu türü
 
 Bu proje **hard roleplay**, **text-based** (yazı tabanlı) bir FiveM sunucusudur. **Sesli konuşma (voice) kapalıdır** — tüm iletişim chat üzerinden yapılır.
@@ -18,7 +24,7 @@ Bu proje **hard roleplay**, **text-based** (yazı tabanlı) bir FiveM sunucusudu
 
 1. Sunucuya bağlanın
 2. Karakter oluşturun (`qb-multicharacter`)
-3. Gerçekçi isim kullanın (ör. `Ahmet Yılmaz` — meme isimler yasak)
+3. Gerçekçi isim kullanın (ör. `James Miller`, `Maria Santos` — meme isimler yasak)
 4. Chat penceresi her zaman görünür — `T` ile yazın
 
 ## Temel RP kuralları

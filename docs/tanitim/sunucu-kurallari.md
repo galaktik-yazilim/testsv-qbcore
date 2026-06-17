@@ -1,16 +1,17 @@
 # Sunucu Kuralları
 
-> Hard RP · Text-based · Türkçe  
-> Oyun içi özet: `/kurallar`
+> Hard RP · Text-based · Türkçe arayüz · Los Santos (Amerika) · Metrik (m, km)  
+> Oyun içi özet: `/kurallar` · Detay: [evren-ve-dil.md](./evren-ve-dil.md)
 
 ---
 
 ## 1. Genel
 
-1. Bu sunucu **yazı tabanlı roleplay** sunucusudur. İletişim chat komutları ile yapılır; **sesli konuşma (voice) kapalıdır**.
-2. Her oyuncunun **1 karakteri** vardır. İkinci karakter veya karakter silme yoktur (CK admin prosedürü).
-3. Gerçekçi isim zorunludur. Meme isim, ünlü isim, rakam/symbol içeren isimler yasaktır.
-4. Minimum karakter yaşı: **18**.
+1. Bu sunucu **yazı tabanlı roleplay** sunucusudur. **Evren: Los Santos, San Andreas (Amerika).** Arayüz Türkçe; mesafe ve kilometre **metrik** (metre, km, km/s).
+2. İletişim chat komutları ile yapılır; **sesli konuşma (voice) kapalıdır**.
+3. Her oyuncunun **1 karakteri** vardır. İkinci karakter veya karakter silme yoktur (CK admin prosedürü).
+4. Gerçekçi isim zorunludur — Los Santos'ta yaşayan insan ismi (Amerikan, Latin, göçmen vb.). Meme, ünlü, rakam/sembol yasak.
+5. Minimum karakter yaşı: **18**.
 
 ## 2. Roleplay kuralları
 

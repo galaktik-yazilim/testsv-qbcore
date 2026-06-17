@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'rp-mileage'
-description 'Kalıcı araç mil takibi (player_vehicles.drivingdistance)'
+description 'Kalıcı araç km takibi (ekranda km, player_vehicles.drivingdistance)'
 version '1.0.0'
 
 shared_script 'config.lua'

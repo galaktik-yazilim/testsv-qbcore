@@ -6,6 +6,8 @@
 
 ### Başlangıç felsefesi
 
+**Evren:** Los Santos (Amerika). **Dil:** Türkçe arayüz. **Birimler:** metrik (m, km, km/s). Bkz. [tanitim/evren-ve-dil.md](./tanitim/evren-ve-dil.md)
+
 İlk aşamada **gelişmiş sistem kurma.** Oyuncu girebilsin, chat RP yapsın, karakter oluştursun, araç alsın — bu kadar. Yaralanma scripti, dispatch, konut, telefon, meslek ekonomileri **açılıştan sonra**, ihtiyaç netleşince eklenir.
 
 | Aşama | Hedef | Süre (tahmini) |

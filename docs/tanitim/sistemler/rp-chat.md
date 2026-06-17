@@ -2,7 +2,7 @@
 
 ## Özet
 
-Sunucunun iletişim omurgasıdır. Global chat yoktur; tüm konuşmalar **yakınlık mesafesine** göre duyulur. Hard RP sunucularında olduğu gibi eylemler chat üzerinden yazılır.
+Sunucunun iletişim omurgasıdır. Global chat yoktur; tüm konuşmalar **yakınlık mesafesine** (metre) göre duyulur. Evren **Los Santos (Amerika)**; arayüz **Türkçe**.
 
 ## Kimler kullanabilir?
 

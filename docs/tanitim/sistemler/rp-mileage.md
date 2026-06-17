@@ -2,7 +2,9 @@
 
 ## Özet
 
-Sahiplendiğiniz araçların toplam kilometresi veritabanında saklanır. Hard RP'de araç değeri, bakım ve satış senaryolarında kullanılabilir.
+Sahiplendiğiniz araçların toplam kilometresi veritabanında saklanır. Ekranda ve `/km` çıktısında **km** gösterilir (Los Santos evreni, metrik birim).
+
+Hard RP'de araç değeri, bakım ve satış senaryolarında kullanılabilir.
 
 ## Kimler kullanabilir?
 
@@ -10,7 +12,7 @@ Araç sahipleri (sürücü koltuğunda sürerken km artar).
 
 ## Nasıl çalışır?
 
-- Sürücü koltuğunda ve hız > 1 km/h iken km sayacı artar
+- Sürücü koltuğunda ve hız ~3.6 km/s üzerindeyken km sayacı artar
 - Veritabanına ~10 saniyede bir senkronize edilir
 - Bisiklet, tekne, helikopter, uçak sayılmaz
 

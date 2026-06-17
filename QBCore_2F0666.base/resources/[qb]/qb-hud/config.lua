@@ -1,7 +1,7 @@
 Config = {}
 Config.OpenMenu = 'I'             -- https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
 Config.StressChance = 0.1         -- Default: 10% -- Percentage Stress Chance When Shooting (0-1)
-Config.UseMPH = false             -- km/h (Türkiye)
+Config.UseMPH = false             -- false = km/s (metrik); Los Santos evreni, metrik gösterim
 Config.MinimumStress = 50         -- Minimum Stress Level For Screen Shaking
 Config.MinimumSpeedUnbuckled = 50 -- Going Over This Speed Unbuckled Will Cause Stress
 Config.MinimumSpeed = 100         -- Going Over This Speed While Buckled Will Cause Stress

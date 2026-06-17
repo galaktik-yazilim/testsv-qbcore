@@ -4,8 +4,9 @@ Bu klasör, projeyi indiren herkesin sistemleri ve meslekleri **Türkçe** okuya
 
 ## Nereden başlamalı?
 
-1. [Genel Başlangıç](./genel-baslangic.md) — kurulum, ilk giriş, temel RP kuralları
-2. [Hızlı Referans](./oyuncu-hizli-referans.md) — tek sayfa komut/tuş özeti
+1. [Genel Başlangıç](./genel-baslangic.md) — kurulum, evren (Los Santos), metrik birimler
+2. [Evren, Dil ve Birimler](./evren-ve-dil.md) — Türkçe UI + Amerika evreni + m/km
+3. [Hızlı Referans](./oyuncu-hizli-referans.md) — tek sayfa komut/tuş özeti
 3. [Sistemler](#sistemler) — chat, araç, galeri vb.
 4. [Meslekler](./meslekler/README.md) — polis, sağlık
 

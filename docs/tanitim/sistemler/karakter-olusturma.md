@@ -17,9 +17,10 @@ Hard RP sunucusunda **her oyuncunun 1 karakteri** vardır. Karakter silme oyuncu
 
 | ✅ Kabul | ❌ Red |
 |---------|--------|
-| Ahmet Yılmaz | xX_Ahmet_Xx |
-| Elif Şahin | Test123 |
-| Jean-Pierre | `<script>` |
+| James Miller | xX_Ahmet_Xx |
+| Maria Santos | Test123 |
+| Ahmet Yılmaz (göçmen RP) | `<script>` |
+| Jean-Pierre | Meme / ünlü isim |
 
 ## Oluşturma adımları
 
