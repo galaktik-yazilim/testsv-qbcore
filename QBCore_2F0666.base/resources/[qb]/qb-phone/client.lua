@@ -223,27 +223,6 @@ local function findVehFromPlateAndLocate(plate)
     end
 end
 
-local function DisableDisplayControlActions()
-    DisableControlAction(0, 1, true)   -- disable mouse look
-    DisableControlAction(0, 2, true)   -- disable mouse look
-    DisableControlAction(0, 3, true)   -- disable mouse look
-    DisableControlAction(0, 4, true)   -- disable mouse look
-    DisableControlAction(0, 5, true)   -- disable mouse look
-    DisableControlAction(0, 6, true)   -- disable mouse look
-    DisableControlAction(0, 263, true) -- disable melee
-    DisableControlAction(0, 264, true) -- disable melee
-    DisableControlAction(0, 257, true) -- disable melee
-    DisableControlAction(0, 140, true) -- disable melee
-    DisableControlAction(0, 141, true) -- disable melee
-    DisableControlAction(0, 142, true) -- disable melee
-    DisableControlAction(0, 143, true) -- disable melee
-    DisableControlAction(0, 177, true) -- disable escape
-    DisableControlAction(0, 200, true) -- disable escape
-    DisableControlAction(0, 202, true) -- disable escape
-    DisableControlAction(0, 322, true) -- disable escape
-    DisableControlAction(0, 245, true) -- disable chat
-end
-
 local function LoadPhone()
     Wait(100)
     QBCore.Functions.TriggerCallback('qb-phone:server:GetPhoneData', function(pData)
@@ -341,7 +320,11 @@ local function isInventoryOpen()
 end
 
 local function applyPhoneFocus(visible)
-    if visible then
+    if GetResourceState('rp-chat') == 'started' then
+        pcall(function()
+            exports['rp-chat']:SetMouseVisible(visible)
+        end)
+    elseif visible then
         SetNuiFocus(true, true)
         SetNuiFocusKeepInput(true)
     else
@@ -351,20 +334,8 @@ local function applyPhoneFocus(visible)
 end
 
 local function syncPhoneMouse(visible)
-    if GetResourceState('rp-chat') == 'started' then
-        pcall(function()
-            exports['rp-chat']:SetMouseVisible(visible)
-        end)
-    else
-        applyPhoneFocus(visible)
-    end
+    applyPhoneFocus(visible)
 end
-
-AddEventHandler('rp-mouse:applyFocus', function(visible, source)
-    if source == 'phone' and PhoneData.isOpen then
-        applyPhoneFocus(visible)
-    end
-end)
 
 local function OpenPhone()
     QBCore.Functions.TriggerCallback('qb-phone:server:HasPhone', function(HasPhone)
@@ -380,22 +351,6 @@ local function OpenPhone()
                 TextOnly = Config.TextOnly,
             })
             syncPhoneMouse(true)
-
-            CreateThread(function()
-                while PhoneData.isOpen do
-                    if GetResourceState('rp-chat') == 'started' then
-                        local ok, mouseOn = pcall(function()
-                            return exports['rp-chat']:IsMouseVisible()
-                        end)
-                        if ok and mouseOn then
-                            DisableDisplayControlActions()
-                        end
-                    else
-                        DisableDisplayControlActions()
-                    end
-                    Wait(1)
-                end
-            end)
 
             if not PhoneData.CallData.InCall then
                 DoPhoneAnimation('cellphone_text_in')

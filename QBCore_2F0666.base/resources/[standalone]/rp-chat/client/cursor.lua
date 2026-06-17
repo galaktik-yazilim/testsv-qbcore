@@ -1,5 +1,5 @@
 -- Merkezi mouse gorunurlugu (isMouseVisible)
--- F4: toggle | Telefon/envanter acilinca: true | NUI focus UI sahibinde kalir (qb-phone vb.)
+-- F4 / telefon / envanter — tek base: focus + kamera kilidi
 
 local isMouseVisible = false
 local lastToggleAt = 0
@@ -17,18 +17,8 @@ local function isInventoryOpen()
     return LocalPlayer.state.inv_busy == true
 end
 
-local function applyMouseFocus()
-    if isPhoneOpen() then
-        TriggerEvent('rp-mouse:applyFocus', isMouseVisible, 'phone')
-        return
-    end
-
-    if isInventoryOpen() then
-        TriggerEvent('rp-mouse:applyFocus', isMouseVisible, 'inventory')
-        return
-    end
-
-    if isMouseVisible then
+local function applyNuiFocus(visible)
+    if visible then
         SetNuiFocus(true, true)
         SetNuiFocusKeepInput(true)
     else
@@ -37,12 +27,42 @@ local function applyMouseFocus()
     end
 end
 
+local function applyMouseFocus()
+    applyNuiFocus(isMouseVisible)
+end
+
+local function blockMouseLookControls()
+    DisableControlAction(0, 1, true)
+    DisableControlAction(0, 2, true)
+    DisableControlAction(0, 3, true)
+    DisableControlAction(0, 4, true)
+    DisableControlAction(0, 5, true)
+    DisableControlAction(0, 6, true)
+    DisableControlAction(0, 24, true)
+    DisableControlAction(0, 25, true)
+    DisableControlAction(0, 106, true)
+end
+
+local function blockPhoneExtraControls()
+    DisableControlAction(0, 263, true)
+    DisableControlAction(0, 264, true)
+    DisableControlAction(0, 257, true)
+    DisableControlAction(0, 140, true)
+    DisableControlAction(0, 141, true)
+    DisableControlAction(0, 142, true)
+    DisableControlAction(0, 143, true)
+    DisableControlAction(0, 177, true)
+    DisableControlAction(0, 200, true)
+    DisableControlAction(0, 202, true)
+    DisableControlAction(0, 322, true)
+    DisableControlAction(0, 245, true)
+end
+
 local function setMouseVisible(visible)
     isMouseVisible = visible == true
     applyMouseFocus()
 end
 
--- Envanter kapandiginda inv_busy once false olur; mouse bayragi takilirsa temizle
 AddStateBagChangeHandler('inv_busy', nil, function(bagName, _, value)
     local myBag = ('player:%s'):format(GetPlayerServerId(PlayerId()))
     if bagName ~= myBag or value then return end
@@ -100,21 +120,19 @@ CreateThread(function()
     RegisterKeyMapping('rpcursor', 'Mouse Imleci (Text RP)', 'keyboard', Config.CursorKey or 'F4')
 end)
 
+-- Tek loop: mouse acikken (F4 / telefon / envanter) kamera donmesin
 CreateThread(function()
     while true do
-        if isMouseVisible and not isPhoneOpen() and not isInventoryOpen() then
-            DisableControlAction(0, 1, true)
-            DisableControlAction(0, 2, true)
-            DisableControlAction(0, 3, true)
-            DisableControlAction(0, 4, true)
-            DisableControlAction(0, 5, true)
-            DisableControlAction(0, 6, true)
-            DisableControlAction(0, 24, true)
-            DisableControlAction(0, 25, true)
-            DisableControlAction(0, 106, true)
+        if isMouseVisible then
+            blockMouseLookControls()
+            if isPhoneOpen() then
+                blockPhoneExtraControls()
+            end
 
-            if IsDisabledControlJustPressed(0, 200) or IsDisabledControlJustPressed(0, 322) then
-                setMouseVisible(false)
+            if not isPhoneOpen() and not isInventoryOpen() then
+                if IsDisabledControlJustPressed(0, 200) or IsDisabledControlJustPressed(0, 322) then
+                    setMouseVisible(false)
+                end
             end
             Wait(0)
         else
