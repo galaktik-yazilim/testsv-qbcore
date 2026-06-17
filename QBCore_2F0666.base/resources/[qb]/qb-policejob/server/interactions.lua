@@ -1,11 +1,13 @@
 local sharedItems = exports['qb-core']:GetShared('Items')
 
+local function isLeoOnDuty(Player)
+	return Player and Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.onduty
+end
+
 RegisterNetEvent('police:server:SearchPlayer', function()
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
-    if not Player then return end
-    local PlayerData = Player.PlayerData
-    if PlayerData.job.type ~= 'leo' then return end
+    if not isLeoOnDuty(Player) then return end
     local player, distance = QBCore.Functions.GetClosestPlayer(src)
     if player ~= -1 and distance < 2.5 then
         local SearchedPlayer = exports['qb-core']:GetPlayer(tonumber(player))
@@ -28,7 +30,9 @@ RegisterNetEvent('police:server:CuffPlayer', function(playerId, isSoftcuff)
 
     local Player = exports['qb-core']:GetPlayer(src)
     local CuffedPlayer = exports['qb-core']:GetPlayer(playerId)
-    if not Player or not CuffedPlayer or (not Player.GetItemByName('handcuffs') and Player.PlayerData.job.type ~= 'leo') then return end
+    if not Player or not CuffedPlayer then return end
+    local hasCuffs = Player.GetItemByName('handcuffs')
+    if not hasCuffs and not isLeoOnDuty(Player) then return end
 
     CuffedPlayer.SetMetaData('ishandcuffed', not CuffedPlayer.PlayerData.metadata['ishandcuffed'])
     TriggerClientEvent('police:client:GetCuffed', CuffedPlayer.PlayerData.source, Player.PlayerData.source, isSoftcuff)
@@ -119,7 +123,10 @@ RegisterNetEvent('police:server:BillPlayer', function(playerId, price)
 
     local Player = exports['qb-core']:GetPlayer(src)
     local OtherPlayer = exports['qb-core']:GetPlayer(playerId)
-    if not Player or not OtherPlayer or Player.PlayerData.job.type ~= 'leo' then return end
+    if not isLeoOnDuty(Player) or not OtherPlayer then return end
+
+    price = math.max(0, math.min(50000, tonumber(price) or 0))
+    if price <= 0 then return end
 
     OtherPlayer.Functions.RemoveMoney('bank', price, 'paid-bills')
     exports['qb-banking']:AddMoney('police', price, 'Fine paid')
@@ -136,7 +143,9 @@ RegisterNetEvent('police:server:JailPlayer', function(playerId, time)
 
     local Player = exports['qb-core']:GetPlayer(src)
     local OtherPlayer = exports['qb-core']:GetPlayer(playerId)
-    if not Player or not OtherPlayer or Player.PlayerData.job.type ~= 'leo' then return end
+    if not isLeoOnDuty(Player) or not OtherPlayer then return end
+
+    time = math.max(1, math.min(500, tonumber(time) or 0))
 
     local currentDate = os.date('*t')
     if currentDate.day == 31 then
@@ -161,8 +170,7 @@ RegisterNetEvent('police:server:SeizeCash', function(playerId)
     if #(playerCoords - targetCoords) > 2.5 then return DropPlayer(src, 'Attempted exploit abuse') end
     local Player = exports['qb-core']:GetPlayer(src)
     local SearchedPlayer = exports['qb-core']:GetPlayer(playerId)
-    if not Player or not SearchedPlayer then return end
-    if Player.PlayerData.job.type ~= 'leo' then return end
+    if not isLeoOnDuty(Player) or not SearchedPlayer then return end
     local moneyAmount = SearchedPlayer.PlayerData.money['cash']
     local info = { cash = moneyAmount }
     SearchedPlayer.Functions.RemoveMoney('cash', moneyAmount, 'police-cash-seized')
@@ -179,8 +187,9 @@ RegisterNetEvent('police:server:SeizeDriverLicense', function(playerId)
     local targetCoords = GetEntityCoords(targetPed)
     if #(playerCoords - targetCoords) > 2.5 then return DropPlayer(src, 'Attempted exploit abuse') end
 
+    local Player = exports['qb-core']:GetPlayer(src)
     local SearchedPlayer = exports['qb-core']:GetPlayer(playerId)
-    if not exports['qb-core']:GetPlayer(src) or not SearchedPlayer then return end
+    if not isLeoOnDuty(Player) or not SearchedPlayer then return end
 
     local driverLicense = SearchedPlayer.PlayerData.metadata['licences']['driver']
     if driverLicense then

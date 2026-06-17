@@ -10,7 +10,7 @@
 | Metrik | Oran | Durum |
 |--------|------|--------|
 | **Genel (açılışa kadar)** | **58%** | Kod/doc bitti · operasyon bekliyor |
-| Kod & dokümantasyon | 100% | Turlar 01–23 ✅ |
+| Kod & dokümantasyon | 100% | Turlar 01–24 ✅ — test bekleniyor |
 | Operasyon (sen) | 0% | Test, beta, açılış, teknik borç ⏳ |
 | P4+ büyüme (sonra) | 0% | Yalnızca plan 📋 |
 
@@ -82,6 +82,7 @@ P4+ (konut, telefon, injury): [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.
 | 2025-06-17 | Tur 21: PD obje/alert, tüketim clamp, admin log guard | 58% |
 | 2025-06-17 | Tur 22: HUD menü TR, log guard, heli spotlight, test rehberi | 58% |
 | 2025-06-17 | Tur 23: kelepçe/revive metadata, EMS on duty guard | 58% |
+| 2025-06-17 | Tur 24: PD off duty, respawn guard, test rehberi genişletme | 58% |
 
 ---
 

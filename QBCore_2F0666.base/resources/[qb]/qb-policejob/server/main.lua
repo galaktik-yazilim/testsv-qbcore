@@ -4,6 +4,10 @@ local sharedWeapons = exports['qb-core']:GetShared('Weapons')
 local updatingCops = false
 local policeAlertCooldowns = {}
 
+local function isLeoOnDuty(Player)
+    return Player and Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.onduty
+end
+
 AddEventHandler('playerDropped', function()
     policeAlertCooldowns[source] = nil
 end)
@@ -199,6 +203,14 @@ end)
 
 RegisterNetEvent('police:server:showFingerprint', function(playerId)
     local src = source
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not isLeoOnDuty(Player) then return end
+    playerId = tonumber(playerId)
+    if not playerId then return end
+    local playerPed = GetPlayerPed(src)
+    local targetPed = GetPlayerPed(playerId)
+    if not targetPed or targetPed == 0 then return end
+    if #(GetEntityCoords(playerPed) - GetEntityCoords(targetPed)) > 2.5 then return end
     TriggerClientEvent('police:client:showFingerprint', playerId, src)
     TriggerClientEvent('police:client:showFingerprint', src, playerId)
 end)
@@ -206,6 +218,9 @@ end)
 RegisterNetEvent('police:server:showFingerprintId', function(sessionId)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
+    if not Player then return end
+    sessionId = tonumber(sessionId)
+    if not sessionId then return end
     local fid = Player.PlayerData.metadata['fingerprint']
     TriggerClientEvent('police:client:showFingerprintId', sessionId, fid)
     TriggerClientEvent('police:client:showFingerprintId', src, fid)
@@ -213,6 +228,8 @@ end)
 
 RegisterNetEvent('police:server:SetTracker', function(targetId)
     local src = source
+    local Player = exports['qb-core']:GetPlayer(src)
+    if not isLeoOnDuty(Player) then return end
     local playerPed = GetPlayerPed(src)
     local targetPed = GetPlayerPed(targetId)
     local playerCoords = GetEntityCoords(playerPed)

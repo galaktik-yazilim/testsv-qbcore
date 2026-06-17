@@ -87,6 +87,11 @@ end)
 RegisterNetEvent('hospital:server:RespawnAtHospital', function(hospitalIndex)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
+	if not Player then return end
+	if not Player.PlayerData.metadata['isdead'] and not Player.PlayerData.metadata['inlaststand'] then return end
+	if type(hospitalIndex) ~= 'number' or hospitalIndex < 1 or hospitalIndex > #Config.Locations['hospital'] then
+		hospitalIndex = 1
+	end
 	if Player.PlayerData.metadata['injail'] > 0 then
 		for i = 1, #Config.Locations['jailbeds'] do
 			local v = Config.Locations['jailbeds'][i]
@@ -322,6 +327,9 @@ end)
 
 RegisterNetEvent('hospital:server:UseFirstAid', function(targetId)
 	local src = source
+	local Player = exports['qb-core']:GetPlayer(src)
+	targetId = tonumber(targetId)
+	if not Player or not targetId or not Player.Functions.GetItemByName('firstaid') then return end
 	local Target = exports['qb-core']:GetPlayer(targetId)
 	if Target then
 		TriggerClientEvent('hospital:client:CanHelp', targetId, src)
@@ -339,19 +347,19 @@ end)
 
 RegisterNetEvent('hospital:server:removeBandage', function()
 	local Player = exports['qb-core']:GetPlayer(source)
-	if not Player then return end
+	if not Player or not Player.Functions.GetItemByName('bandage') then return end
 	exports['qb-inventory']:RemoveItem(source, 'bandage', 1, false, 'hospital:server:removeBandage')
 end)
 
 RegisterNetEvent('hospital:server:removeIfaks', function()
 	local Player = exports['qb-core']:GetPlayer(source)
-	if not Player then return end
+	if not Player or not Player.Functions.GetItemByName('ifaks') then return end
 	exports['qb-inventory']:RemoveItem(source, 'ifaks', 1, false, 'hospital:server:removeIfaks')
 end)
 
 RegisterNetEvent('hospital:server:removePainkillers', function()
 	local Player = exports['qb-core']:GetPlayer(source)
-	if not Player then return end
+	if not Player or not Player.Functions.GetItemByName('painkillers') then return end
 	exports['qb-inventory']:RemoveItem(source, 'painkillers', 1, false, 'hospital:server:removePainkillers')
 end)
 

@@ -69,7 +69,7 @@ const InventoryContainer = Vue.createApp({
                 // Other inventory
                 otherInventory: {},
                 otherInventoryName: "",
-                otherInventoryLabel: "Drop",
+                otherInventoryLabel: "Yer",
                 otherInventoryMaxWeight: 1000000,
                 otherInventorySlots: 100,
                 isShopInventory: false,

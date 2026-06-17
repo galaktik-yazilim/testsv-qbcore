@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–23 MVP kod tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–24 MVP kod tamamlandı.** Toplu test: [OYUN-ICI-TEST-HIZLI.md](./OYUN-ICI-TEST-HIZLI.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -24,6 +24,7 @@
 | [21](./ADIM-21-PD-Tuketim-Guvenlik.md) | PD & tüketim güvenlik | ✅ |
 | [22](./ADIM-22-UI-Guvenlik-Cila.md) | UI & güvenlik cilası | ✅ |
 | [23](./ADIM-23-Metadata-Guvenlik.md) | Metadata güvenlik | ✅ |
+| [24](./ADIM-24-PD-EMS-Sertlestirme.md) | PD/EMS sertleştirme | ✅ |
 
 ---
 

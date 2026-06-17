@@ -1,11 +1,11 @@
 # Geliştirme Durumu — Özet
 
-> **MVP kod geliştirmesi (Tur 01–23) tamamlandı.**  
+> **MVP kod geliştirmesi (Tur 01–24) tamamlandı.**  
 > Kalan işler **operasyonel** (test, beta, açılış, teknik borç).
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 23 metadata güvenlik
+Son güncelleme: Tur 24 PD/EMS sertleştirme — **geliştirme bitti, test bekleniyor**
 
 ---
 
@@ -40,6 +40,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [21](./ADIM-21-PD-Tuketim-Guvenlik.md) | PD & tüketim güvenlik | ✅ | ✅ | PD obje, banka TR |
 | [22](./ADIM-22-UI-Guvenlik-Cila.md) | UI & güvenlik cilası | ✅ | ✅ | HUD TR, log guard |
 | [23](./ADIM-23-Metadata-Guvenlik.md) | Metadata güvenlik | ✅ | ✅ | Kelepçe, revive token |
+| [24](./ADIM-24-PD-EMS-Sertlestirme.md) | PD/EMS sertleştirme | ✅ | ✅ | Off duty guard |
 
 ---
 

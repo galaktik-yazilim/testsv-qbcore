@@ -1,6 +1,6 @@
 # Güvenlik Denetimi — rp-* & MVP
 
-> Son güncelleme: Tur 23 metadata güvenlik  
+> Son güncelleme: Tur 24 PD/EMS sertleştirme  
 > Kapsam: `rp-chat`, `rp-mileage`, `rp-dealership`, `rp-ignition`, `qb-multicharacter` (MVP değişiklikleri)
 
 ---
@@ -72,6 +72,9 @@
 | `policeAlert` spam | ✅ **düzeltildi** | 30 sn cooldown + 256 char |
 | Heli spotlight | ✅ **düzeltildi** | LEO + on duty |
 | `SetHandcuffStatus` client spoof | ✅ **düzeltildi** | Sunucu otoritesi (CuffPlayer) |
+| PD arama/ceza off duty | ✅ **düzeltildi** | LEO + on duty |
+| Ceza/hapis değer spoof | ✅ **düzeltildi** | Tutar/süre clamp |
+| Parmak izi / tracker yetkisiz | ✅ **düzeltildi** | LEO + on duty (+ mesafe) |
 
 ---
 
@@ -118,6 +121,8 @@
 | EMS alert spam | ✅ **düzeltildi** | 30 sn cooldown + sanitize |
 | Doctor sayacı spoof | ✅ **düzeltildi** | Job + on duty doğrulama |
 | TreatWounds off duty | ✅ **düzeltildi** | on duty zorunlu |
+| Respawn sağlıklıyken | ✅ **düzeltildi** | isdead/inlaststand zorunlu |
+| Tüketim envanter spoof | ✅ **düzeltildi** | Item varlık kontrolü |
 
 ---
 
