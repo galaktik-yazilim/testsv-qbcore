@@ -39,19 +39,13 @@ local function ResolveNotifyText(text)
 end
 
 local function SendChatLine(line, color)
-    local payload = {
+    -- Tek yol: chat kaynağı AddEventHandler('chat:addMessage') ile dinler;
+    -- export + TriggerEvent birlikte kullanılırsa her satır iki kez görünür.
+    TriggerEvent('chat:addMessage', {
         color = color,
         multiline = true,
         args = { line, '' },
-    }
-
-    TriggerEvent('chat:addMessage', payload)
-
-    if GetResourceState('chat') == 'started' then
-        pcall(function()
-            exports['chat']:addMessage(payload)
-        end)
-    end
+    })
 end
 
 function NotifyToChat(text, texttype, length, icon)
