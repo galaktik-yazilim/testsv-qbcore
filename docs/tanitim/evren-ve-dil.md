@@ -66,6 +66,7 @@ Yeni özellik eklerken:
 1. Mesafe/hız **metrik** mi?
 2. Oyuncuya giden metin **Türkçe** mi?
 3. IC dünya **Los Santos** ile çelişiyor mu?
+4. Yeni komut → [komutlar.md](./komutlar.md) + `rp-chat` `Config.CommandHelp`
 
 Kapalı meslekler açılırken (ör. `qb-taxijob`) config'teki **mil/mile** fiyatlarını km/metrik mantığa çevirin.
 

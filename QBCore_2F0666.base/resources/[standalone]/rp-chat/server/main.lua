@@ -213,6 +213,45 @@ QBCore.Commands.Add('kurallar', 'Sunucu RP kurallarını göster', {}, false, fu
     end
 end, 'user')
 
+local function SendCommandHelp(source, lines, label)
+    label = label or '» Komut'
+    for i = 1, #lines do
+        SendChat(source, Config.Colors.system, label, lines[i])
+    end
+end
+
+QBCore.Commands.Add('komutlar', 'Oyun içi komut listesini göster (kısa özet)', {}, false, function(source)
+    if not CheckCooldown(source, 'cmd:komutlar', 5000) then return end
+
+    local help = Config.CommandHelp
+    if not help then return end
+
+    if help.intro then
+        SendChat(source, Config.Colors.system, '» Komutlar', help.intro)
+    end
+
+    if help.player then SendCommandHelp(source, help.player) end
+    if help.keys then SendCommandHelp(source, help.keys, '» Tuş') end
+
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player then
+        local jobName = Player.PlayerData.job and Player.PlayerData.job.name
+        if jobName == 'police' and help.police then
+            SendCommandHelp(source, help.police, '» LSPD')
+        elseif jobName == 'ambulance' and help.ems then
+            SendCommandHelp(source, help.ems, '» EMS')
+        end
+    end
+
+    if QBCore.Functions.HasPermission(source, 'admin') and help.admin then
+        SendCommandHelp(source, help.admin, '» Admin')
+    end
+
+    if help.footer then
+        SendChat(source, Config.Colors.system, '» Komutlar', help.footer)
+    end
+end, 'user')
+
 QBCore.Commands.Add('a', 'Admin duyurusu (tüm sunucu)', {
     { name = 'mesaj', help = 'Duyuru metni' },
 }, false, function(source, args)

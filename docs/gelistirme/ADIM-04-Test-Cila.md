@@ -36,6 +36,7 @@ Whitelist **kapalı** — herkes girebilir. Sırayla dene:
 - [ ] Araçtayken `/km` — çıktı **km** biriminde
 - [ ] HUD: hız **km/s**, kilometre **km** (mil/mph yok)
 - [ ] `/kurallar` — Los Santos + metrik satırı görünür
+- [ ] `/komutlar` — genel liste + footer (tam liste linki)
 
 ### Evren / birimler
 - [ ] Chat mesafeleri hissedilir (~20m normal, `/w` daha geniş)

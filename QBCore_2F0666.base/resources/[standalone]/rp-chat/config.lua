@@ -54,5 +54,43 @@ Config.RulesMessages = {
     'Los Santos (Amerika) evreni — arayüz Türkçe, mesafe/km metrik (m, km).',
     'Voice yok; chat: T, /me, /ame, /do, /s, /w, /b. OOC: /b.',
     'Fear RP + NLRP. 1 karakter. Araç: M kontak, K kilit, L kemer, /km.',
-    'Detay: docs/tanitim/sunucu-kurallari.md · docs/tanitim/evren-ve-dil.md',
+    'Detay: docs/tanitim/sunucu-kurallari.md · /komutlar',
+}
+
+-- /komutlar — oyun içi özet (tam liste: docs/tanitim/komutlar.md)
+Config.CommandHelp = {
+    intro = 'Los Santos · Türkçe · metrik — kısa komut özeti',
+    player = {
+        'T + yazı — Yakındakilere IC konuşma (~20 m)',
+        '/me <mesaj> — Yakındakilere eylem mesajı gönder',
+        '/ame <mesaj> — İsimsiz eylem mesajı',
+        '/do <mesaj> — Ortam eylemi belirt',
+        '/b <mesaj> — Yerel OOC',
+        '/s <mesaj> — Fısıltı (~3 m)',
+        '/w <mesaj> — Bağırma (~40 m)',
+        '/911 <mesaj> — Acil çağrı (PD/EMS, görevde)',
+        '/km — Araç kilometresi (km)',
+        '/kurallar — Kural özeti',
+        '/job — İş bilgisi · /gang — Çete bilgisi',
+        '/givekeys [id] — Araç anahtarı ver',
+        '/id — Sunucu ID numaran',
+    },
+    keys = {
+        'M — Kontak · K — Kilit · L — Emniyet kemeri',
+    },
+    footer = 'Tam liste: docs/tanitim/komutlar.md',
+    police = {
+        '/cuff · /sc — Kelepçe · /escort — Taşı',
+        '/jail · /unjail · /fine · /seizecash · /impound · /depot',
+        '/flagplate · /unflagplate · /plateinfo · /911p',
+    },
+    ems = {
+        '/status — Sağlık · /heal — İyileştir · /revivep — Canlandır',
+        '/911e <mesaj> — EMS iç çağrı',
+    },
+    admin = {
+        '/a <mesaj> — Admin duyurusu · /admin — Yönetici menüsü',
+        '/tp · /tpm · /car · /dv — Teleport / araç',
+        '/revive · /aheal — Canlandır / iyileştir (admin)',
+    },
 }

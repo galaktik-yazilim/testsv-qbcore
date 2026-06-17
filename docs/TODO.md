@@ -59,4 +59,4 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 | [ROADMAP.md](./ROADMAP.md) | Vizyon & fazlar |
 | [GUVENLIK-DENETIMI.md](./gelistirme/GUVENLIK-DENETIMI.md) | Güvenlik |
 | [oyuncu-hizli-referans.md](./tanitim/oyuncu-hizli-referans.md) | Oyuncu özeti |
-| [evren-ve-dil.md](./tanitim/evren-ve-dil.md) | Evren · TR · metrik |
+| [komutlar.md](./tanitim/komutlar.md) | Komut rehberi · `/komutlar` |

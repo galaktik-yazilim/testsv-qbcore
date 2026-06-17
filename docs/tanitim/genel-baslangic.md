@@ -79,6 +79,7 @@ Detay: [rp-ignition.md](./sistemler/rp-ignition.md), [rp-mileage.md](./sistemler
 ## Yardım
 
 - Evren & birimler: [evren-ve-dil.md](./evren-ve-dil.md)
+- Komut listesi: [komutlar.md](./komutlar.md) · oyun içi `/komutlar`
 - Sistem rehberleri: [README.md](./README.md)
 - Geliştirme adımları: [gelistirme/README.md](../gelistirme/README.md)
 - Operasyonel checklist: [TODO.md](../TODO.md)

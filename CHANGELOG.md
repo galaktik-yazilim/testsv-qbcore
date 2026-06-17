@@ -9,6 +9,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 
 ### Added
 - [evren-ve-dil.md](docs/tanitim/evren-ve-dil.md) — Los Santos evreni, Türkçe arayüz, metrik birimler (m, km, km/s)
+- [komutlar.md](docs/tanitim/komutlar.md) — tüm aktif komutlar (helper text formatı)
+- **`/komutlar`** — oyun içi komut özeti (`rp-chat`, yetkiye göre PD/EMS/admin bölümleri)
 
 ### Changed
 - `/kurallar`, sunucu kuralları ve tanıtım dokümanları evren/birim standardına göre güncellendi

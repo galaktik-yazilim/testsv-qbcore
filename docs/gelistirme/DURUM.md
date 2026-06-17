@@ -33,7 +33,8 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 
 `server.cfg.example` explicit ensure — voice, arcade, qb-shops, qb-phone kapalı.
 
-Custom: `rp-chat`, `rp-ignition`, `rp-mileage`, `rp-dealership`
+Custom: `rp-chat`, `rp-ignition`, `rp-mileage`, `rp-dealership`  
+Oyuncu komut rehberi: [komutlar.md](../tanitim/komutlar.md) · oyun içi `/komutlar`
 
 ---
 

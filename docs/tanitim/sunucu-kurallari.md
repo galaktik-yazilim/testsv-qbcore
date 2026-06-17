@@ -38,6 +38,7 @@
 | `/b` | Yerel OOC |
 | `/911` | Acil çağrı (PD / EMS) |
 | `/km` | Araç kilometresi (içindeyken) |
+| `/komutlar` | Tüm komutların kısa özeti |
 
 Global chat yoktur. OOC için `/b` kullanın (eski `/ooc` kapalı). Admin duyuru: `/a`.
 

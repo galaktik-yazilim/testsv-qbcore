@@ -7,7 +7,7 @@ QBCore tabanlı **hard RP / text-based** FiveM sunucusu. **Evren: Los Santos (Am
 | Dosya | İçerik |
 |-------|--------|
 | [docs/tanitim/README.md](docs/tanitim/README.md) | Oyuncu & geliştirici rehberleri (Türkçe) |
-| [docs/tanitim/evren-ve-dil.md](docs/tanitim/evren-ve-dil.md) | Los Santos · TR arayüz · metrik birimler |
+| [docs/tanitim/komutlar.md](docs/tanitim/komutlar.md) | Oyun içi komutlar (helper text) |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Geliştirme yol haritası |
 | [docs/gelistirme/DURUM.md](docs/gelistirme/DURUM.md) | Geliştirme durumu (turlar 01–08) |
 | [docs/TODO.md](docs/TODO.md) | Operasyonel checklist (restart, beta) |

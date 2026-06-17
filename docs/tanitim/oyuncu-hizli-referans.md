@@ -17,6 +17,7 @@
 | `/b` | Yerel OOC |
 | `/911` | Acil (PD/EMS, görevde) |
 | `/kurallar` | Kural özeti |
+| `/komutlar` | Komut listesi (helper text özeti) |
 
 ---
 
