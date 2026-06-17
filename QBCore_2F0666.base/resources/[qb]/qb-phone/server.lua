@@ -186,6 +186,10 @@ QBCore.Functions.CreateCallback('qb-phone:server:GetInvoices', function(source, 
 end)
 
 QBCore.Functions.CreateCallback('qb-phone:server:GetCallState', function(_, cb, ContactData)
+    if Config.TextOnly then
+        cb(false, true)
+        return
+    end
     local Target = QBCore.Functions.GetPlayerByPhone(ContactData.number)
     if Target ~= nil then
         if Calls[Target.PlayerData.citizenid] ~= nil then
@@ -775,6 +779,7 @@ RegisterNetEvent('qb-phone:server:MentionedPlayer', function(firstName, lastName
 end)
 
 RegisterNetEvent('qb-phone:server:CallContact', function(TargetData, CallId, AnonymousCall)
+    if Config.TextOnly then return end
     local src = source
     local Ply = exports['qb-core']:GetPlayer(src)
     local Target = QBCore.Functions.GetPlayerByPhone(TargetData.number)
@@ -1101,4 +1106,8 @@ QBCore.Commands.Add('bill', 'Bill A Player', { { name = 'id', help = 'Player ID'
     else
         TriggerClientEvent('QBCore:Notify', source, 'No Access', 'error')
     end
+end)
+
+QBCore.Functions.CreateUseableItem('phone', function(source)
+    TriggerClientEvent('qb-phone:client:openPhoneFromItem', source)
 end)

@@ -554,6 +554,12 @@ $(document).ready(function(){
                 QB.Phone.Functions.SetupCurrentCall(event.data.CallData);
                 QB.Phone.Data.IsOpen = true;
                 QB.Phone.Data.PlayerData = event.data.PlayerData;
+                QB.Phone.Data.TextOnly = event.data.TextOnly === true;
+                if (QB.Phone.Data.TextOnly) {
+                    $("body").addClass("text-only-phone");
+                } else {
+                    $("body").removeClass("text-only-phone");
+                }
                 break;
             case "LoadPhoneData":
                 QB.Phone.Functions.LoadPhoneData(event.data);

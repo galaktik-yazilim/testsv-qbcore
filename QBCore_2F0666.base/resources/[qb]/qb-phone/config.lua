@@ -1,4 +1,5 @@
 Config = Config or {}
+Config.TextOnly = true -- Text RP: sesli arama yok, WhatsApp/mail ile iletişim
 Config.BillingCommissions = { -- This is a percentage (0.10) == 10%
     mechanic = 0.10
 }
@@ -6,6 +7,9 @@ Config.TweetDuration = 12 -- How many hours to load tweets (12 will load the pas
 Config.RepeatTimeout = 2000
 Config.CallRepeats = 10
 Config.OpenPhone = 'F2'
+
+-- Bağımlılığı olmayan uygulamalar (MVP explicit resource listesi)
+Config.DisabledApps = { 'crypto', 'racing', 'houses', 'camera', 'gallery' }
 
 -- Set this to true if you wish to use Fivemerr (https://fivemerr.com/) for media uploads.
 -- Ensure to add your API key to server/main.lua
@@ -15,8 +19,8 @@ Config.PhoneApplications = {
     ['phone'] = {
         app = 'phone',
         color = '#04b543',
-        icon = 'fa fa-phone-alt',
-        tooltipText = 'Telefon',
+        icon = 'fa fa-address-book',
+        tooltipText = 'Kişiler',
         tooltipPos = 'top',
         job = false,
         blockedjobs = {},
@@ -27,7 +31,7 @@ Config.PhoneApplications = {
         app = 'whatsapp',
         color = '#25d366',
         icon = 'fas fa-comment',
-        tooltipText = 'Whatsapp',
+        tooltipText = 'Mesajlar',
         tooltipPos = 'top',
         style = 'font-size: 2.8vh',
         job = false,
@@ -172,6 +176,11 @@ Config.PhoneApplications = {
         Alerts = 0,
     },
 }
+
+for _, appName in ipairs(Config.DisabledApps or {}) do
+    Config.PhoneApplications[appName] = nil
+end
+
 Config.MaxSlots = 20
 
 Config.StoreApps = {

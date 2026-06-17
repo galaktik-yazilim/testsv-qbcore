@@ -31,6 +31,22 @@ PhoneData = {
 
 -- Functions
 
+local function VoiceCallAvailable()
+    return not Config.TextOnly and GetResourceState('pma-voice') == 'started'
+end
+
+local function LeaveVoiceCall(callId)
+    if VoiceCallAvailable() and callId then
+        exports['pma-voice']:removePlayerFromCall(callId)
+    end
+end
+
+local function JoinVoiceCall(callId)
+    if VoiceCallAvailable() and callId then
+        exports['pma-voice']:addPlayerToCall(callId)
+    end
+end
+
 local function LoadAnimation(dict)
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
@@ -331,6 +347,7 @@ local function OpenPhone()
                 AppData = Config.PhoneApplications,
                 CallData = PhoneData.CallData,
                 PlayerData = PhoneData.PlayerData,
+                TextOnly = Config.TextOnly,
             })
             PhoneData.isOpen = true
 
@@ -355,7 +372,7 @@ local function OpenPhone()
                 PhoneData.GarageVehicles = vehicles
             end)
         else
-            QBCore.Functions.Notify("You don't have a phone", 'error')
+            QBCore.Functions.Notify('Telefonun yok.', 'error')
         end
     end)
 end
@@ -368,7 +385,7 @@ end
 local function CancelCall()
     TriggerServerEvent('qb-phone:server:CancelCall', PhoneData.CallData)
     if PhoneData.CallData.CallType == 'ongoing' then
-        exports['pma-voice']:removePlayerFromCall(PhoneData.CallData.CallId)
+        LeaveVoiceCall(PhoneData.CallData.CallId)
     end
     PhoneData.CallData.CallType = nil
     PhoneData.CallData.InCall = false
@@ -421,6 +438,10 @@ local function CancelCall()
 end
 
 local function CallContact(CallData, AnonymousCall)
+    if Config.TextOnly then
+        QBCore.Functions.Notify('Sesli arama kapalı — Mesajlar uygulamasını kullanın.', 'error')
+        return
+    end
     local RepeatCount = 0
     PhoneData.CallData.CallType = 'outgoing'
     PhoneData.CallData.InCall = true
@@ -486,7 +507,7 @@ local function AnswerCall()
         end)
 
         TriggerServerEvent('qb-phone:server:AnswerCall', PhoneData.CallData)
-        exports['pma-voice']:addPlayerToCall(PhoneData.CallData.CallId)
+        JoinVoiceCall(PhoneData.CallData.CallId)
     else
         PhoneData.CallData.InCall = false
         PhoneData.CallData.CallType = nil
@@ -516,7 +537,7 @@ local function openPhoneCommand()
         if not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() then
             OpenPhone()
         else
-            QBCore.Functions.Notify('Action not available at the moment..', 'error')
+            QBCore.Functions.Notify('Şu an telefon kullanılamaz.', 'error')
         end
     end
 end
@@ -524,6 +545,11 @@ end
 -- Eski fivem.cfg bind'leri (ör. M → phone) etkisiz kalsın
 RegisterCommand('phone', function() end, false)
 RegisterCommand('openphone', openPhoneCommand, false)
+RegisterKeyMapping('openphone', 'Telefonu Aç', 'keyboard', Config.OpenPhone)
+
+RegisterNetEvent('qb-phone:client:openPhoneFromItem', function()
+    openPhoneCommand()
+end)
 
 -- Command
 
@@ -1272,6 +1298,11 @@ RegisterNUICallback('GetWhatsappChats', function(_, cb)
 end)
 
 RegisterNUICallback('CallContact', function(data, cb)
+    if Config.TextOnly then
+        QBCore.Functions.Notify('Sesli arama kapalı — Mesajlar uygulamasını kullanın.', 'error')
+        cb({ CanCall = false, IsOnline = true, InCall = PhoneData.CallData.InCall })
+        return
+    end
     QBCore.Functions.TriggerCallback('qb-phone:server:GetCallState', function(CanCall, IsOnline, _)
         local status = {
             CanCall = CanCall,
@@ -1748,7 +1779,7 @@ RegisterNetEvent('qb-phone:client:CancelCall', function()
         SendNUIMessage({
             action = 'CancelOngoingCall'
         })
-        exports['pma-voice']:removePlayerFromCall(PhoneData.CallData.CallId)
+        LeaveVoiceCall(PhoneData.CallData.CallId)
     end
     PhoneData.CallData.CallType = nil
     PhoneData.CallData.InCall = false
@@ -1801,6 +1832,7 @@ RegisterNetEvent('qb-phone:client:CancelCall', function()
 end)
 
 RegisterNetEvent('qb-phone:client:GetCalled', function(CallerNumber, CallId, AnonymousCall)
+    if Config.TextOnly then return end
     local RepeatCount = 0
     local CallData = {
         number = CallerNumber,
@@ -2129,7 +2161,7 @@ RegisterNetEvent('qb-phone:client:AnswerCall', function()
                 Wait(1000)
             end
         end)
-        exports['pma-voice']:addPlayerToCall(PhoneData.CallData.CallId)
+        JoinVoiceCall(PhoneData.CallData.CallId)
     else
         PhoneData.CallData.InCall = false
         PhoneData.CallData.CallType = nil

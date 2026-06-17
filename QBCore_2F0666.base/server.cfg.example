@@ -93,6 +93,7 @@ ensure qb-policejob
 ensure qb-ambulancejob
 ensure qb-adminmenu
 ensure qb-hud
+ensure qb-phone
 
 # --- Hard RP custom ---
 ensure rp-chat

@@ -91,6 +91,7 @@ Config.CommandHelp = {
         '/dimsifirla — Ana boyuta (dim 0) dön',
     },
     keys = {
+        'F2 — Telefon · TAB — Envanter · Z — Hotbar',
         'M — Kontak · K — Kilit · L — Emniyet kemeri',
     },
     footer = 'Tam liste: docs/tanitim/komutlar.md',

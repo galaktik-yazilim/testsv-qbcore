@@ -1026,3 +1026,14 @@
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Opera and Firefox */
 }
+
+/* Text RP — sesli arama kapalı */
+body.text-only-phone #phone-start-call,
+body.text-only-phone .phone-keypad-key-call,
+body.text-only-phone .phone-recent-header,
+body.text-only-phone .phone-recent-calls,
+body.text-only-phone .phone-currentcall-container,
+body.text-only-phone .call-notifications,
+body.text-only-phone .settings-anonymouscall-tab {
+    display: none !important;
+}

@@ -328,7 +328,7 @@ QBCore.Shared.Items = {
     walkstick                    = { name = 'walkstick', label = 'Baston', weight = 1000, type = 'item', image = 'walkstick.png', unique = false, useable = true, shouldClose = true, description = 'Nine dedeler için baston.. HAHA' },
 
     -- Communication
-    phone                        = { name = 'phone', label = 'Telefon', weight = 700, type = 'item', image = 'phone.png', unique = true, useable = false, shouldClose = false, description = 'Güzel bir telefonun var' },
+    phone                        = { name = 'phone', label = 'Telefon', weight = 700, type = 'item', image = 'phone.png', unique = true, useable = true, shouldClose = true, description = 'Güzel bir telefonun var' },
     radio                        = { name = 'radio', label = 'Telsiz', weight = 2000, type = 'item', image = 'radio.png', unique = true, useable = true, shouldClose = true, description = 'Sinyal üzerinden iletişim kurabilirsin' },
     iphone                       = { name = 'iphone', label = 'iPhone', weight = 1000, type = 'item', image = 'iphone.png', unique = false, useable = false, shouldClose = true, description = 'Çok pahalı telefon' },
     samsungphone                 = { name = 'samsungphone', label = 'Samsung S10', weight = 1000, type = 'item', image = 'samsungphone.png', unique = false, useable = false, shouldClose = true, description = 'Çok pahalı telefon' },

@@ -27,7 +27,6 @@ $content = Get-Content $cfgPath -Raw
 $failed = $false
 
 $forbidden = @(
-    'qb-phone',
     'qb-vehicleshop',
     'qb-shops',
     'pma-voice',
@@ -55,6 +54,7 @@ $required = @(
     'qb-doorlock',
     'qb-target',
     'qb-smallresources',
+    'qb-phone',
     'rp-chat',
     'rp-dealership',
     'rp-ignition',

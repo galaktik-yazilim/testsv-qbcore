@@ -71,6 +71,7 @@ ensure qb-policejob
 ensure qb-ambulancejob
 ensure qb-adminmenu
 ensure qb-hud
+ensure qb-phone
 
 ensure rp-chat
 ensure rp-ignition
