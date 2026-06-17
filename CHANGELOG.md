@@ -14,6 +14,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 09: loading Los Santos metinleri, hoş geldin chat, `rp-ignition` phone bağımlılığı kaldırıldı, `toggle-whitelist.ps1`
 - Tur 10: `scripts/verify-server-cfg.ps1` — yasak resource (`qb-phone`, voice vb.) kontrolü
 - [ADIM-10-Giris-PD-Cila.md](docs/gelistirme/ADIM-10-Giris-PD-Cila.md)
+- Tur 11: Legion Meydanı varsayılan spawn, inside metadata temizliği — [ADIM-11](docs/gelistirme/ADIM-11-Spawn-Dis-Guvenlik.md)
 
 ### Changed
 - `/kurallar`, sunucu kuralları ve tanıtım dokümanları evren/birim standardına göre güncellendi
@@ -24,6 +25,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - [ILERLEME.md](docs/ILERLEME.md) — genel ilerleme **58%**
 - **qb-spawn:** spawn noktası etiketleri Türkçe
 - **qb-policejob:** PD alert / `/fine` — `qb-phone` kapalıyken güvenli fallback; TR locale tamamlandı
+- **Varsayılan spawn:** havaalanı → **Legion Meydanı** (açık alan, yeni oyuncu UX)
 
 ### Fixed
 - **qb-multicharacter:** karakter seçiminde loading ekranında takılma (`qb-apartments` kapalıyken sonsuz callback)
@@ -31,6 +33,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-doorlock:** eksik Türkçe locale (`keymapping_description`, `newdoor_command_description`, vb.)
 - **qb-policejob:** `/fine` ve PD alert — phone olmadan crash/ sessiz hata yok
 - **qb-ambulancejob:** hastane faturası — phone olmadan QBCore notify
+- **Spawn sıkışması:** stale `inside` metadata + qb-spawn houses/apartments guard
 
 Operasyonel adımlar: [TODO.md](docs/TODO.md)
 
