@@ -190,8 +190,10 @@ end)
 RegisterNetEvent('police:server:SetHandcuffStatus', function(isHandcuffed)
     local src = source
     local Player = exports['qb-core']:GetPlayer(src)
-    if Player then
-        Player.SetMetaData('ishandcuffed', isHandcuffed)
+    if not Player then return end
+    if isHandcuffed == true then return end
+    if Player.PlayerData.metadata['ishandcuffed'] then
+        Player.SetMetaData('ishandcuffed', false)
     end
 end)
 

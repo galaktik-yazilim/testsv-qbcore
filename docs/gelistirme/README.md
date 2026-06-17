@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–22 MVP kod tamamlandı.** Özet: [DURUM.md](./DURUM.md)
+> **Turlar 01–23 MVP kod tamamlandı.** Özet: [DURUM.md](./DURUM.md)
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -23,6 +23,7 @@
 | [17–20](./ADIM-17-20-Kapanis-Paketi.md) | Kapanış paketi (güvenlik, TR, preflight) | ✅ |
 | [21](./ADIM-21-PD-Tuketim-Guvenlik.md) | PD & tüketim güvenlik | ✅ |
 | [22](./ADIM-22-UI-Guvenlik-Cila.md) | UI & güvenlik cilası | ✅ |
+| [23](./ADIM-23-Metadata-Guvenlik.md) | Metadata güvenlik | ✅ |
 
 ---
 

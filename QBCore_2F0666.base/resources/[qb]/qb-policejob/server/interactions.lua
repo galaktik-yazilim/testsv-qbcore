@@ -30,6 +30,7 @@ RegisterNetEvent('police:server:CuffPlayer', function(playerId, isSoftcuff)
     local CuffedPlayer = exports['qb-core']:GetPlayer(playerId)
     if not Player or not CuffedPlayer or (not Player.GetItemByName('handcuffs') and Player.PlayerData.job.type ~= 'leo') then return end
 
+    CuffedPlayer.SetMetaData('ishandcuffed', not CuffedPlayer.PlayerData.metadata['ishandcuffed'])
     TriggerClientEvent('police:client:GetCuffed', CuffedPlayer.PlayerData.source, Player.PlayerData.source, isSoftcuff)
 end)
 

@@ -1,6 +1,6 @@
 # Aktif TODO — Operasyonel
 
-> **MVP kod geliştirmesi (Tur 01–22) bitti.** Operasyon senin tarafında.  
+> **MVP kod geliştirmesi (Tur 01–23) bitti.** Operasyon senin tarafında.  
 > Master özet: [gelistirme/DURUM.md](./gelistirme/DURUM.md)  
 > **İlerleme: 58%** → [ILERLEME.md](./ILERLEME.md)
 
@@ -8,7 +8,7 @@
 
 ```
 Genel ilerleme       ███████████░░░░░░░░░  58%
-Geliştirme (kod)     ████████████████████ 100%  (Tur 01–22)
+Geliştirme (kod)     ████████████████████ 100%  (Tur 01–23)
 Oyun içi test         ⏳ sen
 Kapalı beta           ⏳ test sonrası
 Açılış                ⏳ beta sonrası
@@ -38,6 +38,7 @@ Hızlı rehber: [OYUN-ICI-TEST-HIZLI.md](./gelistirme/OYUN-ICI-TEST-HIZLI.md)
 - [ ] `.\scripts\preflight-server.ps1` — tam kontrol OK
 - [ ] **Tur 21:** PD off duty stash kapalı; banka ekstre TR
 - [ ] **Tur 22:** HUD menü TR; PD heli spotlight off duty kapalı
+- [ ] **Tur 23:** Kelepçe/revive metadata; EMS off duty işlem yok
 
 ---
 

@@ -6,6 +6,22 @@ local doctorCount = 0
 local doctorCalled = false
 local Doctors = {}
 local hungerResetCooldown = {}
+local deathClearAllowed = {}
+local ambulanceAlertCooldowns = {}
+
+local function allowDeathClear(src)
+	deathClearAllowed[src] = GetGameTimer()
+end
+
+local function isDeathClearAllowed(src)
+	local t = deathClearAllowed[src]
+	if not t then return false end
+	if (GetGameTimer() - t) > 10000 then
+		deathClearAllowed[src] = nil
+		return false
+	end
+	return true
+end
 
 local function validateHospitalBed(hospitalIndex, bedId)
 	local hospitals = Config.Locations['hospital']
@@ -20,7 +36,15 @@ local function validateHospitalBed(hospitalIndex, bedId)
 end
 
 AddEventHandler('playerDropped', function()
-	hungerResetCooldown[source] = nil
+	local src = source
+	hungerResetCooldown[src] = nil
+	deathClearAllowed[src] = nil
+	ambulanceAlertCooldowns[src] = nil
+	if Doctors[src] then
+		doctorCount = doctorCount - 1
+		TriggerClientEvent('hospital:client:SetDoctorCount', -1, doctorCount)
+		Doctors[src] = nil
+	end
 end)
 
 -- Events
@@ -32,6 +56,7 @@ AddEventHandler('txAdmin:events:healedPlayer', function(eventData)
 		return
 	end
 
+	allowDeathClear(eventData.id)
 	TriggerClientEvent('hospital:client:Revive', eventData.id)
 	TriggerClientEvent('hospital:client:HealInjuries', eventData.id, 'full')
 end)
@@ -48,6 +73,10 @@ RegisterNetEvent('hospital:server:SendToBed', function(bedId, isRevive, hospital
 	local playerCoords = GetEntityCoords(playerPed)
 	if #(playerCoords - hospital['location']) > 15.0 then return end
 
+	if isRevive then
+		allowDeathClear(src)
+	end
+
 	TriggerClientEvent('hospital:client:SendToBed', src, bedId, bed, isRevive)
 	TriggerClientEvent('hospital:client:SetBed', -1, bedId, true, hospitalIndex)
 	Player.RemoveMoney('bank', Config.BillCost, 'respawned-at-hospital')
@@ -62,6 +91,7 @@ RegisterNetEvent('hospital:server:RespawnAtHospital', function(hospitalIndex)
 		for i = 1, #Config.Locations['jailbeds'] do
 			local v = Config.Locations['jailbeds'][i]
 			if not v.taken then
+				allowDeathClear(src)
 				TriggerClientEvent('hospital:client:SendToBed', src, i, v, true)
 				TriggerClientEvent('hospital:client:SetBed2', -1, i, true)
 				if Config.WipeInventoryOnRespawn then
@@ -76,6 +106,7 @@ RegisterNetEvent('hospital:server:RespawnAtHospital', function(hospitalIndex)
 			end
 		end
 
+		allowDeathClear(src)
 		TriggerClientEvent('hospital:client:SendToBed', src, 1, Config.Locations['jailbeds'][1], true)
 		TriggerClientEvent('hospital:client:SetBed', -1, 1, true)
 		if Config.WipeInventoryOnRespawn then
@@ -90,6 +121,7 @@ RegisterNetEvent('hospital:server:RespawnAtHospital', function(hospitalIndex)
 		for i = 1, #Config.Locations['hospital'][hospitalIndex]['beds'] do
 			local v = Config.Locations['hospital'][hospitalIndex]['beds'][i]
 			if not v.taken then
+				allowDeathClear(src)
 				TriggerClientEvent('hospital:client:SendToBed', src, i, v, true)
 				TriggerClientEvent('hospital:client:SetBed', -1, i, true, hospitalIndex)
 				if Config.WipeInventoryOnRespawn then
@@ -104,6 +136,7 @@ RegisterNetEvent('hospital:server:RespawnAtHospital', function(hospitalIndex)
 			end
 		end
 		-- All beds were full, placing in first bed as fallback
+		allowDeathClear(src)
 		TriggerClientEvent('hospital:client:SendToBed', src, 1, Config.Locations['hospital'][hospitalIndex]['beds'][1], true)
 		TriggerClientEvent('hospital:client:SetBed', -1, 1, true, hospitalIndex)
 		if Config.WipeInventoryOnRespawn then
@@ -119,6 +152,12 @@ end)
 
 RegisterNetEvent('hospital:server:ambulanceAlert', function(text)
 	local src = source
+	if type(text) ~= 'string' then return end
+	text = text:gsub('[~<].-[>~]', ''):sub(1, 256)
+	if text:match('^%s*$') then return end
+	local now = GetGameTimer()
+	if ambulanceAlertCooldowns[src] and (now - ambulanceAlertCooldowns[src]) < 30000 then return end
+	ambulanceAlertCooldowns[src] = now
 	local ped = GetPlayerPed(src)
 	local coords = GetEntityCoords(ped)
 	local players = QBCore.Functions.GetQBPlayers()
@@ -155,17 +194,34 @@ end)
 RegisterNetEvent('hospital:server:SetDeathStatus', function(isDead)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
-	if Player then
-		Player.SetMetaData('isdead', isDead == true)
+	if not Player then return end
+	if isDead == true then
+		Player.SetMetaData('isdead', true)
+		Player.SetMetaData('inlaststand', false)
+		return
 	end
+	if not Player.PlayerData.metadata['isdead'] and not Player.PlayerData.metadata['inlaststand'] then
+		Player.SetMetaData('isdead', false)
+		return
+	end
+	if not isDeathClearAllowed(src) then return end
+	Player.SetMetaData('isdead', false)
 end)
 
 RegisterNetEvent('hospital:server:SetLaststandStatus', function(bool)
 	local src = source
 	local Player = exports['qb-core']:GetPlayer(src)
-	if Player then
-		Player.SetMetaData('inlaststand', bool == true)
+	if not Player then return end
+	if bool == true then
+		Player.SetMetaData('inlaststand', true)
+		return
 	end
+	if not Player.PlayerData.metadata['inlaststand'] and not Player.PlayerData.metadata['isdead'] then
+		Player.SetMetaData('inlaststand', false)
+		return
+	end
+	if not isDeathClearAllowed(src) then return end
+	Player.SetMetaData('inlaststand', false)
 end)
 
 RegisterNetEvent('hospital:server:SetArmor', function(amount)
@@ -181,7 +237,7 @@ RegisterNetEvent('hospital:server:TreatWounds', function(playerId)
 	local Player = exports['qb-core']:GetPlayer(src)
 	local Patient = exports['qb-core']:GetPlayer(playerId)
 	if Patient then
-		if Player.PlayerData.job.name == 'ambulance' then
+		if Player.PlayerData.job.name == 'ambulance' and Player.PlayerData.job.onduty then
 			exports['qb-inventory']:RemoveItem(src, 'bandage', 1, false, 'hospital:server:TreatWounds')
 			TriggerClientEvent('qb-inventory:client:ItemBox', src, sharedItems['bandage'], 'remove')
 			TriggerClientEvent('hospital:client:HealInjuries', Patient.PlayerData.source, 'full')
@@ -190,30 +246,22 @@ RegisterNetEvent('hospital:server:TreatWounds', function(playerId)
 end)
 
 RegisterNetEvent('hospital:server:AddDoctor', function(job)
-	if job == 'ambulance' then
-		local src = source
-		doctorCount = doctorCount + 1
-		TriggerClientEvent('hospital:client:SetDoctorCount', -1, doctorCount)
-		Doctors[src] = true
-	end
+	local src = source
+	if job ~= 'ambulance' then return end
+	local Player = exports['qb-core']:GetPlayer(src)
+	if not Player or Player.PlayerData.job.name ~= 'ambulance' or not Player.PlayerData.job.onduty then return end
+	doctorCount = doctorCount + 1
+	TriggerClientEvent('hospital:client:SetDoctorCount', -1, doctorCount)
+	Doctors[src] = true
 end)
 
 RegisterNetEvent('hospital:server:RemoveDoctor', function(job)
-	if job == 'ambulance' then
-		local src = source
-		doctorCount = doctorCount - 1
-		TriggerClientEvent('hospital:client:SetDoctorCount', -1, doctorCount)
-		Doctors[src] = nil
-	end
-end)
-
-AddEventHandler('playerDropped', function()
 	local src = source
-	if Doctors[src] then
-		doctorCount = doctorCount - 1
-		TriggerClientEvent('hospital:client:SetDoctorCount', -1, doctorCount)
-		Doctors[src] = nil
-	end
+	if job ~= 'ambulance' then return end
+	if not Doctors[src] then return end
+	doctorCount = doctorCount - 1
+	TriggerClientEvent('hospital:client:SetDoctorCount', -1, doctorCount)
+	Doctors[src] = nil
 end)
 
 RegisterNetEvent('hospital:server:RevivePlayer', function(playerId, isOldMan)
@@ -222,11 +270,12 @@ RegisterNetEvent('hospital:server:RevivePlayer', function(playerId, isOldMan)
 	local Patient = exports['qb-core']:GetPlayer(playerId)
 	local oldMan = isOldMan or false
 	if Patient then
-		if Player.PlayerData.job.name == 'ambulance' or QBCore.Functions.HasItem(src, 'firstaid', 1) then
+		if (Player.PlayerData.job.name == 'ambulance' and Player.PlayerData.job.onduty) or QBCore.Functions.HasItem(src, 'firstaid', 1) then
 			if oldMan then
 				if Player.RemoveMoney('cash', 5000, 'revived-player') then
 					exports['qb-inventory']:RemoveItem(src, 'firstaid', 1, false, 'hospital:server:RevivePlayer')
 					TriggerClientEvent('qb-inventory:client:ItemBox', src, sharedItems['firstaid'], 'remove')
+					allowDeathClear(Patient.PlayerData.source)
 					TriggerClientEvent('hospital:client:Revive', Patient.PlayerData.source)
 				else
 					TriggerClientEvent('QBCore:Notify', src, Lang:t('error.not_enough_money'), 'error')
@@ -234,6 +283,7 @@ RegisterNetEvent('hospital:server:RevivePlayer', function(playerId, isOldMan)
 			else
 				exports['qb-inventory']:RemoveItem(src, 'firstaid', 1, false, 'hospital:server:RevivePlayer')
 				TriggerClientEvent('qb-inventory:client:ItemBox', src, sharedItems['firstaid'], 'remove')
+				allowDeathClear(Patient.PlayerData.source)
 				TriggerClientEvent('hospital:client:Revive', Patient.PlayerData.source)
 			end
 		else
@@ -426,11 +476,13 @@ QBCore.Commands.Add('revive', Lang:t('info.revive_player_a'), { { name = 'id', h
 	if args[1] then
 		local Player = exports['qb-core']:GetPlayer(tonumber(args[1]))
 		if Player then
+			allowDeathClear(Player.PlayerData.source)
 			TriggerClientEvent('hospital:client:Revive', Player.PlayerData.source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, Lang:t('error.not_online'), 'error')
 		end
 	else
+		allowDeathClear(src)
 		TriggerClientEvent('hospital:client:Revive', src)
 	end
 end, 'admin')

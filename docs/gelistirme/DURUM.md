@@ -1,11 +1,11 @@
 # Geliştirme Durumu — Özet
 
-> **MVP kod geliştirmesi (Tur 01–22) tamamlandı.**  
+> **MVP kod geliştirmesi (Tur 01–23) tamamlandı.**  
 > Kalan işler **operasyonel** (test, beta, açılış, teknik borç).
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 22 UI & güvenlik cilası
+Son güncelleme: Tur 23 metadata güvenlik
 
 ---
 
@@ -39,6 +39,7 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [17–20](./ADIM-17-20-Kapanis-Paketi.md) | Kapanış paketi | ✅ | ✅ | Preflight, TR UI, güvenlik |
 | [21](./ADIM-21-PD-Tuketim-Guvenlik.md) | PD & tüketim güvenlik | ✅ | ✅ | PD obje, banka TR |
 | [22](./ADIM-22-UI-Guvenlik-Cila.md) | UI & güvenlik cilası | ✅ | ✅ | HUD TR, log guard |
+| [23](./ADIM-23-Metadata-Guvenlik.md) | Metadata güvenlik | ✅ | ✅ | Kelepçe, revive token |
 
 ---
 

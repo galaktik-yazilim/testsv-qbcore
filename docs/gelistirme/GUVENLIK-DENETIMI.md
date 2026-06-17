@@ -1,6 +1,6 @@
 # Güvenlik Denetimi — rp-* & MVP
 
-> Son güncelleme: Tur 22 UI & güvenlik cilası  
+> Son güncelleme: Tur 23 metadata güvenlik  
 > Kapsam: `rp-chat`, `rp-mileage`, `rp-dealership`, `rp-ignition`, `qb-multicharacter` (MVP değişiklikleri)
 
 ---
@@ -71,6 +71,7 @@
 | Stash / delil off duty | ✅ **düzeltildi** | on duty zorunlu |
 | `policeAlert` spam | ✅ **düzeltildi** | 30 sn cooldown + 256 char |
 | Heli spotlight | ✅ **düzeltildi** | LEO + on duty |
+| `SetHandcuffStatus` client spoof | ✅ **düzeltildi** | Sunucu otoritesi (CuffPlayer) |
 
 ---
 
@@ -109,10 +110,14 @@
 
 | Risk | Durum | Not |
 |------|--------|-----|
-| Armor/death metadata spoof | ✅ **kısmi** | Değer clamp; tam sunucu türevi P4+ |
+| Armor/death metadata spoof | ✅ **düzeltildi** | Ölüm temizleme token; zırh clamp |
 | EMS stash yetkisiz | ✅ **düzeltildi** | ambulance + on duty |
 | `SendToBed` uzaktan / sahte yatak | ✅ **düzeltildi** | Index doğrulama + 15 m mesafe |
 | Revive hunger reset spam | ✅ **düzeltildi** | 30 sn cooldown |
+| Sahte revive (metadata) | ✅ **düzeltildi** | Sunucu token — yalnızca legit revive |
+| EMS alert spam | ✅ **düzeltildi** | 30 sn cooldown + sanitize |
+| Doctor sayacı spoof | ✅ **düzeltildi** | Job + on duty doğrulama |
+| TreatWounds off duty | ✅ **düzeltildi** | on duty zorunlu |
 
 ---
 
@@ -135,7 +140,6 @@
 | Anti-cheat | P4+ / açılış sonrası |
 | Discord webhook log | Teknik borç |
 | qb-adminmenu tam audit | QBCore varsayılan — ACE yeterli MVP için |
-| `SetHandcuffStatus` client | Kelepçe metadata — tam sunucu türevi P4+ |
 
 ---
 

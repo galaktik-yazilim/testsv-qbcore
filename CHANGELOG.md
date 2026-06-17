@@ -23,6 +23,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 17–20: güvenlik sertleştirme, TR UI, preflight — [ADIM-17–20](docs/gelistirme/ADIM-17-20-Kapanis-Paketi.md)
 - Tur 21: PD obje/alert, tüketim clamp — [ADIM-21](docs/gelistirme/ADIM-21-PD-Tuketim-Guvenlik.md)
 - Tur 22: HUD TR, log guard, test rehberi — [ADIM-22](docs/gelistirme/ADIM-22-UI-Guvenlik-Cila.md)
+- Tur 23: metadata güvenlik (kelepçe, revive, EMS) — [ADIM-23](docs/gelistirme/ADIM-23-Metadata-Guvenlik.md)
 - `scripts/preflight-server.ps1` — MVP ön kontrol
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
@@ -54,6 +55,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-target / qb-menu:** keybind açıklamaları Türkçe
 - **qb-smallresources:** client log yalnızca ölüm + cooldown
 - **qb-ambulancejob:** revive açlık/susuzluk cooldown; SendToBed mesafe/index guard
+- **qb-policejob / qb-ambulancejob:** metadata güvenlik (kelepçe, ölüm token, EMS on duty)
+- **qb-multicharacter:** NUI fallback metinleri Türkçe
+- **qb-spawn:** sayfa başlığı Türkçe
 - **docs/OYUN-ICI-TEST-HIZLI.md** — 5 dk smoke test rehberi
 
 ### Fixed
