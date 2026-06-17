@@ -924,7 +924,7 @@ if Config.UseTarget then
                         type = 'client',
                         icon = 'fa fa-clipboard',
                         event = 'qb-ambulancejob:checkin',
-                        label = 'Check In',
+                        label = Lang:t('text.check'),
                     }
                 },
                 distance = 1.5
@@ -946,7 +946,7 @@ if Config.UseTarget then
                             type = 'client',
                             event = 'qb-ambulancejob:beds',
                             icon = 'fas fa-bed',
-                            label = 'Layin Bed',
+                            label = Lang:t('text.bed'),
                         }
                     },
                     distance = 1.5

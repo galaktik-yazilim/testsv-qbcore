@@ -1,0 +1,95 @@
+# testsv — Zap deploy (txAdmin recipe). Sırlar {{svLicense}} / {{dbConnectionString}} ile dolar.
+
+# Pool boyutları — client stabilitesi (server.cfg en üstünde olmalı)
+increase_pool_size "TxdStore" 26000
+increase_pool_size "FragmentStore" 14000
+increase_pool_size "StaticBounds" 5000
+increase_pool_size "netGameEvent" 400
+increase_pool_size "CMoveObject" 75
+increase_pool_size "LightEntity" 1000
+
+endpoint_add_tcp "0.0.0.0:30120"
+endpoint_add_udp "0.0.0.0:30120"
+sv_maxclients 32
+set onesync on
+
+setr qb_whitelist 0
+sets qb_discord "https://discord.gg/DEGISTIR"
+set steam_webApiKey "none"
+sets tags "hardrp, textrp, qbcore, turkish, roleplay"
+
+sv_licenseKey "{{svLicense}}"
+sv_hostname "Hard RP — Text-Based Roleplay"
+sets sv_projectName "Hard RP"
+sets sv_projectDesc "Text-based hard roleplay. Voice kapalı. Türkçe."
+sets locale "tr-TR"
+load_server_icon myLogo.png
+sv_enforceGameBuild 3095
+set resources_useSystemChat true
+set mysql_connection_string "{{dbConnectionString}}"
+
+sv_scriptHookAllowed 0
+
+setr qb_locale "tr"
+setr qb_notify_to_chat true
+setr UseTarget false
+
+ensure mapmanager
+ensure chat
+ensure spawnmanager
+ensure sessionmanager
+ensure basic-gamemode
+ensure hardcap
+ensure baseevents
+
+ensure oxmysql
+ensure connectqueue
+ensure PolyZone
+ensure progressbar
+ensure interact-sound
+ensure bob74_ipl
+ensure menuv
+
+ensure qb-core
+ensure qb-multicharacter
+ensure qb-spawn
+ensure qb-loading
+ensure qb-clothing
+ensure qb-input
+ensure qb-menu
+ensure qb-inventory
+ensure qb-weapons
+ensure qb-banking
+ensure qb-smallresources
+ensure qb-weathersync
+ensure qb-doorlock
+ensure qb-target
+ensure qb-vehiclekeys
+ensure qb-garages
+ensure qb-fuel
+ensure qb-policejob
+ensure qb-ambulancejob
+ensure qb-adminmenu
+ensure qb-hud
+
+ensure rp-chat
+ensure rp-ignition
+ensure rp-mileage
+ensure rp-dealership
+
+ensure dealer_map
+ensure hospital_map
+ensure prison_main
+ensure prison_canteen
+ensure prison_meeting
+
+add_ace group.admin command allow
+add_principal identifier.fivem:19207962 group.admin
+
+add_ace resource.qb-core command allow
+add_ace qbcore.god command allow
+add_principal qbcore.god group.admin
+add_principal qbcore.god qbcore.admin
+add_principal qbcore.admin qbcore.mod
+add_ace group.admin join allow
+add_ace group.whitelisted join allow

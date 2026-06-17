@@ -35,15 +35,20 @@ Her işlemde: oyuncu adı, license, sebep, kanıt (screenshot/mesaj log).
 
 ---
 
-## QBCore ACE whitelist
+## QBCore ACE whitelist (otomatik)
 
-`setr qb_whitelist 1` ise:
+Beta / production icin:
 
+```powershell
+# scripts/whitelist-licenses.txt dosyasina license ekle
+.\scripts\enable-beta-mode.ps1
 ```
-add_principal identifier.license:XXX group.whitelisted
-```
 
-Kaldırma: satırı sil + `refresh` veya cfg restart.
+Yeni oyuncu: `whitelist-licenses.txt` satir ekle → `.\scripts\sync-whitelist-ace.ps1` → restart.
+
+Test modu (herkes girer): `.\scripts\enable-dev-mode.ps1`
+
+Detay: [ADIM-26-Otomasyon-Whitelist.md](../gelistirme/ADIM-26-Otomasyon-Whitelist.md)
 
 ---
 

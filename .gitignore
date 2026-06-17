@@ -59,6 +59,7 @@ Desktop.ini
 
 # --- Yerel yedekler (scripts/backup-data.ps1 çıktısı) ---
 _backups/
+resources.zip
 
 # --- MySQL yedek ayarları (scripts/mysql.env) ---
 scripts/mysql.env

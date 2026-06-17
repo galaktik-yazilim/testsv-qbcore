@@ -13,7 +13,7 @@
 | Ekonomi (araç satın alma) | ✅ düzeltildi |
 | Karakter oluşturma | ✅ |
 | SQL injection (custom kod) | ✅ parametreli sorgular |
-| Whitelist | Kapalı (test) — açılışta açılacak |
+| Whitelist | Kapali (varsayilan); beta: `enable-beta-mode.ps1` (ACE otomatik) |
 | Anti-cheat | Yok (bilinçli ertelendi) |
 
 ---
@@ -153,7 +153,7 @@
 - [ ] Yeni `RegisterNetEvent` → sunucu doğrulama eklendi mi?
 - [ ] Yeni ekonomi event → mesafe + fiyat sunucuda mı?
 - [ ] `server.cfg` repoda yok mu?
-- [ ] Whitelist açıkken ACE listesi güncel mi?
+- [ ] Whitelist açıkken ACE listesi güncel mi? → `sync-whitelist-ace.ps1` / `whitelist-licenses.txt`
 
 ---
 

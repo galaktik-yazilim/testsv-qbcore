@@ -1,6 +1,6 @@
 # Geliştirme Adımları
 
-> **Turlar 01–24 MVP kod tamamlandı.** Toplu test: [OYUN-ICI-TEST-HIZLI.md](./OYUN-ICI-TEST-HIZLI.md)
+> **Turlar 01–26 MVP kod tamamlandı.** Baslangic: `.\scripts\setup-dev-env.ps1`
 
 | Tur | Konu | Durum |
 |-----|------|-------|
@@ -25,6 +25,8 @@
 | [22](./ADIM-22-UI-Guvenlik-Cila.md) | UI & güvenlik cilası | ✅ |
 | [23](./ADIM-23-Metadata-Guvenlik.md) | Metadata güvenlik | ✅ |
 | [24](./ADIM-24-PD-EMS-Sertlestirme.md) | PD/EMS sertleştirme | ✅ |
+| [25](./ADIM-25-Test-Hazirlik.md) | Test hazırlık & finalize | ✅ |
+| [26](./ADIM-26-Otomasyon-Whitelist.md) | Whitelist & ACE otomasyon | ✅ |
 
 ---
 
@@ -39,6 +41,8 @@
 | [KAPALI-BETA-CHECKLIST.md](./KAPALI-BETA-CHECKLIST.md) | Beta test |
 | [BETA-GERI-BILDIRIM.md](./BETA-GERI-BILDIRIM.md) | Geri bildirim formu |
 | [TEKNIK-BORC.md](../TEKNIK-BORC.md) | Yedek, MySQL |
-| [PERFORMANS-NOTLARI.md](./PERFORMANS-NOTLARI.md) | resmon |
+| [OYUN-ICI-TEST-HIZLI.md](./gelistirme/OYUN-ICI-TEST-HIZLI.md) | Oyun içi checklist |
+| [TEST-ONCESI-FINAL.md](./gelistirme/TEST-ONCESI-FINAL.md) | Restart öncesi |
+| [TEST-SONRASI.md](./gelistirme/TEST-SONRASI.md) | Test sonrası adımlar |
 
 Operasyon: [TODO.md](../TODO.md)

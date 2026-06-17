@@ -96,7 +96,9 @@ local Translations = {
         call = 'Çağır',
         check_in = '[E] Kayıt ol',
         check = 'Kayıt Ol',
-        lie_bed = '[E] - Yatağa uzanmak için'
+        lie_bed = '[E] - Yatağa uzanmak için',
+        elevator = 'Asansör',
+        bed = 'Yatağa uzan',
     },
     body = {
         head = 'Kafa',

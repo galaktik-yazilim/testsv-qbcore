@@ -34,5 +34,5 @@ if ($legacyHits.Count -eq 0) {
 }
 
 Write-Host ""
-Write-Host "Preflight OK - restart and in-game test next." -ForegroundColor Green
+Write-Host "Preflight OK - run test-oncesi.ps1 then restart." -ForegroundColor Green
 exit 0

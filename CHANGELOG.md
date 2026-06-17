@@ -25,6 +25,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - Tur 22: HUD TR, log guard, test rehberi — [ADIM-22](docs/gelistirme/ADIM-22-UI-Guvenlik-Cila.md)
 - Tur 23: metadata güvenlik (kelepçe, revive, EMS) — [ADIM-23](docs/gelistirme/ADIM-23-Metadata-Guvenlik.md)
 - Tur 24: PD/EMS sertleştirme — [ADIM-24](docs/gelistirme/ADIM-24-PD-EMS-Sertlestirme.md)
+- Tur 25: test hazırlık — [ADIM-25](docs/gelistirme/ADIM-25-Test-Hazirlik.md)
+- Tur 26: whitelist/ACE otomasyon — [ADIM-26](docs/gelistirme/ADIM-26-Otomasyon-Whitelist.md)
 - `scripts/preflight-server.ps1` — MVP ön kontrol
 - `/fdoor`, `/dimsifirla` — interior sıkışma kurtarma (`rp-chat`)
 
@@ -60,6 +62,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/) — en yeni üstte.
 - **qb-ambulancejob:** respawn guard; tüketim envanter doğrulama
 - **qb-smallresources:** tackle keybind TR
 - **qb-inventory:** varsayılan drop etiketi "Yer"
+- **progressbar:** fallback "Yükleniyor..."
+- **scripts/setup-dev-env.ps1**, **enable-beta-mode.ps1**, **sync-whitelist-ace.ps1** — ACE otomasyon
+- **qb-ambulancejob:** qb-target etiketleri Türkçe (UseTarget acikken)
+- **docs/TEST-ONCESI-FINAL.md**, **TEST-SONRASI.md** — finalize rehberleri
+- **verify-server-cfg.ps1** — qb-loading, qb-doorlock, qb-target vb. zorunlu ensure
 - **qb-multicharacter:** NUI fallback metinleri Türkçe
 - **qb-spawn:** sayfa başlığı Türkçe
 - **docs/OYUN-ICI-TEST-HIZLI.md** — 5 dk smoke test rehberi

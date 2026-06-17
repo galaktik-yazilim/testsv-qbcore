@@ -1,0 +1,8 @@
+# Whitelist lisanslari — scripts/sync-whitelist-ace.ps1 otomatik server.cfg'ye yazar
+# Her satir bir oyuncu. Formatlar:
+#   license:HEX16
+#   identifier.license:HEX16
+#   HEX16  (script license: on ekini ekler)
+#
+# Ornek:
+# license:abc123def4567890

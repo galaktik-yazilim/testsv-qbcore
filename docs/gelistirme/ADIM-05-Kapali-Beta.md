@@ -13,30 +13,28 @@ Adım 04 oyun içi test checklist'i tamamlandığında:
 
 ---
 
-## Whitelist açma
-
-### 1. Script (önerilen)
-
-PowerShell (txData kökünden):
+## Whitelist açma (otomatik — ACE elle gerekmez)
 
 ```powershell
-.\scripts\toggle-whitelist.ps1 -Set 1
+# whitelist-licenses.txt dosyasina license satirlari ekle (beta oyunculari)
+.\scripts\enable-beta-mode.ps1
 ```
 
-### 2. Elle server.cfg
+Restart. Yeni oyuncu eklemek:
 
-```
-setr qb_whitelist 1
-```
-
-ACE satırlarını aktif et:
-
-```
-add_ace group.whitelisted join allow
-add_principal identifier.license:ROCKSTAR_LICENSE group.whitelisted
+```powershell
+# scripts/whitelist-licenses.txt satir ekle
+.\scripts\sync-whitelist-ace.ps1
+# restart
 ```
 
-### 3. txAdmin alternatifi
+Dev/test moduna donmek:
+
+```powershell
+.\scripts\enable-dev-mode.ps1
+```
+
+### txAdmin alternatifi
 
 txAdmin whitelist kullanırsan `qb_whitelist 0` bırakabilirsin.
 

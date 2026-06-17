@@ -1,11 +1,11 @@
 # Geliştirme Durumu — Özet
 
-> **MVP kod geliştirmesi (Tur 01–24) tamamlandı.**  
+> **MVP kod geliştirmesi (Tur 01–26) tamamlandı — TEST HAZIR.**  
 > Kalan işler **operasyonel** (test, beta, açılış, teknik borç).
 
 **Genel ilerleme (açılışa kadar): 58%** → [ILERLEME.md](../ILERLEME.md)
 
-Son güncelleme: Tur 24 PD/EMS sertleştirme — **geliştirme bitti, test bekleniyor**
+Son güncelleme: Tur 25 test hazırlık — **restart + test**
 
 ---
 
@@ -41,6 +41,8 @@ Referans: [tanitim/evren-ve-dil.md](../tanitim/evren-ve-dil.md)
 | [22](./ADIM-22-UI-Guvenlik-Cila.md) | UI & güvenlik cilası | ✅ | ✅ | HUD TR, log guard |
 | [23](./ADIM-23-Metadata-Guvenlik.md) | Metadata güvenlik | ✅ | ✅ | Kelepçe, revive token |
 | [24](./ADIM-24-PD-EMS-Sertlestirme.md) | PD/EMS sertleştirme | ✅ | ✅ | Off duty guard |
+| [25](./ADIM-25-Test-Hazirlik.md) | Test hazırlık & finalize | ✅ | ✅ | test-oncesi.ps1 |
+| [26](./ADIM-26-Otomasyon-Whitelist.md) | Whitelist ACE otomasyon | ✅ | ✅ | enable-beta-mode.ps1 |
 
 ---
 

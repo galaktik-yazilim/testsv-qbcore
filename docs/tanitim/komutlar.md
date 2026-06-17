@@ -62,7 +62,7 @@ Helper text formatı (F8 / chat önerisi stili):
 
 ## Polis — LSPD (`qb-policejob`)
 
-**Job:** `police` · Görevde (`onduty`) olmayı unutmayın.
+**Job:** `police` · **Görevde (`onduty`) zorunlu** — arama, ceza, stash, obje vb. off duty kapalı.
 
 | Komut | Helper text |
 |-------|---------------|
@@ -100,7 +100,7 @@ Sivil acil çağrı: **`/911`** (`rp-chat`).
 
 ## Sağlık — EMS (`qb-ambulancejob`)
 
-**Job:** `ambulance` · Görevde olmayı unutmayın.
+**Job:** `ambulance` · **Görevde (`onduty`) zorunlu** — revive, bandaj, stash off duty kapalı.
 
 | Komut | Helper text |
 |-------|---------------|

@@ -38,7 +38,8 @@ Set-Content -Path $cfgPath -Value $newContent -NoNewline
 
 Write-Host "qb_whitelist: $current -> $next"
 if ($next -eq '1') {
-    Write-Host "Whitelist ACILDI. ACE satirlarini (group.whitelisted) kontrol edin ve sunucuyu restart edin."
+    Write-Host "Whitelist ACILDI. ACE blogu sync-whitelist-ace.ps1 ile guncellenir."
+    & (Join-Path $scriptDir "sync-whitelist-ace.ps1")
 } else {
-    Write-Host "Whitelist KAPATILDI. Test icin herkes girebilir — restart gerekir."
+    Write-Host "Whitelist KAPATILDI. Test icin herkes girebilir - restart gerekir."
 }

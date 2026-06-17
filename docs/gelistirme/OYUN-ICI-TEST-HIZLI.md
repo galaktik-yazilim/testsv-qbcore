@@ -1,7 +1,7 @@
 # Oyun İçi Test — Hızlı Rehber
 
 > **Tüm geliştirmeler (Tur 01–24) bitti — tek seferde test et.**  
-> Restart öncesi: `.\scripts\preflight-server.ps1`  
+> Baslangic: `.\scripts\setup-dev-env.ps1` → restart  
 > Tam checklist: [ADIM-04-Test-Cila.md](./ADIM-04-Test-Cila.md)
 
 ---
@@ -10,7 +10,7 @@
 
 ```powershell
 cd c:\txData
-.\scripts\preflight-server.ps1
+.\scripts\setup-dev-env.ps1
 ```
 
 Sunucuyu restart et. F8 konsolu açık tut.

@@ -1,6 +1,6 @@
 # Aktif TODO — Operasyonel
 
-> **MVP kod geliştirmesi (Tur 01–24) bitti.** Sen toplu test yapacaksın.  
+> **MVP finalize (Tur 01–26) bitti.**   Test için hazırsın.  
 > Master özet: [gelistirme/DURUM.md](./gelistirme/DURUM.md)  
 > **İlerleme: 58%** → [ILERLEME.md](./ILERLEME.md)
 
@@ -8,7 +8,7 @@
 
 ```
 Genel ilerleme       ███████████░░░░░░░░░  58%
-Geliştirme (kod)     ████████████████████ 100%  (Tur 01–24)
+Geliştirme (kod)     ████████████████████ 100%  (Tur 01–26)
 Oyun içi test         ⏳ sen
 Kapalı beta           ⏳ test sonrası
 Açılış                ⏳ beta sonrası
@@ -20,9 +20,11 @@ P4+ (konut, telefon)  📋 backlog — ADIM-06
 
 ## 1. Oyun içi test (şimdi)
 
-[ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
+**Önce:** `.\scripts\setup-dev-env.ps1` → restart
 
-Hızlı rehber: [OYUN-ICI-TEST-HIZLI.md](./gelistirme/OYUN-ICI-TEST-HIZLI.md)
+[TEST-ONCESI-FINAL.md](./gelistirme/TEST-ONCESI-FINAL.md) · [OYUN-ICI-TEST-HIZLI.md](./gelistirme/OYUN-ICI-TEST-HIZLI.md) · [ADIM-04-Test-Cila.md](./gelistirme/ADIM-04-Test-Cila.md)
+
+Test bitince: [TEST-SONRASI.md](./gelistirme/TEST-SONRASI.md)
 
 - [ ] Restart
 - [ ] Karakter, chat, `/km`, galeri, garaj
@@ -47,7 +49,7 @@ Hızlı rehber: [OYUN-ICI-TEST-HIZLI.md](./gelistirme/OYUN-ICI-TEST-HIZLI.md)
 
 [ADIM-05-Kapali-Beta.md](./gelistirme/ADIM-05-Kapali-Beta.md) · [KAPALI-BETA-CHECKLIST.md](./gelistirme/KAPALI-BETA-CHECKLIST.md)
 
-- [ ] Whitelist aç (`qb_whitelist 1`)
+- [ ] Whitelist aç → `.\scripts\enable-beta-mode.ps1` (ACE otomatik)
 - [ ] 3–7 gün, 5–15 oyuncu
 - [ ] [BETA-GERI-BILDIRIM.md](./gelistirme/BETA-GERI-BILDIRIM.md) topla
 

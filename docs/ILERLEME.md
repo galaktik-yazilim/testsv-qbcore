@@ -1,6 +1,6 @@
 # Genel İlerleme
 
-> **Son güncelleme:** 2025-06-17 — Tur 17–20 kapanış paketi (kod tamam)  
+> **Son güncelleme:** 2025-06-17 — Tur 25 test hazırlık (MVP finalize)  
 > **Hedef:** MVP sunucunun kapalı beta → açılış yolu (P4+ backlog hariç)
 
 ---
@@ -10,7 +10,7 @@
 | Metrik | Oran | Durum |
 |--------|------|--------|
 | **Genel (açılışa kadar)** | **58%** | Kod/doc bitti · operasyon bekliyor |
-| Kod & dokümantasyon | 100% | Turlar 01–24 ✅ — test bekleniyor |
+| Kod & dokümantasyon | 100% | Turlar 01–26 ✅ — test hazır |
 | Operasyon (sen) | 0% | Test, beta, açılış, teknik borç ⏳ |
 | P4+ büyüme (sonra) | 0% | Yalnızca plan 📋 |
 
@@ -54,7 +54,7 @@ P4+ (backlog)  ░░░░░░░░░░░░░░░░░░░░    0
 
 ## Sırada ne var?
 
-1. **Restart + oyun içi test** — checklist [TODO.md](./TODO.md) §1  
+1. **`.\scripts\setup-dev-env.ps1`** → restart → test  
 2. **Kapalı beta** — whitelist aç, 3–7 gün  
 3. **Açılış** — Discord + duyuru  
 4. **Teknik borç** — yedek / MySQL (en son)
@@ -83,6 +83,8 @@ P4+ (konut, telefon, injury): [ADIM-06-P4-Plan.md](./gelistirme/ADIM-06-P4-Plan.
 | 2025-06-17 | Tur 22: HUD menü TR, log guard, heli spotlight, test rehberi | 58% |
 | 2025-06-17 | Tur 23: kelepçe/revive metadata, EMS on duty guard | 58% |
 | 2025-06-17 | Tur 24: PD off duty, respawn guard, test rehberi genişletme | 58% |
+| 2025-06-17 | Tur 25: test-oncesi script, finalize rehberleri | 58% |
+| 2025-06-17 | Tur 26: whitelist/ACE otomasyon, EMS target TR | 58% |
 
 ---
 

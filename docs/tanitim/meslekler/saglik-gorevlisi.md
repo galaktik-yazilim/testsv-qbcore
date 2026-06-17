@@ -18,6 +18,7 @@ Acil tıp personeli (**Pillbox Hill Medical Center** / EMS). Yaralı oyunculara 
 ## Hard RP farkı
 
 - **NPC hastane check-in kapalı** — self-revive yok (`MinimalDoctors = 0`)
+- **Görevde değilken** revive, bandaj, doktor sayacı ve EMS stash **kapalı** (script korumalı)
 - Ölüm süresi: **6 dakika**
 - Hastane respawn envanter **silmez**
 - `/me` ve `/do` ile muayene zorunlu
