@@ -236,7 +236,11 @@ RegisterNetEvent('rp-dealership:client:spawnPurchased', function(dealershipId, m
 
     closeDealership()
 
-    QBCore.Functions.TriggerCallback('qb-vehicleshop:server:spawnvehicle', function(netId, properties, vehPlate)
+    QBCore.Functions.TriggerCallback('rp-dealership:server:spawnPurchased', function(netId, properties, vehPlate)
+        if not netId then
+            QBCore.Functions.Notify('Araç spawn edilemedi.', 'error')
+            return
+        end
         while not NetworkDoesNetworkIdExist(netId) do Wait(10) end
         local veh = NetworkGetEntityFromNetworkId(netId)
         ensurePlate(veh, vehPlate)

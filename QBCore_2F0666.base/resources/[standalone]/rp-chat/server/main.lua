@@ -1,5 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local cooldowns = {}
+
 local function GetCharName(source)
     local Player = QBCore.Functions.GetPlayer(source)
     if Player then
@@ -11,6 +13,8 @@ end
 
 local function GetNearbyPlayers(source, range)
     local ped = GetPlayerPed(source)
+    if ped == 0 then return {} end
+
     local coords = GetEntityCoords(ped)
     local nearby = {}
 
@@ -46,72 +50,136 @@ local function BroadcastProximity(source, color, label, message, range)
     end
 end
 
--- Normal konuşma: yakınlık bazlı (global yerine)
-AddEventHandler('chatMessage', function(source, name, message)
+local function SanitizeMessage(raw)
+    if type(raw) ~= 'string' then return nil end
+    local msg = raw:gsub('[~<].-[>~]', '')
+    if #msg > Config.MaxMessageLength then
+        msg = msg:sub(1, Config.MaxMessageLength)
+    end
+    if msg:match('^%s*$') then return nil end
+    return msg
+end
+
+local function CheckCooldown(source, bucket, ms)
+    ms = ms or Config.CommandCooldownMs
+    local now = GetGameTimer()
+    local key = ('%s:%s'):format(source, bucket)
+    if cooldowns[key] and (now - cooldowns[key]) < ms then
+        return false
+    end
+    cooldowns[key] = now
+    return true
+end
+
+local function IsDriver(source)
+    local ped = GetPlayerPed(source)
+    if ped == 0 then return false end
+    local veh = GetVehiclePedIsIn(ped, false)
+    if veh == 0 then return false end
+    return GetPedInVehicleSeat(veh, -1) == ped
+end
+
+local function AddProximityCommand(name, help, range, color, formatFn, permission)
+    QBCore.Commands.Add(name, help, {
+        { name = 'mesaj', help = 'Mesajınız' },
+    }, false, function(source, args)
+        if #args < 1 then
+            NotifyPlayer(source, 'Mesaj yazmalısın.', 'error')
+            return
+        end
+        if not CheckCooldown(source, 'cmd:' .. name) then
+            NotifyPlayer(source, 'Çok hızlı yazıyorsun, biraz bekle.', 'warning')
+            return
+        end
+
+        local msg = SanitizeMessage(table.concat(args, ' '))
+        if not msg then return end
+
+        local label, body = formatFn(GetCharName(source), msg)
+        BroadcastProximity(source, color, label, body, range)
+    end, permission or 'user')
+end
+
+AddEventHandler('playerDropped', function()
+    local src = source
+    for key in pairs(cooldowns) do
+        if key:find('^' .. src .. ':') then
+            cooldowns[key] = nil
+        end
+    end
+end)
+
+AddEventHandler('chatMessage', function(source, _, message)
     if source == 0 then return end
     if type(message) ~= 'string' or message:sub(1, 1) == '/' then return end
 
     CancelEvent()
 
-    local charName = GetCharName(source)
-    BroadcastProximity(source, Config.Colors.say, charName .. ' diyor ki:', message)
+    if not CheckCooldown(source, 'say') then return end
+
+    local msg = SanitizeMessage(message)
+    if not msg then return end
+
+    BroadcastProximity(source, Config.Colors.say, GetCharName(source) .. ' diyor ki:', msg)
 end)
 
--- /b — yerel OOC (( mesaj ))
-QBCore.Commands.Add('b', 'Yakındaki oyunculara OOC mesaj gönder', {
-    { name = 'mesaj', help = 'OOC mesajınız' },
-}, false, function(source, args)
-    if #args < 1 then
-        NotifyPlayer(source, 'Mesaj yazmalısın.', 'error')
-        return
-    end
+AddProximityCommand('me', 'Yakındakilere eylem mesajı gönder', Config.ProximityRange, Config.Colors.me, function(charName, msg)
+    return '* ' .. charName, msg
+end)
 
-    local msg = table.concat(args, ' '):gsub('[~<].-[>~]', '')
-    local charName = GetCharName(source)
-    BroadcastProximity(source, Config.Colors.b, '(( ' .. charName .. ' ))', msg)
-end, 'user')
+AddProximityCommand('b', 'Yakındaki oyunculara OOC mesaj gönder', Config.ProximityRange, Config.Colors.b, function(charName, msg)
+    return '(( ' .. charName .. ' ))', msg
+end)
 
--- /do — ortam / eylem açıklaması
-QBCore.Commands.Add('do', 'Ortam eylemi belirt', {
-    { name = 'mesaj', help = 'Ortam mesajı' },
-}, false, function(source, args)
-    if #args < 1 then
-        NotifyPlayer(source, 'Mesaj yazmalısın.', 'error')
-        return
-    end
+AddProximityCommand('do', 'Ortam eylemi belirt', Config.ProximityRange, Config.Colors.do_cmd, function(charName, msg)
+    return '** ' .. msg .. ' (( ' .. charName .. ' ))', ''
+end)
 
-    local msg = table.concat(args, ' '):gsub('[~<].-[>~]', '')
-    local charName = GetCharName(source)
-    BroadcastProximity(source, Config.Colors.do_cmd, '** ' .. msg .. ' (( ' .. charName .. ' ))', '')
-end, 'user')
+AddProximityCommand('s', 'Fısıldayarak konuş (~3m)', Config.WhisperRange, Config.Colors.whisper, function(charName, msg)
+    return charName .. ' fısıldar:', msg
+end)
+
+AddProximityCommand('w', 'Bağırarak konuş (~40m)', Config.ShoutRange, Config.Colors.shout, function(charName, msg)
+    return charName .. ' bağırır:', msg
+end)
 
 exports('BroadcastProximity', BroadcastProximity)
 exports('GetCharName', GetCharName)
 exports('Notify', NotifyPlayer)
 
+local function HandleVehicleChatAction(source, bucket, buildMessage)
+    if not IsDriver(source) then return end
+    if not CheckCooldown(source, bucket, Config.VehicleActionCooldownMs) then return end
+    BroadcastProximity(source, Config.Colors.me, buildMessage(GetCharName(source)), '')
+end
+
 RegisterNetEvent('rp-chat:server:vehicleIgnition', function(engineOn)
-    local src = source
-    local charName = GetCharName(src)
-    local msg = engineOn
-        and (charName .. ' isimli kişi aracı çalıştırdı')
-        or (charName .. ' isimli kişi aracı durdurdu')
-    BroadcastProximity(src, Config.Colors.me, msg, '')
+    if type(engineOn) ~= 'boolean' then return end
+    HandleVehicleChatAction(source, 'veh:ignition', function(name)
+        return engineOn
+            and (name .. ' isimli kişi aracı çalıştırdı')
+            or (name .. ' isimli kişi aracı durdurdu')
+    end)
 end)
 
 RegisterNetEvent('rp-chat:server:vehicleLock', function(locked)
-    local src = source
-    local charName = GetCharName(src)
-    local msg = locked
-        and ('* ' .. charName .. ' aracı kilitler')
-        or ('* ' .. charName .. ' aracın kilidini açar')
-    BroadcastProximity(src, Config.Colors.me, msg, '')
+    if type(locked) ~= 'boolean' then return end
+    HandleVehicleChatAction(source, 'veh:lock', function(name)
+        return locked
+            and ('* ' .. name .. ' aracı kilitler')
+            or ('* ' .. name .. ' aracın kilidini açar')
+    end)
 end)
 
 RegisterNetEvent('rp-chat:server:vehicleSeatbelt', function(buckled)
-    local src = source
-    local charName = GetCharName(src)
+    if type(buckled) ~= 'boolean' then return end
+    local ped = GetPlayerPed(source)
+    if ped == 0 or GetVehiclePedIsIn(ped, false) == 0 then return end
+    if not CheckCooldown(source, 'veh:seatbelt', Config.VehicleActionCooldownMs) then return end
+
+    local charName = GetCharName(source)
     local msg = buckled
         and ('* ' .. charName .. ' emniyet kemerini takar')
         or ('* ' .. charName .. ' emniyet kemerini çıkartır')
-    BroadcastProximity(src, Config.Colors.me, msg, '')
+    BroadcastProximity(source, Config.Colors.me, msg, '')
 end)

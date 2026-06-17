@@ -1,14 +1,25 @@
 # testsv — FiveM QBCore (txAdmin)
 
-QBCore tabanlı FiveM sunucusu. txAdmin `txData` klasör yapısına göre düzenlenmiştir.
+QBCore tabanlı **hard RP / text-based** FiveM sunucusu. txAdmin `txData` klasör yapısına göre düzenlenmiştir.
+
+## Dokümantasyon
+
+| Dosya | İçerik |
+|-------|--------|
+| [docs/tanitim/README.md](docs/tanitim/README.md) | Oyuncu & geliştirici rehberleri (Türkçe) |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Geliştirme yol haritası |
+| [docs/TODO.md](docs/TODO.md) | Aktif görev listesi |
+| [CHANGELOG.md](CHANGELOG.md) | Yapılan değişiklikler |
 
 ## Klasör yapısı
 
 ```
 txData/
-├── default/                 # txAdmin profili (config takip edilir, runtime data ignore)
+├── docs/                    # Yol haritası, TODO, tanıtım rehberleri
+│   └── tanitim/             # Sistem & meslek rehberleri (Türkçe)
+├── default/                 # txAdmin profili
 ├── QBCore_2F0666.base/      # Sunucu kökü (server.cfg, resources)
-├── admins.json              # txAdmin admin hesapları (YEREL — repoda yok)
+├── admins.json              # txAdmin admin hesapları (YEREL)
 └── scripts/                 # Yardımcı scriptler
 ```
 

@@ -305,31 +305,4 @@ QBCore.Commands.Add('ooc', Lang:t('command.ooc.help'), {}, false, function(sourc
     end
 end, 'user')
 
--- Me command
-
-QBCore.Commands.Add('me', Lang:t('command.me.help'), { { name = Lang:t('command.me.params.message.name'), help = Lang:t('command.me.params.message.help') } }, false, function(source, args)
-    if #args < 1 then
-        TriggerClientEvent('QBCore:Notify', source, Lang:t('error.missing_args2'), 'error')
-        return
-    end
-    local ped = GetPlayerPed(source)
-    local pCoords = GetEntityCoords(ped)
-    local msg = table.concat(args, ' '):gsub('[~<].-[>~]', '')
-    local Players = QBCore.Functions.GetPlayers()
-    local Player = QBCore.Functions.GetPlayer(source)
-    local charName = Player and (Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname) or GetPlayerName(source)
-    local meColor = { 194, 162, 218 }
-    for i = 1, #Players do
-        local targetId = Players[i]
-        local target = GetPlayerPed(targetId)
-        local tCoords = GetEntityCoords(target)
-        if target == ped or #(pCoords - tCoords) < 20 then
-            TriggerClientEvent('QBCore:Command:ShowMe3D', targetId, source, msg)
-            TriggerClientEvent('chat:addMessage', targetId, {
-                color = meColor,
-                multiline = true,
-                args = { '* ' .. charName, msg },
-            })
-        end
-    end
-end, 'user')
+-- /me komutu rp-chat resource'unda (text-only, 3D text yok)

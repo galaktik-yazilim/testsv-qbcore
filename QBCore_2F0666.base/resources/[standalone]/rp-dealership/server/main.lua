@@ -1,11 +1,23 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local sharedVehicles = exports['qb-core']:GetShared('Vehicles')
 
+local buyCooldowns = {}
+
 local StringCharset = {}
 local NumberCharset = {}
 for i = 48, 57 do NumberCharset[#NumberCharset + 1] = string.char(i) end
 for i = 65, 90 do StringCharset[#StringCharset + 1] = string.char(i) end
 for i = 97, 122 do StringCharset[#StringCharset + 1] = string.char(i) end
+
+local vehicleTypes = {
+    motorcycles = 'bike',
+    boats = 'boat',
+    helicopters = 'heli',
+    planes = 'plane',
+    submarines = 'submarine',
+    trailer = 'trailer',
+    train = 'train',
+}
 
 local function RandomStr(length)
     if length <= 0 then return '' end
@@ -24,6 +36,39 @@ local function GeneratePlate()
         return GeneratePlate()
     end
     return plate:upper()
+end
+
+local function getDealershipPoint(dealership)
+    local c = dealership.interact
+    if not c then return nil end
+    return vector3(c.x, c.y, c.z)
+end
+
+local function isNearDealership(source, dealershipId)
+    local dealership = Config.Dealerships[dealershipId]
+    if not dealership then return false end
+
+    local point = getDealershipPoint(dealership)
+    if not point then return false end
+
+    local ped = GetPlayerPed(source)
+    if ped == 0 then return false end
+
+    return #(GetEntityCoords(ped) - point) <= Config.ServerInteractDistance
+end
+
+local function canBuy(source)
+    local now = os.time()
+    local last = buyCooldowns[source] or 0
+    if now - last < Config.BuyCooldownSec then return false end
+    buyCooldowns[source] = now
+    return true
+end
+
+local function GetVehicleTypeByModel(model)
+    local vehicleData = sharedVehicles[model]
+    if not vehicleData then return 'automobile' end
+    return vehicleTypes[vehicleData.category] or 'automobile'
 end
 
 local function vehicleInShop(vehShop, shopId)
@@ -86,10 +131,16 @@ local function buildCatalog(shopId)
     return vehicles, categoryList, brandList
 end
 
-QBCore.Functions.CreateCallback('rp-dealership:server:getCatalog', function(source, cb, dealershipId)
-    local dealership = Config.Dealerships[dealershipId]
-    if not dealership then return cb(false) end
+AddEventHandler('playerDropped', function()
+    buyCooldowns[source] = nil
+end)
 
+QBCore.Functions.CreateCallback('rp-dealership:server:getCatalog', function(source, cb, dealershipId)
+    if type(dealershipId) ~= 'string' or not isNearDealership(source, dealershipId) then
+        return cb(false)
+    end
+
+    local dealership = Config.Dealerships[dealershipId]
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return cb(false) end
 
@@ -104,10 +155,53 @@ QBCore.Functions.CreateCallback('rp-dealership:server:getCatalog', function(sour
     })
 end)
 
+local function asVector4(coords)
+    if type(coords) == 'vector4' then return coords end
+    if type(coords) == 'table' and coords.x and coords.y and coords.z then
+        return vector4(coords.x, coords.y, coords.z, coords.w or 0.0)
+    end
+    return nil
+end
+
+QBCore.Functions.CreateCallback('rp-dealership:server:spawnPurchased', function(source, cb, plate, model, coords)
+    if type(plate) ~= 'string' or type(model) ~= 'string' then
+        return cb(nil)
+    end
+
+    local spawn = asVector4(coords)
+    if not spawn then return cb(nil) end
+
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player then return cb(nil) end
+
+    local owned = MySQL.scalar.await(
+        'SELECT citizenid FROM player_vehicles WHERE plate = ? LIMIT 1',
+        { plate }
+    )
+    if owned ~= Player.PlayerData.citizenid then return cb(nil) end
+
+    local vehType = sharedVehicles[model] and sharedVehicles[model].type or GetVehicleTypeByModel(model)
+    local veh = CreateVehicleServerSetter(joaat(model), vehType, spawn.x, spawn.y, spawn.z, spawn.w)
+    local netId = NetworkGetNetworkIdFromEntity(veh)
+    SetVehicleNumberPlateText(veh, plate)
+
+    local vehProps = {}
+    local result = MySQL.rawExecute.await('SELECT mods FROM player_vehicles WHERE plate = ?', { plate })
+    if result and result[1] then
+        vehProps = json.decode(result[1].mods) or {}
+    end
+
+    cb(netId, vehProps, plate)
+end)
+
 RegisterNetEvent('rp-dealership:server:buyVehicle', function(dealershipId, model, payType)
     local src = source
+    if type(dealershipId) ~= 'string' or type(model) ~= 'string' then return end
+    if not isNearDealership(src, dealershipId) then return end
+    if not canBuy(src) then return end
+
     local dealership = Config.Dealerships[dealershipId]
-    if not dealership or type(model) ~= 'string' then return end
+    if not dealership then return end
 
     payType = payType == 'bank' and 'bank' or 'cash'
     local vehData = sharedVehicles[model]

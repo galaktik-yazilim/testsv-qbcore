@@ -3,8 +3,12 @@ Config = {}
 -- Her zaman yeşil marker göster (giriş noktasında)
 Config.ShowMarker = true
 
--- qb-target bölgesi
-Config.UseTarget = true
+-- [E] ile etkileşim (UseTarget false iken qb-target gerekmez)
+Config.UseTarget = false
+
+-- Güvenlik
+Config.ServerInteractDistance = 6.0
+Config.BuyCooldownSec = 3
 
 Config.CategoryLabels = {
     compacts = 'Kompakt',

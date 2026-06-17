@@ -19,35 +19,41 @@ endpoint_add_tcp "0.0.0.0:30120"
 endpoint_add_udp "0.0.0.0:30120"
 sv_maxclients 48
 set steam_webApiKey "YOUR_STEAM_WEB_API_KEY"
-sets tags "default, deployer, qbcore, qb-core"
+sets tags "hardrp, textrp, qbcore, turkish"
 
 ## You MAY edit the following:
 sv_licenseKey "YOUR_CFX_LICENSE_KEY"
-sv_hostname "testsv built with QBCore Framework by JericoFx & Kakarot & Hamy!"
-sets sv_projectName "[QBCore Framework] testsv"
-sets sv_projectDesc "An advanced FiveM RP framework including jobs, gangs, housing & more!"
-sets locale "root-AQ"
+sv_hostname "Hard RP Text-Based Sunucu"
+sets sv_projectName "Hard RP"
+sets sv_projectDesc "Text-based hard roleplay — QBCore tabanlı"
+sets locale "tr-TR"
 load_server_icon myLogo.png
 sv_enforceGameBuild 3095
 set resources_useSystemChat true
 set mysql_connection_string "mysql://USER:PASSWORD@localhost/DATABASE?charset=utf8mb4"
 
-# Voice config
+# Güvenlik
+sv_scriptHookAllowed 0
+#set sv_authMaxVariance 1
+#set sv_authMinTrust 5
+
+# OneSync (slot sayısına göre ayarlayın)
+## set onesync on
+
+# Voice — text RP sunucusunda opsiyonel; açıksa mesafe sınırı önerilir
 setr voice_useNativeAudio true
 setr voice_defaultCycle "GRAVE"
 setr voice_defaultVolume 0.3
 setr voice_enableRadioAnim 1
 setr voice_syncData 1
-setr voice_useSendingRangeOnly false
+setr voice_useSendingRangeOnly true
 setr voice_enableUi 0
 
-# QBCore locale config
-setr qb_locale "en"
-
-# QBCore UseTarget
+# QBCore
+setr qb_locale "tr"
 setr UseTarget false
 
-# These resources will start by default.
+# --- CFX varsayılan ---
 ensure mapmanager
 ensure chat
 ensure spawnmanager
@@ -56,25 +62,65 @@ ensure basic-gamemode
 ensure hardcap
 ensure baseevents
 
-# QBCore & Extra stuff
+# --- Bağımlılıklar (explicit — [standalone] klasörü toplu yüklenmez) ---
+ensure oxmysql
+ensure connectqueue
+ensure PolyZone
+ensure progressbar
+ensure interact-sound
+ensure bob74_ipl
+ensure menuv
+
+# --- QBCore çekirdek ---
 ensure qb-core
+ensure qb-multicharacter
+ensure qb-spawn
+ensure qb-loading
+ensure qb-clothing
+ensure qb-input
+ensure qb-menu
+ensure qb-inventory
+ensure qb-weapons
+ensure qb-banking
+ensure qb-smallresources
+ensure qb-weathersync
+ensure qb-doorlock
+ensure qb-target
+ensure qb-vehiclekeys
+ensure qb-garages
+ensure qb-fuel
+ensure qb-policejob
+ensure qb-ambulancejob
+ensure qb-adminmenu
+ensure qb-hud
+
+# --- Hard RP custom ---
 ensure rp-chat
-ensure [qb]
-ensure [standalone]
-ensure [voice]
-ensure [defaultmaps]
+ensure rp-ignition
+ensure rp-mileage
+ensure rp-dealership
+
+# --- Ses (opsiyonel — text RP'de kapatabilirsiniz) ---
+ensure pma-voice
+ensure qb-radio
+
+# --- Haritalar ---
+ensure dealer_map
+ensure hospital_map
+ensure prison_main
+ensure prison_canteen
+ensure prison_meeting
+
+# NOT: Arcade scriptler (soygun, drugs, crypto, qb-phone vb.) bilinçli olarak
+# bu listede yok. İhtiyaç halinde tek tek ekleyin — docs/ROADMAP.md
 
 ## Permissions ##
 add_ace group.admin command allow
 add_principal identifier.fivem:YOUR_FIVEM_ID group.admin
 
-# Resources
 add_ace resource.qb-core command allow
-
-# Gods
 add_ace qbcore.god command allow
 
-# Inheritance
 add_principal qbcore.god group.admin
 add_principal qbcore.god qbcore.admin
 add_principal qbcore.admin qbcore.mod
