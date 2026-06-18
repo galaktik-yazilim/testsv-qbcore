@@ -1,4 +1,5 @@
--- Merkezi mouse + gameplay kilidi (F4 / telefon / envanter / diger NUI)
+-- Merkezi mouse + hareket kilidi (F4 / telefon / envanter / modul UI)
+-- IsNuiFocused() KULLANMA — txAdmin (/tx), chat (T) ve diger dis NUI'leri bozar.
 
 local isMouseVisible = false
 local uiBlockDepth = 0
@@ -25,38 +26,39 @@ local function popUiBlock()
     uiBlockDepth = math.max(0, uiBlockDepth - 1)
 end
 
+--- Hareket: modul UI veya imlec acikken kilitli. Telefon/envanter ekranda + F4 kapali = kosulabilir.
 local function shouldBlockGameplay()
-    return uiBlockDepth > 0 or isMouseVisible or isPhoneOpen() or isInventoryOpen()
+    if uiBlockDepth > 0 then return true end
+    return isMouseVisible
 end
 
---- F4: sadece imlec; NUI focus chat/telefon/envanterde kalsin (tiklanabilir)
-local function applyCursorOnly()
+--- F4: sadece imlec; klavye/NUI focus calinmaz (chat, /tx menu tiklanabilir kalir)
+local function applyF4CursorOnly()
     SetNuiFocusKeepInput(false)
     SetNuiFocus(false, true)
 end
 
-local function clearCursorFocus()
+local function clearCursorAndFocus()
+    TriggerEvent('rp-mouse:releaseFocus')
     SetNuiFocusKeepInput(false)
-    if not IsNuiFocused() then
-        SetNuiFocus(false, false)
-    end
+    SetNuiFocus(false, false)
 end
 
 local function applyMouseFocus()
     if isInventoryOpen() then
-        TriggerEvent('rp-mouse:applyFocus', true, 'inventory')
+        TriggerEvent('rp-mouse:applyFocus', isMouseVisible, 'inventory')
         return
     end
 
     if isPhoneOpen() then
-        TriggerEvent('rp-mouse:applyFocus', true, 'phone')
+        TriggerEvent('rp-mouse:applyFocus', isMouseVisible, 'phone')
         return
     end
 
     if isMouseVisible then
-        applyCursorOnly()
+        applyF4CursorOnly()
     else
-        clearCursorFocus()
+        clearCursorAndFocus()
     end
 end
 
@@ -102,12 +104,10 @@ local function blockPhoneExtraControls()
     DisableControlAction(0, 200, true)
     DisableControlAction(0, 202, true)
     DisableControlAction(0, 322, true)
+    DisableControlAction(0, 245, true)
 end
 
 local function setMouseVisible(visible)
-    if visible and (isPhoneOpen() or isInventoryOpen()) then
-        return
-    end
     isMouseVisible = visible == true
     applyMouseFocus()
 end
@@ -121,13 +121,11 @@ AddStateBagChangeHandler('inv_busy', nil, function(bagName, _, value)
     if bagName ~= myBag or value then return end
     if isPhoneOpen() then return end
     if isMouseVisible then
-        isMouseVisible = false
-        clearCursorFocus()
+        setMouseVisible(false)
     end
 end)
 
 local function toggleMouseVisible()
-    if isPhoneOpen() or isInventoryOpen() then return end
     local now = GetGameTimer()
     if now - lastToggleAt < TOGGLE_GUARD_MS then return end
     lastToggleAt = now
@@ -137,7 +135,6 @@ end
 local function canEnableMouse()
     if not LocalPlayer.state.isLoggedIn then return false end
     if IsPauseMenuActive() then return false end
-    if isPhoneOpen() or isInventoryOpen() then return false end
 
     local pdata = exports['qb-core']:GetCoreObject().Functions.GetPlayerData()
     if not pdata or not pdata.citizenid then return false end
@@ -151,7 +148,7 @@ local function canEnableMouse()
 end
 
 local function toggleMouseCommand()
-    if isMouseVisible then
+    if isMouseVisible or isPhoneOpen() or isInventoryOpen() then
         toggleMouseVisible()
         return
     end
@@ -181,7 +178,7 @@ CreateThread(function()
         if shouldBlockGameplay() then
             blockMouseLookControls()
             blockMovementControls()
-            if isPhoneOpen() or uiBlockDepth > 0 then
+            if isPhoneOpen() and isMouseVisible then
                 blockPhoneExtraControls()
             end
 
@@ -209,9 +206,7 @@ exports('SetMouseVisibleState', function(visible)
     setMouseVisibleState(visible)
 end)
 
-exports('ToggleMouseVisible', function()
-    toggleMouseVisible()
-end)
+exports('ToggleMouseVisible', toggleMouseVisible)
 
 exports('IsCursorMode', function()
     return isMouseVisible
@@ -219,7 +214,7 @@ end)
 
 exports('SetCursorMode', function(enabled)
     if enabled then
-        if not canEnableMouse() then return false end
+        if not canEnableMouse() and not isPhoneOpen() and not isInventoryOpen() then return false end
         setMouseVisible(true)
         return true
     end
@@ -227,18 +222,7 @@ exports('SetCursorMode', function(enabled)
     return true
 end)
 
-exports('PushUiBlock', pushUiBlock)
+--- Modul UI acikken hareket kilidi (focus modulun kendi SetNuiFocus'unda kalir)
+exports('OpenModuleUi', pushUiBlock)
 
-exports('PopUiBlock', popUiBlock)
-
-exports('OpenModuleUi', function()
-    pushUiBlock()
-    SetNuiFocus(true, true)
-    SetNuiFocusKeepInput(false)
-end)
-
-exports('CloseModuleUi', function()
-    popUiBlock()
-    SetNuiFocusKeepInput(false)
-    SetNuiFocus(false, false)
-end)
+exports('CloseModuleUi', popUiBlock)

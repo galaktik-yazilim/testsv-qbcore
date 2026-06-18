@@ -320,34 +320,19 @@ local function isInventoryOpen()
 end
 
 local function applyPhoneNuiFocus(visible)
-    if visible then
-        SetNuiFocus(true, true)
-        SetNuiFocusKeepInput(false)
-    else
-        SetNuiFocusKeepInput(false)
-        SetNuiFocus(false, false)
-    end
+    SetNuiFocusKeepInput(false)
+    SetNuiFocus(visible, visible)
 end
 
-AddEventHandler('rp-mouse:applyFocus', function(_, source)
+AddEventHandler('rp-mouse:applyFocus', function(visible, source)
     if source == 'phone' and PhoneData.isOpen then
-        applyPhoneNuiFocus(true)
+        applyPhoneNuiFocus(visible)
     end
 end)
 
 AddEventHandler('rp-mouse:releaseFocus', function()
     applyPhoneNuiFocus(false)
 end)
-
-local function syncPhoneMouse(visible)
-    if GetResourceState('rp-chat') == 'started' then
-        pcall(function()
-            exports['rp-chat']:SetMouseVisible(visible)
-        end)
-    else
-        applyPhoneNuiFocus(visible)
-    end
-end
 
 local function OpenPhone()
     QBCore.Functions.TriggerCallback('qb-phone:server:HasPhone', function(HasPhone)
@@ -564,6 +549,12 @@ local function releasePhoneNuiFocus()
         end)
     end
 end
+
+RegisterNetEvent('qb-phone:client:restoreFocus', function()
+    if PhoneData.isOpen then
+        applyPhoneNuiFocus(true)
+    end
+end)
 
 local function applyPhoneCloseGameState()
     if not PhoneData.CallData.InCall then

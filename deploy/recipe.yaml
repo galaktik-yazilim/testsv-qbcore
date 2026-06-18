@@ -44,7 +44,8 @@ tasks:
     src: ./tmp/repo/QBCore_2F0666.base/myLogo.png
     dest: ./myLogo.png
 
-  # server.cfg: sadece yoksa oluştur — canlı cfg asla üzerine yazma
+  # server.cfg: sadece yoksa şablon kopyala (placeholder'lı — txAdmin'den MySQL/license doldur)
+  # Güncelleme asla canlı cfg üzerine yazmaz; replace_string YOK (boş var ile siler)
   - action: copy_path
     src: ./tmp/repo/deploy/server.cfg.template
     dest: ./server.cfg

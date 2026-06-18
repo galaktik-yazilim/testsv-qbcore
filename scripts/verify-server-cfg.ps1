@@ -102,5 +102,17 @@ if ($content -match 'setr\s+qb_locale\s+"tr"') {
     Write-Host "[HATA] setr qb_locale `"tr`" eksik."
 }
 
+if ($content -match '\{\{[^}]+\}\}') {
+    $failed = $true
+    Write-Host "[HATA] server.cfg icinde doldurulmamis placeholder var (or. {{dbConnectionString}})."
+    Write-Host "       Zap: txAdmin > Settings > FXServer > mysql_connection_string satirini duzenle."
+    Write-Host "       Detay: deploy/ZAP-MYSQL.md"
+}
+
+if ($content -match 'mysql_connection_string\s+"\{\{dbConnectionString\}\}"') {
+    $failed = $true
+    Write-Host "[HATA] mysql_connection_string hala sablon degeri — oxmysql baglanamaz."
+}
+
 if ($failed) { exit 1 }
 exit 0

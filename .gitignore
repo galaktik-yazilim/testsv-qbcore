@@ -7,6 +7,8 @@
 **/server.cfg
 **/server.cfg.bkp
 **/server.cfg.local
+**/server.cfg.zap
+deploy/server.cfg.zap
 admins.json
 *.env
 .env.*

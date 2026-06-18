@@ -10,7 +10,6 @@ local function setModuleUiFocus(enabled)
         else
             pcall(function() exports['rp-chat']:CloseModuleUi() end)
         end
-        return
     end
     SetNuiFocusKeepInput(false)
     SetNuiFocus(enabled, enabled)

@@ -1,7 +1,7 @@
 name: testsv Hard RP — İlk Kurulum
-version: v1.1.0
+version: v1.1.1
 author: aosdev
-description: Sıfır sunucu veya tam yeniden kurulum. server.cfg + MySQL tabloları dahil.
+description: Sıfır sunucu veya tam yeniden kurulum. server.cfg placeholder doldurma + MySQL tabloları.
 
 tasks:
   - action: download_github
@@ -42,6 +42,10 @@ tasks:
   - action: copy_path
     src: ./tmp/repo/deploy/server.cfg.template
     dest: ./server.cfg
+
+  - action: replace_string
+    mode: all_vars
+    file: ./server.cfg
 
   - action: copy_path
     src: ./tmp/repo/QBCore_2F0666.base/myLogo.png

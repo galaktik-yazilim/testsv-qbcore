@@ -19,7 +19,6 @@ const load = Vue.createApp({
 
       SettingsTitle: 'Ayarlar',
       AutoPlayDesc2: 'Kapalıyken slayt görselleri dönmeyi durdurur ve son görselde kalır.',
-      PlayVideoDesc3: 'Kapalıyken video duraklatılır.',
 
       KeybindTitle: 'Tuş Atamaları',
       Keybind1: 'Envanter (TAB)',
@@ -45,7 +44,6 @@ const load = Vue.createApp({
       firstslide: ref(1),
       secondslide: ref('1'),
       thirdslide: ref('5'),
-      playvideo: ref(true),
       download: ref(true),
       settings: ref(false),
     }
@@ -57,6 +55,7 @@ load.mount('#loading-main')
 
 function videotoggle() {
     var video = document.getElementById("video");
+    if (!video) return;
     if (video.paused) {
         video.play();
     } else {
