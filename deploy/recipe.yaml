@@ -1,7 +1,7 @@
 name: testsv Hard RP — Güncelleme
-version: v1.1.2
+version: v1.1.3
 author: aosdev
-description: GitHub kod güncelleme. server.cfg şablondan yazılır, txAdmin placeholder doldurur. SQL yok.
+description: GitHub kod güncelleme. Mevcut server.cfg korunur (DB/license silinmez). SQL yok.
 
 tasks:
   - action: download_github
@@ -44,15 +44,12 @@ tasks:
     src: ./tmp/repo/QBCore_2F0666.base/myLogo.png
     dest: ./myLogo.png
 
-  # txAdmin deploy sonunda server.cfg oluşturulmuş olmalı (overwrite false atlanınca validation hata verir)
+  # server.cfg: sadece yoksa oluştur — canlı cfg asla üzerine yazma
   - action: copy_path
     src: ./tmp/repo/deploy/server.cfg.template
     dest: ./server.cfg
-    overwrite: true
-
-  - action: replace_string
-    mode: all_vars
-    file: ./server.cfg
+    overwrite: false
+    errorOnExist: false
 
   - action: remove_path
     path: ./tmp
