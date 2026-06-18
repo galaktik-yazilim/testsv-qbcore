@@ -1,7 +1,4 @@
-# testsv — Zap deploy (txAdmin recipe).
-# İlk kurulum: recipe-install.yaml deployer adım 2 + replace_string ile dolar.
-# Güncelleme recipe'si server.cfg DOKUNMAZ — canlı cfg txAdmin'den düzenlenir.
-# MySQL (Zap): mysql://KULLANICI:SIFRE@HOST:3306/VERITABANI?charset=utf8mb4
+# testsv — Zap deploy. MySQL Zap panelden; license txAdmin deploy adim 2 ({{svLicense}}).
 
 # Pool boyutları — client stabilitesi (server.cfg en üstünde olmalı)
 increase_pool_size "TxdStore" 26000
@@ -29,7 +26,7 @@ sets locale "tr-TR"
 load_server_icon myLogo.png
 sv_enforceGameBuild 3095
 set resources_useSystemChat true
-set mysql_connection_string "{{dbConnectionString}}"
+set mysql_connection_string "mysql://zap1391637-1:8GApJsPYjZWSc5WO@mysql-mariadb-21-104.zap-srv.com:3306/zap1391637-1?charset=utf8mb4"
 
 sv_scriptHookAllowed 0
 

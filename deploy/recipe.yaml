@@ -1,7 +1,7 @@
 name: testsv Hard RP — Güncelleme
-version: v1.1.3
+version: v1.1.4
 author: aosdev
-description: GitHub kod güncelleme. Mevcut server.cfg korunur (DB/license silinmez). SQL yok.
+description: GitHub kod güncelleme. Bozuk {{placeholder}} cfg satirlari duzeltilir. SQL yok.
 
 tasks:
   - action: download_github
@@ -44,13 +44,18 @@ tasks:
     src: ./tmp/repo/QBCore_2F0666.base/myLogo.png
     dest: ./myLogo.png
 
-  # server.cfg: sadece yoksa şablon kopyala (placeholder'lı — txAdmin'den MySQL/license doldur)
-  # Güncelleme asla canlı cfg üzerine yazmaz; replace_string YOK (boş var ile siler)
+  # server.cfg: sadece yoksa Zap sablonu kopyala (MySQL/license dahil)
   - action: copy_path
     src: ./tmp/repo/deploy/server.cfg.template
     dest: ./server.cfg
     overwrite: false
     errorOnExist: false
+
+  - action: replace_string
+    mode: literal
+    file: ./server.cfg
+    search: '{{dbConnectionString}}'
+    replace: 'mysql://zap1391637-1:8GApJsPYjZWSc5WO@mysql-mariadb-21-104.zap-srv.com:3306/zap1391637-1?charset=utf8mb4'
 
   - action: remove_path
     path: ./tmp
