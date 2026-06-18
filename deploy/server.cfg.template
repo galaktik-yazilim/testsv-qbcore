@@ -26,7 +26,7 @@ sets locale "tr-TR"
 load_server_icon myLogo.png
 sv_enforceGameBuild 3095
 set resources_useSystemChat true
-set mysql_connection_string "mysql://zap1391637-1:8GApJsPYjZWSc5WO@mysql-mariadb-21-104.zap-srv.com:3306/zap1391637-1?charset=utf8mb4"
+set mysql_connection_string "{{dbConnectionString}}"
 
 sv_scriptHookAllowed 0
 
