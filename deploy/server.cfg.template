@@ -90,6 +90,7 @@ ensure prison_meeting
 
 add_ace group.admin command allow
 add_principal identifier.fivem:19207962 group.admin
+add_principal identifier.fivem:10585864 group.admin
 
 add_ace resource.qb-core command allow
 add_ace qbcore.god command allow
